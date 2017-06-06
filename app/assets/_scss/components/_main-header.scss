@@ -1,0 +1,57 @@
+/* HEADER
+-------------------------*/
+.main-header {
+    border:0;
+
+    .navbar-default {
+        border:0;
+        box-shadow:none;
+
+        .navbar-nav {
+            > li {
+                padding-top:16px;
+                padding-bottom:16px;
+                padding-right:20px;
+
+                >a{
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                    font-weight:700;
+                }
+                
+                >.btn-bordered-black {
+                    color:$black;                
+                    
+                    &:focus {
+                        box-shadow:none;
+                    }
+                }
+
+                .btn-bg-blue {
+                    color:#fff;
+                    border-radius:50%;
+                    width:42px;
+                    height:40px;
+                    margin-top:-4px;
+                    line-height:30px;
+                    text-align:center;
+
+                    &:hover {
+                        background-color:$blue;
+                    }
+                }
+            }
+        }
+    }
+
+    .navbar-collapse {
+        width:100%;
+        border:0;
+    }
+
+    .navbar-default 
+
+    .navbar-form {
+        border:0;
+    }
+}

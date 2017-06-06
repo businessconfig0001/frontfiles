@@ -1,0 +1,29 @@
+.btn {
+    &-primary {
+        color:#fff;
+
+        &:hover {
+            color:#fff;
+        }
+    }
+
+    /* BUTTON WITH BORDER
+    ------------------------*/
+
+    @each $name, $color in $colors {
+        &-border-#{$name} {
+            border:1px solid $color;
+            color:$color;
+            background-color:transparent;
+        }
+    }
+
+     /* BUTTON WITH BACKGROUND
+    ------------------------*/
+    @each $name, $color in $colors {
+        &-bg-#{$name} {
+            color:#fff;
+            background-color:$color;
+        }
+    }
+}
