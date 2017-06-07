@@ -1,4 +1,10 @@
 .btn {
+    display:inline-block;
+
+    &:focus, &:active {
+        box-shadow:none;
+    }
+
     &-primary {
         color:#fff;
 
@@ -24,6 +30,14 @@
         &-bg-#{$name} {
             color:#fff;
             background-color:$color;
+        }
+    }
+
+    &-photo {
+        background:url("../images/upload2x.png") center center no-repeat;
+
+        &:active {
+            background-image:url("../images/upload2x.png");
         }
     }
 }

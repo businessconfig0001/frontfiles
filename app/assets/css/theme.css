@@ -56,13 +56,43 @@ img {
   .form-control:focus {
     box-shadow: none; }
 
+.form-container .upload {
+  height: 390px;
+  width: 100%;
+  display: block;
+  font-size: 5em;
+  color: #fff;
+  position: relative; }
+  .form-container .upload span {
+    position: absolute;
+    font-size: 5em;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; }
+
+.form-container .form {
+  margin-left: 5%; }
+  .form-container .form p {
+    margin-bottom: 0.9em; }
+  .form-container .form input[type="text"] {
+    border-color: #dadada; }
+  .form-container .form button {
+    display: block;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-left: 40px;
+    padding-right: 40px; }
+
 /*-----------------------
  HELPERS
 ------------------------*/
 /* TEXT
 ------------------------*/
 .txt-black {
-  color: #211f1f; }
+  color: #1a1919; }
 
 .txt-blue {
   color: #0000ff; }
@@ -82,7 +112,7 @@ img {
 /* BACKGROUNDS
 ------------------------*/
 .bg-black {
-  background-color: #211f1f; }
+  background-color: #1a1919; }
 
 .bg-blue {
   background-color: #0000ff; }
@@ -138,17 +168,20 @@ img {
   font-style: italic; }
 
 .btn {
+  display: inline-block;
   /* BUTTON WITH BORDER
     ------------------------*/
   /* BUTTON WITH BACKGROUND
     ------------------------*/ }
+  .btn:focus, .btn:active {
+    box-shadow: none; }
   .btn-primary {
     color: #fff; }
     .btn-primary:hover {
       color: #fff; }
   .btn-border-black {
-    border: 1px solid #211f1f;
-    color: #211f1f;
+    border: 1px solid #1a1919;
+    color: #1a1919;
     background-color: transparent; }
   .btn-border-blue {
     border: 1px solid #0000ff;
@@ -172,7 +205,7 @@ img {
     background-color: transparent; }
   .btn-bg-black {
     color: #fff;
-    background-color: #211f1f; }
+    background-color: #1a1919; }
   .btn-bg-blue {
     color: #fff;
     background-color: #0000ff; }
@@ -188,6 +221,10 @@ img {
   .btn-bg-white {
     color: #fff;
     background-color: #fff; }
+  .btn-photo {
+    background: url("../images/upload2x.png") center center no-repeat; }
+    .btn-photo:active {
+      background-image: url("../images/upload2x.png"); }
 
 .blocks .block-image {
   position: relative;
@@ -230,12 +267,29 @@ img {
     display: inline-block; }
     .blocks .block-footer li a {
       text-decoration: none;
-      color: #211f1f; }
+      color: #1a1919; }
+
+.thumbnails {
+  padding: 10px 0; }
+  .thumbnails .thumb {
+    display: inline-block; }
+    .thumbnails .thumb img {
+      display: block;
+      width: 100%;
+      height: auto; }
+  .thumbnails .description {
+    font-weight: 700;
+    padding: 5px 0; }
 
 /* HEADER
 -------------------------*/
 .main-header {
   border: 0; }
+  .main-header .logo {
+    background: url("../images/logo2x.png") left center no-repeat;
+    background-size: 80% auto;
+    display: block;
+    width: 100%; }
   .main-header .navbar-default {
     border: 0;
     box-shadow: none; }
@@ -248,7 +302,7 @@ img {
         padding-bottom: 5px;
         font-weight: 700; }
       .main-header .navbar-default .navbar-nav > li > .btn-bordered-black {
-        color: #211f1f; }
+        color: #1a1919; }
         .main-header .navbar-default .navbar-nav > li > .btn-bordered-black:focus {
           box-shadow: none; }
       .main-header .navbar-default .navbar-nav > li .btn-bg-blue {
@@ -267,6 +321,12 @@ img {
   .main-header .navbar-default
 .navbar-form {
     border: 0; }
+
+.search .search-input {
+  border: 0;
+  background: url("../images/magnify2x.png") left center no-repeat;
+  background-size: 20px;
+  padding-left: 30px; }
 
 .hero {
   position: relative; }
@@ -316,3 +376,54 @@ img {
           font-weight: 700;
           color: #fff;
           font-size: 0.8em; }
+
+/* USER PROFILE 
+-----------------------*/
+.profile-header {
+  position: relative;
+  background-color: #1a1919;
+  padding: 30px 0;
+  min-height: 355px;
+  margin-bottom: 40px; }
+  .profile-header-spacer {
+    min-height: 295px; }
+  .profile-header .profile-picture {
+    margin-top: 75px; }
+    .profile-header .profile-picture img {
+      display: block;
+      border-radius: 50%;
+      width: 220px;
+      height: 220px; }
+  .profile-header .btn-photo-container {
+    position: absolute;
+    right: 0;
+    bottom: 0; }
+  .profile-header .btn-photo {
+    width: 60px;
+    height: 60px;
+    background-size: contain; }
+
+.profile-details-container {
+  color: #0000ff;
+  margin-bottom: 40px; }
+  .profile-details-container .title {
+    font-weight: 700;
+    color: #0000ff;
+    border-bottom: 1px solid #0000ff;
+    padding-bottom: 5px;
+    margin-bottom: 5px; }
+  .profile-details-container .location {
+    font-size: 1.2em;
+    margin-bottom: 60px; }
+  .profile-details-container .source {
+    font-size: 1em;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #0000ff; }
+    .profile-details-container .source a {
+      color: #0000ff;
+      text-decoration: none; }
+  .profile-details-container .tags li {
+    display: inline-block; }
+    .profile-details-container .tags li a {
+      padding: 3px 5px; }
