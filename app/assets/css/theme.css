@@ -77,14 +77,36 @@ img {
     margin-bottom: 0.9em; }
   .form-container .form input[type="text"] {
     border-color: #dadada; }
+  .form-container .form input[type="date"] {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0; }
   .form-container .form button {
     display: block;
     color: #fff;
     text-align: center;
     text-transform: uppercase;
-    font-weight: 700;
-    padding-left: 40px;
-    padding-right: 40px; }
+    font-weight: 700; }
+
+.custom-input .radio-label {
+  position: relative;
+  padding-left: 15px;
+  line-height: 1.1em;
+  cursor: pointer; }
+
+.custom-input input[type="radio"] + .radio-label::after {
+  content: '';
+  border: 1px solid #aab2bd;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  position: absolute;
+  top: .1em;
+  left: 0;
+  font-size: 1.1em; }
+
+.custom-input input[type="radio"]:checked + .radio-label::after {
+  content: 'X'; }
 
 /*-----------------------
  HELPERS
@@ -167,6 +189,9 @@ img {
 .italic {
   font-style: italic; }
 
+.no-border {
+  border: 0; }
+
 .btn {
   display: inline-block;
   /* BUTTON WITH BORDER
@@ -178,6 +203,10 @@ img {
   .btn-primary {
     color: #fff; }
     .btn-primary:hover {
+      color: #fff; }
+  .btn.bg-blue {
+    color: #fff; }
+    .btn.bg-blue:hover {
       color: #fff; }
   .btn-border-black {
     border: 1px solid #1a1919;
@@ -301,20 +330,32 @@ img {
         padding-top: 5px;
         padding-bottom: 5px;
         font-weight: 700; }
-      .main-header .navbar-default .navbar-nav > li > .btn-bordered-black {
+        .main-header .navbar-default .navbar-nav > li > a:hover {
+          color: #0000ff; }
+      .main-header .navbar-default .navbar-nav > li > .btn-border-black {
         color: #1a1919; }
-        .main-header .navbar-default .navbar-nav > li > .btn-bordered-black:focus {
+        .main-header .navbar-default .navbar-nav > li > .btn-border-black:focus {
           box-shadow: none; }
+        .main-header .navbar-default .navbar-nav > li > .btn-border-black:hover {
+          color: #fff;
+          background-color: #0000ff;
+          border: 1px solid #0000ff; }
       .main-header .navbar-default .navbar-nav > li .btn-bg-blue {
-        color: #fff;
+        background-color: #fff;
+        color: #1a1919;
+        border-width: 1px;
+        border-style: solid;
         border-radius: 50%;
+        border-color: #1a1919;
         width: 42px;
         height: 40px;
         margin-top: -4px;
         line-height: 30px;
         text-align: center; }
         .main-header .navbar-default .navbar-nav > li .btn-bg-blue:hover {
-          background-color: #0000ff; }
+          background-color: #0000ff;
+          color: #fff;
+          border-color: #0000ff; }
   .main-header .navbar-collapse {
     width: 100%;
     border: 0; }
@@ -427,3 +468,45 @@ img {
     display: inline-block; }
     .profile-details-container .tags li a {
       padding: 3px 5px; }
+
+.page-payment-info {
+  margin-bottom: 40px; }
+  .page-payment-info .blocks {
+    margin-top: 40px; }
+    .page-payment-info .blocks .block-content {
+      padding-left: 50px; }
+    .page-payment-info .blocks .block-footer {
+      padding-left: 50px;
+      font-weight: 700; }
+  .page-payment-info .title {
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.4em; }
+    .page-payment-info .title.border-bottom {
+      border-bottom-width: 2px;
+      border-bottom-style: solid; }
+  .page-payment-info .form-container .btn {
+    display: block; }
+  .page-payment-info .form-container .form-control {
+    margin-bottom: 20px; }
+  .page-payment-info .form-container textarea {
+    resize: none; }
+  .page-payment-info .form-container label {
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #aab2bd;
+    margin-bottom: 10px; }
+  .page-payment-info .form-container select {
+    border: 0; }
+  .page-payment-info .form-container input[type="text"],
+  .page-payment-info .form-container input[type="number"],
+  .page-payment-info .form-container input[type="month"] {
+    color: #1a1919; }
+  .page-payment-info .form-container input[type="file"] {
+    margin-bottom: 0; }
+  .page-payment-info .form-container .no-border {
+    padding-left: 0; }
+  .page-payment-info .form-container hr {
+    border-color: #aab2bd; }

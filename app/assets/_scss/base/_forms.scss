@@ -50,3 +50,27 @@
         }
     }
 }
+
+.custom-input {
+    .radio-label {
+        position:relative;
+        padding-left:15px;
+        line-height:1.1em;
+        cursor:pointer;
+    }
+    input[type="radio"] + .radio-label::after {
+        content:'';
+        border:1px solid $gray;
+        width:12px;
+        height:12px;
+        cursor:pointer;   
+        position: absolute;
+        top: .1em; 
+        left: 0;
+        font-size: 1.1em;     
+    }
+
+    input[type="radio"]:checked + .radio-label::after{
+        content: 'X';
+    }
+}
