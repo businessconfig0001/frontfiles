@@ -1,0 +1,70 @@
+body {
+    background: none;
+}
+.full {
+    background: url('../img/front-bg.jpg') no-repeat center bottom fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.logo {
+    margin: 50px 0 0 50px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #0000FF;
+  color: #fff;
+  padding: 30px;
+  
+}
+
+.widgets{
+    
+}
+
+.widget { 
+    vertical-align: middle;
+}
+
+/*.widget .widget-content{ 
+    position: absolute;
+    bottom: 0;
+}*/
+
+.widget.first {
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 44px;
+}
+
+.widget.second {
+    text-align: center;
+    font-size: 24px;
+}
+
+.widget.third {
+    text-align: right;
+    font-size: 18px;
+}
+.widget.third a{
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 7px;
+}
+
+
+/* Tamanho Smartphone e Tablet Pequeno 481px MAX
+****************************************************************************************************************************/
+@media only screen and (max-width : 767px) {
+    .widget *{
+        text-align: center;
+    }
+    .full{
+    background-position: -160px -110px;
+    }
+}
