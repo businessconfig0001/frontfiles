@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html  lang="en" class="full">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +14,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/full.css?<?php echo date('Ymdhis'); ?>" rel="stylesheet">
+    <link href="css/full.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,17 +25,20 @@
 
 </head>
 
-<body class="full">
+<body>
     
     <header>
         <div class="logo"><img src="img/logo.png" /></div>
     </header>
- 
+    
+    <div class="main-content">
+        <img src="img/bg1920.jpg" class="front-image hidden-sm visible-xs img-responsive"/>
+    </div>
     <footer class="footer">
       <div class="widgets">
           <div class="col-sm-4 col-xs-12 widget first">
               <div class="widget-content">
-                  The Global Platform for Independent Journalism
+                  The Global Platform for <br/>Independent Journalism
               </div>
           </div>
           <div class="col-sm-5 col-xs-12 widget second">
