@@ -1,4 +1,2 @@
-_docs
 node_modules
-.git
-.vscode
+vendor

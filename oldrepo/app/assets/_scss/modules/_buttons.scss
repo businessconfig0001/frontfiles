@@ -1,0 +1,51 @@
+.btn {
+    display:inline-block;
+
+    &:focus, &:active {
+        box-shadow:none;
+    }
+
+    &-primary {
+        color:#fff;
+
+        &:hover {
+            color:#fff;
+        }
+    }
+
+    &.bg-blue {
+        color:#fff;
+
+        &:hover {
+            color:#fff;
+        }
+    }
+
+    /* BUTTON WITH BORDER
+    ------------------------*/
+
+    @each $name, $color in $colors {
+        &-border-#{$name} {
+            border:1px solid $color;
+            color:$color;
+            background-color:transparent;
+        }
+    }
+
+     /* BUTTON WITH BACKGROUND
+    ------------------------*/
+    @each $name, $color in $colors {
+        &-bg-#{$name} {
+            color:#fff;
+            background-color:$color;
+        }
+    }
+
+    &-photo {
+        background:url("../images/upload2x.png") center center no-repeat;
+
+        &:active {
+            background-image:url("../images/upload2x.png");
+        }
+    }
+}
