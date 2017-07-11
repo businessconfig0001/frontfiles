@@ -1,4 +1,4 @@
-# frontfiles
+# Frontfiles
 FrontFiles Project
 
 ## Setup
@@ -9,7 +9,7 @@ Navigate to the root directory
 
 You can use your own `.env` file or copy the `.env.example` provided.
 
-### install dependencies
+### Install dependencies
 
 ```
 $composer install
