@@ -21,7 +21,7 @@
         <![endif]-->
 
         <!-- page structure -->
-        <div class="container-fluid">
+        <div class="container-fluid" id="app">
             <div class="row">
                 <!-- modules -->
                 <!-- header module -->
