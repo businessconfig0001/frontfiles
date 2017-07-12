@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/upload', 'HomeController@index')->name('home');
 
-Route::post('/upload','HomeController@upload');
+Route::post('/upload','VideoController@store');
