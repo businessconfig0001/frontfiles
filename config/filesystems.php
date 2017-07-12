@@ -67,7 +67,7 @@ return [
             'name'      => env('STORAGE_NAME'),
             'key'       => env('STORAGE_KEY'),
             'container' => env('STORAGE_CONTAINER'),
-            'url' => 'https://lalablob.blob.core.windows.net/',
+            'url' => 'https://ffcontents.blob.core.windows.net/',
         ],
 
     ],

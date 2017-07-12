@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "914507d0bf81bbeeb25ff05ed740c307",
+    "content-hash": "093abf6fdbb2e7244c746153035e7188",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -764,6 +764,53 @@
                 "storage"
             ],
             "time": "2017-04-28T10:15:08+00:00"
+        },
+        {
+            "name": "league/flysystem-azure",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem-azure.git",
+                "reference": "0b9838c4f75ee41bc390357b0350e9a62e3b3a1f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-azure/zipball/0b9838c4f75ee41bc390357b0350e9a62e3b3a1f",
+                "reference": "0b9838c4f75ee41bc390357b0350e9a62e3b3a1f",
+                "shasum": ""
+            },
+            "require": {
+                "league/flysystem": "~1.0",
+                "microsoft/azure-storage": "~0.10.1",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Flysystem\\Azure\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frank de Jonge",
+                    "email": "info@frenky.net"
+                }
+            ],
+            "description": "Flysystem adapter for Windows Azure",
+            "time": "2016-07-10T19:08:39+00:00"
         },
         {
             "name": "microsoft/azure-storage",

@@ -6,6 +6,8 @@ use App\Video;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
@@ -29,45 +31,32 @@ class VideoController extends Controller
         if ($request->hasFile('video')) {
             if ($request->file('video')->isValid()) {
 
-
-
-                return response()->json(array('status'=>'Avatar updated!'));
-
-            }
-            return response()->json(array('error'=>'Avatar file is not valid'));
-        }
-
-        if ($request->hasFile('video')) {
-            if ($request->file('video')->isValid()) {
-
                 $file = $request->file('video');
                 $extension = $file->getClientOriginalExtension();
-                $name = $request->get('title') . time() . '.' . $extension;
-                $destinationPath = public_path('/videos');
-
-                $file_final=$file->move($destinationPath, $name);
+                $name = $request->get('title') . uniqid() . '.' . $extension;
+                $destinationPath = public_path('/videos/');
+                //$file = $request->file('video')->move($destinationPath,$name);
 
                 $video = new Video();
-
                 $video->title = $request->get('title');
                 $video->description = $request->get('description');
-                $video->path = $destinationPath . $name;
                 $video->user_id = Auth::user()->id;
+                $video->filename=$name;
 
                 // Copy to remote
-                $path = $file_final->store(
-                    'videos', 'azure'
+                ini_set('memory_limit', '-1');
+                $path =  $request->file('video')->storeAs(
+                    'usercontents',$name, 'azure'
                 );
 
                 $url = config('filesystems.disks.azure.url').$path;
                 $video->url=$url;
-
                 $video->save();
 
-                return redirect('/upload')->json(array('status'=>'Video uploaded!'));
+                return redirect('/upload')->with(array('status'=>'Video uploaded!'));
             }
-            return redirect('/upload')->json(array('error'=>'Video file is not valid'));
+            return redirect('/upload')->with(array('error'=>'Video file is not valid'));
         }
-        return redirect('/upload')->json(array('error'=>'Video file is not available'));
+        return redirect('/upload')->with(array('error'=>'Video file is not available'));
     }
 }
