@@ -7,7 +7,10 @@
     "require": {
         "php": ">=5.6.4",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "microsoft/azure-storage": "0.10.2",
+        "microsoft/windowsazure": "0.5",
+        "league/flysystem-azure": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
