@@ -15,7 +15,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.component('drag-n-drop', require('./components/drag-n-drop.vue'));
 
 const app = new Vue({
     el: '#app'

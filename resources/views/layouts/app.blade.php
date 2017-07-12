@@ -9,8 +9,10 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="assets/css/vendor/font-awesome.min.css" />
-        <link rel="stylesheet" type="text/css" href="assets/css/vendor/bootstrap.min.css" />
+        <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+        <script>
+            window.csrfToken = "{{ csrf_token() }}";
+        </script>
         <link rel="stylesheet" type="text/css" href="assets/css/theme.css" />
     </head>
     <body class="page-payment-info">
@@ -69,7 +71,8 @@
 
             </div>
         </div><!-- /page structure -->
-        <script type="text/javascript" src="assets/js/vendor/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="assets/js/vendor/bootstrap.min.js"></script>
     </body>
+    <script type="text/javascript" src="{{ mix ('/js/manifest.js')}}"></script>
+    <script type="text/javascript" src="{{ mix ('/js/vendor.js')}}"></script>
+    <script type="text/javascript" src="{{ mix ('/js/app.js')}}"></script>
 </html>
