@@ -49,7 +49,6 @@ class VideosController extends Controller
      */
     public function store(Request $request)
     {
-        \Log::info($request);
         $this->validate($request, [
             'video' => 'required',
 
@@ -85,12 +84,18 @@ class VideosController extends Controller
                 $url = config('filesystems.disks.azure.url').$path;
                 $video->url=$url;
                 $video->save();
+                if(request()->wantsJson())
+                    return response()->json(array('status' => 'Video uploaded!','data'=>$video));
 
-                return redirect('/videos/upload')->with(array('status'=>'Video uploaded!'));
+                return redirect('/video/upload')->with(array('status'=>'Video uploaded!'));
             }
-            return redirect('/videos/upload')->with(array('error'=>'Video file is not valid'));
+            if(request()->wantsJson())
+                return response()->json(array('status' => 'Video file is not valid'));
+            return redirect('/video/upload')->with(array('error'=>'Video file is not valid'));
         }
-        return redirect('/videos/upload')->with(array('error'=>'Video file is not available'));
+        if(request()->wantsJson())
+            return response()->json(array('status' => 'Video file is not available'));
+        return redirect('/video/upload')->with(array('error'=>'Video file is not available'));
     }
 
     /**
