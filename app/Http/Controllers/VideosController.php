@@ -25,10 +25,7 @@ class VideosController extends Controller
     {
         $videos = Video::where('user_id', auth()->user()->id)->get();
 
-        if(request()->wantsJson())
-            return $videos;
-
-        return view('videos.index', compact('videos'));
+        return request()->wantsJson() ? $videos : view('videos.index', compact('videos'));
     }
 
     /**
