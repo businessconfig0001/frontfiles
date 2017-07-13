@@ -17,7 +17,7 @@
 		<div class="col-xs-12 col-sm-3 form">
 			<div v-for="upload in uploads" class="form-group">
 				<h3>{{upload.name}}</h3>
-				<div v-show="errors.length">
+				<div v-show="upload.errors">
 					<ul>
 						<li v-for="error in errors">{{error}}</li>
 					</ul>
@@ -85,7 +85,7 @@
 					  		file:fileList[x],
 					  		name:fileList[x].name,
 					  		data: d,
-					  		errors:[]
+					  		errors:false
 					  	})
 				  });
 				  this.state='more'
