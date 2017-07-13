@@ -90,11 +90,11 @@ class VideosController extends Controller
                 return redirect('/video/upload')->with(array('status'=>'Video uploaded!'));
             }
             if(request()->wantsJson())
-                return response()->json(array('status' => 'Video file is not valid'));
+                return response()->json(array('error' => 'Video file is not valid'));
             return redirect('/video/upload')->with(array('error'=>'Video file is not valid'));
         }
         if(request()->wantsJson())
-            return response()->json(array('status' => 'Video file is not available'));
+            return response()->json(array('error' => 'Video file is not available'));
         return redirect('/video/upload')->with(array('error'=>'Video file is not available'));
     }
 
