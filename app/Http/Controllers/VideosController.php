@@ -35,7 +35,9 @@ class VideosController extends Controller
      */
     public function create()
     {
-        return view('videos.create');
+        $videos = Video::where('user_id', auth()->user()->id)->get();
+
+        return request()->wantsJson() ? $videos : view('videos.create', compact('videos'));
     }
 
     /**

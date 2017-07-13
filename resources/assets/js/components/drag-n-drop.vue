@@ -33,6 +33,9 @@
 		</div>
 		<a class="submit btn" @click.prevent="upload">Save</a>
 	</form>
+	<div class="video-container">
+		<video-display :videos="videos"></video-display>
+	</div>
 </div>
 	
 </template>
@@ -45,6 +48,12 @@
 			return {
 				state:'',
 				uploads:[],
+			}
+		},
+		props:{
+			videos:{
+				required:true,
+				type:Array
 			}
 		},
 		mounted(){
@@ -80,7 +89,10 @@
 				console.log('uploading ' + this.uploads.length + ' files')
 				console.log(this.uploads)
 				for (let u in this.uploads){
-					 upload(this.uploads[u]).then(res => this.uploads = this.uploads.filter(x => (x.name !== u.name) && (x.file !== u.file)))
+					 upload(this.uploads[u]).then(res => {
+					 	this.uploads = this.uploads.filter(x => (x.name !== u.name) && (x.file !== u.file))
+					 	this.videos.push(res.data)
+					 })
 						.catch(res => this.uploads[u].errors = res.errors)
 				}
 			}
