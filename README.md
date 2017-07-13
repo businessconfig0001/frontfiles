@@ -33,5 +33,5 @@ $ php artisan db:seed
 
 Development build
 ```
-$npm run dev
+$ npm run dev
 ```
