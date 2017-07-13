@@ -19,7 +19,8 @@ class VideoController extends Controller
 
     public function index()
     {
-
+        $videos=Video::where('user_id',Auth::user()->id);
+        return response()->json(array('data'=>$videos));
     }
 
     public function store(CreateVideoRequest $request)
