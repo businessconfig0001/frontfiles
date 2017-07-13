@@ -37,7 +37,7 @@
                                 </button>
 
                                 <div class="col-xs-6 col-sm-4">
-                                    <a class="navbar-brand logo" href="#"><span></span></a>
+                                    <a class="navbar-brand logo" href="{{ url('/') }}"><span></span></a>
                                 </div>
 
                                 <!-- Collect the nav links, forms, and other content for toggling -->

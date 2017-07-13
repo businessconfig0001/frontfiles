@@ -6,8 +6,7 @@ use Illuminate\{
 
 class DatabaseSeeder extends Seeder
 {
-
-    //Tables to truncate
+    //Tables to truncate and seed
     protected $tables = [
         'roles'     => RolesTableSeeder::class,
         'users'     => UsersTableSeeder::class,
