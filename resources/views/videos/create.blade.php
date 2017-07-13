@@ -5,7 +5,6 @@
                 <section class="form-container">
 				    <drag-n-drop></drag-n-drop>
                 </section><!-- form-container -->
-	
 
                 <!-- /modules -->
 @endsection

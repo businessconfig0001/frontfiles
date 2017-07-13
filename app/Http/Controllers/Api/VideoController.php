@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace FrontFiles\Http\Controllers\Api;
 
+use FrontFiles\Http\Controllers\Controller;
+use FrontFiles\Video;
 
-use App\Http\Controllers\Controller;
-use App\Video;
 class VideoController extends Controller
 {
     /**

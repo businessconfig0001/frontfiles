@@ -12,21 +12,21 @@ You can use your own `.env` file or copy the `.env.example` provided.
 ### Install dependencies
 
 ```
-$composer install
-$npm install
+$ composer install
+$ npm install
 ```
 
 ### Generate project key
 
 ```
-$php artisan key:generate
+$ php artisan key:generate
 ```
 
-### Migrate & seed the database (not yet implemented)
+### Migrate & seed the database
 
 ```
-$php artisan migrate
-$php artisan db:seed
+$ php artisan migrate
+$ php artisan db:seed
 ```
 
 ### Compile SASS & Vue with Webpack

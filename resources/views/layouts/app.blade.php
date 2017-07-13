@@ -52,12 +52,28 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-5">
                                         <ul class="nav navbar-nav navbar-right">
-                                            <li><a href="#">Videos</a></li>
+                                            <li><a href="/videos">Videos</a></li>
                                             <li><a href="#">$$$</a></li>
                                             <li><a href="#">World</a></li>
                                             <li><a href="#" class="btn-bg-blue">SS</a></li>
                                             <li><a href="#"><i class="fa fa-sliders txt-medium"></i></a></li>
-                                            <li><a href="/upload" class="btn btn-border-black">upload</a></li>
+
+                                            @if (Auth::guest())
+                                                <li><a href="{{ route('login') }}">Login</a></li>
+                                                <li><a href="{{ route('register') }}">Register</a></li>
+                                            @else
+                                                <li>
+                                                    <a href="{{ route('logout') }}"
+                                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                                        Logout
+                                                    </a>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                        {{ csrf_field() }}
+                                                    </form>
+                                                </li>
+                                            @endif
+
+                                            <li><a href="/videos/upload" class="btn btn-border-black">upload</a></li>
                                         </ul>
                                     </div>
                                 </div><!-- /.navbar-collapse -->

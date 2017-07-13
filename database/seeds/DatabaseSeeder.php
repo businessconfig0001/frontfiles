@@ -1,13 +1,17 @@
 <?php
 
-use Illuminate\Database\Seeder;
+use Illuminate\{
+    Database\Seeder, Support\Facades\DB
+};
 
 class DatabaseSeeder extends Seeder
 {
 
     //Tables to truncate
-    protected $toTruncate = [
-        'users',
+    protected $tables = [
+        'roles'     => RolesTableSeeder::class,
+        'users'     => UsersTableSeeder::class,
+        'videos'    => VideosTableSeeder::class,
     ];
 
     /**
@@ -19,17 +23,22 @@ class DatabaseSeeder extends Seeder
     {
         //Disable foreign keys checks to avoid errors
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        //delete all data
-        foreach($this->toTruncate as $table)
+
+        //Delete all data
+        foreach($this->tables as $name => $class)
         {
-            DB::table($table)->truncate();
-            $this->command->info("Database table '{$table}' truncated");
+            DB::table($name)->truncate();
+            $this->command->info("Table '{$name}' truncated");
         }
+
         //Enable foreign keys again
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        $this->call(UserTableSeeder::class);
-        $this->command->info('Users created');
 
-
+        //Populate database with data
+        foreach($this->tables as $name => $class)
+        {
+            $this->call($class);
+            $this->command->info("Table '{$name}' populated");
+        }
     }
 }

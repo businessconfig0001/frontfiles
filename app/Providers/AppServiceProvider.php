@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Providers;
+namespace FrontFiles\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\{
+    ServiceProvider, Facades\Schema
+};
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //Fixes the error:
+        //SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 1000 bytes
+        Schema::defaultStringLength(191);
     }
 
     /**
@@ -23,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if($this->app->environment() !== 'production')
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
     }
 }

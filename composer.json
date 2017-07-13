@@ -8,11 +8,12 @@
         "php": ">=5.6.4",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "league/flysystem-azure": "^1.0",
         "microsoft/azure-storage": "0.10.2",
-        "microsoft/windowsazure": "0.5",
-        "league/flysystem-azure": "^1.0"
+        "microsoft/windowsazure": "0.5"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.4",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~5.7"
@@ -22,7 +23,7 @@
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "FrontFiles\\": "app/"
         }
     },
     "autoload-dev": {
@@ -39,10 +40,14 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
             "php artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
             "php artisan optimize"
         ]
     },

@@ -1,5 +1,5 @@
 <?php
-namespace App\Providers;
+namespace FrontFiles\Providers;
 use Storage;
 use League\Flysystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
