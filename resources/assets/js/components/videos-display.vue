@@ -2,7 +2,11 @@
 <div class="display-container">
 	<ul class="video-list">
 		<li v-for="video in videos">
-			
+			<video>
+				<source :src="video.src">
+			</video>
+			<h2>{{video.title}}</h2>
+			<p>{{video.description}}</p>
 		</li>
 	</ul>
 </div>
