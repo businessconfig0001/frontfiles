@@ -17,6 +17,11 @@
 		<div class="col-xs-12 col-sm-3 form">
 			<div v-for="upload in uploads" class="form-group">
 				<h3>{{upload.name}}</h3>
+				<div v-show="errors.length">
+					<ul>
+						<li v-for="error in errors">{{error}}</li>
+					</ul>
+				</div>
 				<p>
 					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
 					<!--<span v-show="typeof upload.errors['title'] !== 'undefined'">{{upload.errors['title']}}</span>-->
@@ -134,5 +139,9 @@
 .form-group{
 	display:block;
 	padding-bottom:2rem;
+}
+.video-container{
+	display:block;
+	width:100%;
 }
 </style>

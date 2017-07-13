@@ -2,20 +2,20 @@
 <div class="display-container">
 	<ul class="video-list">
 		<li v-for="video in videos">
-			<video controls>
-				<source :src="video.url">
-			</video>
-			<h2>{{video.title}}</h2>
-			<p>{{video.description}}</p>
+			<video-block :video="video"></video-block>
 		</li>
 	</ul>
 </div>
 </template>
 
 <script>
+import videoBlock from './video-block'
 export default {
 
 	name: 'videos-display',
+	components:{
+		videoBlock
+	},
 	props:{
 		videos:{
 			required:true,
@@ -31,4 +31,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+	li{
+		width:50%;
+		display:inline-block;
+	}
 </style>
