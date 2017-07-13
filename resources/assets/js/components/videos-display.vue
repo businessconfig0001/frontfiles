@@ -2,8 +2,8 @@
 <div class="display-container">
 	<ul class="video-list">
 		<li v-for="video in videos">
-			<video>
-				<source :src="video.src">
+			<video controls>
+				<source :src="video.url">
 			</video>
 			<h2>{{video.title}}</h2>
 			<p>{{video.description}}</p>
@@ -15,19 +15,18 @@
 <script>
 export default {
 
-  name: 'videos-display',
-  props:{
-  	videos:{
-  		required:true,
-  		type:Array
-  	}
-  }
+	name: 'videos-display',
+	props:{
+		videos:{
+			required:true,
+			type:Array
+		}
+	},
+	data () {
+		return {
 
-  data () {
-    return {
-
-    };
-  }
+		}
+	}
 };
 </script>
 

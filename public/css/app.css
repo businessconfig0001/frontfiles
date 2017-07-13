@@ -8781,11 +8781,11 @@ img {
 }
 
 .btn-photo {
-  background: url(/images/upload2x.png?1de8ff468014c37caafca911242a5db4) center center no-repeat;
+  background: url(/images/upload2x.png?a42e510890362f45bd9e793ccd05cab4) center center no-repeat;
 }
 
 .btn-photo:active {
-  background-image: url(/images/upload2x.png?1de8ff468014c37caafca911242a5db4);
+  background-image: url(/images/upload2x.png?a42e510890362f45bd9e793ccd05cab4);
 }
 
 .blocks .block-image {
