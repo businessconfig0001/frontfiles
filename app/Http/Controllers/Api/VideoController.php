@@ -24,7 +24,7 @@ class VideoController extends Controller
         return response()->json(array('data'=>$videos));
     }
 
-    public function store(Requeqt $request)
+    public function store(Request $request)
     {
         this.validate($request->input->all(),[
             'video' => 'required|video',
@@ -51,8 +51,13 @@ class VideoController extends Controller
         //$this->authorize('update', $doctor);
         foreach((array) $data as $key => $value) {
             switch($key) {
-                case 'title' :              $video->title    = $value; break;
+                case 'title' :              $video->title           = $value; break;
                 case 'description' :        $video->description     = $value; break;
+                case 'what' :               $video->description     = $value; break;
+                case 'where' :              $video->description     = $value; break;
+                case 'when' :               $video->description     = $value; break;
+                case 'who'  :               $video->description     = $value; break;
+
             }
         }
 

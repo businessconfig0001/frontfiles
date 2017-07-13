@@ -20,4 +20,6 @@ Auth::routes();
 Route::get('/video', 'VideosController@index');
 Route::get('/video/upload', 'VideosController@create');
 Route::post('/video', 'VideosController@store');
+Route::put('/video/{id}', 'VideosController@update');
+Route::delete('/video/{id}', 'VideosController@update');
 
