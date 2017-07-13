@@ -22,17 +22,16 @@
 					<!--<span v-show="typeof upload.errors['title'] !== 'undefined'">{{upload.errors['title']}}</span>-->
 				</p>
 				<p>
-					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="upload.data.desc"></textarea>
+					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="upload.data.description"></textarea>
 					<!--<span v-show="typeof upload.errors['description'] !== 'undefined'">{{upload.errors['description']}}</span>-->
 				</p>
-				<p><input type="date" name="expiration" id="expiration" class="form-control" placeholder="Expiration date" v-model="upload.data.date"/></p>
 				<p><input type="text" name="what" id="what" class="form-control" placeholder="#What" v-model="upload.data.what"/></p>
-				<p><input type="text" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where"/></p>
+				<p><input type="" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where"/></p>
 				<p><input type="text" name="who" id="who" class="form-control" placeholder="#Who" v-model="upload.data.who"/></p>
-				<p><input type="text" name="when" id="when" class="form-control" placeholder="#When" v-model="upload.data.when"/></p>
+				<p><input type="text" name="when" id="when" class="form-control" placeholder="#When" onfocus="(this.type='date')" v-model="upload.data.when"/></p>
 			</div>
 		</div>
-		<a class="submit" @click.prevent="upload">Save</a>
+		<a class="submit btn" @click.prevent="upload">Save</a>
 	</form>
 </div>
 	
@@ -61,8 +60,7 @@
 				  .map(x => {
 				  		let d = {
 				  			title:'',
-				  			desc:'',
-				  			date:'',
+				  			description:'',
 				  			what:'',
 				  			where:'',
 				  			when:'',
@@ -91,7 +89,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .dropbox {
 	outline-offset: -10px;
 	padding: 10px 10px;

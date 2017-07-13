@@ -18,6 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/video', 'VideosController@index');
-Route::get('/videos/upload', 'VideosController@create');
+Route::get('/video/upload', 'VideosController@create');
 Route::post('/video', 'VideosController@store');
 

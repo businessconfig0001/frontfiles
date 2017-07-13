@@ -4,6 +4,7 @@ namespace FrontFiles\Http\Controllers;
 
 use FrontFiles\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VideosController extends Controller
 {
