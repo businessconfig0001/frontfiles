@@ -23,10 +23,10 @@ class VideosController extends Controller
      */
     public function index()
     {
-        $videos = Video::where('user_id',Auth::user()->id);
+        $videos = Video::where('user_id', auth()->user()->id)->get();
 
         if(request()->wantsJson())
-            return $videos->get();
+            return $videos;
 
         return view('videos.index', compact('videos'));
     }
@@ -51,8 +51,8 @@ class VideosController extends Controller
     {
         $this->validate($request, [
             'video' => 'required',
-
         ]);
+
         \Log::info($request);
 
         if ($request->hasFile('video')) {
