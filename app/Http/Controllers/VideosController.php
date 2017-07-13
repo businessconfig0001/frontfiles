@@ -2,9 +2,9 @@
 
 namespace FrontFiles\Http\Controllers;
 
+use App\Http\Requests\CreateVideoRequest;
 use FrontFiles\Video;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class VideosController extends Controller
 {
@@ -41,58 +41,13 @@ class VideosController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
+     * @param CreateVideoRequest $form
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, CreateVideoRequest $form)
     {
-        $this->validate($request, [
-            'video' => 'required',
-        ]);
-
-        \Log::info($request);
-
-        if ($request->hasFile('video')) {
-            if ($request->file('video')->isValid()) {
-
-                $file = $request->file('video');
-                $extension = $file->getClientOriginalExtension();
-                $name = $request->get('title') . uniqid() . '.' . $extension;
-                $destinationPath = public_path('/videos/');
-                //$file = $request->file('video')->move($destinationPath,$name);
-
-                $video = new Video();
-                $video->title = $request->title;
-                $video->description = $request->description;
-                $video->user_id = \Auth::user()->id;
-                $video->filename=$name;
-                $video->short_id=1;
-                $video->what=$request->what;
-                $video->where=$request->where;
-                $video->who=$request->who;
-                $video->when=$request->when;
-
-                // Copy to remote
-                ini_set('memory_limit', '-1');
-                $path =  $request->file('video')->storeAs(
-                    'usercontents',$name, 'azure'
-                );
-
-                $url = config('filesystems.disks.azure.url').$path;
-                $video->url=$url;
-                $video->save();
-                if(request()->wantsJson())
-                    return response()->json(array('status' => 'Video uploaded!','data'=>$video));
-
-                return redirect('/video/upload')->with(array('status'=>'Video uploaded!'));
-            }
-            if(request()->wantsJson())
-                return response()->json(array('error' => 'Video file is not valid'));
-            return redirect('/video/upload')->with(array('error'=>'Video file is not valid'));
-        }
-        if(request()->wantsJson())
-            return response()->json(array('error' => 'Video file is not available'));
-        return redirect('/video/upload')->with(array('error'=>'Video file is not available'));
+        return $form->persist($request);
     }
 
     /**
