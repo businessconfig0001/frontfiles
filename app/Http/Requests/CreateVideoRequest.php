@@ -25,7 +25,7 @@ class CreateVideoRequest extends Request {
     public function rules()
     {
         return [
-            'video' => 'required',
+            'video' => 'required|video',
             'title' => 'required',
             'description' => 'required',
             'what' => 'required',

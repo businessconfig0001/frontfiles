@@ -2,8 +2,7 @@
 
 namespace FrontFiles\Http\Controllers\Api;
 
-use App\Http\Requests\CreateVideoRequest;
-use App\Http\Requests\UpdateVideoRequest;
+use App\Http\Requests\Request;
 use FrontFiles\Http\Controllers\Controller;
 use FrontFiles\Video;
 
@@ -25,9 +24,17 @@ class VideoController extends Controller
         return response()->json(array('data'=>$videos));
     }
 
-    public function store($request)
+    public function store(Requeqt $request)
     {
-        \Log::info($request);
+        this.validate($request->input->all(),[
+            'video' => 'required|video',
+            'title' => 'required',
+            'description' => 'required',
+            'what' => 'required',
+            'where' => 'required',
+            'when' => 'required',
+            'who' => 'required',
+        ]);
     }
     /**
      * Update the specified resource in storage.
@@ -36,7 +43,7 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateVideoRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $data=$request->all();
         $video = Video::find($id);
