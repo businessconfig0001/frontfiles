@@ -1,0 +1,76 @@
+.form-control {
+    box-shadow:none;
+
+    &:focus {
+        box-shadow:none;
+    }
+}
+
+.form-container {
+    .upload {
+        height:390px;
+        width:100%;
+        display:block;
+        font-size:5em;
+        color:$white;
+        position:relative;
+
+        span {
+            position:absolute;
+            font-size:5em;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+        }
+    }
+    .form {
+        margin-left:5%;
+
+        p {
+            margin-bottom:0.9em;
+        }
+
+        input[type="text"] {
+            border-color:$light-gray;
+        }
+
+        input[type="date"] {
+            border-top:0;
+            border-left:0;
+            border-right:0;
+        }
+
+        button {
+            display:block;
+            color:$white;
+            text-align:center;
+            text-transform:uppercase;
+            font-weight:700;
+        }
+    }
+}
+
+.custom-input {
+    .radio-label {
+        position:relative;
+        padding-left:15px;
+        line-height:1.1em;
+        cursor:pointer;
+    }
+    input[type="radio"] + .radio-label::after {
+        content:'';
+        border:1px solid $gray;
+        width:12px;
+        height:12px;
+        cursor:pointer;   
+        position: absolute;
+        top: .1em; 
+        left: 0;
+        font-size: 1.1em;     
+    }
+
+    input[type="radio"]:checked + .radio-label::after{
+        content: 'X';
+    }
+}

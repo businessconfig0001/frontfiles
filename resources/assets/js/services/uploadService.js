@@ -1,5 +1,6 @@
-const url = '/upload'
+const url = '/videos'
 function upload(data){
+	console.log(data)
 	//add data
 	let form = formDataFactory(data.data)
 
@@ -8,7 +9,7 @@ function upload(data){
 
 	//upload
 	return new Promise((resolve,reject) =>
-		http.post(window.location.protocol + "//" + window.location.host + url,form)
+		axios.post(window.location.protocol + "//" + window.location.host + url,form)
 		.then(resolve)
 		.catch(reject)
 	)

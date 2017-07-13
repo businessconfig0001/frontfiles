@@ -1,0 +1,73 @@
+.page-payment-info {
+    margin-bottom:40px;
+
+    .blocks {
+        margin-top:40px;
+
+        .block-content {
+            padding-left:50px;
+        }
+
+        .block-footer {
+            padding-left:50px;
+            font-weight:700;
+        }
+    }
+
+    .title {
+        text-transform:uppercase;
+        padding-bottom:10px;
+        margin-bottom:20px;
+        font-size:1.4em;
+
+        &.border-bottom {
+            border-bottom-width:2px;
+            border-bottom-style: solid;
+        }
+    }
+
+    .form-container {
+
+        .btn {
+            display:block;
+        }
+
+        .form-control {
+            margin-bottom:20px;
+        }
+
+        textarea{
+            resize:none;
+        }
+
+        label {
+            font-size:0.75em;
+            font-weight:700;
+            text-transform:uppercase;
+            color:$gray;
+            margin-bottom:10px;
+        }
+
+        select{
+            border:0;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="month"], {
+            color:$black;
+        }
+
+        input[type="file"] {
+            margin-bottom:0;
+        }
+
+        .no-border {
+            padding-left:0;
+        }
+
+        hr {
+            border-color:$gray;
+        }
+    }
+}

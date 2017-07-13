@@ -13,7 +13,6 @@
         <script>
             window.csrfToken = "{{ csrf_token() }}";
         </script>
-        <link rel="stylesheet" type="text/css" href="assets/css/theme.css" />
     </head>
     <body class="page-payment-info">
         <!--[if lt IE 7]>

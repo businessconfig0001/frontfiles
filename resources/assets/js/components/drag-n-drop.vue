@@ -19,11 +19,11 @@
 				<h3>{{upload.name}}</h3>
 				<p>
 					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
-					<span v-show="upload.errors['title']">{{upload.errors['title']}}</span>
+					<!--<span v-show="typeof upload.errors['title'] !== 'undefined'">{{upload.errors['title']}}</span>-->
 				</p>
 				<p>
 					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="upload.data.desc"></textarea>
-					<span v-show="upload.errors['description']">{{upload.errors['description']}}</span>
+					<!--<span v-show="typeof upload.errors['description'] !== 'undefined'">{{upload.errors['description']}}</span>-->
 				</p>
 				<p><input type="date" name="expiration" id="expiration" class="form-control" placeholder="Expiration date" v-model="upload.data.date"/></p>
 				<p><input type="text" name="what" id="what" class="form-control" placeholder="#What" v-model="upload.data.what"/></p>
@@ -80,10 +80,11 @@
 			},
 			upload(){
 				console.log('uploading ' + this.uploads.length + ' files')
+				console.log(this.uploads)
 				for (let u in this.uploads){
-					 upload(u)
-						.then(res => this.uploads = this.uploads.filter(x => (x.name !=== u.name) && (x.file !=== u.file))
-						.catch(res => u.errors = res.errors)
+					 upload(this.uploads[u]).then(res => this.uploads = this.uploads.filter(x => (x.name !== u.name) && (x.file !== u.file)))
+						.catch(res => this.uploads[u].errors = res.errors)
+				}
 			}
 
 		}

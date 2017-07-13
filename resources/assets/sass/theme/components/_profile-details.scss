@@ -1,0 +1,39 @@
+.profile-details-container {
+    color:$blue;
+    margin-bottom:40px;
+
+
+    .title {
+        font-weight:700;
+        color:$blue;
+        border-bottom:1px solid $blue;
+        padding-bottom:5px;
+        margin-bottom:5px;
+    }
+
+    .location {
+        font-size:1.2em;
+        margin-bottom:60px;
+    }
+
+    .source {
+        font-size:1em;
+        padding-bottom:5px;
+        margin-bottom:5px;
+        border-bottom:1px solid $blue;
+
+        a{
+            color:$blue;
+            text-decoration:none;
+        }
+    }
+
+    .tags {
+        li {
+            display:inline-block;
+            a {
+                padding:3px 5px;
+            }
+        }
+    }
+}
