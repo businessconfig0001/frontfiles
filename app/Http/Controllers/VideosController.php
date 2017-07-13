@@ -22,7 +22,7 @@ class VideosController extends Controller
      */
     public function index()
     {
-        $videos = Video::all();
+        $videos = Video::where('user_id',Auth::user()->id);
 
         if(request()->wantsJson())
             return $videos->get();
