@@ -23,10 +23,10 @@ class CreateVideosTable extends Migration
             $table->string('title');
             $table->text('description');
 
-            $table->string('what');
-            $table->string('where');
-            $table->dateTime('when');
-            $table->string('who');
+            $table->string('what')->nullable();
+            $table->string('where')->nullable();
+            $table->dateTime('when')->nullable();
+            $table->string('who')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
