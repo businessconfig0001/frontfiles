@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/videos', 'VideosController@index');
+Route::get('/video', 'VideosController@index');
 Route::get('/videos/upload', 'VideosController@create');
-Route::post('/videos', 'VideosController@store');
+Route::post('/video', 'VideosController@store');
+
