@@ -1631,7 +1631,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		upload: function upload() {
 			console.log('uploading ' + this.uploads.length + ' files');
 			this.uploads.forEach(function (x) {
-				return Object(__WEBPACK_IMPORTED_MODULE_0__services_uploadService__["a" /* upload */])(x).then(console.log('succes'));
+				return __WEBPACK_IMPORTED_MODULE_0__services_uploadService__["a" /* upload */](x).then(console.log('succes'));
 			});
 		}
 	}
@@ -29436,14 +29436,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fileCount = $event.target.files.length
       }
     }
-  }), _vm._v(" "), (_vm.state === 'saving') ? _c('p', [_vm._v("\r\n\t\t\t  \tUploading " + _vm._s(_vm.fileCount) + " files...\r\n\t\t\t")]) : (_vm.state === 'more') ? _c('p', [_vm._v("\r\n\t\t\t  \tAdd more files or "), _c('a', {
+  }), _vm._v(" "), (_vm.state === 'saving') ? _c('p', [_vm._v("\n\t\t\t  \tUploading " + _vm._s(_vm.fileCount) + " files...\n\t\t\t")]) : (_vm.state === 'more') ? _c('p', [_vm._v("\n\t\t\t  \tAdd more files or "), _c('a', {
     on: {
       "click": function($event) {
         $event.preventDefault();
         _vm.upload($event)
       }
     }
-  }, [_vm._v("save them")])]) : _c('p', [_vm._v("\r\n\t\t\t  \tDrag your file(s) here to begin"), _c('br'), _vm._v(" or click to browse\r\n\t\t\t")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("save them")])]) : _c('p', [_vm._v("\n\t\t\t  \tDrag your file(s) here to begin"), _c('br'), _vm._v(" or click to browse\n\t\t\t")])]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12 col-sm-3 form"
   }, _vm._l((_vm.uploads), function(upload) {
     return _c('div', {
@@ -30048,7 +30048,7 @@ var Component = __webpack_require__("./node_modules/vue-loader/lib/component-nor
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "C:\\wamp64\\www\\frontfiles\\resources\\assets\\js\\components\\drag-n-drop.vue"
+Component.options.__file = "/Users/milandebuck/Code/frontfiles/resources/assets/js/components/drag-n-drop.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] drag-n-drop.vue: functional components are not supported with templates, they should use render functions.")}
 

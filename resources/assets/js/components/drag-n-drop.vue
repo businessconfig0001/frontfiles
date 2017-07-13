@@ -17,8 +17,14 @@
 		<div class="col-xs-12 col-sm-3 form">
 			<div v-for="upload in uploads" class="form-group">
 				<h3>{{upload.name}}</h3>
-				<p><input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/></p>
-				<p><textarea name="description" id="description" class="form-control" placeholder="Description" v-model="upload.data.desc"></textarea></p>
+				<p>
+					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
+					<span v-show="upload.errors['title']">{{upload.errors['title']}}</span>
+				</p>
+				<p>
+					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="upload.data.desc"></textarea>
+					<span v-show="upload.errors['description']">{{upload.errors['description']}}</span>
+				</p>
 				<p><input type="date" name="expiration" id="expiration" class="form-control" placeholder="Expiration date" v-model="upload.data.date"/></p>
 				<p><input type="text" name="what" id="what" class="form-control" placeholder="#What" v-model="upload.data.what"/></p>
 				<p><input type="text" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where"/></p>
@@ -66,15 +72,18 @@
 					  	this.uploads.push({ 
 					  		file:fileList[x],
 					  		name:fileList[x].name,
-					  		data: d
+					  		data: d,
+					  		errors:[]
 					  	})
 				  });
 				  this.state='more'
 			},
 			upload(){
 				console.log('uploading ' + this.uploads.length + ' files')
-				this.uploads.forEach(x => upload(x)
-					.then(console.log('succes')))
+				for (let u in this.uploads){
+					 upload(u)
+						.then(res => this.uploads = this.uploads.filter(x => (x.name !=== u.name) && (x.file !=== u.file))
+						.catch(res => u.errors = res.errors)
 			}
 
 		}
