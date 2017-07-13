@@ -1,4 +1,4 @@
-const url = '/videos'
+const url = '/video'
 function upload(data){
 	console.log(data)
 	//add data
@@ -17,8 +17,10 @@ function upload(data){
 
 function formDataFactory(data){
 	let form= new FormData()
-	for(let key in Object.keys(data)){
-		form.append(key,data[key])
+	let keys = Object.keys(data)
+	for(let i = 0 ; i < keys.length ; i++ ){
+		console.log(keys[i])
+		form.append(keys[i],data[keys[i]])
 	}
 	return form
 }
