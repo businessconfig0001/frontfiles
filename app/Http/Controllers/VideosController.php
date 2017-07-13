@@ -48,11 +48,12 @@ class VideosController extends Controller
      */
     public function store(Request $request)
     {
+        \Log::info($request);
         $this->validate($request, [
             'video' => 'required',
-            'title' => 'required',
-            'description' => 'required',
+
         ]);
+        \Log::info($request);
 
         if ($request->hasFile('video')) {
             if ($request->file('video')->isValid()) {
@@ -64,10 +65,15 @@ class VideosController extends Controller
                 //$file = $request->file('video')->move($destinationPath,$name);
 
                 $video = new Video();
-                $video->title = $request->get('title');
-                $video->description = $request->get('description');
-                $video->user_id = Auth::user()->id;
+                $video->title = $request->title;
+                $video->description = $request->desc;
+                $video->user_id = \Auth::user()->id;
                 $video->filename=$name;
+                $video->short_id=1;
+                $video->what=$request->what;
+                $video->where=$request->where;
+                $video->who=$request->who;
+                $video->when=$request->when;
 
                 // Copy to remote
                 ini_set('memory_limit', '-1');

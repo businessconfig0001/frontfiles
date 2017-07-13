@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class CreateVideoRequest extends Request {
+class UpdateVideoRequest extends Request {
 
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,6 @@ class CreateVideoRequest extends Request {
     public function rules()
     {
         return [
-            'video' => 'required',
             'title' => 'required',
             'description' => 'required',
         ];

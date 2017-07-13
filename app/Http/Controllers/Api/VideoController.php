@@ -2,6 +2,8 @@
 
 namespace FrontFiles\Http\Controllers\Api;
 
+use App\Http\Requests\CreateVideoRequest;
+use App\Http\Requests\UpdateVideoRequest;
 use FrontFiles\Http\Controllers\Controller;
 use FrontFiles\Video;
 
@@ -23,9 +25,9 @@ class VideoController extends Controller
         return response()->json(array('data'=>$videos));
     }
 
-    public function store(CreateVideoRequest $request)
+    public function store($request)
     {
-
+        \Log::info($request);
     }
     /**
      * Update the specified resource in storage.
@@ -44,8 +46,6 @@ class VideoController extends Controller
             switch($key) {
                 case 'title' :              $video->title    = $value; break;
                 case 'description' :        $video->description     = $value; break;
-                case 'path' :               $video->path        = $value; break;
-                case 'url' :                $video->url  = $value; break;
             }
         }
 

@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class CreateAccountRequest extends Request {
+class CreateVideoRequest extends Request {
 
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,9 @@ class CreateAccountRequest extends Request {
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:50',
-            'email' => 'required|email|max:50|unique:accounts,email',
-            'password' => 'required|confirmed|min:6|max:100',
-            'account_type_id' => 'required',
-
+            'video' => 'required',
+            'title' => 'required',
+            'description' => 'required',
         ];
     }
 
