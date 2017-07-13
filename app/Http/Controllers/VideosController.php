@@ -67,7 +67,7 @@ class VideosController extends Controller
 
                 $video = new Video();
                 $video->title = $request->title;
-                $video->description = $request->desc;
+                $video->description = $request->description;
                 $video->user_id = \Auth::user()->id;
                 $video->filename=$name;
                 $video->short_id=1;

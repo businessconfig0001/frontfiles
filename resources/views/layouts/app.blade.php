@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-5">
                                         <ul class="nav navbar-nav navbar-right">
-                                            <li><a href="/videos">Videos</a></li>
+                                            <li><a href="/video">Videos</a></li>
                                             <li><a href="#">$$$</a></li>
                                             <li><a href="#">World</a></li>
                                             <li><a href="#" class="btn-bg-blue">SS</a></li>
