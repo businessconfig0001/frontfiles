@@ -54,10 +54,6 @@
                                                 <li><a href="{{ route('login') }}">Login</a></li>
                                             @else
                                                 <li><a href="/video">Videos</a></li>
-                                                <li><a href="#">$$$</a></li>
-                                                <li><a href="#">World</a></li>
-                                                <li><a href="#" class="btn-bg-blue">SS</a></li>
-                                                <li><a href="#"><i class="fa fa-sliders txt-medium"></i></a></li>
                                                 <li>
                                                     <a href="{{ route('logout') }}"
                                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">

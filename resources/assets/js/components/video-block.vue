@@ -103,9 +103,8 @@ export default {
 <style lang="scss" scoped>
 .block-container{
 	width:100%;
-	background-color:rgba(255,255,255,0.3);
+	background-color:rgb(255,255,255);
 	padding: 1rem;
-	color:white;
 
 	video{
 		width:100%;

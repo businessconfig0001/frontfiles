@@ -19,9 +19,9 @@
     }
     .sub-title{
          padding-top: 15px;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-weight: bolder;
-        width: 200%;
+        width: 300%;
         margin-left: -80%;
     }
     .navbar-default {
@@ -91,4 +91,29 @@
     .navbar-form {
         border:0;
     }
+}
+
+@media(max-width:1050px){
+    .main-header{
+        .logo{
+            background-size:80% auto;
+        }
+
+       .sub-title{
+            padding-top:23px;
+            width: 250%;
+            font-size:1rem;
+            margin-left:-4rem;
+        } 
+    }
+    
+}
+@media(max-width:1050px){
+    .main-header{
+        .logo{
+            background-size:90% auto;
+        }
+ 
+    }
+    
 }

@@ -8351,19 +8351,21 @@ button.close {
 }
 
 .bg-photo {
-  width: 100%;
-  min-height: 90vh;
-  overflow-y: scroll;
+  background: no-repeat center center fixed;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
+  top: 0;
 }
 
 .bg-login {
   background-image: url(/images/riot1.jpg?772273f557c0f17166a715dda6df8389);
-  background-size: 100%;
 }
 
 .bg-create {
-  background-image: url(/images/riot2.jpg?5264bec10b59785bfd9aefd2cb27d196);
-  background-size: 100%;
+  background-image: url(/images/riot2.jpg?e383921d8faefbff667fe78592154096);
 }
 
 #landing .hero-image {
@@ -9035,9 +9037,9 @@ img {
 
 .main-header .sub-title {
   padding-top: 15px;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: bolder;
-  width: 200%;
+  width: 300%;
   margin-left: -80%;
 }
 
@@ -9105,6 +9107,25 @@ img {
 
 .main-header .navbar-default .navbar-form {
   border: 0;
+}
+
+@media (max-width: 1050px) {
+  .main-header .logo {
+    background-size: 80% auto;
+  }
+
+  .main-header .sub-title {
+    padding-top: 23px;
+    width: 250%;
+    font-size: 1rem;
+    margin-left: -4rem;
+  }
+}
+
+@media (max-width: 1050px) {
+  .main-header .logo {
+    background-size: 90% auto;
+  }
 }
 
 .search .search-input {
