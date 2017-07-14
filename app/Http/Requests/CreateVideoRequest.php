@@ -60,13 +60,14 @@ class CreateVideoRequest extends FormRequest
             return redirect('/video/upload')->with(array('error'=>'Video file is not valid'));
         }
 
-        $filename = $this->getVideoFilename();
+        $short_id = Video::generateUniqueShortID(8);
+        $name = $short_id . '.' .request()->file('video')->getClientOriginalExtension();
 
         $video = Video::create([
             'user_id' => auth()->user()->id,
-            'short_id' => uniqid(),
-            'filename' => $filename,
-            'url' => $this->getVideoUrl($filename),
+            'short_id' => $short_id,
+            'filename' => $name,
+            'url' => Video::storeAndReturnUrl($name),
             'title' => request('title'),
             'description' => request('description'),
             'what' => request('what'),
@@ -79,44 +80,5 @@ class CreateVideoRequest extends FormRequest
             return response()->json(array('status' => 'Video uploaded successfully!', 'data' => $video));
 
         return redirect('/video/upload')->with(array('status' => 'Video uploaded successfully!'));
-    }
-
-    /**
-     * Returns the filename of the video.
-     *
-     * @return string
-     */
-    protected function getVideoFilename()
-    {
-        return request()->get('title') .
-            uniqid() .
-            '.' .
-            request()
-                ->file('video')
-                ->getClientOriginalExtension();
-    }
-
-    /**
-     * Returns the URL of the video.
-     *
-     * @param string $filename
-     * @return string
-     */
-    protected function getVideoUrl($filename)
-    {
-        // Copy to remote
-        //!!! REMOVE THIS ON PRODUCTION
-        ini_set('memory_limit', '-1');
-
-        if(config('filesystems.default') === 'local')
-            return config('filesystems.disks.local.url') .
-                request()
-                    ->file('video')
-                    ->storeAs('usercontents', $filename, config('filesystems.default'));
-
-        return config('filesystems.disks.azure.url') .
-            request()
-                ->file('video')
-                ->storeAs('usercontents', $filename, config('filesystems.default'));
     }
 }

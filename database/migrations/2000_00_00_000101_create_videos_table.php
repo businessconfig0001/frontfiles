@@ -17,7 +17,7 @@ class CreateVideosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
 
-            $table->string('short_id', 50);
+            $table->string('short_id', 20)->unique();
             $table->string('filename');
             $table->string('url');
             $table->string('title');

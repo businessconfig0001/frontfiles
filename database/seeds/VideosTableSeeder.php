@@ -20,7 +20,6 @@ class VideosTableSeeder extends Seeder
             Video::create([
                 'user_id' => $faker->numberBetween(1, 5),
                 'short_id' => $faker->randomNumber(8),
-                'filename' => $faker->streetName,
                 'url' => $faker->url,
                 'title' => $faker->sentence,
                 'description' => $faker->paragraph,
