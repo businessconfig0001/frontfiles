@@ -5,11 +5,25 @@
 
     .logo {
         background:url("../images/logo2x.png") left center no-repeat;
-        background-size:80% auto;
+        background-size:50% auto;
         display:block;
         width:100%;
     }
+    .navbar-brand{
+        padding: 62px 15px;
+    }
+    .header-content{
+        padding-top:30px
 
+
+    }
+    .sub-title{
+         padding-top: 15px;
+        font-size: 1.8rem;
+        font-weight: bolder;
+        width: 200%;
+        margin-left: -80%;
+    }
     .navbar-default {
         border:0;
         box-shadow:none;
