@@ -9043,6 +9043,10 @@ img {
   margin-left: -80%;
 }
 
+.main-header button.navbar-toggle {
+  margin-top: 40px;
+}
+
 .main-header .navbar-default {
   border: 0;
   -webkit-box-shadow: none;
@@ -9125,6 +9129,12 @@ img {
 @media (max-width: 1050px) {
   .main-header .logo {
     background-size: 90% auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-header .sub-title {
+    visibility: hidden;
   }
 }
 

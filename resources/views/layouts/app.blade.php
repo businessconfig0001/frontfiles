@@ -36,7 +36,9 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-
+                                <div class="mobile-nav">
+                                    
+                                </div>
                                 <div class="col-xs-6 col-sm-4">
                                     <a class="navbar-brand logo" href="{{ url('/') }}"><span></span></a>
                                 </div>
