@@ -1,6 +1,6 @@
 <template>
 <div class="drag-container">
-	<form enctype="multipart/form-data" novalidate>
+	<form enctype="multipart/form-data" novalidate class="clearfix">
 		<div class="col-sm-7 col-xs-12 bg-blue text-center dropbox">
 			<input type="file" multiple name="video" :disabled="state ==='saving'" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="video/*" class="input-file">
 			<p v-if="state === 'saving'">
@@ -23,17 +23,33 @@
 					</ul>
 				</div>
 				<p>
+					<display-error :error="upload.errors['title']"></display-error>
 					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
-					<!--<span v-show="typeof upload.errors['title'] !== 'undefined'">{{upload.errors['title']}}</span>-->
+					
 				</p>
 				<p>
+					<display-error :error="upload.errors['description']"></display-error>
 					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="upload.data.description"></textarea>
-					<!--<span v-show="typeof upload.errors['description'] !== 'undefined'">{{upload.errors['description']}}</span>-->
+					
 				</p>
-				<p><input type="text" name="what" id="what" class="form-control" placeholder="#What" v-model="upload.data.what"/></p>
-				<p><input type="" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where"/></p>
-				<p><input type="text" name="who" id="who" class="form-control" placeholder="#Who" v-model="upload.data.who"/></p>
-				<p><input type="text" name="when" id="when" class="form-control" placeholder="#When" onfocus="(this.type='date')" v-model="upload.data.when"/></p>
+				<p>
+					<display-error :error="upload.errors['what']"></display-error>
+					<input type="text" name="what" id="what" class="form-control" placeholder="#What" v-model="upload.data.what"/>
+					
+				</p>
+				<p>
+					<display-error :error="upload.errors['where']"></display-error>
+					<input type="" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where"/>
+					
+				</p>
+				<p>
+					<display-error :error="upload.errors['who']"></display-error>
+					<input type="text" name="who" id="who" class="form-control" placeholder="#Who" v-model="upload.data.who"/>			
+				</p>
+				<p>
+					<display-error :error="upload.errors['when']"></display-error>
+					<input type="text" name="when" id="when" class="form-control" placeholder="#When" onfocus="(this.type='date')" v-model="upload.data.when"/>
+				</p>
 			</div>
 		</div>
 		<a class="submit btn" @click.prevent="upload">Save</a>
@@ -47,8 +63,12 @@
 
 <script>
 	import { upload } from './../services/uploadService'
+	import  displayError from './display-error'
 	export default {
 		name:'drag-n-drop',
+		components:{
+			displayError
+		},
 		data(){
 			return {
 				state:'',
@@ -85,7 +105,7 @@
 					  		file:fileList[x],
 					  		name:fileList[x].name,
 					  		data: d,
-					  		errors:false
+					  		errors:{}
 					  	})
 				  });
 				  this.state='more'
@@ -95,10 +115,11 @@
 				console.log(this.uploads)
 				for (let u in this.uploads){
 					 upload(this.uploads[u]).then(res => {
+					 	console.log('succes')
 					 	this.uploads = this.uploads.filter(x => (x.name !== u.name) && (x.file !== u.file))
 					 	this.videos.push(res.data)
 					 })
-						.catch(res => this.uploads[u].errors = res.errors)
+						.catch(err => this.uploads[u].errors = err.response.data)
 				}
 			}
 
@@ -107,6 +128,9 @@
 </script>
 
 <style lang="scss" scoped>
+form{
+	display:block
+}
 .dropbox {
 	outline-offset: -10px;
 	padding: 10px 10px;
