@@ -8368,6 +8368,10 @@ button.close {
   background-image: url(/images/riot2.jpg?e383921d8faefbff667fe78592154096);
 }
 
+.btn-primary {
+  background-color: blue !important;
+}
+
 #landing .hero-image {
   padding: 57% 0 0 0;
 }
@@ -8485,6 +8489,11 @@ button.close {
 .ff-divisor {
   background: #eee url(/assets/images/ff-bg.png) repeat;
   height: 100px;
+}
+
+.newsletter {
+  width: 15rem;
+  margin: 0.5rem 0 !important;
 }
 
 /*-------------------------------------
