@@ -162,7 +162,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        FrontFiles\Providers\AzureStorageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -177,6 +176,11 @@ return [
         // FrontFiles\Providers\BroadcastServiceProvider::class,
         FrontFiles\Providers\EventServiceProvider::class,
         FrontFiles\Providers\RouteServiceProvider::class,
+
+        /*
+         * Azure storage
+         */
+        FrontFiles\Providers\AzureStorageServiceProvider::class,
 
         /*
          * Development helpers

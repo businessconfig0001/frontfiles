@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/video', 'VideosController@index');
 Route::get('/video/upload', 'VideosController@create');
+Route::get('/video/{video}', 'VideosController@show');
 Route::post('/video', 'VideosController@store');
-Route::put('/video/{id}', 'VideosController@update');
-Route::delete('/video/{id}', 'VideosController@update');
-
+Route::patch('/video/{video}/edit', 'VideosController@update');
+Route::delete('/video/{video}', 'VideosController@destroy');

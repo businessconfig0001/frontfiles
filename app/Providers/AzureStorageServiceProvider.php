@@ -1,10 +1,13 @@
 <?php
+
 namespace FrontFiles\Providers;
+
 use Storage;
 use League\Flysystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 use League\Flysystem\Azure\AzureAdapter;
 use MicrosoftAzure\Storage\Common\ServicesBuilder;
+
 class AzureStorageServiceProvider extends ServiceProvider
 {
     /**
@@ -26,6 +29,7 @@ class AzureStorageServiceProvider extends ServiceProvider
             return new Filesystem(new AzureAdapter($blobRestProxy, $config['container']));
         });
     }
+
     /**
      * Register bindings in the container.
      *

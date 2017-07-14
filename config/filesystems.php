@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'azure'),
+    'default' => env('FILESYSTEM_DRIVER', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,30 +44,31 @@ return [
     'disks' => [
 
         'local' => [
-            'driver' => 'local',
-            'root' => storage_path('app'),
+            'driver'    => 'local',
+            'root'      => storage_path('app'),
         ],
 
         'public' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
+            'driver'        => 'local',
+            'root'          => storage_path('app/public'),
+            'url'           => env('APP_URL').'/storage',
+            'visibility'    => 'public',
         ],
 
         's3' => [
-            'driver' => 's3',
-            'key' => env('AWS_KEY'),
-            'secret' => env('AWS_SECRET'),
-            'region' => env('AWS_REGION'),
-            'bucket' => env('AWS_BUCKET'),
+            'driver'    => 's3',
+            'key'       => env('AWS_KEY'),
+            'secret'    => env('AWS_SECRET'),
+            'region'    => env('AWS_REGION'),
+            'bucket'    => env('AWS_BUCKET'),
         ],
+
         'azure' => [
             'driver'    => 'azure',
             'name'      => env('STORAGE_NAME'),
             'key'       => env('STORAGE_KEY'),
             'container' => env('STORAGE_CONTAINER'),
-            'url' => 'https://ffcontents.blob.core.windows.net/',
+            'url'       => 'https://ffcontents.blob.core.windows.net/',
         ],
 
     ],

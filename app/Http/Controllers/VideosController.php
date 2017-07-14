@@ -3,7 +3,6 @@
 namespace FrontFiles\Http\Controllers;
 
 use FrontFiles\Http\Requests\CreateVideoRequest;
-use FrontFiles\Http\Requests\UpdateVideoRequest;
 use FrontFiles\Video;
 
 class VideosController extends Controller
@@ -43,13 +42,12 @@ class VideosController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
      * @param CreateVideoRequest $form
      * @return \Illuminate\Http\Response
      */
     public function store(CreateVideoRequest $form)
     {
-        return $form->persist($request);
+        return $form->persist();
     }
 
     /**
@@ -81,7 +79,7 @@ class VideosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateVideoRequest $request, $id)
+    public function update($request, $id)
     {
         //
     }
