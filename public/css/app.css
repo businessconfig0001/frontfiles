@@ -8350,6 +8350,22 @@ button.close {
   }
 }
 
+.bg-photo {
+  width: 100%;
+  min-height: 90vh;
+  overflow-y: scroll;
+}
+
+.bg-login {
+  background-image: url(/images/riot1.jpg?772273f557c0f17166a715dda6df8389);
+  background-size: 100%;
+}
+
+.bg-create {
+  background-image: url(/images/riot2.jpg?5264bec10b59785bfd9aefd2cb27d196);
+  background-size: 100%;
+}
+
 #landing .hero-image {
   padding: 57% 0 0 0;
 }
@@ -9003,10 +9019,26 @@ img {
 }
 
 .main-header .logo {
-  background: url(/images/logo2x.png?e3d22e8567b45dd5235f3a6281b091c2) left center no-repeat;
-  background-size: 80% auto;
+  background: url(/images/logo2x.png?4c0bb1bd413e7b2cde19172ba198671e) left center no-repeat;
+  background-size: 50% auto;
   display: block;
   width: 100%;
+}
+
+.main-header .navbar-brand {
+  padding: 62px 15px;
+}
+
+.main-header .header-content {
+  padding-top: 30px;
+}
+
+.main-header .sub-title {
+  padding-top: 15px;
+  font-size: 1.8rem;
+  font-weight: bolder;
+  width: 200%;
+  margin-left: -80%;
 }
 
 .main-header .navbar-default {

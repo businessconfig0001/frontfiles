@@ -12,8 +12,8 @@
 			<li v-show="video.who">#Who: <span>{{video.who}}</span></li>
 			<li v-show="video.what">#What: <span>{{video.what}}</span></li>
 		</ul>
-		<a class="btn" @click.prevent="status = false">edit</a>
-		<a class="btn" @click.prevent="del">delete</a>
+		<a class="btn btn-primary" @click.prevent="status = false">edit</a>
+		<a class="btn btn-primary" @click.prevent="del">delete</a>
 	</div>
 	<div v-else>
 			<p>
@@ -27,23 +27,23 @@
 			<ul>
 			<li>
 				<display-error v-show="video.errors" :error="video.errors['where']"></display-error>
-				#Where: <input type="text" name="where" v-model="video.where">
+				#Where: <input type="text" name="where"  class="form-control" v-model="video.where">
 			</li>
 			<li>
 				<display-error v-show="video.errors" :error="video.errors['when']"></display-error>
-				#When: <input type="date" name="when" v-model="video.when">
+				#When: <input type="date" name="when"  class="form-control" v-model="video.when">
 			</li>
 			<li>
 				<display-error v-show="video.errors" :error="video.errors['who']"></display-error>
-				#Who: <input type="text" name="who" v-model="video.who">
+				#Who: <input type="text" name="who"  class="form-control"v-model="video.who">
 			</li>
 			<li>
 				<display-error v-show="video.errors" :error="video.errors['what']"></display-error>
-				#What: <input type="text" name="what" v-model="video.what">
+				#What: <input type="text" name="what"  class="form-control" v-model="video.what">
 			</li>
 		</ul>
-			<a class="btn" @click.prevent="update">edit</a>
-			<a class="btn" @click.prevent="status = true ">Go back</a>
+			<a class="btn btn-primary" @click.prevent="update">edit</a>
+			<a class="btn btn-primary" @click.prevent="status = true ">Go back</a>
 	</div>
 </div>
 </template>
@@ -103,11 +103,17 @@ export default {
 <style lang="scss" scoped>
 .block-container{
 	width:100%;
-	background-color:white;
+	background-color:rgba(255,255,255,0.3);
 	padding: 1rem;
+	color:white;
 
 	video{
 		width:100%;
+	}
+
+	.btn{
+		width:15rem;
+		margin: 0.5rem auto;
 	}
 }
 </style>

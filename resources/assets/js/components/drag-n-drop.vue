@@ -14,9 +14,9 @@
 			</p>
 		</div>
 
-		<div class="col-xs-12 col-sm-3 form">
+		<div class="col-xs-12 col-sm-3 form" v-show="uploads.length">
 			<div v-for="upload in uploads" class="form-group">
-				<h3>{{upload.name}}</h3>
+				<h3>File: <span>{{upload.name}}</span></h3>
 				<div v-show="upload.errors">
 					<ul>
 						<li v-for="error in errors">{{error}}</li>
@@ -51,8 +51,9 @@
 					<input type="text" name="when" id="when" class="form-control" placeholder="#When" onfocus="(this.type='date')" v-model="upload.data.when"/>
 				</p>
 			</div>
+			<a class="submit btn btn-primary" @click.prevent="upload">Save</a>
 		</div>
-		<a class="submit btn" @click.prevent="upload">Save</a>
+		
 	</form>
 	<div class="video-container">
 		<video-display :videos="videos"></video-display>
@@ -128,6 +129,15 @@
 </script>
 
 <style lang="scss" scoped>
+h3{
+	font-size:1.2rem;
+	padding:1rem;
+
+	span{
+		color:white
+	}
+
+}
 form{
 	display:block
 }
