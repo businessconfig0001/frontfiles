@@ -2,7 +2,9 @@
 
 namespace FrontFiles\Http\Controllers;
 
-use FrontFiles\Http\Requests\CreateVideoRequest;
+use FrontFiles\Http\Requests\{
+    CreateVideoRequest, UpdateVideoRequest
+};
 use FrontFiles\Video;
 
 class VideosController extends Controller
@@ -75,23 +77,32 @@ class VideosController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param Video $video
+     * @param UpdateVideoRequest $form
      * @return \Illuminate\Http\Response
      */
-    public function update($request, $id)
+    public function update(Video $video, UpdateVideoRequest $form)
     {
-        //
+        $this->authorize('update', $video);
+
+        return $form->persist($video);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Video $video
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Video $video)
     {
-        //
+        $this->authorize('delete', $video);
+
+        $video->delete();
+
+        if(request()->expectsJson())
+            return response(['status' => 'Video successfully deleted!']);
+
+        return back();
     }
 }

@@ -13,6 +13,7 @@ class VideosTableSeeder extends Seeder
      */
     public function run()
     {
+        /*
         $faker = Faker::create();
 
         foreach (range(1,30) as $x)
@@ -28,5 +29,6 @@ class VideosTableSeeder extends Seeder
                 'when' => $faker->dateTimeThisMonth,
                 'who' => $faker->name
             ]);
+        */
     }
 }

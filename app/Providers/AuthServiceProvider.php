@@ -2,7 +2,6 @@
 
 namespace FrontFiles\Providers;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -13,7 +12,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        //'FrontFiles\Model' => 'FrontFiles\Policies\ModelPolicy',
+        'FrontFiles\Video' => 'FrontFiles\Policies\VideoPolicy',
     ];
 
     /**

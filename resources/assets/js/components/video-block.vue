@@ -39,12 +39,12 @@ export default {
   		let f=new FormData();
   		f.append('title',this.video.title)
   		f.append('description',this.video.description)
-  		axios.put(window.location.protocol + "//" + window.location.host + this.url,f)
+  		axios.patch(window.location.protocol + "//" + window.location.host + this.url + '/' + this.video.id, f)
   			.then(status = true)
   			.catch(console.error)
   	},
   	del(){
-  		axios.delete(window.location.protocol + "//" + window.location.host + this.url + '?id=' + this.video.id)
+  		axios.delete(window.location.protocol + "//" + window.location.host + this.url + '/' + this.video.id)
   			.then(this.$emit('remove'))
   			.catch(console.error)
   	}
