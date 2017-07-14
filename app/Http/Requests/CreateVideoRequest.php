@@ -60,30 +60,20 @@ class CreateVideoRequest extends FormRequest
             return redirect('/video/upload')->with(array('error'=>'Video file is not valid'));
         }
 
-        $file = request()->file('video');
-        $extension = $file->getClientOriginalExtension();
-        $name = request()->get('title') . uniqid() . '.' . $extension;
+        $filename = $this->getVideoFilename();
 
-        $video = new Video();
-        $video->user_id = auth()->user()->id;
-        $video->short_id = uniqid();
-        $video->filename = $name;
-        $video->title = request()->title;
-        $video->description = request()->description;
-        $video->what = request()->what;
-        $video->where = request()->where;
-        $video->who = request()->who;
-        $video->when = request()->when;
-
-        // Copy to remote
-        ini_set('memory_limit', '-1');
-        $path =  request()->file('video')->storeAs(
-            'usercontents', $name, config('filesystems.default')
-        );
-
-        $video->url = config('filesystems.disks.azure.url') . $path;
-
-        $video->save();
+        $video = Video::create([
+            'user_id' => auth()->user()->id,
+            'short_id' => uniqid(),
+            'filename' => $filename,
+            'url' => $this->getVideoUrl($filename),
+            'title' => request('title'),
+            'description' => request('description'),
+            'what' => request('what'),
+            'where' => request('where'),
+            'who' => request('who'),
+            'when' => request('when'),
+        ]);
 
         if(request()->wantsJson())
             return response()->json(array('status' => 'Video uploaded successfully!', 'data' => $video));
@@ -91,4 +81,42 @@ class CreateVideoRequest extends FormRequest
         return redirect('/video/upload')->with(array('status' => 'Video uploaded successfully!'));
     }
 
+    /**
+     * Returns the filename of the video.
+     *
+     * @return string
+     */
+    protected function getVideoFilename()
+    {
+        return request()->get('title') .
+            uniqid() .
+            '.' .
+            request()
+                ->file('video')
+                ->getClientOriginalExtension();
+    }
+
+    /**
+     * Returns the URL of the video.
+     *
+     * @param string $filename
+     * @return string
+     */
+    protected function getVideoUrl($filename)
+    {
+        // Copy to remote
+        //!!! REMOVE THIS ON PRODUCTION
+        ini_set('memory_limit', '-1');
+
+        if(config('filesystems.default') === 'local')
+            return config('filesystems.disks.local.root') .
+                request()
+                    ->file('video')
+                    ->storeAs('usercontents', $filename, config('filesystems.default'));
+
+        return config('filesystems.disks.azure.url') .
+            request()
+                ->file('video')
+                ->storeAs('usercontents', $filename, config('filesystems.default'));
+    }
 }
