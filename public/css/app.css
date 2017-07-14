@@ -8350,6 +8350,125 @@ button.close {
   }
 }
 
+#landing .hero-image {
+  padding: 57% 0 0 0;
+}
+
+#landing h3 {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+#landing h2 {
+  font-size: 45px;
+  color: blue;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+#landing #about-us {
+  padding: 50px;
+  font-size: 24px;
+  font-weight: bold;
+  clear: both;
+  color: #000;
+}
+
+#landing #about-us p {
+  margin-bottom: 30px;
+}
+
+#landing #about-us .mailing {
+  clear: both;
+  margin-top: 10px;
+}
+
+#landing #about-us .mailing input[type=text] {
+  float: left;
+  padding: 6px;
+  font-size: 20px;
+}
+
+#landing #about-us .mailing input[type=submit] {
+  border: 0;
+  padding: 11px;
+  color: #fff;
+  margin-left: 3px;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+#landing #how-it-works {
+  padding-top: 60px;
+  color: #000;
+  clear: both;
+}
+
+#landing #how-it-works .steps .step {
+  padding: 0;
+  font-size: 40px;
+  line-height: 130px;
+  display: block;
+  float: left;
+  width: 100%;
+  font-weight: bold;
+}
+
+#landing #how-it-works .steps .step .icon {
+  font-size: 80px;
+  text-align: right;
+}
+
+#landing #how-it-works .steps .step:nth-child(odd) {
+  color: #fff;
+  background: blue;
+}
+
+#landing #how-it-works .steps .step:nth-child(odd) .icon {
+  color: black;
+}
+
+#landing #how-it-works .steps .step:nth-child(even) {
+  color: #fff;
+  background: black;
+}
+
+#landing #how-it-works .steps .step:nth-child(even) .icon {
+  color: blue;
+}
+
+.footer {
+  padding: 60px 0 200px;
+}
+
+.footer img {
+  width: auto;
+}
+
+.footer .fa {
+  color: #fff;
+  font-size: 30px;
+  margin: 0 5px;
+  float: right;
+}
+
+.footer a {
+  color: #fff;
+}
+
+.text-blue {
+  color: blue;
+}
+
+.main-header .navbar-default {
+  margin-bottom: 0px;
+}
+
+.ff-divisor {
+  background: #eee url(/assets/images/ff-bg.png) repeat;
+  height: 100px;
+}
+
 /*-------------------------------------
  Name: FRONTFILES
  Date: Jun 2017
