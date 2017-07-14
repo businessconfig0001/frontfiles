@@ -1,0 +1,113 @@
+#landing{
+	.hero-image {
+	    padding: 57% 0 0 0;
+	}
+	h3{
+		font-size: 35px;
+		font-weight: bold;
+	}
+	h2{
+		font-size: 45px;
+		color: blue;
+		margin-bottom: 30px;
+		font-weight: bold;
+	}
+	#about-us{
+		padding: 50px;
+		font-size: 24px;
+		font-weight: bold;
+		clear: both;
+		color: #000;
+		
+		p{
+			margin-bottom: 30px;
+		}
+		.mailing{
+			clear: both;
+			margin-top: 10px;
+			input[type=text]{
+				float: left;
+				padding: 6px;
+				font-size: 20px;
+			}
+			input[type=submit]{
+				border: 0;
+				padding: 11px;
+				color: #fff;
+				margin-left: 3px;
+				font-size: 18px;
+				font-weight: normal;
+			}
+		}
+	}
+
+	#how-it-works{
+		padding-top: 60px;
+		color: #000;
+		clear: both;
+		.steps{
+			.step{
+				padding: 0;
+				font-size: 40px;
+				line-height: 130px;
+			    display: block;
+			    float: left;
+			    width: 100%;
+			    font-weight: bold;
+				.icon{
+					font-size: 80px;
+					text-align: right;
+				}
+			}
+			.step:nth-child(odd) {
+			    color: #fff;
+			    background: blue;
+			    .icon{
+			    	color: black;
+			    }
+			}
+			.step:nth-child(even) {
+			    color: #fff;
+			    background: black;
+			    .icon{
+			    	color: blue;
+			    }
+			}
+		}
+	}
+
+	
+}
+
+.footer{
+	padding: 60px 0 200px;
+	img{
+		width: auto;
+	}
+	.fa{
+		color: #fff;
+		font-size: 30px;
+		margin: 0 5px;
+		float: right;
+	}
+	a{
+		color: #fff;
+	}
+
+}
+
+.text-blue{
+	color: blue;	
+}
+
+.main-header{
+	.navbar-default{
+		margin-bottom: 0px;
+	}
+}
+
+.ff-divisor{
+	background: #eee url(/assets/images/ff-bg.png) repeat;
+	height: 100px;
+
+}
