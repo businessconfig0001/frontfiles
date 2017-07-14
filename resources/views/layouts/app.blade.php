@@ -67,7 +67,7 @@
                                                 </li>
                                             @endif
 
-                                            <li><a href="/video/upload" class="btn btn-border-black">upload</a></li>
+                                            <li><a href="/video/upload" class="btn btn-border-black">Upload</a></li>
                                         </ul>
                                     </div>
                                 </div><!-- /.navbar-collapse -->

@@ -8368,6 +8368,10 @@ button.close {
   background-image: url(/images/riot2.jpg?e383921d8faefbff667fe78592154096);
 }
 
+.login-box {
+  margin-top: 6rem;
+}
+
 .btn-primary {
   background-color: blue !important;
 }
