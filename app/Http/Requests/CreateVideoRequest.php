@@ -109,7 +109,7 @@ class CreateVideoRequest extends FormRequest
         ini_set('memory_limit', '-1');
 
         if(config('filesystems.default') === 'local')
-            return config('filesystems.disks.local.root') .
+            return config('filesystems.disks.local.url') .
                 request()
                     ->file('video')
                     ->storeAs('usercontents', $filename, config('filesystems.default'));
