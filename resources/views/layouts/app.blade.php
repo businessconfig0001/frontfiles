@@ -46,7 +46,7 @@
                                 <!-- Collect the nav links, forms, and other content for toggling -->
                                 <div class="collapse navbar-collapse header-content" id="main-navbar-collapse">
                                     <div class="col-xs-12 col-sm-3">
-                                        <h2 class="text-blue sub-title">The Global Platform for Independant Journalism</h2>
+                                        <h2 class="text-blue sub-title">The Global Platform for Independent Journalism</h2>
                                     </div>
                                     <div class="col-xs-12 col-sm-5">
                                         <ul class="nav navbar-nav navbar-right">
