@@ -26,7 +26,11 @@ class UpdateVideoRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'what' => 'required',
+            'where' => 'required',
+            'when' => 'required',
+            'who' => 'required',
         ];
     }
 
@@ -41,6 +45,10 @@ class UpdateVideoRequest extends FormRequest
         $video->update([
             'title' => request('title'),
             'description' => request('description'),
+            'what' => request('what'),
+            'where' => request('where'),
+            'when' => request('when'),
+            'who' => request('who'),
         ]);
 
         if(request()->expectsJson())

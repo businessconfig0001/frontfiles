@@ -86,8 +86,9 @@ export default {
   		f.append('when',this.video.when)
   		f.append('what',this.video.what)
   		f.append('where',this.video.where)
+		f.append('_method', 'PATCH')
 
-  		axios.patch(window.location.protocol + "//" + window.location.host + this.url + '/' + this.video.id, f)
+  		axios.post(window.location.protocol + "//" + window.location.host + this.url + '/' + this.video.id, f)
   			.then(status = true)
   			.catch(this.video.erros = res.response.data)
   	},

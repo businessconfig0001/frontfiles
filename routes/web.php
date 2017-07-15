@@ -23,7 +23,7 @@ Auth::routes();
 
 Route::get('/video', 'VideosController@index');
 Route::get('/video/upload', 'VideosController@create');
-Route::get('/video/{short_id}', 'VideosController@show');
 Route::post('/video', 'VideosController@store');
+Route::get('/video/{short_id}', 'VideosController@show');
 Route::patch('/video/{video}', 'VideosController@update');
 Route::delete('/video/{video}', 'VideosController@destroy');
