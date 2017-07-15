@@ -7,6 +7,9 @@ use Illuminate\{
     Support\Facades\Storage,
     Contracts\Filesystem\FileNotFoundException
 };
+use WindowsAzure\Common\ServicesBuilder;
+use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
+use MicrosoftAzure\Storage\Common\ServiceException;
 
 class Video extends Model
 {
@@ -28,10 +31,12 @@ class Video extends Model
 
         //Automatically deletes from the storage the associated video
         static::deleting(function($video){
-            if(!Storage::exists(auth()->user()->email . '/' . $video->filename))
+            $container = 'user-id-' . auth()->user()->id;
+
+            if(!Storage::exists($container . '/' . $video->filename))
                 throw new FileNotFoundException('We couln\'t find this file!');
             else
-                Storage::delete(auth()->user()->email . '/' . $video->filename);
+                Storage::delete($container . '/' . $video->filename);
         });
     }
 
@@ -78,16 +83,36 @@ class Video extends Model
         //!!! REMOVE THIS ON PRODUCTION
         ini_set('memory_limit', '-1');
 
-        if(config('filesystems.default') === 'local')
-            return config('filesystems.disks.local.url') .
-                request()
-                    ->file('video')
-                    ->storeAs(auth()->user()->email, $name, config('filesystems.default'));
+        $container = 'user-id-' . auth()->user()->id;
 
-        return config('filesystems.disks.azure.url') .
+        if(config('filesystems.default') === 'azure')
+            static::createContainerIfNeeded($container);
+
+        return config('filesystems.disks.' . config('filesystems.default') . '.url') .
             request()
                 ->file('video')
-                ->storeAs(auth()->user()->email, $name, config('filesystems.default'));
+                ->storeAs($container, $name, config('filesystems.default'));
+    }
+
+    /**
+     * Checks if the current user container exists in the azure blob storage
+     * If it does not exist, he creates it.
+     *
+     * @param string $container
+     */
+    protected static function createContainerIfNeeded(string $container)
+    {
+        //BLOBS_ONLY means that its public
+        $containerOptions = new CreateContainerOptions();
+        $containerOptions->setPublicAccess(PublicAccessType::BLOBS_ONLY);
+
+        try{
+            ServicesBuilder::getInstance()
+                ->createBlobService(config('filesystems.disks.azure.endpoint'))
+                ->createContainer($container, $containerOptions);
+        }catch(ServiceException $e){
+            //If there's an exception, it means that the container (folder) already exists
+        }
     }
 
     /**

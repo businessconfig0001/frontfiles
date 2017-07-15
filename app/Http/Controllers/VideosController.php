@@ -24,7 +24,9 @@ class VideosController extends Controller
      */
     public function index()
     {
-        $videos = Video::where('user_id', auth()->user()->id)->get();
+        $videos = Video::where('user_id', auth()->user()->id)
+            ->latest()
+            ->get();
 
         return request()->wantsJson() ? $videos : view('videos.index', compact('videos'));
     }
@@ -36,7 +38,9 @@ class VideosController extends Controller
      */
     public function create()
     {
-        $videos = Video::where('user_id', auth()->user()->id)->get();
+        $videos = Video::where('user_id', auth()->user()->id)
+            ->latest()
+            ->get();
 
         return request()->wantsJson() ? $videos : view('videos.create', compact('videos'));
     }
