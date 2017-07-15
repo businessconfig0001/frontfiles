@@ -52,7 +52,7 @@
 
                 <section class="col-xs-12  no-pad hero">
                     <div class="hero-image">
-                        <img src="assets/images/beach-img.jpg" alt="hero">
+                        <img src="assets/images/riot1.jpg" alt="hero">
                     </div>
                 </section>
 
