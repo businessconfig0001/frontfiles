@@ -36,6 +36,16 @@ class Video extends Model
     }
 
     /**
+     * Gets the path for the video.
+     *
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function path()
+    {
+        return url("/video/{$this->short_id}");
+    }
+
+    /**
      * Generates a pseudo-random string that will be the Short ID of the video.
      *
      * @param int $length
