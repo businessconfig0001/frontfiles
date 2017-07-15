@@ -55,12 +55,16 @@ class VideosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param string $short_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($short_id)
     {
-        //
+        $video = Video::where('short_id', $short_id)->firstOrFail();
+
+        $this->authorize('view', $video);
+
+        return view('videos.show', compact('video'));
     }
 
     /**
