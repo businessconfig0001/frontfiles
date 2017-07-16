@@ -28,6 +28,21 @@ class User extends Authenticatable
     ];
 
     /**
+     * Global query scopes for the File model.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        //Automatically deletes this user's files (from the storage and the database)
+        static::deleting(function($user){
+            File::where('user_id', $user->id)->get()->each(function($file){
+                $file->delete();
+            });
+        });
+    }
+
+    /**
      * File relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

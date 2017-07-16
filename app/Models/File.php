@@ -101,7 +101,7 @@ class File extends Model
     {
         // Copy to remote
         //!!! REMOVE THIS ON PRODUCTION
-        ini_set('memory_limit', '-1');
+        //ini_set('memory_limit', '-1');
 
         $container = 'user-id-' . auth()->user()->id;
 
