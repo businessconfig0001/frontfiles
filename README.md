@@ -35,3 +35,8 @@ Development build
 ```
 $ npm run dev
 ```
+
+### If you prefer a one-liner (make sure .env configured first)
+```
+$ composer install && php artisan key:generate && npm install && npm run development && php artisan migrate && php artisan db:seed
+```
