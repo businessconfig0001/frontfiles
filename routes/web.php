@@ -21,9 +21,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/video', 'VideosController@index');
-Route::get('/video/upload', 'VideosController@create');
-Route::post('/video', 'VideosController@store');
-Route::get('/video/{short_id}', 'VideosController@show');
-Route::patch('/video/{video}', 'VideosController@update');
-Route::delete('/video/{video}', 'VideosController@destroy');
+Route::get('/files', 'FilesController@index');
+Route::get('/files/upload', 'FilesController@create');
+Route::post('/files', 'FilesController@store');
+Route::get('/files/{short_id}', 'FilesController@show');
+Route::patch('/files/{file}', 'FilesController@update');
+Route::delete('/files/{file}', 'FilesController@destroy');

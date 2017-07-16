@@ -1,11 +1,11 @@
-const url = '/video'
+const url = '/files'
 function upload(data){
 	console.log(data)
 	//add data
 	let form = formDataFactory(data.data)
 
 	//add img
-	form.append('video',data.file,data.name)
+	form.append('file',data.file,data.name)
 
 	//upload
 	return new Promise((resolve,reject) =>

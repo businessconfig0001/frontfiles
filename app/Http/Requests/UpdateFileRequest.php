@@ -3,9 +3,9 @@
 namespace FrontFiles\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use FrontFiles\Video;
+use FrontFiles\File;
 
-class UpdateVideoRequest extends FormRequest
+class UpdateFileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -35,14 +35,14 @@ class UpdateVideoRequest extends FormRequest
     }
 
     /**
-     * Updates the video.
+     * Updates the file.
      *
-     * @param Video $video
+     * @param File $file
      * @return mixed
      */
-    public function persist(Video $video)
+    public function persist(File $file)
     {
-        $video->update([
+        $file->update([
             'title' => request('title'),
             'description' => request('description'),
             'what' => request('what'),
@@ -52,8 +52,8 @@ class UpdateVideoRequest extends FormRequest
         ]);
 
         if(request()->expectsJson())
-            return response(['status' => 'Video successfully edited!']);
+            return response(['status' => 'File successfully edited!']);
 
-        return redirect('/video');
+        return redirect('/files');
     }
 }

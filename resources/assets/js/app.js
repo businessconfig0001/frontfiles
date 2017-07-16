@@ -16,7 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('drag-n-drop', require('./components/drag-n-drop.vue'))
-Vue.component('video-display',require('./components/videos-display.vue'))
+Vue.component('files-display',require('./components/files-display.vue'))
 
 const app = new Vue({
     el: '#app'

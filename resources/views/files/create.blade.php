@@ -5,7 +5,7 @@
 	</div>
  <!-- form-container -->
     <section class="form-container">
-	    <drag-n-drop :videos="{{$videos}}"></drag-n-drop>
+	    <drag-n-drop :files="{{$files}}"></drag-n-drop>
     </section><!-- form-container -->
 
     <!-- /modules -->

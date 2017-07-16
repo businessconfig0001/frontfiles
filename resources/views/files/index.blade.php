@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row">
-            <video-display :videos="{{$videos}}"></video-display>
+            <files-display :files="{{$files}}"></files-display>
         </div>
     </div>
 

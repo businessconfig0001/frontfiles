@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use FrontFiles\Video;
+use FrontFiles\File;
 
-class VideosTableSeeder extends Seeder
+class FilesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,9 +17,13 @@ class VideosTableSeeder extends Seeder
         $faker = Faker::create();
 
         foreach (range(1,30) as $x)
-            Video::create([
+            File::create([
                 'user_id' => $faker->numberBetween(1, 5),
                 'short_id' => $faker->randomNumber(8),
+                'type' => '',
+                'extension' => '',
+                'original_name' => '',
+                'name' => '',
                 'url' => $faker->url,
                 'title' => $faker->sentence,
                 'description' => $faker->paragraph,

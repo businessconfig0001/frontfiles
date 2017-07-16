@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'bio'
+        'name', 'email', 'password', 'avatar'
     ];
 
     /**
@@ -28,13 +28,13 @@ class User extends Authenticatable
     ];
 
     /**
-     * Video relationship.
+     * File relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function videos()
+    public function files()
     {
-        return $this->hasMany(Video::class);
+        return $this->hasMany(File::class, 'user_id');
     }
 
     /**

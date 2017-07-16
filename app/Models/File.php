@@ -11,7 +11,7 @@ use WindowsAzure\Common\ServicesBuilder;
 use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
 use MicrosoftAzure\Storage\Common\ServiceException;
 
-class Video extends Model
+class File extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -19,44 +19,46 @@ class Video extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'short_id', 'filename', 'url', 'title', 'description', 'what', 'where', 'when', 'who'
+        'user_id', 'short_id', 'type', 'extension',
+        'original_name', 'name', 'url', 'title',
+        'description', 'what', 'where', 'when', 'who'
     ];
 
     /**
-     * Global query scopes for the Video model.
+     * Global query scopes for the File model.
      */
     protected static function boot()
     {
         parent::boot();
 
-        //Automatically deletes from the storage the associated video
-        static::deleting(function($video){
+        //Automatically deletes from the storage the associated file
+        static::deleting(function($file){
             $container = 'user-id-' . auth()->user()->id;
 
-            if(!Storage::exists($container . '/' . $video->filename))
+            if(!Storage::exists($container . '/' . $file->name))
                 throw new FileNotFoundException('We couln\'t find this file!');
             else
-                Storage::delete($container . '/' . $video->filename);
+                Storage::delete($container . '/' . $file->name);
         });
     }
 
     /**
-     * Gets the path for the video.
+     * Gets the path for the file.
      *
      * @return \Illuminate\Contracts\Routing\UrlGenerator|string
      */
     public function path()
     {
-        return url("/video/{$this->short_id}");
+        return url("/files/{$this->short_id}");
     }
 
     /**
-     * Generates a pseudo-random string that will be the Short ID of the video.
+     * Generates a pseudo-random string that will be the Short ID of the file.
      *
      * @param int $length
      * @return string
      */
-    public static function generateUniqueShortID(int $length = 15)
+    public static function generateUniqueShortID(int $length = 8)
     {
         $output = '';
         $chars = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -72,7 +74,25 @@ class Video extends Model
     }
 
     /**
-     * Stores the video and returns the url for this video.
+     * Returns the file type, according to the mime type provided.
+     *
+     * @param string $mimeType
+     * @return string
+     */
+    public static function getFileType(string $mimeType = 'document')
+    {
+        $type = explode('/', $mimeType)[0];
+
+        $acceptedTypes = [
+            'video', 'image',
+            'audio', 'document'
+        ];
+
+        return in_array($type, $acceptedTypes) ? $type : 'document';
+    }
+
+    /**
+     * Stores the file and returns the url for this file.
      *
      * @param string $name
      * @return string
@@ -85,13 +105,15 @@ class Video extends Model
 
         $container = 'user-id-' . auth()->user()->id;
 
-        if(config('filesystems.default') === 'azure')
+        $config = config('filesystems.default');
+
+        if($config === 'azure')
             static::createContainerIfNeeded($container);
 
-        return config('filesystems.disks.' . config('filesystems.default') . '.url') .
+        return config('filesystems.disks.' . $config . '.url') .
             request()
-                ->file('video')
-                ->storeAs($container, $name, config('filesystems.default'));
+                ->file('file')
+                ->storeAs($container, $name, $config);
     }
 
     /**
@@ -116,7 +138,7 @@ class Video extends Model
     }
 
     /**
-     * Creator of the Video.
+     * Creator of the File.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

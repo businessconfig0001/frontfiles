@@ -3,14 +3,14 @@
 namespace FrontFiles\Http\Controllers;
 
 use FrontFiles\Http\Requests\{
-    CreateVideoRequest, UpdateVideoRequest
+    CreateFileRequest, UpdateFileRequest
 };
-use FrontFiles\Video;
+use FrontFiles\File;
 
-class VideosController extends Controller
+class FilesController extends Controller
 {
     /**
-     * VideosController constructor.
+     * FilesController constructor.
      */
     public function __construct()
     {
@@ -24,11 +24,11 @@ class VideosController extends Controller
      */
     public function index()
     {
-        $videos = Video::where('user_id', auth()->user()->id)
+        $files = File::where('user_id', auth()->user()->id)
             ->latest()
             ->get();
 
-        return request()->wantsJson() ? $videos : view('videos.index', compact('videos'));
+        return request()->wantsJson() ? $files : view('files.index', compact('files'));
     }
 
     /**
@@ -38,20 +38,20 @@ class VideosController extends Controller
      */
     public function create()
     {
-        $videos = Video::where('user_id', auth()->user()->id)
+        $files = File::where('user_id', auth()->user()->id)
             ->latest()
             ->get();
 
-        return request()->wantsJson() ? $videos : view('videos.create', compact('videos'));
+        return request()->wantsJson() ? $files : view('files.create', compact('files'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param CreateVideoRequest $form
+     * @param CreateFileRequest $form
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateVideoRequest $form)
+    public function store(CreateFileRequest $form)
     {
         return $form->persist();
     }
@@ -64,11 +64,11 @@ class VideosController extends Controller
      */
     public function show($short_id)
     {
-        $video = Video::where('short_id', $short_id)->firstOrFail();
+        $file = File::where('short_id', $short_id)->firstOrFail();
 
-        $this->authorize('view', $video);
+        $this->authorize('view', $file);
 
-        return view('videos.show', compact('video'));
+        return view('files.show', compact('file'));
     }
 
     /**
@@ -85,31 +85,31 @@ class VideosController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Video $video
-     * @param UpdateVideoRequest $form
+     * @param File $file
+     * @param UpdateFileRequest $form
      * @return \Illuminate\Http\Response
      */
-    public function update(Video $video, UpdateVideoRequest $form)
+    public function update(File $file, UpdateFileRequest $form)
     {
-        $this->authorize('update', $video);
+        $this->authorize('update', $file);
 
-        return $form->persist($video);
+        return $form->persist($file);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Video $video
+     * @param File $file
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video $video)
+    public function destroy(File $file)
     {
-        $this->authorize('delete', $video);
+        $this->authorize('delete', $file);
 
-        $video->delete();
+        $file->delete();
 
         if(request()->expectsJson())
-            return response(['status' => 'Video successfully deleted!']);
+            return response(['status' => 'File successfully deleted!']);
 
         return back();
     }

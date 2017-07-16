@@ -6,11 +6,11 @@ use Illuminate\{
 
 class DatabaseSeeder extends Seeder
 {
-    //Tables to truncate and seed
+    //Tables to truncate and seeded
     protected $tables = [
         'roles'     => RolesTableSeeder::class,
         'users'     => UsersTableSeeder::class,
-        'videos'    => VideosTableSeeder::class,
+        'files'     => FilesTableSeeder::class,
     ];
 
     /**

@@ -1,23 +1,23 @@
 <template>
 <div class="display-container">
 	<ul class="video-list">
-		<li v-for="video in videos">
-			<video-block :video="video"></video-block>
+		<li v-for="file in files">
+			<file-block :file="file"></file-block>
 		</li>
 	</ul>
 </div>
 </template>
 
 <script>
-import videoBlock from './video-block'
+import fileBlock from './file-block'
 export default {
 
-	name: 'videos-display',
+	name: 'files-display',
 	components:{
-		videoBlock
+		fileBlock
 	},
 	props:{
-		videos:{
+		files:{
 			required:true,
 			type:Array
 		}

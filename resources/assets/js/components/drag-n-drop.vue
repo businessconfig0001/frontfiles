@@ -2,7 +2,7 @@
 <div class="drag-container">
 	<form enctype="multipart/form-data" novalidate class="clearfix">
 		<div class="col-sm-7 col-xs-12 bg-blue text-center dropbox">
-			<input type="file" multiple name="video" :disabled="state ==='saving'" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="video/*" class="input-file">
+			<input type="file" multiple name="file" :disabled="state ==='saving'" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*,video/*,audio/*,application/pdf" class="input-file">
 			<p v-if="state === 'saving'">
 			  	Uploading {{ fileCount }} files...
 			</p>
@@ -55,8 +55,8 @@
 		</div>
 		
 	</form>
-	<div class="video-container">
-		<video-display :videos="videos"></video-display>
+	<div class="file-container">
+		<files-display :files="files"></files-display>
 	</div>
 </div>
 	
@@ -77,7 +77,7 @@
 			}
 		},
 		props:{
-			videos:{
+			files:{
 				required:true,
 				type:Array
 			}
@@ -116,9 +116,9 @@
 				console.log(this.uploads)
 				for (let u in this.uploads){
 					 upload(this.uploads[u]).then(res => {
-					 	console.log('succes')
+					 	console.log('success')
 					 	this.uploads = this.uploads.filter(x => (x.name !== u.name) && (x.file !== u.file))
-					 	this.videos.push(res.data)
+					 	this.files.push(res.data)
 					 })
 						.catch(err => this.uploads[u].errors = err.response.data)
 				}
@@ -174,7 +174,7 @@ form{
 	display:block;
 	padding-bottom:2rem;
 }
-.video-container{
+.file-container{
 	display:block;
 	width:100%;
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVideosTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,27 +13,32 @@ class CreateVideosTable extends Migration
      */
     public function up()
     {
-        Schema::create('videos', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
 
-            $table->string('short_id', 20)->unique();
-            $table->string('filename');
+            $table->char('short_id', 8)->unique();
+            $table->string('type', 8)->comment('video | audio | image | document');
+            $table->string('extension', 8);
+            $table->string('original_name');
+            $table->string('name', 20);
             $table->string('url');
             $table->string('title');
             $table->text('description');
 
             $table->string('what')->nullable();
             $table->string('where')->nullable();
-            $table->dateTime('when')->nullable();
+            $table->date('when')->nullable();
             $table->string('who')->nullable();
 
             $table->timestamps();
-            $table->softDeletes();
         });
 
-        Schema::table('videos', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+        Schema::table('files', function (Blueprint $table) {
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
@@ -44,6 +49,6 @@ class CreateVideosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('videos');
+        Schema::dropIfExists('files');
     }
 }

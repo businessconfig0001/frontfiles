@@ -55,7 +55,7 @@
                                             @if (Auth::guest())
                                                 <li><a href="{{ route('login') }}">Login</a></li>
                                             @else
-                                                <li><a href="/video">Videos</a></li>
+                                                <li><a href="{{ url('/files') }}">Files</a></li>
                                                 <li>
                                                     <a href="{{ route('logout') }}"
                                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -67,7 +67,7 @@
                                                 </li>
                                             @endif
 
-                                            <li><a href="/video/upload" class="btn btn-border-black">Upload</a></li>
+                                            <li><a href="{{ url('/files/upload') }}" class="btn btn-border-black">Upload</a></li>
                                         </ul>
                                     </div>
                                 </div><!-- /.navbar-collapse -->
