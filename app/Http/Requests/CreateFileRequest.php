@@ -25,13 +25,13 @@ class CreateFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required',
-            'title' => 'required',
-            'description' => 'required',
-            'what' => 'required',
-            'where' => 'required',
-            'when' => 'required',
-            'who' => 'required',
+            'file'          => 'required|file|allowed_file',
+            'title'         => 'required|string|max:175',
+            'description'   => 'required|string',
+            'what'          => 'required|string|max:175',
+            'where'         => 'required|string|max:175',
+            'when'          => 'required|date',
+            'who'           => 'required|string|max:175',
         ];
     }
 

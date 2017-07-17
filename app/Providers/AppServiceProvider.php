@@ -17,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
         //Fixes the error:
         //SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 1000 bytes
         Schema::defaultStringLength(191);
+
+        //Custom validation rule for checking if the file an allowed type
+        \Validator::extend('allowed_file', 'FrontFiles\Rules\AllowedFile@passes');
     }
 
     /**

@@ -84,8 +84,9 @@ class File extends Model
         $type = explode('/', $mimeType)[0];
 
         $acceptedTypes = [
-            'video', 'image',
-            'audio', 'document'
+            'video',
+            'image',
+            'audio',
         ];
 
         return in_array($type, $acceptedTypes) ? $type : 'document';

@@ -25,12 +25,12 @@ class UpdateFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'description' => 'required',
-            'what' => 'required',
-            'where' => 'required',
-            'when' => 'required',
-            'who' => 'required',
+            'title'         => 'required|string|max:175',
+            'description'   => 'required|string',
+            'what'          => 'required|string|max:175',
+            'where'         => 'required|string|max:175',
+            'when'          => 'required|date',
+            'who'           => 'required|string|max:175',
         ];
     }
 
