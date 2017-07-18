@@ -111,3 +111,38 @@
 	height: 100px;
 
 }
+
+/* Tamanho Smartphone e Tablet Pequeno */
+@media only screen and (max-width : 767px) {	
+    #landing {
+    	#about-us{
+    		padding: 30px 0px;
+    		p{
+    			font-weight: normal;
+    			font-size: 24px;
+    		}
+    	}
+    	#how-it-works {
+    		h3, h2{
+    			padding-left: 15px;
+    		}
+    		.steps {
+    			.step{
+    				font-size: 18px;
+    				line-height: 25px;
+    				padding: 15px 0;
+    				.icon{
+				    	font-size: 23px;
+				    	padding-right: 15px;
+				    }
+    			}
+    		}
+    	}
+    }
+
+    .footer .fa {
+	    float: left;
+	    margin-top: 30px;
+	}
+
+}

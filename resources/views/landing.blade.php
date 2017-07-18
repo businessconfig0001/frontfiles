@@ -46,38 +46,38 @@
 		                <section class="steps">
 		                	<div class="step">
 		                		<div class="container">
-		                			<div class="col-xs-10">1. Create a Profile</div>
-		                			<div class="col-xs-2 icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
+		                			<div class="col-xs-9">1. Create a Profile</div>
+		                			<div class="col-xs-3 icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
 		                		<div class="container">
-		                			<div class="col-xs-10">2. Shoot a Photo & Video</div>
-		                			<div class="col-xs-2 icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
+		                			<div class="col-xs-9">2. Shoot a Photo & Video</div>
+		                			<div class="col-xs-3 icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
 		                		<div class="container">
-		                			<div class="col-xs-10">3. Tag it</div>
-		                			<div class="col-xs-2 icon">#</div>
+		                			<div class="col-xs-9">3. Tag it</div>
+		                			<div class="col-xs-3 icon">#</div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
 		                		<div class="container">
-		                			<div class="col-xs-10">4. Price and License</div>
-		                			<div class="col-xs-2 icon">$ &copy;</div>
+		                			<div class="col-xs-9">4. Price and License</div>
+		                			<div class="col-xs-3 icon">$ &copy;</div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
 		                		<div class="container">
-		                			<div class="col-xs-10">5. Upload & Sell</div>
-		                			<div class="col-xs-2 icon"><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
+		                			<div class="col-xs-9">5. Upload & Sell</div>
+		                			<div class="col-xs-3 icon"><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
 		                		<div class="container">
-		                			<div class="col-xs-10">6. Keep independent</div>
-		                			<div class="col-xs-2 icon"><i class="fa fa-bolt" aria-hidden="true"></i></div>
+		                			<div class="col-xs-9">6. Keep independent</div>
+		                			<div class="col-xs-3 icon"><i class="fa fa-bolt" aria-hidden="true"></i></div>
 		                		</div>
 		                	</div>
 		                </section>
