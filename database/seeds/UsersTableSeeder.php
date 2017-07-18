@@ -30,7 +30,6 @@ class UsersTableSeeder extends Seeder
                 'name' => $faker->name,
                 'email' => $email,
                 'password' => bcrypt('secret'),
-                //'bio' => $faker->paragraph,
                 'confirmed' => true,
             ]);
     }

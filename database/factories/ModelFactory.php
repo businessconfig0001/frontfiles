@@ -13,12 +13,37 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(FrontFiles\User::class, function (Faker\Generator $faker) {
-    static $password;
-
     return [
+        'role_id' => 2,
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'password' => bcrypt('secret'),
+        'confirmed' => true,
         'remember_token' => str_random(10),
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(FrontFiles\File::class, function (Faker\Generator $faker) {
+    $short_id = $faker->randomNumber(8);
+    $extension = $faker->fileExtension;
+    $name = $short_id . '.' . $extension;
+
+    return [
+        'user_id' => function() {
+            return factory('FrontFiles\User')->create()->id;
+        },
+        'short_id' => $short_id,
+        'type' => 'video',
+        'extension' => $extension,
+        'original_name' => $faker->word,
+        'name' => $name,
+        'url' => $faker->url,
+        'title' => $faker->sentence,
+        'description' => $faker->paragraph,
+        'what' => $faker->sentence,
+        'where' => 'Lisbon, Portugal',
+        'when' => $faker->dateTimeThisMonth,
+        'who' => $faker->name
     ];
 });
