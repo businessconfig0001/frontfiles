@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use FrontFiles\Inspections\File\FileType;
+use FrontFiles\Inspections\FileMimeType\FileMimeType;
 use Tests\TestCase;
 
 class FileTest extends TestCase
@@ -10,7 +10,7 @@ class FileTest extends TestCase
     /**
      * File inspector.
      *
-     * @var FileType
+     * @var FileMimeType
      */
     protected $file;
 
@@ -630,7 +630,7 @@ class FileTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->file = new FileType();
+        $this->file = new FileMimeType();
     }
 
     /** @test */
