@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
 
         //Custom validation rule for checking if the file an allowed type
         \Validator::extend('allowed_file', 'FrontFiles\Rules\AllowedFile@passes');
+
+        //Custom validation rule for checking if the user has enough space left for this file
+        \Validator::extend('has_enough_space', 'FrontFiles\Rules\AllowedFile@passes');
     }
 
     /**

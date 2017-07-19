@@ -30,6 +30,7 @@ class UsersTableSeeder extends Seeder
                 'name' => $faker->name,
                 'email' => $email,
                 'password' => bcrypt('secret'),
+                'allowed_space' => 10737418240,
                 'confirmed' => true,
             ]);
     }

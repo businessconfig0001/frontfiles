@@ -2,9 +2,9 @@
 
 namespace FrontFiles\Rules;
 
-use FrontFiles\Inspections\FileMimeType\FileMimeType;
+use FrontFiles\Inspections\AvailableSpace\AvailableSpace;
 
-class AllowedFile
+class HasEnoughSpace
 {
     /**
      * Custom validation rule for files.
@@ -16,7 +16,7 @@ class AllowedFile
     public function passes($attribute, $value)
     {
         try{
-            return (new FileMimeType)->check((string)$value->getMimeType());
+            return (new AvailableSpace)->check((int)$value->getClientSize());
         } catch(\Exception $e){
             return false;
         }

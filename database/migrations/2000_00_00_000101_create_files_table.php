@@ -20,6 +20,7 @@ class CreateFilesTable extends Migration
             $table->char('short_id', 8)->unique();
             $table->string('type', 8)->comment('video | audio | image | document');
             $table->string('extension', 8);
+            $table->unsignedBigInteger('size');
             $table->string('original_name');
             $table->string('name', 20);
             $table->string('url');

@@ -1,8 +1,8 @@
 <?php
 
-namespace FrontFiles\Inspections\File\Interfaces;
+namespace FrontFiles\Inspections\FileMimeType\Interfaces;
 
-interface FileInterface
+interface FileMimeTypeInterface
 {
     /**
      * Filter have to implement this interface.

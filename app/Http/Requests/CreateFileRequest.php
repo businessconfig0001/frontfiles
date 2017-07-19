@@ -25,7 +25,7 @@ class CreateFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'file'          => 'required|file|allowed_file',
+            'file'          => 'required|file|allowed_file|has_enough_space',
             'title'         => 'required|string|max:175',
             'description'   => 'required|string',
             'what'          => 'required|string|max:175',
@@ -62,15 +62,16 @@ class CreateFileRequest extends FormRequest
 
         $rawFile = request()->file('file');
         $short_id = File::generateUniqueShortID();
-        $extension = $rawFile->getClientOriginalExtension();
+        $extension = (string)$rawFile->getMimeType();
         $name = $short_id . '.' . $extension;
 
         $file = File::create([
             'user_id' => auth()->user()->id,
             'short_id' => $short_id,
-            'type' => File::getFileType($rawFile->getClientMimeType()),
-            'extension' => $extension,
-            'original_name' => $rawFile->getClientOriginalName(),
+            'type' => File::getFileType($extension),
+            'extension' => (string)$rawFile->getExtension(),
+            'size' => (int)$rawFile->getClientSize(),
+            'original_name' => (string)$rawFile->getClientOriginalName(),
             'name' => $name,
             'url' => File::storeAndReturnUrl($name),
             'title' => request('title'),

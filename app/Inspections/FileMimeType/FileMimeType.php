@@ -1,8 +1,8 @@
 <?php
 
-namespace FrontFiles\Inspections\File;
+namespace FrontFiles\Inspections\FileMimeType;
 
-class File
+class FileMimeType
 {
     /**
      * Filters the input for each file type.

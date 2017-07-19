@@ -36,6 +36,7 @@ $factory->define(FrontFiles\File::class, function (Faker\Generator $faker) {
         'short_id' => $short_id,
         'type' => 'video',
         'extension' => $extension,
+        'size' => 15000000,
         'original_name' => $faker->word,
         'name' => $name,
         'url' => $faker->url,

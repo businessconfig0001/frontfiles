@@ -1,10 +1,10 @@
 <?php
 
-namespace FrontFiles\Inspections\File\Filters;
+namespace FrontFiles\Inspections\FileMimeType\Filters;
 
-use FrontFiles\Inspections\File\Interfaces\FileInterface;
+use FrontFiles\Inspections\FileMimeType\Interfaces\FileMimeTypeInterface;
 
-class Image implements FileInterface
+class Image implements FileMimeTypeInterface
 {
     /**
      * Valid mime types for images.

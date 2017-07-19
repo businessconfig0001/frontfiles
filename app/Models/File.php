@@ -20,7 +20,7 @@ class File extends Model
      */
     protected $fillable = [
         'user_id', 'short_id', 'type', 'extension',
-        'original_name', 'name', 'url', 'title',
+        'size', 'original_name', 'name', 'url', 'title',
         'description', 'what', 'where', 'when', 'who'
     ];
 
