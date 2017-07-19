@@ -88,6 +88,7 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
     'allowed_file'         => 'The :attribute type is invalid.',
+    'has_enough_space'     => 'You have reached your storage limit.',
 
     /*
     |--------------------------------------------------------------------------

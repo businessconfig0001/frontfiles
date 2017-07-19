@@ -2,27 +2,22 @@
 
 namespace FrontFiles\Inspections\AvailableSpace;
 
-use FrontFiles\User;
-
 class AvailableSpace
 {
     /**
      * Checks if the user has enough space left to store this file.
      *
-     * @param string $value
+     * @param int $value
      * @return bool
+     * @throws \Exception
      */
-    public function check(string $value)
+    public function check(int $value)
     {
-        $user = auth()->user();
+        //If the use doesn't have enough space left, an Exception is thrown
+        if($value > auth()->user()->amountOfSpaceLeft())
+            throw new \Exception('You have reached your storage limit.');
 
-        dd($user);
-
-        $user_space = $user->allowed_space;
-
-        $used_space = $user->files->sum('size');
-
-        //If there's no exception thrown, it's a valid type
+        //If there's no exception thrown, the user has space
         return true;
     }
 }

@@ -62,14 +62,14 @@ class CreateFileRequest extends FormRequest
 
         $rawFile = request()->file('file');
         $short_id = File::generateUniqueShortID();
-        $extension = (string)$rawFile->getMimeType();
+        $extension = (string)$rawFile->clientExtension();
         $name = $short_id . '.' . $extension;
 
         $file = File::create([
             'user_id' => auth()->user()->id,
             'short_id' => $short_id,
-            'type' => File::getFileType($extension),
-            'extension' => (string)$rawFile->getExtension(),
+            'type' => File::getFileType((string)$rawFile->getMimeType()),
+            'extension' => $extension,
             'size' => (int)$rawFile->getClientSize(),
             'original_name' => (string)$rawFile->getClientOriginalName(),
             'name' => $name,

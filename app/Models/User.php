@@ -42,6 +42,17 @@ class User extends Authenticatable
         });
     }
 
+
+    /**
+     * Returns the amount of free space that the user has.
+     *
+     * @return int
+     */
+    public function amountOfSpaceLeft()
+    {
+        return (int)($this->allowed_space - $this->files->sum('size'));
+    }
+
     /**
      * File relationship.
      *
