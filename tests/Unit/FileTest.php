@@ -8,7 +8,7 @@ use Tests\TestCase;
 class FileTest extends TestCase
 {
     /**
-     * File inspector.test
+     * File inspector.
      *
      * @var FileMimeType
      */
