@@ -54,6 +54,16 @@ class User extends Authenticatable
     }
 
     /**
+     * This will automatically encrypt the password.
+     *
+     * @param $password
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+    /**
      * File relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

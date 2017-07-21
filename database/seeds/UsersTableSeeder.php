@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
         'user2@frontfiles.com',
         'user3@frontfiles.com',
         'user4@frontfiles.com',
-        'user5@frontfiles.com'
+        'user5@frontfiles.com',
     ];
 
     /**
@@ -24,13 +24,14 @@ class UsersTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach($this->user_mails as $email)
+        foreach($this->user_mails as $email){
             User::create([
                 'name' => $faker->name,
                 'email' => $email,
-                'password' => bcrypt('secret'),
+                'password' => 'secret',
                 'allowed_space' => 10737418240,
                 'confirmed' => true,
-            ]);
+            ])->assignRole('user-basic');
+        }
     }
 }

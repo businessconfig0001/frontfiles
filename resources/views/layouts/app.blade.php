@@ -53,21 +53,21 @@
                                             
 
                                             @if (Auth::guest())
-                                                <li><a href="{{ route('login') }}">Login</a></li>
+                                                <li><a href="{{ route('auth.login') }}">Login</a></li>
                                             @else
-                                                <li><a href="{{ url('/files') }}">Files</a></li>
+                                                <li><a href="{{ route('files') }}">Files</a></li>
                                                 <li>
-                                                    <a href="{{ route('logout') }}"
+                                                    <a href="{{ route('auth.logout') }}"
                                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                                         Logout
                                                     </a>
-                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
                                                         {{ csrf_field() }}
                                                     </form>
                                                 </li>
                                             @endif
 
-                                            <li><a href="{{ url('/files/upload') }}" class="btn btn-border-black">Upload</a></li>
+                                            <li><a href="{{ route('files.upload') }}" class="btn btn-border-black">Upload</a></li>
                                         </ul>
                                     </div>
                                 </div><!-- /.navbar-collapse -->

@@ -12,6 +12,20 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(\Spatie\Permission\Models\Permission::class, function () {
+    return [
+        'name' => 'upload-file',
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(\Spatie\Permission\Models\Role::class, function () {
+    return [
+        'name' => 'user-basic',
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(FrontFiles\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,

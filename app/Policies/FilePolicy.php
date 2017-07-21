@@ -20,7 +20,7 @@ class FilePolicy
      */
     public function view(User $user, File $file)
     {
-        return $file->user_id == $user->id;
+        return $file->user_id === $user->id;
     }
 
     /**
@@ -43,7 +43,7 @@ class FilePolicy
      */
     public function update(User $user, File $file)
     {
-        return $file->user_id == $user->id;
+        return $file->user_id === $user->id;
     }
 
     /**
@@ -55,6 +55,6 @@ class FilePolicy
      */
     public function delete(User $user, File $file)
     {
-        return $file->user_id == $user->id;
+        return $file->user_id === $user->id;
     }
 }
