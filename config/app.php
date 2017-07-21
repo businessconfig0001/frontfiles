@@ -178,14 +178,15 @@ return [
         FrontFiles\Providers\RouteServiceProvider::class,
 
         /*
-         * Azure storage
-         */
-        FrontFiles\Providers\AzureStorageServiceProvider::class,
-
-        /*
          * Development helpers
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+        /*
+         * Custom packages
+         */
+        FrontFiles\Providers\AzureStorageServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
     ],
 
     /*
