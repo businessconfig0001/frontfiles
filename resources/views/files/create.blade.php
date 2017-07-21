@@ -3,7 +3,7 @@
 @section('content')
 	<div class="bg-photo bg-create">
 	</div>
- <!-- form-container -->
+    <!-- form-container -->
     <section class="form-container">
 	    <drag-n-drop :files="{{$files}}"></drag-n-drop>
     </section><!-- form-container -->

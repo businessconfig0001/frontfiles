@@ -15,11 +15,11 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table){
             $table->bigIncrements('id');
-            $table->unsignedSmallInteger('role_id')->default(2);
 
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('bio')->nullable();
             $table->string('avatar')->nullable();
             $table->unsignedBigInteger('allowed_space')->default(10737418240);
 
@@ -28,10 +28,6 @@ class CreateUsersTable extends Migration
 
             $table->rememberToken();
             $table->timestamps();
-        });
-
-        Schema::table('users', function (Blueprint $table){
-            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 

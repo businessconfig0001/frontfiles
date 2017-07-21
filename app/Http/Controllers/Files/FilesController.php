@@ -1,22 +1,13 @@
 <?php
 
-namespace FrontFiles\Http\Controllers;
+namespace FrontFiles\Http\Controllers\Files;
 
-use FrontFiles\Http\Requests\{
-    CreateFileRequest, UpdateFileRequest
-};
 use FrontFiles\File;
+use FrontFiles\Http\Controllers\Controller;
+use FrontFiles\Http\Requests\{ CreateFileRequest, UpdateFileRequest };
 
 class FilesController extends Controller
 {
-    /**
-     * FilesController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *

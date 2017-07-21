@@ -1,16 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class RolesTableSeeder extends Seeder
 {
-    //Role types
-    protected $types = [
-        'administrator',
-        'basic',
-        'organization'
-    ];
-
     /**
      * Run the database seeds.
      *
@@ -18,9 +12,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        foreach($this->types as $type)
-            DB::table('roles')->insert([
-                'type' => $type
-            ]);
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'user-basic']);
     }
 }
