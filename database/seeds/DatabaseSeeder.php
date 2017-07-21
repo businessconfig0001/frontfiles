@@ -8,7 +8,6 @@ class DatabaseSeeder extends Seeder
 {
     //Tables to truncate and seeded
     protected $tables = [
-        'roles'     => RolesTableSeeder::class,
         'users'     => UsersTableSeeder::class,
         'files'     => FilesTableSeeder::class,
     ];

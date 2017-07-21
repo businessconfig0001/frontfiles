@@ -26,7 +26,6 @@ class UsersTableSeeder extends Seeder
 
         foreach($this->user_mails as $email)
             User::create([
-                'role_id' => 2,
                 'name' => $faker->name,
                 'email' => $email,
                 'password' => bcrypt('secret'),

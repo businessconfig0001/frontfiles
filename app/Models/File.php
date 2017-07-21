@@ -2,11 +2,7 @@
 
 namespace FrontFiles;
 
-use Illuminate\{
-    Database\Eloquent\Model,
-    Support\Facades\Storage,
-    Contracts\Filesystem\FileNotFoundException
-};
+use Illuminate\{ Database\Eloquent\Model, Support\Facades\Storage, Contracts\Filesystem\FileNotFoundException };
 use WindowsAzure\Common\ServicesBuilder;
 use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
 use MicrosoftAzure\Storage\Common\ServiceException;

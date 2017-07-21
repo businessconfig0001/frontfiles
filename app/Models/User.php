@@ -2,12 +2,12 @@
 
 namespace FrontFiles;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -61,15 +61,5 @@ class User extends Authenticatable
     public function files()
     {
         return $this->hasMany(File::class, 'user_id');
-    }
-
-    /**
-     * Role relationship.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function role()
-    {
-        return $this->belongsTo(Role::class, 'role_id');
     }
 }

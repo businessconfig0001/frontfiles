@@ -14,7 +14,6 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(FrontFiles\User::class, function (Faker\Generator $faker) {
     return [
-        'role_id' => 2,
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => bcrypt('secret'),
