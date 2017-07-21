@@ -42,7 +42,6 @@ class User extends Authenticatable
         });
     }
 
-
     /**
      * Returns the amount of free space that the user has.
      *

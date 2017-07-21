@@ -49,6 +49,16 @@ class File extends Model
     }
 
     /**
+     * Gets the real path for the file.
+     *
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function realPath()
+    {
+        return url("/files/{$this->id}");
+    }
+
+    /**
      * Generates a pseudo-random string that will be the Short ID of the file.
      *
      * @param int $length

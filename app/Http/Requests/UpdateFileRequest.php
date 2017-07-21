@@ -54,6 +54,6 @@ class UpdateFileRequest extends FormRequest
         if(request()->expectsJson())
             return response(['status' => 'File successfully edited!']);
 
-        return redirect('/files');
+        return redirect(route('files'));
     }
 }
