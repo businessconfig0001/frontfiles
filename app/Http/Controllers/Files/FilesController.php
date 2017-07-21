@@ -100,7 +100,7 @@ class FilesController extends Controller
         $file->delete();
 
         if(request()->expectsJson())
-            return response(['status' => 'File successfully deleted!']);
+            return response(['status' => 'File successfully deleted!'], 204);
 
         return back();
     }
