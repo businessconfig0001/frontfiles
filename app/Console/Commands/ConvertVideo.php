@@ -27,8 +27,10 @@ class ConvertVideo extends Command
      * @var string
      */
     protected $signature = 'convert:video 
-                            {input : The path of the input video} 
+                            {input : The name} 
                             {output : The path of the output video}
+                            {watermark_image : The watermark image}
+                            {storage_path : Path where file is}
                             {--queue= : Whether the job should be queued}';
 
     /**
@@ -57,6 +59,7 @@ class ConvertVideo extends Command
     {
         $input=$this->argument('input');
         $output=$this->argument('output');
+        $watermark_image=$this->argument('watermark_image');
 
         $filesystems = Mockery::mock(Filesystems::class);
         $config      = Mockery::mock(ConfigRepository::class);
@@ -76,16 +79,20 @@ class ConvertVideo extends Command
         $media = new FFMpeg( $filesystems,$config,$logger);
         $media->fromDisk(config('filesystems.default'))
             ->open($input)
+            ->addFilter(['-i', $watermark_image,'-filter_complex','overlay=10:10'])
+            ->addFilter(['-strict', 1])
+
             ->export()
             ->toDisk(config('filesystems.default')) // Maybe we need a different config here
             ->inFormat(new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))
-            ->save($output);
+
+        ->save($output);
     }
 
 
     public function getLocalAdapter(): FilesystemAdapter
     {
-        $flysystem = new Flysystem(new Local('/tmp/'));
+        $flysystem = new Flysystem(new Local($this->argument('storage_path')));
         return new FilesystemAdapter($flysystem);
     }
 }

@@ -105,12 +105,6 @@ class File extends Model
 
         // Code here
 
-        // 2. create job for decoding (below wasn't well tested)
-        Artisan::queue('convert:video', [
-            'input' =>  request()->file('file')->getFilename(),
-            'output' => request()->file('file')->getFilename(),
-        ]);
-
         $container = 'user-id-' . auth()->user()->id;
 
         $config = config('filesystems.default');

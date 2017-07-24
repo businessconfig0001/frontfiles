@@ -4,6 +4,7 @@ namespace FrontFiles\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use FrontFiles\File;
+use Illuminate\Support\Facades\Artisan;
 
 class CreateFileRequest extends FormRequest
 {
@@ -81,6 +82,25 @@ class CreateFileRequest extends FormRequest
             'who' => request('who'),
             'when' => request('when'),
         ]);
+
+        /**  CHANGES HERE (IMPROVE THE CODE) */
+        $container = 'user-id-' . auth()->user()->id;
+
+        $config = config('filesystems.local.root');
+        $local_path=public_path('userFiles').'/'.$container.'/';
+
+        Artisan::queue('convert:video', [
+            'storage_path' => $local_path,
+            'input' =>  $name,
+            'output' =>         $name = $short_id . 'encoded.' . $extension,
+            'watermark_image' => asset('images/logo2x.png'),
+        ]);
+        $config = config('filesystems.default');
+
+        $file->name=$name;
+        $file->url=config('filesystems.disks.local.url').'/'.$container.'/'.$name;
+        $file->save();
+        /**  END CHANGES HERE */
 
         if(request()->wantsJson())
             return response()->json(array('status' => 'File uploaded successfully!', 'data' => $file));
