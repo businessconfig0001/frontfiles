@@ -11,6 +11,7 @@
         "league/flysystem-azure": "^1.0",
         "microsoft/azure-storage": "0.10.2",
         "microsoft/windowsazure": "^0.5",
+        "pbmedia/laravel-ffmpeg": "^1.1",
         "spatie/laravel-permission": "^2.2"
     },
     "require-dev": {

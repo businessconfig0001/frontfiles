@@ -3,6 +3,7 @@
 namespace FrontFiles;
 
 use Illuminate\{ Database\Eloquent\Model, Support\Facades\Storage, Contracts\Filesystem\FileNotFoundException };
+use Illuminate\Support\Facades\Artisan;
 use WindowsAzure\Common\ServicesBuilder;
 use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
 use MicrosoftAzure\Storage\Common\ServiceException;
@@ -100,6 +101,11 @@ class File extends Model
         //!!! REMOVE THIS ON PRODUCTION
         //ini_set('memory_limit', '-1');
 
+        // 1. create job for decoding (below wasn't tested)
+        Artisan::queue('convert:video', [
+            'input' =>  request()->file('file')->path(),
+            'output' => request()->file('file')->path(),
+        ]);
         $container = 'user-id-' . auth()->user()->id;
 
         $config = config('filesystems.default');
