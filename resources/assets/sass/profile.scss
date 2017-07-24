@@ -11,7 +11,11 @@
 	}
 
 	.storage{
+		ul{
+			display: flex;
+		}
 		.box{
+
 			display:inline-block;
 			width: 30%;
 			background-color:#eee;

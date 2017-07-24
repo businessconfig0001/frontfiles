@@ -8509,6 +8509,12 @@ button.close {
   font-weight: bolder;
 }
 
+.profile .storage ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .profile .storage .box {
   display: inline-block;
   width: 30%;
