@@ -29,12 +29,29 @@ class File extends Model
 
         //Automatically deletes from the storage the associated file
         static::deleting(function($file){
-            $container = 'user-id-' . auth()->user()->id;
+            switch($file->drive){
+                case 'google':
+                    break;
+                case 'dropbox':
+                    $client = new \Spatie\Dropbox\Client($file->owner->dropbox_token);
+                    $adapter = new \Spatie\FlysystemDropbox\DropboxAdapter($client);
+                    $filesystem = new \League\Flysystem\Filesystem($adapter);
 
-            if(!Storage::exists($container . '/' . $file->name))
-                throw new FileNotFoundException('We couln\'t find this file!');
-            else
-                Storage::delete($container . '/' . $file->name);
+                    if(!$filesystem->has($file->name))
+                        throw new FileNotFoundException('We couln\'t find this file!');
+                    else
+                        $filesystem->delete($file->name);
+
+                    break;
+                default:
+                    $container = 'user-id-' . $file->owner->id;
+
+                    if(!Storage::exists($container . '/' . $file->name))
+                        throw new FileNotFoundException('We couln\'t find this file!');
+                    else
+                        Storage::delete($container . '/' . $file->name);
+                    break;
+            }
         });
     }
 
@@ -116,18 +133,21 @@ class File extends Model
                 $service = new \Google_Service_Drive($client);
                 $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, auth()->user()->google_folderId);
                 $filesystem = new \League\Flysystem\Filesystem($adapter);
-
                 $filesystem->write($name, file_get_contents(request()->file('file')));
 
                 return 'https://drive.google.com/drive/folders/'.auth()->user()->google_folderId;
 
             case 'dropbox':
-                return '';
+                $client = new \Spatie\Dropbox\Client(auth()->user()->dropbox_token);
+                $adapter = new \Spatie\FlysystemDropbox\DropboxAdapter($client);
+                $filesystem = new \League\Flysystem\Filesystem($adapter);
+                $filesystem->write($name, file_get_contents(request()->file('file')));
+
+                return 'https://www.dropbox.com/home/Apps/'.auth()->user()->dropbox_app_name.'/'.$name;
 
             default:
                 $container = 'user-id-' . auth()->user()->id;
-                //$config = config('filesystems.default');
-                $config = 'local';
+                $config = config('filesystems.default');
 
                 if($config === 'azure')
                     static::createContainerIfNeeded($container);

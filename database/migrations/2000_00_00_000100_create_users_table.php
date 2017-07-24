@@ -25,6 +25,9 @@ class CreateUsersTable extends Migration
             $table->string('google_refreshToken')->nullable();
             $table->string('google_folderId')->nullable();
 
+            $table->string('dropbox_token')->nullable();
+            $table->string('dropbox_app_name')->nullable();
+
             $table->unsignedBigInteger('allowed_space')->default(10737418240);
 
             $table->string('confirmation_code')->nullable();

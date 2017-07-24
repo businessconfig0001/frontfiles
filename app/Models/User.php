@@ -17,7 +17,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'avatar',
         'google_clientId', 'google_clientSecret',
-        'google_refreshToken', 'google_folderId'
+        'google_refreshToken', 'google_folderId',
+        'dropbox_token', 'dropbox_app_name',
     ];
 
     /**

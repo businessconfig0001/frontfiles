@@ -10,10 +10,17 @@
 
         <div class="row">
             @if($user->google_clientId && $user->google_clientSecret && $user->google_refreshToken && $user->google_folderId)
-                <p>GDrive configured!</p>
+                <p>Google Drive configured!</p>
             @else
-                <p>GDrive not configured!<br>
-                    Please configure it so that you can save files in your drive.
+                <p>Google Drive not configured!<br>
+                    Please configure it so that you can save files in your Google Drive.
+                </p>
+            @endif
+            @if($user->dropbox_token && $user->dropbox_app_name)
+                <p>Dropbox configured!</p>
+            @else
+                <p>Dropbox not configured!<br>
+                    Please configure it so that you can save files in your Dropbox.
                 </p>
             @endif
         </div>
