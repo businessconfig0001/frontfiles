@@ -25,7 +25,6 @@
 				<p>
 					<display-error :error="upload.errors['title']"></display-error>
 					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
-					
 				</p>
 				<p>
 					<display-error :error="upload.errors['description']"></display-error>
@@ -49,6 +48,12 @@
 				<p>
 					<display-error :error="upload.errors['when']"></display-error>
 					<input type="text" name="when" id="when" class="form-control" placeholder="#When" onfocus="(this.type='date')" v-model="upload.data.when"/>
+				</p>
+				<p>
+					<display-error :error="upload.errors['drive']"></display-error>
+					<input type="radio" name="drive" value="azure" class="form-control" v-model="upload.data.drive" checked> Azure<br>
+					<input type="radio" name="drive" value="google" class="form-control" v-model="upload.data.drive"> Google Drive<br>
+					<input type="radio" name="drive" value="dropbox" class="form-control" v-model="upload.data.drive"> Dropbox
 				</p>
 			</div>
 			<a class="submit btn btn-primary" @click.prevent="upload">Save</a>
@@ -99,7 +104,8 @@
 				  			what:'',
 				  			where:'',
 				  			when:'',
-				  			who:''
+				  			who:'',
+							drive:''
 				  		}
 				  		if(this.uploads[x]) d = this.uploads[x].data 
 					  	this.uploads.push({ 

@@ -12,6 +12,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
+        'FrontFiles\User' => 'FrontFiles\Policies\UserPolicy',
         'FrontFiles\File' => 'FrontFiles\Policies\FilePolicy',
     ];
 

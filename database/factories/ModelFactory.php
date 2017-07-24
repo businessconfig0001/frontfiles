@@ -30,7 +30,8 @@ $factory->define(FrontFiles\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => bcrypt('secret'),
+        'password' => 'secret',
+        'allowed_space' => 10737418240,
         'confirmed' => true,
         'remember_token' => str_random(10),
     ];
@@ -39,7 +40,7 @@ $factory->define(FrontFiles\User::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(FrontFiles\File::class, function (Faker\Generator $faker) {
     $short_id = $faker->randomNumber(8);
-    $extension = $faker->fileExtension;
+    $extension = 'mp4';
     $name = $short_id . '.' . $extension;
 
     return [

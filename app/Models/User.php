@@ -15,7 +15,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar'
+        'name', 'email', 'password', 'avatar',
+        'google_clientId', 'google_clientSecret',
+        'google_refreshToken', 'google_folderId',
+        'dropbox_token', 'dropbox_app_name',
     ];
 
     /**
@@ -41,7 +44,6 @@ class User extends Authenticatable
             });
         });
     }
-
 
     /**
      * Returns the amount of free space that the user has.

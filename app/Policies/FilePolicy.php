@@ -2,9 +2,7 @@
 
 namespace FrontFiles\Policies;
 
-use FrontFiles\{
-    User, File
-};
+use FrontFiles\{ User, File };
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FilePolicy

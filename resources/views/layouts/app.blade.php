@@ -65,9 +65,11 @@
                                                         {{ csrf_field() }}
                                                     </form>
                                                 </li>
+                                                <li><a href="{{ route('profile') }}">Profile</a></li>
                                             @endif
 
                                             <li><a href="{{ route('files.upload') }}" class="btn btn-border-black">Upload</a></li>
+
                                         </ul>
                                     </div>
                                 </div><!-- /.navbar-collapse -->
