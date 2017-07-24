@@ -45,7 +45,7 @@ return [
 
         'local' => [
             'driver'        => 'local',
-            'root'          => public_path('userFiles/'),
+            'root'          => public_path('userFiles'),
             'url'           => env('APP_URL').'/userFiles/',
             'visibility'    => 'public',
         ],

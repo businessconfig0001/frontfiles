@@ -101,11 +101,16 @@ class File extends Model
         //!!! REMOVE THIS ON PRODUCTION
         //ini_set('memory_limit', '-1');
 
-        // 1. create job for decoding (below wasn't tested)
+        // 1. Copy from /tmp to local storage
+
+        // Code here
+
+        // 2. create job for decoding (below wasn't well tested)
         Artisan::queue('convert:video', [
-            'input' =>  request()->file('file')->path(),
-            'output' => request()->file('file')->path(),
+            'input' =>  request()->file('file')->getFilename(),
+            'output' => request()->file('file')->getFilename(),
         ]);
+
         $container = 'user-id-' . auth()->user()->id;
 
         $config = config('filesystems.default');

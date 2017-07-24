@@ -2,9 +2,23 @@
 
 namespace FrontFiles\Console\Commands;
 
-use FFMpeg\FFMpeg;
-use Illuminate\Console\Command;
+use Illuminate\Contracts\Filesystem\Factory as Filesystems;
+use Illuminate\Config\Repository as ConfigRepository;
 
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\Filesystem\Factory;
+use Illuminate\Filesystem\FilesystemAdapter;
+use Illuminate\Log\Writer;
+use League\Flysystem\AdapterInterface;
+use League\Flysystem\FilesystemInterface;
+use Monolog\Logger;
+use Pbmedia\LaravelFFMpeg\FFMpeg;
+use Illuminate\Console\Command;
+use Psr\Log\LoggerInterface;
+use Mockery;
+use League\Flysystem\Adapter\Ftp;
+use League\Flysystem\Adapter\Local;
+use League\Flysystem\Filesystem as Flysystem;
 class ConvertVideo extends Command
 {
     /**
@@ -43,12 +57,35 @@ class ConvertVideo extends Command
     {
         $input=$this->argument('input');
         $output=$this->argument('output');
-        FFMpeg::fromDisk(config('filesystems.default'))
+
+        $filesystems = Mockery::mock(Filesystems::class);
+        $config      = Mockery::mock(ConfigRepository::class);
+        $logger      = new Writer(new Logger('ffmpeg'));
+        $adapter = Mockery::mock(AdapterInterface::class);
+        $driver = Mockery::mock(FilesystemInterface::class);
+        $driver->shouldReceive('getAdapter')->andReturn($adapter);
+        $remoteDisk = Mockery::mock(FilesystemAdapter::class);
+        $remoteDisk->shouldReceive('getDriver')->andReturn($driver);
+
+        $localDisk = $this->getLocalAdapter();
+        $filesystems->shouldReceive('disk')->once()->with('azure')->andReturn($remoteDisk);
+        $filesystems->shouldReceive('disk')->once()->with('local')->andReturn($localDisk);
+        $config->shouldReceive('get')->once()->with('laravel-ffmpeg')->andReturn(array_merge(config('laravel-ffmpeg'), ['default_disk' => 'local']));
+        $config->shouldReceive('get')->once()->with('filesystems.default')->andReturn('local');
+
+        $media = new FFMpeg( $filesystems,$config,$logger);
+        $media->fromDisk(config('filesystems.default'))
             ->open($input)
-            // export TO X264
             ->export()
             ->toDisk(config('filesystems.default')) // Maybe we need a different config here
-            ->inFormat(new \FFMpeg\Format\Video\X264)
+            ->inFormat(new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))
             ->save($output);
+    }
+
+
+    public function getLocalAdapter(): FilesystemAdapter
+    {
+        $flysystem = new Flysystem(new Local('/tmp/'));
+        return new FilesystemAdapter($flysystem);
     }
 }
