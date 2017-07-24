@@ -19,8 +19,12 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('bio')->nullable();
-            $table->string('avatar')->nullable();
+
+            $table->string('google_clientId')->nullable();
+            $table->string('google_clientSecret')->nullable();
+            $table->string('google_refreshToken')->nullable();
+            $table->string('google_folderId')->nullable();
+
             $table->unsignedBigInteger('allowed_space')->default(10737418240);
 
             $table->string('confirmation_code')->nullable();

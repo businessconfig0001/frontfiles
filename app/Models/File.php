@@ -15,7 +15,7 @@ class File extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'short_id', 'type', 'extension',
+        'user_id', 'short_id', 'drive', 'type', 'extension',
         'size', 'original_name', 'name', 'url', 'title',
         'description', 'what', 'where', 'when', 'who'
     ];
@@ -106,21 +106,37 @@ class File extends Model
      */
     public static function storeAndReturnUrl(string $name)
     {
-        // Copy to remote
-        //!!! REMOVE THIS ON PRODUCTION
-        //ini_set('memory_limit', '-1');
+        switch(request('drive'))
+        {
+            case 'google':
+                $client = new \Google_Client();
+                $client->setClientId(auth()->user()->google_clientId);
+                $client->setClientSecret(auth()->user()->google_clientSecret);
+                $client->refreshToken(auth()->user()->google_refreshToken);
+                $service = new \Google_Service_Drive($client);
+                $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, auth()->user()->google_folderId);
+                $filesystem = new \League\Flysystem\Filesystem($adapter);
 
-        $container = 'user-id-' . auth()->user()->id;
+                $filesystem->write($name, file_get_contents(request()->file('file')));
 
-        $config = config('filesystems.default');
+                return 'https://drive.google.com/drive/folders/'.auth()->user()->google_folderId;
 
-        if($config === 'azure')
-            static::createContainerIfNeeded($container);
+            case 'dropbox':
+                return '';
 
-        return config('filesystems.disks.' . $config . '.url') .
-            request()
-                ->file('file')
-                ->storeAs($container, $name, $config);
+            default:
+                $container = 'user-id-' . auth()->user()->id;
+                //$config = config('filesystems.default');
+                $config = 'local';
+
+                if($config === 'azure')
+                    static::createContainerIfNeeded($container);
+
+                return config('filesystems.disks.' . $config . '.url') .
+                    request()
+                        ->file('file')
+                        ->storeAs($container, $name, $config);
+        }
     }
 
     /**

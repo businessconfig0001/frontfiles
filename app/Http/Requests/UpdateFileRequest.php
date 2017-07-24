@@ -52,7 +52,7 @@ class UpdateFileRequest extends FormRequest
         ]);
 
         if(request()->expectsJson())
-            return response(['status' => 'File successfully edited!']);
+            return response(['status' => 'File successfully edited!'], 200);
 
         return redirect(route('files'));
     }

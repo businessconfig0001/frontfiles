@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+    'cloud' => env('FILESYSTEM_CLOUD', 'azure'),
 
     /*
     |--------------------------------------------------------------------------
@@ -48,14 +48,6 @@ return [
             'root'          => public_path('userFiles/'),
             'url'           => env('APP_URL').'/userFiles/',
             'visibility'    => 'public',
-        ],
-
-        's3' => [
-            'driver'    => 's3',
-            'key'       => env('AWS_KEY'),
-            'secret'    => env('AWS_SECRET'),
-            'region'    => env('AWS_REGION'),
-            'bucket'    => env('AWS_BUCKET'),
         ],
 
         'azure' => [
