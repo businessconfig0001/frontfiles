@@ -39,12 +39,26 @@ Route::group([
 });
 
 /**
+ * Profile routes
+ */
+Route::group([
+    'namespace' => 'Profile',
+    'middleware' => 'auth',
+    'prefix' => 'profile',
+], function () {
+    Route::get('/', 'ProfileController@show')->name('profile');
+    Route::get('/edit', 'ProfileController@edit')->name('profile.edit');
+    Route::patch('/', 'ProfileController@update')->name('profile.update');
+    Route::delete('/', 'ProfileController@destroy')->name('profile.delete');
+});
+
+/**
  * Files routes
  */
 Route::group([
+    'namespace' => 'Files',
     'middleware' => 'auth',
     'prefix' => 'files',
-    'namespace' => 'Files'
 ], function () {
     Route::get('/', 'FilesController@index')->name('files');
     Route::post('/', 'FilesController@store')->name('files');

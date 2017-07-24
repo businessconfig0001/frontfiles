@@ -32,6 +32,7 @@ class CreateFileRequest extends FormRequest
             'where'         => 'required|string|max:175',
             'when'          => 'required|date',
             'who'           => 'required|string|max:175',
+            'drive'         => 'required|in:azure,google,dropbox',
         ];
     }
 
@@ -46,7 +47,7 @@ class CreateFileRequest extends FormRequest
         if(!request()->hasFile('file'))
         {
             if(request()->wantsJson())
-                return response()->json(array('error' => 'File is not available'));
+                return response()->json(array('error' => 'File is not available'), 422);
 
             return redirect(route('files.upload'))->with(array('error'=>'File is not available'));
         }
@@ -55,35 +56,36 @@ class CreateFileRequest extends FormRequest
         if(!request()->file('file')->isValid())
         {
             if(request()->wantsJson())
-                return response()->json(array('error' => 'File is not valid'));
+                return response()->json(array('error' => 'File is not valid'), 422);
 
             return redirect(route('files.upload'))->with(array('error'=>'File is not valid'));
         }
 
-        $rawFile = request()->file('file');
-        $short_id = File::generateUniqueShortID();
-        $extension = (string)$rawFile->clientExtension();
-        $name = $short_id . '.' . $extension;
+        $rawFile    = request()->file('file');
+        $short_id   = File::generateUniqueShortID();
+        $extension  = (string)$rawFile->clientExtension();
+        $name       = $short_id . '.' . $extension;
 
         $file = File::create([
-            'user_id' => auth()->user()->id,
-            'short_id' => $short_id,
-            'type' => File::getFileType((string)$rawFile->getMimeType()),
-            'extension' => $extension,
-            'size' => (int)$rawFile->getClientSize(),
+            'user_id'       => auth()->user()->id,
+            'short_id'      => $short_id,
+            'drive'         => request('drive'),
+            'type'          => File::getFileType((string)$rawFile->getMimeType()),
+            'extension'     => $extension,
+            'size'          => (int)$rawFile->getClientSize(),
             'original_name' => (string)$rawFile->getClientOriginalName(),
-            'name' => $name,
-            'url' => File::storeAndReturnUrl($name),
-            'title' => request('title'),
-            'description' => request('description'),
-            'what' => request('what'),
-            'where' => request('where'),
-            'who' => request('who'),
-            'when' => request('when'),
+            'name'          => $name,
+            'url'           => File::storeAndReturnUrl($name),
+            'title'         => request('title'),
+            'description'   => request('description'),
+            'what'          => request('what'),
+            'where'         => request('where'),
+            'who'           => request('who'),
+            'when'          => request('when'),
         ]);
 
         if(request()->wantsJson())
-            return response()->json(array('status' => 'File uploaded successfully!', 'data' => $file));
+            return response()->json(array('status' => 'File uploaded successfully!', 'data' => $file), 201);
 
         return redirect(route('files.upload'))->with(array('status' => 'File uploaded successfully!'));
     }

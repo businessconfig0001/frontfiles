@@ -15,7 +15,7 @@ class File extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'short_id', 'type', 'extension',
+        'user_id', 'short_id', 'drive', 'type', 'extension',
         'size', 'original_name', 'name', 'url', 'title',
         'description', 'what', 'where', 'when', 'who'
     ];
@@ -29,12 +29,29 @@ class File extends Model
 
         //Automatically deletes from the storage the associated file
         static::deleting(function($file){
-            $container = 'user-id-' . auth()->user()->id;
+            switch($file->drive){
+                case 'google':
+                    break;
+                case 'dropbox':
+                    $client = new \Spatie\Dropbox\Client($file->owner->dropbox_token);
+                    $adapter = new \Spatie\FlysystemDropbox\DropboxAdapter($client);
+                    $filesystem = new \League\Flysystem\Filesystem($adapter);
 
-            if(!Storage::exists($container . '/' . $file->name))
-                throw new FileNotFoundException('We couln\'t find this file!');
-            else
-                Storage::delete($container . '/' . $file->name);
+                    if(!$filesystem->has($file->name))
+                        throw new FileNotFoundException('We couln\'t find this file!');
+                    else
+                        $filesystem->delete($file->name);
+
+                    break;
+                default:
+                    $container = 'user-id-' . $file->owner->id;
+
+                    if(!Storage::exists($container . '/' . $file->name))
+                        throw new FileNotFoundException('We couln\'t find this file!');
+                    else
+                        Storage::delete($container . '/' . $file->name);
+                    break;
+            }
         });
     }
 
@@ -106,21 +123,40 @@ class File extends Model
      */
     public static function storeAndReturnUrl(string $name)
     {
-        // Copy to remote
-        //!!! REMOVE THIS ON PRODUCTION
-        //ini_set('memory_limit', '-1');
+        switch(request('drive'))
+        {
+            case 'google':
+                $client = new \Google_Client();
+                $client->setClientId(auth()->user()->google_clientId);
+                $client->setClientSecret(auth()->user()->google_clientSecret);
+                $client->refreshToken(auth()->user()->google_refreshToken);
+                $service = new \Google_Service_Drive($client);
+                $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, auth()->user()->google_folderId);
+                $filesystem = new \League\Flysystem\Filesystem($adapter);
+                $filesystem->write($name, file_get_contents(request()->file('file')));
 
-        $container = 'user-id-' . auth()->user()->id;
+                return 'https://drive.google.com/drive/folders/'.auth()->user()->google_folderId;
 
-        $config = config('filesystems.default');
+            case 'dropbox':
+                $client = new \Spatie\Dropbox\Client(auth()->user()->dropbox_token);
+                $adapter = new \Spatie\FlysystemDropbox\DropboxAdapter($client);
+                $filesystem = new \League\Flysystem\Filesystem($adapter);
+                $filesystem->write($name, file_get_contents(request()->file('file')));
 
-        if($config === 'azure')
-            static::createContainerIfNeeded($container);
+                return 'https://www.dropbox.com/home/Apps/'.auth()->user()->dropbox_app_name.'/'.$name;
 
-        return config('filesystems.disks.' . $config . '.url') .
-            request()
-                ->file('file')
-                ->storeAs($container, $name, $config);
+            default:
+                $container = 'user-id-' . auth()->user()->id;
+                $config = config('filesystems.default');
+
+                if($config === 'azure')
+                    static::createContainerIfNeeded($container);
+
+                return config('filesystems.disks.' . $config . '.url') .
+                    request()
+                        ->file('file')
+                        ->storeAs($container, $name, $config);
+        }
     }
 
     /**

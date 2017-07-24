@@ -18,6 +18,7 @@ class CreateFilesTable extends Migration
             $table->unsignedBigInteger('user_id');
 
             $table->char('short_id', 8)->unique();
+            $table->string('drive', 8)->comment('azure | google | dropbox');
             $table->string('type', 8)->comment('video | audio | image | document');
             $table->string('extension', 8);
             $table->unsignedBigInteger('size');
