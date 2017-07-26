@@ -84,6 +84,7 @@
             </div>
         </div><!-- /page structure -->
     </body>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7eCQwmRXS72DyZ5WwSmKS6DIT85Qwu8E&libraries=places"></script>
     <script type="text/javascript" src="{{ mix ('/js/manifest.js')}}"></script>
     <script type="text/javascript" src="{{ mix ('/js/vendor.js')}}"></script>
     <script type="text/javascript" src="{{ mix ('/js/app.js')}}"></script>

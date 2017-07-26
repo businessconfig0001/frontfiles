@@ -6,7 +6,7 @@
 			<a @click.prevent="removeTag(tag)"><i class="fa fa-times"></i></a>
 		</li>
 	</ul>
-	<input type="text" v-model="new_tag" :placeholder="placeholder" @keyup.enter="addTag" @keyup.tab.prevent="addTag">
+	<input type="text" v-model="new_tag" :placeholder="placeholder" @keyup.enter="addTag">
 </div>
 </template>
 

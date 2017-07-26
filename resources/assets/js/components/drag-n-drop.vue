@@ -37,13 +37,13 @@
 					
 				</p>
 				<p>
-					<display-error :error="upload.errors['where']"></display-error>
-					<input type="" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where"/>
-					
+					<display-error :error="upload.errors['who']"></display-error>
+					<tag-input placeholder="#Who" :tags="upload.data.who"></tag-input>			
 				</p>
 				<p>
-					<display-error :error="upload.errors['who']"></display-error>
-					<input type="text" name="who" id="who" class="form-control" placeholder="#Who" v-model="upload.data.who"/>			
+					<display-error :error="upload.errors['where']"></display-error>
+					<input type="" ref="where" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where" @focus="initPlace"/>
+					
 				</p>
 				<p>
 					<display-error :error="upload.errors['when']"></display-error>
@@ -88,7 +88,6 @@
 			}
 		},
 		mounted(){
-
 		},
 		methods:{
 			filesChange(fieldName, fileList) {
@@ -103,7 +102,7 @@
 				  			description:'',
 				  			what:[],
 				  			where:'',
-				  			when:'',
+				  			when:[],
 				  			who:'',
 							drive:''
 				  		}
@@ -128,8 +127,24 @@
 					 })
 						.catch(err => this.uploads[u].errors = err.response.data)
 				}
+			},
+			initPlace(event){
+				console.log(event)
+				let placebox=new google.maps.places.Autocomplete(event.target)
+				console.log(placebox)
 			}
 
+		},
+		watch:{
+			uploads(){
+				/*
+				let u=this.uploads
+				for(let i= 0 ; i < u.length ; i++){
+					let placebox=new google.maps.places.Autocomplete(this.$refs.where[i])
+					placebox.addListener('place_changed',console.log)
+				}
+				*/
+			}
 		}
 	}
 </script>
