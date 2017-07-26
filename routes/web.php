@@ -46,7 +46,8 @@ Route::group([
     'middleware' => 'auth',
     'prefix' => 'profile',
 ], function () {
-    Route::get('/', 'ProfileController@show')->name('profile');
+    Route::get('/', 'ProfileController@index')->name('profile');
+    Route::get('/{slug}', 'ProfileController@show')->name('profile.show');
     Route::get('/edit', 'ProfileController@edit')->name('profile.edit');
     Route::patch('/', 'ProfileController@update')->name('profile.update');
     Route::delete('/', 'ProfileController@destroy')->name('profile.delete');

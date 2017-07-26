@@ -9,13 +9,30 @@ use FrontFiles\User;
 class ProfileController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $user = User::find(auth()->user()->id);
+
+        $this->authorize('view', $user);
+
+        if(request()->expectsJson())
+            return $user;
+
+        return view('profile.index', compact('user'));
+    }
+
+    /**
      * Display the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($slug)
     {
-        $user = User::find(auth()->user()->id);
+        $user = User::where('slug', $slug)->firstOrFail();
 
         $this->authorize('view', $user);
 
@@ -41,7 +58,6 @@ class ProfileController extends Controller
 
         return view('profile.edit', compact('user'));
     }
-
 
     /**
      * Update the specified resource in storage.

@@ -11,9 +11,9 @@
         "league/flysystem-azure": "^1.0",
         "microsoft/azure-storage": "0.10.2",
         "microsoft/windowsazure": "^0.5",
-        "nao-pon/flysystem-google-drive": "~1.1",
         "spatie/flysystem-dropbox": "^1.0",
-        "spatie/laravel-permission": "^2.2"
+        "spatie/laravel-permission": "^2.2",
+        "spatie/laravel-sluggable": "^1.5"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.4",

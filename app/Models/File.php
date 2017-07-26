@@ -2,6 +2,7 @@
 
 namespace FrontFiles;
 
+use FrontFiles\Utility\Helper;
 use Illuminate\{ Database\Eloquent\Model, Support\Facades\Storage, Contracts\Filesystem\FileNotFoundException };
 use WindowsAzure\Common\ServicesBuilder;
 use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
@@ -30,8 +31,6 @@ class File extends Model
         //Automatically deletes from the storage the associated file
         static::deleting(function($file){
             switch($file->drive){
-                case 'google':
-                    break;
                 case 'dropbox':
                     $client = new \Spatie\Dropbox\Client($file->owner->dropbox_token);
                     $adapter = new \Spatie\FlysystemDropbox\DropboxAdapter($client);
@@ -83,12 +82,7 @@ class File extends Model
      */
     public static function generateUniqueShortID(int $length = 8)
     {
-        $output = '';
-        $chars = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $max = strlen($chars) - 1;
-
-        for($i = 0; $i < $length; $i++)
-            $output .= $chars[mt_rand(0, $max)];
+        $output = Helper::generateRandomAlphaNumericString();
 
         if(static::where('short_id', $output)->exists())
             static::generateUniqueShortID($length);
@@ -125,18 +119,6 @@ class File extends Model
     {
         switch(request('drive'))
         {
-            case 'google':
-                $client = new \Google_Client();
-                $client->setClientId(auth()->user()->google_clientId);
-                $client->setClientSecret(auth()->user()->google_clientSecret);
-                $client->refreshToken(auth()->user()->google_refreshToken);
-                $service = new \Google_Service_Drive($client);
-                $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, auth()->user()->google_folderId);
-                $filesystem = new \League\Flysystem\Filesystem($adapter);
-                $filesystem->write($name, file_get_contents(request()->file('file')));
-
-                return 'https://drive.google.com/drive/folders/'.auth()->user()->google_folderId;
-
             case 'dropbox':
                 $client = new \Spatie\Dropbox\Client(auth()->user()->dropbox_token);
                 $adapter = new \Spatie\FlysystemDropbox\DropboxAdapter($client);

@@ -32,7 +32,7 @@ class CreateFileRequest extends FormRequest
             'where'         => 'required|string|max:175',
             'when'          => 'required|date',
             'who'           => 'required|string|max:175',
-            'drive'         => 'required|in:azure,google,dropbox',
+            'drive'         => 'required|in:azure,dropbox',
         ];
     }
 
