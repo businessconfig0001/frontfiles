@@ -42,7 +42,7 @@
 				</p>
 				<p>
 					<display-error :error="upload.errors['where']"></display-error>
-					<input type="" ref="where" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where" @focus="initPlace"/>
+					<input type="" ref="where" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where" @focus="initPlace(upload.index)"/>
 					
 				</p>
 				<p>
@@ -91,28 +91,30 @@
 		},
 		methods:{
 			filesChange(fieldName, fileList) {
-
+				console.log('got here')
 				if (!fileList.length) return;
 
 				// append the files to FormData
 				Array.from(Array(fileList.length).keys())
 				  .map(x => {
+				  		let name=fileList[x].name
 				  		let d = {
 				  			title:'',
 				  			description:'',
 				  			what:[],
 				  			where:'',
-				  			when:[],
-				  			who:'',
+				  			when:'',
+				  			who:[],
 							drive:''
 				  		}
 				  		if(this.uploads[x]) d = this.uploads[x].data 
-					  	this.uploads.push({ 
+					  	this.uploads[x]={ 
 					  		file:fileList[x],
-					  		name:fileList[x].name,
+					  		name:name,
 					  		data: d,
-					  		errors:{}
-					  	})
+					  		errors:[],
+					  		index:x
+					  	}
 				  });
 				  this.state='more'
 			},
@@ -128,10 +130,11 @@
 						.catch(err => this.uploads[u].errors = err.response.data)
 				}
 			},
-			initPlace(event){
+			initPlace(event,name){
 				console.log(event)
 				let placebox=new google.maps.places.Autocomplete(event.target)
-				console.log(placebox)
+				placebox.addListener('place_changed',this.uploads[name].data.where = placebox.getPlace().address_components[0].long_name)
+				
 			}
 
 		},
@@ -161,6 +164,12 @@ h3{
 }
 form{
 	display:block
+
+	input{
+		&[placeholder]{
+			color:#C7C7CD !important;
+		}
+	}
 }
 .dropbox {
 	outline-offset: -10px;

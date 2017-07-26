@@ -65,6 +65,10 @@ export default {
 		input{
 				border:none;
 				display:inline-block;
+
+				&[placeholder]{
+					color:#C7C7CD;
+				}
 			}
 	}
 </style>
