@@ -33,7 +33,7 @@
 				</p>
 				<p>
 					<display-error :error="upload.errors['what']"></display-error>
-					<input type="text" name="what" id="what" class="form-control" placeholder="#What" v-model="upload.data.what"/>
+					<tag-input placeholder="#What" :tags="upload.data.what"></tag-input>
 					
 				</p>
 				<p>
@@ -101,7 +101,7 @@
 				  		let d = {
 				  			title:'',
 				  			description:'',
-				  			what:'',
+				  			what:[],
 				  			where:'',
 				  			when:'',
 				  			who:'',

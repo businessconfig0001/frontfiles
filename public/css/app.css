@@ -9305,42 +9305,78 @@ img {
   background-size: contain;
 }
 
-.profile-details-container {
+.profile-container {
   color: #0000ff;
   margin-bottom: 40px;
+  border-top: 1rem solid #0000ff;
+  padding: 5rem;
 }
 
-.profile-details-container .title {
+.profile-container .profile-picture img {
+  display: block;
+  border-radius: 50%;
+  width: 100%;
+}
+
+.profile-container .profile-content {
+  margin-top: 5rem;
+}
+
+.profile-container .profile-content .row + .row {
+  margin-top: 2rem;
+}
+
+.profile-container .profile-content .title {
+  font-size: 2.5rem;
   font-weight: 700;
   color: #0000ff;
-  border-bottom: 1px solid #0000ff;
   padding-bottom: 5px;
   margin-bottom: 5px;
 }
 
-.profile-details-container .location {
+.profile-container .profile-content .box {
+  border-top: 1px solid #0000ff;
+  padding-top: 1rem;
+}
+
+.profile-container .profile-content .box-offset {
+  margin-top: 3.2rem;
+}
+
+.profile-container .profile-content .box-offset-small {
+  margin-top: 1.7rem;
+}
+
+.profile-container .profile-content .subtitle {
+  font-size: 1.2em;
+}
+
+.profile-container .profile-content .location {
   font-size: 1.2em;
   margin-bottom: 60px;
 }
 
-.profile-details-container .source {
+.profile-container .profile-content .source {
   font-size: 1em;
   padding-bottom: 5px;
   margin-bottom: 5px;
-  border-bottom: 1px solid #0000ff;
+  text-transform: uppercase;
 }
 
-.profile-details-container .source a {
+.profile-container .profile-content .source a {
+  font-weight: 600;
   color: #0000ff;
   text-decoration: none;
 }
 
-.profile-details-container .tags li {
+.profile-container .profile-content .tags li {
   display: inline-block;
 }
 
-.profile-details-container .tags li a {
+.profile-container .profile-content .tags li a {
+  font-weight: 600;
   padding: 3px 5px;
+  text-transform: uppercase;
 }
 
 .page-payment-info {
