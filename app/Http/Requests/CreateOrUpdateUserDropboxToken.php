@@ -3,7 +3,6 @@
 namespace FrontFiles\Http\Requests;
 
 use FrontFiles\User;
-use Kunnu\Dropbox\{ Dropbox, DropboxApp};
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateOrUpdateUserDropboxToken extends FormRequest
@@ -42,16 +41,11 @@ class CreateOrUpdateUserDropboxToken extends FormRequest
      * Updates the user.
      *
      * @param User $user
+     * @param $authHelper
      * @return mixed
      */
-    public function persist(User $user)
+    public function persist(User $user, $authHelper)
     {
-        //Configure Dropbox Application
-        $appInfo = new DropboxApp(env('DROPBOX_KEY'), env('DROPBOX_SECRET'));
-
-        //DropboxAuthHelper
-        $authHelper = (new Dropbox($appInfo))->getAuthHelper();
-
         //Fetch the AccessToken
         $accessToken = $authHelper->getAccessToken(
             request('code'),
@@ -59,7 +53,7 @@ class CreateOrUpdateUserDropboxToken extends FormRequest
             route('profile.dropbox.auth')
         );
 
-        $user->update(['dropbox_token' => $accessToken]);
+        $user->update(['dropbox_token' => $accessToken->getToken()]);
 
         if(request()->expectsJson())
             return response(['status' => 'Dropbox successfully configured!'], 200);

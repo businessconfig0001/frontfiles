@@ -3,13 +3,33 @@
 namespace FrontFiles\Http\Controllers\Profile;
 
 use FrontFiles\User;
-use Kunnu\Dropbox\{ Dropbox, DropboxApp};
+use Kunnu\Dropbox\{ Dropbox, DropboxApp };
 use FrontFiles\Http\Controllers\Controller;
 use FrontFiles\Http\Requests\UpdateProfileRequest;
 use FrontFiles\Http\Requests\CreateOrUpdateUserDropboxToken;
 
 class ProfileController extends Controller
 {
+    protected $app;
+    protected $dropbox;
+    protected $authHelper;
+    protected $authUrl;
+
+    /**
+     * ProfileController constructor.
+     */
+    public function __construct()
+    {
+        //Configure Dropbox Application
+        $this->app = new DropboxApp(env('DROPBOX_KEY'), env('DROPBOX_SECRET'));
+        //Configure Dropbox service
+        $this->dropbox = new Dropbox($this->app);
+        //DropboxAuthHelper
+        $this->authHelper = $this->dropbox->getAuthHelper();
+        //Auth URL + callback URL
+        $this->authUrl = $this->authHelper->getAuthUrl(route('profile.dropbox.auth'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,19 +41,7 @@ class ProfileController extends Controller
 
         $this->authorize('view', $user);
 
-        $authUrl = '';
-
-        if(!$user->dropbox_token)
-        {
-            //Configure Dropbox Application
-            $appInfo = new DropboxApp(env('DROPBOX_KEY'), env('DROPBOX_SECRET'));
-
-            //DropboxAuthHelper
-            $authHelper = (new Dropbox($appInfo))->getAuthHelper();
-
-            //Auth URL + callback URL
-            $authUrl = $authHelper->getAuthUrl(route('profile.dropbox.auth'));
-        }
+        $authUrl = $this->authUrl;
 
         if(request()->expectsJson())
             return response()->json(['data' => $user, 'authUrl' => $authUrl], 200);
@@ -109,7 +117,6 @@ class ProfileController extends Controller
         return redirect()->route('home');
     }
 
-
     /**
      * Saves the user dropbox token and redirects to his profile.
      *
@@ -118,11 +125,10 @@ class ProfileController extends Controller
      */
     public function dropboxAuth(CreateOrUpdateUserDropboxToken $form)
     {
-        dd('test');
         $user = User::find(auth()->user()->id);
 
         $this->authorize('update', $user);
 
-        return $form->persist($user);
+        return $form->persist($user, $this->authHelper);
     }
 }
