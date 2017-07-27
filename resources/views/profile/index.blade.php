@@ -18,7 +18,7 @@
                         <p>Dropbox configured!</p>
                     @else
                         <p>Dropbox not configured!</p>
-                        <a href="#" class="btn btn-primary">Connect to your Dropbox</a>
+                        <a href="{{ $authUrl }}" class="btn btn-primary">Connect to your Dropbox</a>
                     @endif
                 </li>
             </ul>

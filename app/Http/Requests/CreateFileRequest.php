@@ -47,18 +47,18 @@ class CreateFileRequest extends FormRequest
         if(!request()->hasFile('file'))
         {
             if(request()->wantsJson())
-                return response()->json(array('error' => 'File is not available'), 422);
+                return response()->json(['error' => 'File is not available'], 422);
 
-            return redirect(route('files.upload'))->with(array('error'=>'File is not available'));
+            return redirect(route('files.upload'))->with(['error'=>'File is not available']);
         }
 
         //Exit early if the file isn't valid
         if(!request()->file('file')->isValid())
         {
             if(request()->wantsJson())
-                return response()->json(array('error' => 'File is not valid'), 422);
+                return response()->json(['error' => 'File is not valid'], 422);
 
-            return redirect(route('files.upload'))->with(array('error'=>'File is not valid'));
+            return redirect(route('files.upload'))->with(['error'=>'File is not valid']);
         }
 
         $rawFile    = request()->file('file');
@@ -85,8 +85,8 @@ class CreateFileRequest extends FormRequest
         ]);
 
         if(request()->wantsJson())
-            return response()->json(array('status' => 'File uploaded successfully!', 'data' => $file), 201);
+            return response()->json(['status' => 'File uploaded successfully!', 'data' => $file], 201);
 
-        return redirect(route('files.upload'))->with(array('status' => 'File uploaded successfully!'));
+        return redirect(route('files.upload'))->with(['status' => 'File uploaded successfully!']);
     }
 }
