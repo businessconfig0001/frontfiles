@@ -119,11 +119,8 @@
 				  this.state='more'
 			},
 			upload(){
-				console.log('uploading ' + this.uploads.length + ' files')
-				console.log(this.uploads)
-				for (let u in this.uploads){
+				for (let u in this.uploads,(e) => console.log(e.progress)){
 					 upload(this.uploads[u]).then(res => {
-					 	console.log('success')
 					 	this.uploads = this.uploads.filter(x => (x.name !== u.name) && (x.file !== u.file))
 					 	this.files.push(res.data)
 					 })
