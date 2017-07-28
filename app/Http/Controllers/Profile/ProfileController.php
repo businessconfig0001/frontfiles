@@ -91,7 +91,9 @@ class ProfileController extends Controller
         if(request()->expectsJson())
             return response(['status' => 'Profile successfully deleted!'], 204);
 
-        return redirect()->route('home');
+        return redirect()
+            ->route('home')
+            ->with('message', 'Account deleted!');
     }
 
     /**
@@ -127,6 +129,8 @@ class ProfileController extends Controller
 
         $user->update(['dropbox_token' => $dropboxUser->token]);
 
-        return redirect(route('profile'));
+        return redirect()
+            ->route('profile')
+            ->with('message', 'Dropbox successfully connected!');
     }
 }
