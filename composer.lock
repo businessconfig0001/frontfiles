@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "87ccd43b01b37eea414530bc60e2fc6a",
+    "content-hash": "ba28b8d06d89d8c9b8fb149eaddd2d1e",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -489,51 +489,6 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
-        },
-        {
-            "name": "kunalvarma05/dropbox-php-sdk",
-            "version": "v0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kunalvarma05/dropbox-php-sdk.git",
-                "reference": "c818f7612ec057758f4f7f2e64ee5390e21b300e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kunalvarma05/dropbox-php-sdk/zipball/c818f7612ec057758f4f7f2e64ee5390e21b300e",
-                "reference": "c818f7612ec057758f4f7f2e64ee5390e21b300e",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "~6.0",
-                "tightenco/collect": "^5.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Kunnu\\Dropbox\\": "src/Dropbox"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kunal Varma",
-                    "email": "kunalvarma05@gmail.com"
-                }
-            ],
-            "description": "Dropbox PHP API V2 SDK (Unofficial)",
-            "keywords": [
-                "api",
-                "client",
-                "dropbox",
-                "php",
-                "sdk",
-                "unofficial"
-            ],
-            "time": "2017-03-09T19:04:37+00:00"
         },
         {
             "name": "laravel/framework",

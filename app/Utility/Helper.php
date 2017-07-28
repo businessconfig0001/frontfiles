@@ -17,7 +17,7 @@ class Helper
         $max = strlen($chars) - 1;
 
         for($i = 0; $i < $length; $i++)
-            $output .= $chars[mt_rand(0, $max)];
+            $output .= $chars[random_int(0, $max)];
 
         return $output;
     }

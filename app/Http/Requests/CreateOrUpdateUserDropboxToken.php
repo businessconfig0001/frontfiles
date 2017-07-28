@@ -47,13 +47,13 @@ class CreateOrUpdateUserDropboxToken extends FormRequest
     public function persist(User $user, $authHelper)
     {
         //Fetch the AccessToken
-        $accessToken = $authHelper->getAccessToken(
-            request('code'),
-            request('state'),
-            route('profile.dropbox.auth')
-        );
+        //$accessToken = $authHelper->getAccessToken(
+        //    request('code'),
+        //    request('state'),
+        //    route('profile.dropbox.auth')
+        //);
 
-        $user->update(['dropbox_token' => $accessToken->getToken()]);
+        //$user->update(['dropbox_token' => $accessToken->getToken()]);
 
         if(request()->expectsJson())
             return response(['status' => 'Dropbox successfully configured!'], 200);

@@ -17,8 +17,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'email', 'password',
-        'avatar', 'dropbox_token',
+        'name', 'slug', 'email',
+        'dropbox_token', 'password',
     ];
 
     /**
