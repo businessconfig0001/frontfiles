@@ -5,6 +5,12 @@
 			<input type="file" multiple name="file" :disabled="state ==='saving'" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*,video/*,audio/*,application/pdf" class="input-file">
 			<p v-if="state === 'saving'">
 			  	Uploading {{ fileCount }} files...
+			  	<ul>
+			  		<li v-for="p in progressBar">
+			  			<span>{{p.name}}</span>
+			  			<progress value="p.loaded" max="p.total"></progress>
+			  		</li>
+			  	</ul>
 			</p>
 			<p v-else-if="state === 'more'">
 			  	Add more files or <a @click.prevent="upload">save them</a>
@@ -14,49 +20,12 @@
 			</p>
 		</div>
 
+
 		<div class="col-xs-12 col-sm-3 form" v-show="uploads.length">
 			<div v-for="upload in uploads" class="form-group">
-				<h3>File: <span>{{upload.name}}</span></h3>
-				<div v-show="upload.errors">
-					<ul>
-						<li v-for="error in errors">{{error}}</li>
-					</ul>
-				</div>
-				<p>
-					<display-error :error="upload.errors['title']"></display-error>
-					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
-				</p>
-				<p>
-					<display-error :error="upload.errors['description']"></display-error>
-					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="upload.data.description"></textarea>
-					
-				</p>
-				<p>
-					<display-error :error="upload.errors['what']"></display-error>
-					<tag-input placeholder="#What" :tags="upload.data.what"></tag-input>
-					
-				</p>
-				<p>
-					<display-error :error="upload.errors['who']"></display-error>
-					<tag-input placeholder="#Who" :tags="upload.data.who"></tag-input>			
-				</p>
-				<p>
-					<display-error :error="upload.errors['where']"></display-error>
-					<input type="" ref="where" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where" @focus="initPlace(upload.index)"/>
-					
-				</p>
-				<p>
-					<display-error :error="upload.errors['when']"></display-error>
-					<input type="text" name="when" id="when" class="form-control" placeholder="#When" onfocus="(this.type='date')" v-model="upload.data.when"/>
-				</p>
-				<p>
-					<display-error :error="upload.errors['drive']"></display-error>
-					<input type="radio" name="drive" value="azure" class="form-control" v-model="upload.data.drive" checked> Azure<br>
-					<input type="radio" name="drive" value="google" class="form-control" v-model="upload.data.drive"> Google Drive<br>
-					<input type="radio" name="drive" value="dropbox" class="form-control" v-model="upload.data.drive"> Dropbox
-				</p>
+				<upload-form :upload="upload"></upload-form>
 			</div>
-			<a class="submit btn btn-primary" @click.prevent="upload">Save</a>
+			<a class="submit btn btn-primary" @click.prevent="uploadFile">Save</a>
 		</div>
 		
 	</form>
@@ -69,16 +38,17 @@
 
 <script>
 	import { upload } from './../services/uploadService'
-	import  displayError from './display-error'
+	import uploadForm from './upload-form'
 	export default {
 		name:'drag-n-drop',
 		components:{
-			displayError
+			uploadForm
 		},
 		data(){
 			return {
 				state:'',
 				uploads:[],
+				progressBar:[]
 			}
 		},
 		props:{
@@ -110,6 +80,7 @@
 				  		if(this.uploads[x]) d = this.uploads[x].data 
 					  	this.uploads[x]={ 
 					  		file:fileList[x],
+					  		size:fileList[x].size,
 					  		name:name,
 					  		data: d,
 					  		errors:[],
@@ -118,33 +89,34 @@
 				  });
 				  this.state='more'
 			},
-			upload(){
-				for (let u in this.uploads,(e) => console.log(e.progress)){
-					 upload(this.uploads[u]).then(res => {
-					 	this.uploads = this.uploads.filter(x => (x.name !== u.name) && (x.file !== u.file))
-					 	this.files.push(res.data)
-					 })
-						.catch(err => this.uploads[u].errors = err.response.data)
+			uploadFile(){
+				for (let u in this.uploads){
+
+					this.progressBar.push({
+						name:u.name,
+						loaded:0,
+						total:u.size
+					})
+					setTimeout(()=>{this.execUpload(u)},10000)
+						
 				}
 			},
-			initPlace(event,name){
-				console.log(event)
-				let placebox=new google.maps.places.Autocomplete(event.target)
-				placebox.addListener('place_changed',this.uploads[name].data.where = placebox.getPlace().address_components[0].long_name)
-				
+			execUpload(u){
+				console.log('executing')
+				upload(this.uploads[u],(e) => this.progressBar[u.index].loaded=e.loaded).then(res => {
+							this.uploads = this.uploads.filter(x => (x.name !== u.name) && (x.file !== u.file))
+							this.progressBar.splice(u.index,1)
+							this.files.push(res.data)
+						})
+						.catch(err => this.uploads[u].errors = err.response.data)
+				},
+			watch:{
+				progressBar(){
+					if(this.progressBar.length)this.state='saving'
+					else this.state=''
+				}
 			}
 
-		},
-		watch:{
-			uploads(){
-				/*
-				let u=this.uploads
-				for(let i= 0 ; i < u.length ; i++){
-					let placebox=new google.maps.places.Autocomplete(this.$refs.where[i])
-					placebox.addListener('place_changed',console.log)
-				}
-				*/
-			}
 		}
 	}
 </script>

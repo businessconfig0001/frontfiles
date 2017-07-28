@@ -3,7 +3,7 @@ function upload(data,progress){
 	console.log(data)
 	//add data
 	let form = formDataFactory(data.data)
-
+	console.log(form)
 	//add img
 	form.append('file',data.file,data.name)
 
@@ -13,7 +13,10 @@ function upload(data,progress){
 			onUploadProgress:progress
 		})
 		.then(resolve)
-		.catch(reject)
+		.catch(err=>{
+			console.error(err)
+			reject(err)
+		})
 	)
 }
 
