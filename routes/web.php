@@ -46,8 +46,10 @@ Route::group([
     'middleware' => 'auth',
     'prefix' => 'profile',
 ], function () {
-    Route::get('/', 'ProfileController@show')->name('profile');
-    Route::get('/edit', 'ProfileController@edit')->name('profile.edit');
+    Route::get('/', 'ProfileController@index')->name('profile');
+    Route::get('/dropbox', 'ProfileController@dropbox')->name('profile.dropbox');
+    Route::get('/dropbox/callback', 'ProfileController@dropboxCallback')->name('profile.dropbox.callback');
+    Route::get('/{slug}', 'ProfileController@show')->name('profile.show');
     Route::patch('/', 'ProfileController@update')->name('profile.update');
     Route::delete('/', 'ProfileController@destroy')->name('profile.delete');
 });

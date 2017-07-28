@@ -1,39 +1,73 @@
-.profile-details-container {
+  .profile-container {
     color:$blue;
     margin-bottom:40px;
+    border-top:1rem solid $blue;
+    padding:5rem;
 
-
-    .title {
-        font-weight:700;
-        color:$blue;
-        border-bottom:1px solid $blue;
-        padding-bottom:5px;
-        margin-bottom:5px;
+    .profile-picture {
+            img {
+                display:block;
+                border-radius:50%;
+                width:100%;
+            }
     }
 
-    .location {
-        font-size:1.2em;
-        margin-bottom:60px;
-    }
+    .profile-content{
+        margin-top:5rem;
 
-    .source {
-        font-size:1em;
-        padding-bottom:5px;
-        margin-bottom:5px;
-        border-bottom:1px solid $blue;
-
-        a{
-            color:$blue;
-            text-decoration:none;
+        .row + .row{
+            margin-top:2rem;
         }
-    }
+        
+        .title {
+            font-size:2.5rem;
+            font-weight:700;
+            color:$blue;
+            padding-bottom:5px;
+            margin-bottom:5px;
+        }
+        .box{
+            border-top:1px solid $blue;
+            padding-top:1rem;
+        }
+        .box-offset{
+            margin-top:3.2rem;
+        }
+        .box-offset-small{
+            margin-top:1.7rem;
+        }
+        .subtitle{
+            font-size:1.2em;
+        }
 
-    .tags {
-        li {
-            display:inline-block;
-            a {
-                padding:3px 5px;
+        .location {
+            font-size:1.2em;
+            margin-bottom:60px;
+        }
+
+        .source {
+            font-size:1em;
+            padding-bottom:5px;
+            margin-bottom:5px;
+            text-transform:uppercase;
+
+            a{
+                font-weight:600;
+                color:$blue;
+                text-decoration:none;
             }
         }
+
+        .tags {
+            li {
+                display:inline-block;
+                a {
+                    font-weight:600;
+                    padding:3px 5px;
+                    text-transform:uppercase;
+                }
+            }
     }
+    }
+   
 }

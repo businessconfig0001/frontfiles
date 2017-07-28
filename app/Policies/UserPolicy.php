@@ -52,4 +52,15 @@ class UserPolicy
     {
         return auth()->user()->id === $user->id;
     }
+
+    /**
+     * Determine whether the user can connect via oauth.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function oauth(User $user)
+    {
+        return auth()->user()->id === $user->id;
+    }
 }

@@ -1,0 +1,42 @@
+.profile {
+	padding:2rem;
+
+	.title{
+		color: blue;
+		font-weight: bolder;
+	}
+
+	.info{
+
+	}
+
+	.storage{
+		ul{
+			display: flex;
+		}
+		.box{
+
+			display:inline-block;
+			width: 30%;
+			background-color:#eee;
+			border:1px dashed blue;
+			padding:1rem;
+			margin:1rem;
+			border-radius:10px;
+			text-align:center;
+
+			.logo{
+				width:40%;
+			}
+
+			.title{
+				font-size:1.6rem;
+				padding-top:1rem;
+			}
+			p{
+				padding:1rem;
+			}
+		}
+	}
+	
+}
