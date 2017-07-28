@@ -17,11 +17,16 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
 
             $table->string('name');
-            $table->string('slug')->unique();
             $table->string('email')->unique();
             $table->string('password');
 
-            $table->string('dropbox_token', 64)->nullable();
+            $table->string('google_clientId')->nullable();
+            $table->string('google_clientSecret')->nullable();
+            $table->string('google_refreshToken')->nullable();
+            $table->string('google_folderId')->nullable();
+
+            $table->string('dropbox_token')->nullable();
+            $table->string('dropbox_app_name')->nullable();
 
             $table->unsignedBigInteger('allowed_space')->default(10737418240);
 

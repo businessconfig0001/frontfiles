@@ -2,8 +2,7 @@
 
 namespace FrontFiles\Http\Controllers\Files;
 
-use FrontFiles\{File, User };
-use Laravel\Socialite\Facades\Socialite;
+use FrontFiles\File;
 use FrontFiles\Http\Controllers\Controller;
 use FrontFiles\Http\Requests\{ CreateFileRequest, UpdateFileRequest };
 
@@ -33,8 +32,6 @@ class FilesController extends Controller
         $files = File::where('user_id', auth()->user()->id)
             ->latest()
             ->get();
-
-        $this->checkIfTokensAreStillValid();
 
         return request()->wantsJson() ? $files : view('files.create', compact('files'));
     }
@@ -109,19 +106,5 @@ class FilesController extends Controller
             return response(['status' => 'File successfully deleted!'], 204);
 
         return back();
-    }
-
-    /**
-     * Verifies if the tokens are still valid.
-     */
-    protected function checkIfTokensAreStillValid()
-    {
-        $user = User::find(auth()->user()->id);
-
-        try{
-            Socialite::driver('dropbox')->userFromToken($user->dropbox_token);
-        } catch(\Exception $e) {
-            $user->update(['dropbox_token' => null]);
-        }
     }
 }

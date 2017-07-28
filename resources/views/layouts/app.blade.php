@@ -50,10 +50,10 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-5">
                                         <ul class="nav navbar-nav navbar-right">
+                                            
 
                                             @if (Auth::guest())
                                                 <li><a href="{{ route('auth.login') }}">Login</a></li>
-                                                <li><a href="{{ route('auth.register') }}">Register</a></li>
                                             @else
                                                 <li><a href="{{ route('files') }}">Files</a></li>
                                                 <li>

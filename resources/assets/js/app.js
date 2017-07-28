@@ -17,7 +17,6 @@ window.Vue = require('vue');
 
 Vue.component('drag-n-drop', require('./components/drag-n-drop.vue'))
 Vue.component('files-display',require('./components/files-display.vue'))
-Vue.component('tag-input',require('./components/tag-input.vue'))
 
 const app = new Vue({
     el: '#app'

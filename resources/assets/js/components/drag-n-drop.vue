@@ -33,7 +33,7 @@
 				</p>
 				<p>
 					<display-error :error="upload.errors['what']"></display-error>
-					<tag-input placeholder="#What" :tags="upload.data.what"></tag-input>
+					<input type="text" name="what" id="what" class="form-control" placeholder="#What" v-model="upload.data.what"/>
 					
 				</p>
 				<p>
@@ -52,6 +52,7 @@
 				<p>
 					<display-error :error="upload.errors['drive']"></display-error>
 					<input type="radio" name="drive" value="azure" class="form-control" v-model="upload.data.drive" checked> Azure<br>
+					<input type="radio" name="drive" value="google" class="form-control" v-model="upload.data.drive"> Google Drive<br>
 					<input type="radio" name="drive" value="dropbox" class="form-control" v-model="upload.data.drive"> Dropbox
 				</p>
 			</div>
@@ -100,7 +101,7 @@
 				  		let d = {
 				  			title:'',
 				  			description:'',
-				  			what:[],
+				  			what:'',
 				  			where:'',
 				  			when:'',
 				  			who:'',

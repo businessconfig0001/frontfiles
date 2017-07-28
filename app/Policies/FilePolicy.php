@@ -29,7 +29,7 @@ class FilePolicy
      */
     public function create(User $user)
     {
-        return $file->user_id === $user->id;
+        //
     }
 
     /**

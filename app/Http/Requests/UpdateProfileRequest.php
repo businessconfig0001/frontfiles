@@ -25,7 +25,12 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'token' => 'nullable|string|max:64',
+            'clientId'       => 'nullable|string|max:175',
+            'clientSecret'   => 'nullable|string|max:175',
+            'refreshToken'   => 'nullable|string|max:175',
+            'folderId'       => 'nullable|string|max:175',
+            'token'          => 'nullable|string|max:175',
+            'app_name'       => 'nullable|string|max:175',
         ];
     }
 
@@ -37,8 +42,19 @@ class UpdateProfileRequest extends FormRequest
      */
     public function persist(User $user)
     {
-        if(request('token'))
-            $user->update(['dropbox_token' => request('token')]);
+        if(request('clientId') && request('clientSecret') && request('refreshToken') && request('folderId'))
+            $user->update([
+                'google_clientId'       => request('clientId'),
+                'google_clientSecret'   => request('clientSecret'),
+                'google_refreshToken'   => request('refreshToken'),
+                'google_folderId'       => request('folderId'),
+            ]);
+
+        if(request('token') && request('app_name'))
+            $user->update([
+                'dropbox_token'         => request('token'),
+                'dropbox_app_name'      => request('app_name'),
+            ]);
 
         if(request()->expectsJson())
             return response(['status' => 'Profile successfully edited!'], 200);

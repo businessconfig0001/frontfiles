@@ -25,9 +25,8 @@ class UsersTableSeeder extends Seeder
         $faker = Faker::create();
 
         foreach($this->user_mails as $email){
-            $name = $faker->name;
             User::create([
-                'name' => $name,
+                'name' => $faker->name,
                 'email' => $email,
                 'password' => 'secret',
                 'allowed_space' => 10737418240,

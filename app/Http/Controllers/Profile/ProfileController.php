@@ -2,43 +2,25 @@
 
 namespace FrontFiles\Http\Controllers\Profile;
 
-use FrontFiles\User;
-use Laravel\Socialite\Facades\Socialite;
 use FrontFiles\Http\Controllers\Controller;
 use FrontFiles\Http\Requests\UpdateProfileRequest;
+use FrontFiles\User;
 
 class ProfileController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show()
     {
         $user = User::find(auth()->user()->id);
 
         $this->authorize('view', $user);
 
         if(request()->expectsJson())
-            return response()->json(['data' => $user], 200);
-
-        return view('profile.index', compact('user'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($slug)
-    {
-        $user = User::where('slug', $slug)->firstOrFail();
-
-        $this->authorize('view', $user);
-
-        if(request()->expectsJson())
-            return response()->json(['data' => $user], 200);
+            return $user;
 
         return view('profile.show', compact('user'));
     }
@@ -50,15 +32,16 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-//        $user = User::find(auth()->user()->id);
-//
-//        $this->authorize('edit', $user);
-//
-//        if(request()->expectsJson())
-//            return response()->json(['data' => $user], 200);
-//
-//        return view('profile.edit', compact('user'));
+        $user = User::find(auth()->user()->id);
+
+        $this->authorize('edit', $user);
+
+        if(request()->expectsJson())
+            return $user;
+
+        return view('profile.edit', compact('user'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -91,46 +74,6 @@ class ProfileController extends Controller
         if(request()->expectsJson())
             return response(['status' => 'Profile successfully deleted!'], 204);
 
-        return redirect()
-            ->route('home')
-            ->with('message', 'Account deleted!');
-    }
-
-    /**
-     * CONNECT USER ACCOUNT TO DROPBOX
-     */
-
-    /**
-     * Redirects the user tho the Dropbox auth page.
-     *
-     * @return mixed
-     */
-    public function dropbox()
-    {
-        $user = User::find(auth()->user()->id);
-
-        $this->authorize('oauth', $user);
-
-        return Socialite::driver('dropbox')->redirect();
-    }
-
-    /**
-     * Saves the user dropbox token and redirects to his profile.
-     *
-     * @return mixed
-     */
-    public function dropboxCallback()
-    {
-        $user = User::find(auth()->user()->id);
-
-        $this->authorize('oauth', $user);
-
-        $dropboxUser = Socialite::driver('dropbox')->user();
-
-        $user->update(['dropbox_token' => $dropboxUser->token]);
-
-        return redirect()
-            ->route('profile')
-            ->with('message', 'Dropbox successfully connected!');
+        return redirect()->route('home');
     }
 }

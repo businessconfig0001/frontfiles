@@ -4,12 +4,10 @@ namespace FrontFiles;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
-use Spatie\Sluggable\{ HasSlug, SlugOptions };
 
 class User extends Authenticatable
 {
     use HasRoles;
-    use HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -17,8 +15,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'email',
-        'dropbox_token', 'password',
+        'name', 'email', 'password', 'avatar',
+        'google_clientId', 'google_clientSecret',
+        'google_refreshToken', 'google_folderId',
+        'dropbox_token', 'dropbox_app_name',
     ];
 
     /**
@@ -43,29 +43,6 @@ class User extends Authenticatable
                 $file->delete();
             });
         });
-    }
-
-    /**
-     * Get the options for generating the slug.
-     *
-     * @return SlugOptions
-     */
-    public function getSlugOptions() : SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug')
-            ->doNotGenerateSlugsOnUpdate();
-    }
-
-    /**
-     * Gets the path for the user's profile.
-     *
-     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
-     */
-    public function path()
-    {
-        return url("/profile/{$this->slug}");
     }
 
     /**
