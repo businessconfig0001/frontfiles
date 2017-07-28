@@ -27,8 +27,9 @@ $factory->define(\Spatie\Permission\Models\Role::class, function () {
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(FrontFiles\User::class, function (Faker\Generator $faker) {
+    $name = $faker->name;
     return [
-        'name' => $faker->name,
+        'name' => $name,
         'email' => $faker->unique()->safeEmail,
         'password' => 'secret',
         'allowed_space' => 10737418240,

@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'dropbox' => [
+        'client_id' => env('DROPBOX_KEY'),
+        'client_secret' => env('DROPBOX_SECRET'),
+        'redirect' => env('DROPBOX_REDIRECT_URI'),
+    ],
+
 ];
