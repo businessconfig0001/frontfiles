@@ -3,9 +3,9 @@
 namespace FrontFiles\Http\Controllers\Profile;
 
 use FrontFiles\User;
+use Laravel\Socialite\Facades\Socialite;
 use FrontFiles\Http\Controllers\Controller;
 use FrontFiles\Http\Requests\UpdateProfileRequest;
-use FrontFiles\Http\Requests\CreateOrUpdateUserDropboxToken;
 
 class ProfileController extends Controller
 {
@@ -20,12 +20,10 @@ class ProfileController extends Controller
 
         $this->authorize('view', $user);
 
-        $authUrl = '';
-
         if(request()->expectsJson())
-            return response()->json(['data' => $user, 'authUrl' => $authUrl], 200);
+            return response()->json(['data' => $user], 200);
 
-        return view('profile.index', compact('user', 'authUrl'));
+        return view('profile.index', compact('user'));
     }
 
     /**
@@ -97,17 +95,38 @@ class ProfileController extends Controller
     }
 
     /**
-     * Saves the user dropbox token and redirects to his profile.
+     * CONNECT USER ACCOUNT TO DROPBOX
+     */
+
+    /**
+     * Redirects the user tho the Dropbox auth page.
      *
-     * @param CreateOrUpdateUserDropboxToken $form
      * @return mixed
      */
-    public function dropboxAuth(CreateOrUpdateUserDropboxToken $form)
+    public function dropbox()
     {
         $user = User::find(auth()->user()->id);
 
-        $this->authorize('update', $user);
+        $this->authorize('oauth', $user);
 
-        return $form->persist($user);
+        return Socialite::driver('dropbox')->redirect();
+    }
+
+    /**
+     * Saves the user dropbox token and redirects to his profile.
+     *
+     * @return mixed
+     */
+    public function dropboxCallback()
+    {
+        $user = User::find(auth()->user()->id);
+
+        $this->authorize('oauth', $user);
+
+        $dropboxUser = Socialite::driver('dropbox')->user();
+
+        $user->update(['dropbox_token' => $dropboxUser->token]);
+
+        return redirect(route('profile'));
     }
 }
