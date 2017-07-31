@@ -3,13 +3,9 @@
 	<form enctype="multipart/form-data" novalidate class="clearfix">
 		<div class="col-sm-7 col-xs-12 bg-blue text-center dropbox">
 			<input type="file" multiple name="file" :disabled="state ==='saving'" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*,video/*,audio/*,application/pdf" class="input-file">
-			<p v-if="state === 'saving'">
+			<p v-if="state === 'saving'" class="progress">
 			  	Uploading {{ fileCount }} files...
-			  	<ul>
-			  		<li v-for="p in progressBar">
-			  			<span>{{p.name}}</span>
-			  			<progress value="p.loaded" max="p.total"></progress>
-			  		</li>
+			  	<progress :value="progressBar.loaded" :max="progressBar.total"></progress>
 			  	</ul>
 			</p>
 			<p v-else-if="state === 'more'">
@@ -48,7 +44,7 @@
 			return {
 				state:'',
 				uploads:[],
-				progressBar:[]
+				progressBar:{}
 			}
 		},
 		props:{
@@ -84,37 +80,30 @@
 					  		name:name,
 					  		data: d,
 					  		errors:[],
-					  		index:x
+					  		index:x,
+					  		previous:0
 					  	}
 				  });
 				  this.state='more'
 			},
 			uploadFile(){
+				this.state='saving'
+				let total=this.uploads.reduce((total,x) => total += x.size,0)
+				this.progressBar={
+					loaded:0,
+					total:total
+				}
+				let promises=[]
 				for (let u in this.uploads){
-
-					this.progressBar.push({
-						name:u.name,
-						loaded:0,
-						total:u.size
-					})
-					setTimeout(()=>{this.execUpload(u)},10000)
+					promises.push(upload(this.uploads[u],(e) => {
+						this.progressBar.loaded +=e.loaded - this.uploads[u].previous
+						this.uploads[u].previous=e.loaded
 						
+					}))
 				}
-			},
-			execUpload(u){
-				console.log('executing')
-				upload(this.uploads[u],(e) => this.progressBar[u.index].loaded=e.loaded).then(res => {
-							this.uploads = this.uploads.filter(x => (x.name !== u.name) && (x.file !== u.file))
-							this.progressBar.splice(u.index,1)
-							this.files.push(res.data)
-						})
-						.catch(err => this.uploads[u].errors = err.response.data)
-				},
-			watch:{
-				progressBar(){
-					if(this.progressBar.length)this.state='saving'
-					else this.state=''
-				}
+				Promise.all(promises)
+					.then(location.reload())
+					.catch(console.error)
 			}
 
 		}
@@ -151,6 +140,14 @@ form{
 	justify-content:center;
 	&:hover {
 		background: lightblue; /* when mouse over to the drop zone, change color */
+	}
+
+	.progress{
+		width:60%;
+
+		progress:{
+			width:100%;
+		}
 	}
 
 	.input-file {
