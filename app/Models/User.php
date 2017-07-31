@@ -73,7 +73,7 @@ class User extends Authenticatable
      *
      * @return int
      */
-    public function amountOfSpaceLeft()
+    public function amountOfSpaceLeft(): int
     {
         return (int)($this->allowed_space - $this->files->sum('size'));
     }
@@ -93,7 +93,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function files()
+    public function files(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(File::class, 'user_id');
     }

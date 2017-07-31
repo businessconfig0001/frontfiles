@@ -27,10 +27,8 @@ class FilesTableSeeder extends Seeder
                 'url' => $faker->url,
                 'title' => $faker->sentence,
                 'description' => $faker->paragraph,
-                'what' => $faker->sentence,
                 'where' => $x > 5 ? $faker->city : 'Lisbon',
                 'when' => $faker->dateTimeThisMonth,
-                'who' => $faker->name
             ]);
         */
     }
