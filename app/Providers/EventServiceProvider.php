@@ -13,11 +13,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        /*
-        'FrontFiles\Events\Event' => [
-            'FrontFiles\Listeners\EventListener',
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            'SocialiteProviders\Dropbox\DropboxExtendSocialite@handle',
         ],
-        */
     ];
 
     /**
