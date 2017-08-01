@@ -23,6 +23,19 @@ class TagWho extends Model
     ];
 
     /**
+     * Global query scopes for the File model.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        //Automatically deletes the relation between the tag and the files
+        static::deleting(function($tagWho){
+            $tagWho->files()->detach();
+        });
+    }
+
+    /**
      * Files that this tag is associated to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

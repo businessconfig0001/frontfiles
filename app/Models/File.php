@@ -28,8 +28,9 @@ class File extends Model
     {
         parent::boot();
 
-        //Automatically deletes from the storage the associated file
+        //Automatically deletes from the storage the associated file and the tags relation.
         static::deleting(function($file){
+
             switch($file->drive){
                 case 'dropbox':
                     $client = new \Spatie\Dropbox\Client($file->owner->dropbox_token);
@@ -51,6 +52,9 @@ class File extends Model
                         Storage::delete($container . '/' . $file->name);
                     break;
             }
+
+            $file->tagsWhat()->detach();
+            $file->tagsWho()->detach();
         });
     }
 
@@ -167,9 +171,19 @@ class File extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function tagsWho(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'file_tag', 'file_id', 'tag_id');
+        return $this->belongsToMany(TagWho::class, 'file_tagwhat', 'file_id', 'tagwhat_id');
+    }
+
+    /**
+     * Tags associated to this file.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tagsWhat(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(TagWhat::class, 'file_tagwho', 'file_id', 'tagwho_id');
     }
 
     /**

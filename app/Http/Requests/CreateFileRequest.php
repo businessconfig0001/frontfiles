@@ -84,6 +84,9 @@ class CreateFileRequest extends FormRequest
             'why'           => request('why'),
         ]);
 
+        $file->tagsWhat()->attach(request('what'));
+        $file->tagsWho()->attach(request('who'));
+
         if(request()->wantsJson())
             return response()->json(['status' => 'File uploaded successfully!', 'data' => $file], 201);
 
