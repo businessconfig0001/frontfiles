@@ -16,15 +16,18 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table){
             $table->bigIncrements('id');
 
-            $table->string('name');
-            $table->string('slug')->unique();
             $table->string('email')->unique();
-            $table->string('password');
-
-            $table->string('dropbox_token', 64)->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('slug')->unique();
+            $table->string('avatar');
+            $table->text('bio');
+            $table->string('location');
 
             $table->unsignedBigInteger('allowed_space')->default(10737418240);
+            $table->string('dropbox_token', 64)->nullable();
 
+            $table->string('password');
             $table->string('confirmation_code')->nullable();
             $table->boolean('confirmed')->default(false);
 

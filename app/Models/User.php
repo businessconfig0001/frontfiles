@@ -17,8 +17,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'email',
+        'email', 'first_name', 'last_name',
+        'slug', 'avatar', 'bio', 'location',
         'dropbox_token', 'password',
+        'confirmation_code', 'confirmed'
     ];
 
     /**
@@ -53,7 +55,7 @@ class User extends Authenticatable
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('name')
+            ->generateSlugsFrom(['first_name', 'last_name'])
             ->saveSlugsTo('slug')
             ->doNotGenerateSlugsOnUpdate();
     }
