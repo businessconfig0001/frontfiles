@@ -15,7 +15,9 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->bigIncrements('id');
+
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->char('short_id', 8)->unique();
             $table->string('drive', 8)->comment('azure | dropbox');
@@ -32,13 +34,6 @@ class CreateFilesTable extends Migration
             $table->date('when');
 
             $table->timestamps();
-        });
-
-        Schema::table('files', function (Blueprint $table) {
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
         });
     }
 

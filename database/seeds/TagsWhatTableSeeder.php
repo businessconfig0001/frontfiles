@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use FrontFiles\Tag;
+use FrontFiles\TagWhat;
 
-class TagsTableSeeder extends Seeder
+class TagsWhatTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class TagsTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach(range(1, 30) as $index)
-            Tag::create(['name' => $faker->word]);
+        foreach(range(1, 15) as $index)
+            TagWhat::create(['name' => $faker->word]);
     }
 }

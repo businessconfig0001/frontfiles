@@ -12,6 +12,10 @@ class DatabaseSeeder extends Seeder
         'roles'         => RolesTableSeeder::class,
         'users'         => UsersTableSeeder::class,
         'files'         => FilesTableSeeder::class,
+        'tagsWhat'      => TagsWhatTableSeeder::class,
+        'tagsWho'       => TagsWhoTableSeeder::class,
+        'file_tagWhat'  => FileTagWhatTableSeeder::class,
+        'file_tagWho'   => FileTagWhoTableSeeder::class,
     ];
 
     /**

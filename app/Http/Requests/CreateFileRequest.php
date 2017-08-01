@@ -28,10 +28,10 @@ class CreateFileRequest extends FormRequest
             'file'          => 'required|file|allowed_file|has_enough_space',
             'title'         => 'required|string|max:175',
             'description'   => 'required|string',
-            'what'          => 'required|string|max:175',
             'where'         => 'required|string|max:175',
             'when'          => 'required|date',
-            'who'           => 'required|string|max:175',
+            'what.*'        => 'required|string|max:50|unique:tagsWhat',
+            'who.*'         => 'required|string|max:50|unique:tagsWho',
             'drive'         => 'required|in:azure,dropbox',
         ];
     }

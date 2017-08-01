@@ -4,8 +4,15 @@ namespace FrontFiles;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class TagWho extends Model
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'tagswho';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,8 +27,8 @@ class Tag extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function associatedTo(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function files(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(File::class, 'file_tag', 'tag_id', 'file_id');
+        return $this->belongsToMany(File::class, 'file_tagwho', 'tagWho_id', 'file_id');
     }
 }
