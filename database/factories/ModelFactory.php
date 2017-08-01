@@ -57,9 +57,8 @@ $factory->define(FrontFiles\File::class, function (Faker\Generator $faker) {
         'url' => $faker->url,
         'title' => $faker->sentence,
         'description' => $faker->paragraph,
-        'what' => $faker->sentence,
         'where' => 'Lisbon, Portugal',
         'when' => $faker->dateTimeThisMonth,
-        'who' => $faker->name
+        'why' => $faker->paragraph,
     ];
 });

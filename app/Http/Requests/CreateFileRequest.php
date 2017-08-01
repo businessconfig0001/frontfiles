@@ -32,6 +32,7 @@ class CreateFileRequest extends FormRequest
             'when'          => 'required|date',
             'what.*'        => 'required|string|max:50|unique:tagsWhat',
             'who.*'         => 'required|string|max:50|unique:tagsWho',
+            'why'           => 'nullable|string|max:160',
             'drive'         => 'required|in:azure,dropbox',
         ];
     }
@@ -78,10 +79,9 @@ class CreateFileRequest extends FormRequest
             'url'           => File::storeAndReturnUrl($name),
             'title'         => request('title'),
             'description'   => request('description'),
-            'what'          => request('what'),
             'where'         => request('where'),
-            'who'           => request('who'),
             'when'          => request('when'),
+            'why'           => request('why'),
         ]);
 
         if(request()->wantsJson())
