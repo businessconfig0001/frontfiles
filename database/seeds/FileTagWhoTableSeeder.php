@@ -13,7 +13,6 @@ class FileTagWhoTableSeeder extends Seeder
      */
     public function run()
     {
-        /*
         $faker = Faker::create();
 
         $fileIds = File::pluck('id')->all();
@@ -21,9 +20,8 @@ class FileTagWhoTableSeeder extends Seeder
 
         foreach(range(1, 30) as $index)
             DB::table('file_tagWho')->insert([
-                'lesson_id' => $faker->randomElement($lessonIds),
-                'tagWho_id' => $faker->randomElement($tagIds)
-            ])
-        */
+                'file_id' => $faker->randomElement($fileIds),
+                'tagWho_id' => $faker->unique()->randomElement($tagIds)
+            ]);
     }
 }

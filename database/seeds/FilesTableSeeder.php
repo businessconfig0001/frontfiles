@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use FrontFiles\File;
+use FrontFiles\{ User, File };
 
 class FilesTableSeeder extends Seeder
 {
@@ -13,23 +13,31 @@ class FilesTableSeeder extends Seeder
      */
     public function run()
     {
-        /*
         $faker = Faker::create();
 
-        foreach (range(1,30) as $x)
+        $userIds = User::pluck('id')->all();
+
+        foreach (range(1,100) as $x){
+            $short_id = File::generateUniqueShortID(8);
+            $extension = 'mp4';
+            $name = $short_id . '.' . $extension;
+
             File::create([
-                'user_id' => $faker->numberBetween(1, 5),
-                'short_id' => $faker->randomNumber(8),
-                'type' => '',
-                'extension' => '',
-                'original_name' => '',
-                'name' => '',
-                'url' => $faker->url,
-                'title' => $faker->sentence,
-                'description' => $faker->paragraph,
-                'where' => $x > 5 ? $faker->city : 'Lisbon',
-                'when' => $faker->dateTimeThisMonth,
+                'user_id'       => $faker->randomElement($userIds),
+                'short_id'      => $short_id,
+                'drive'         => $faker->randomElement(['azure', 'dropbox']),
+                'type'          => 'video',
+                'extension'     => $extension,
+                'size'          => 383631,
+                'original_name' => $faker->word,
+                'name'          => $name,
+                'url'           => 'http://techslides.com/demos/sample-videos/small.mp4',
+                'title'         => $faker->sentence,
+                'description'   => $faker->paragraph,
+                'where'         => 'Odivelas, Lisbon, Portugal',
+                'when'          => $faker->dateTimeThisMonth,
+                'why'           => $faker->sentence,
             ]);
-        */
+        }
     }
 }

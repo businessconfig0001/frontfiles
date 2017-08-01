@@ -32,7 +32,7 @@ class CreateFilesTable extends Migration
 
             $table->string('where');
             $table->date('when');
-            $table->string('why');
+            $table->string('why')->nullable();;
 
             $table->timestamps();
         });

@@ -27,11 +27,11 @@ class UsersTableSeeder extends Seeder
         foreach($this->user_mails as $email){
             $name = $faker->name;
             User::create([
-                'name' => $name,
-                'email' => $email,
-                'password' => 'secret',
+                'name'          => $name,
+                'email'         => $email,
+                'password'      => 'secret',
                 'allowed_space' => 10737418240,
-                'confirmed' => true,
+                'confirmed'     => true,
             ])->assignRole('user-basic');
         }
     }

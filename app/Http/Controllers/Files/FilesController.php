@@ -47,7 +47,6 @@ class FilesController extends Controller
      */
     public function store(CreateFileRequest $form)
     {
-        dd(request('where'));
         return $form->persist();
     }
 
