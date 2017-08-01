@@ -33,6 +33,7 @@
 </template>
 
 <script>
+	import { Errors } from './../classes/Errors'
 	import { upload } from './../services/uploadService'
 	import uploadForm from './upload-form'
 	export default {
@@ -71,6 +72,7 @@
 				  			where:'',
 				  			when:'',
 				  			who:[],
+				  			why:'',
 							drive:''
 				  		}
 				  		if(this.uploads[x]) d = this.uploads[x].data 
@@ -79,7 +81,7 @@
 					  		size:fileList[x].size,
 					  		name:name,
 					  		data: d,
-					  		errors:[],
+					  		errors:new Errors(),
 					  		index:x,
 					  		previous:0
 					  	}
@@ -102,7 +104,7 @@
 					}))
 				}
 				Promise.all(promises)
-					.then(location.reload())
+					.then(/*location.reload()*/)
 					.catch(console.error)
 			}
 
