@@ -19,7 +19,7 @@
 
 		<div class="col-xs-12 col-sm-3 form" v-show="uploads.length">
 			<div v-for="upload in uploads" class="form-group">
-				<upload-form :upload="upload"></upload-form>
+				<upload-form :upload="upload" :errors="upload.errors"></upload-form>
 			</div>
 			<a class="submit btn btn-primary" @click.prevent="uploadFile">Save</a>
 		</div>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+	import { Errors } from './../classes/Errors'
 	import { upload } from './../services/uploadService'
 	import uploadForm from './upload-form'
 	export default {
@@ -57,7 +58,6 @@
 		},
 		methods:{
 			filesChange(fieldName, fileList) {
-				console.log('got here')
 				if (!fileList.length) return;
 
 				// append the files to FormData
@@ -71,6 +71,7 @@
 				  			where:'',
 				  			when:'',
 				  			who:[],
+				  			why:'',
 							drive:''
 				  		}
 				  		if(this.uploads[x]) d = this.uploads[x].data 
@@ -79,7 +80,7 @@
 					  		size:fileList[x].size,
 					  		name:name,
 					  		data: d,
-					  		errors:[],
+					  		errors:{},
 					  		index:x,
 					  		previous:0
 					  	}
@@ -102,8 +103,10 @@
 					}))
 				}
 				Promise.all(promises)
-					.then(location.reload())
-					.catch(console.error)
+					.then(/*location.reload()*/)
+					.catch((data) => {
+						this.uploads[data.index]=data
+					})
 			}
 
 		}

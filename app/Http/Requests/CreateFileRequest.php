@@ -2,8 +2,9 @@
 
 namespace FrontFiles\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use FrontFiles\File;
+use FrontFiles\{ TagWhat, TagWho };
+use Illuminate\Foundation\Http\FormRequest;
 
 class CreateFileRequest extends FormRequest
 {
@@ -18,6 +19,27 @@ class CreateFileRequest extends FormRequest
     }
 
     /**
+     * Corrects data.
+     *
+     * @return array
+     */
+    protected function validationData(): array
+    {
+        $all = parent::validationData();
+
+        if (is_string($what = array_get($all, 'what')))
+            $what = json_decode($what, true);
+
+        if (is_string($who = array_get($all, 'who')))
+            $who = json_decode($who, true);
+
+        $all['what'] = $what;
+        $all['who'] = $who;
+
+        return $all;
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -28,11 +50,12 @@ class CreateFileRequest extends FormRequest
             'file'          => 'required|file|allowed_file|has_enough_space',
             'title'         => 'required|string|max:175',
             'description'   => 'required|string',
-            'what'          => 'required|string|max:175',
             'where'         => 'required|string|max:175',
             'when'          => 'required|date',
-            'who'           => 'required|string|max:175',
-            'drive'         => 'required|in:azure,dropbox',
+            'what.*'        => 'required|string|max:25',
+            'who.*'         => 'required|string|max:25',
+            'why'           => 'nullable|string|max:160',
+            'drive'         => 'required|in:nothing,dropbox',
         ];
     }
 
@@ -66,10 +89,12 @@ class CreateFileRequest extends FormRequest
         $extension  = (string)$rawFile->clientExtension();
         $name       = $short_id . '.' . $extension;
 
+        $drive = request('drive') === 'dropbox' ? 'dropbox' : 'azure';
+
         $file = File::create([
             'user_id'       => auth()->user()->id,
             'short_id'      => $short_id,
-            'drive'         => request('drive'),
+            'drive'         => $drive,
             'type'          => File::getFileType((string)$rawFile->getMimeType()),
             'extension'     => $extension,
             'size'          => (int)$rawFile->getClientSize(),
@@ -78,11 +103,30 @@ class CreateFileRequest extends FormRequest
             'url'           => File::storeAndReturnUrl($name),
             'title'         => request('title'),
             'description'   => request('description'),
-            'what'          => request('what'),
             'where'         => request('where'),
-            'who'           => request('who'),
             'when'          => request('when'),
+            'why'           => request('why'),
         ]);
+
+        $tagsWhat = json_decode(request('what'), true);
+        $tagsWho = json_decode(request('who'), true);
+        $tagsWhatIds = [];
+        $tagsWhoIds = [];
+
+        foreach($tagsWhat as $tagWhat)
+            if(!TagWhat::where('name', $tagWhat)->exists())
+                array_push($tagsWhatIds, TagWhat::create(['name' => $tagWhat])->id);
+            else
+                array_push($tagsWhatIds, TagWhat::where('name', $tagWhat)->first()->id);
+
+        foreach($tagsWho as $tagWho)
+            if(!TagWho::where('name', $tagWho)->exists())
+                array_push($tagsWhoIds, TagWho::create(['name' => $tagWho])->id);
+            else
+                array_push($tagsWhoIds, TagWho::where('name', $tagWho)->first()->id);
+
+        $file->tagsWhat()->sync($tagsWhatIds);
+        $file->tagsWho()->sync($tagsWhoIds);
 
         if(request()->wantsJson())
             return response()->json(['status' => 'File uploaded successfully!', 'data' => $file], 201);

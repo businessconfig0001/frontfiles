@@ -15,10 +15,12 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->bigIncrements('id');
+
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->char('short_id', 8)->unique();
-            $table->string('drive', 8)->comment('azure | google | dropbox');
+            $table->string('drive', 8)->comment('azure | dropbox');
             $table->string('type', 8)->comment('video | audio | image | document');
             $table->string('extension', 8);
             $table->unsignedBigInteger('size');
@@ -28,19 +30,14 @@ class CreateFilesTable extends Migration
             $table->string('title');
             $table->text('description');
 
-            $table->string('what')->nullable();
-            $table->string('where')->nullable();
-            $table->date('when')->nullable();
-            $table->string('who')->nullable();
+            $table->string('where');
+            $table->date('when');
+            $table->string('why')->nullable();;
 
             $table->timestamps();
         });
 
-        Schema::table('files', function (Blueprint $table) {
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+        Schema::table('files', function($table) {
         });
     }
 

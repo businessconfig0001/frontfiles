@@ -2,9 +2,10 @@
 
 namespace FrontFiles;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\{ HasSlug, SlugOptions };
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -17,8 +18,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'email',
-        'dropbox_token', 'password',
+        'email', 'first_name', 'last_name',
+        'slug', 'avatar', 'avatar_name', 'bio',
+        'location', 'dropbox_token', 'password',
+        'confirmation_code', 'confirmed'
     ];
 
     /**
@@ -39,9 +42,19 @@ class User extends Authenticatable
 
         //Automatically deletes this user's files (from the storage and the database)
         static::deleting(function($user){
+
+            //Delete user's avatar
+            if($user->avatar_name)
+                if(!Storage::exists('user-avatars/' . $user->avatar_name))
+                    throw new FileNotFoundException('We couln\'t find this file!');
+                else
+                    Storage::delete('user-avatars/' . $user->avatar_name);
+
+            //Delete user's files
             File::where('user_id', $user->id)->get()->each(function($file){
                 $file->delete();
             });
+
         });
     }
 
@@ -53,9 +66,19 @@ class User extends Authenticatable
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('name')
+            ->generateSlugsFrom(['first_name', 'last_name'])
             ->saveSlugsTo('slug')
             ->doNotGenerateSlugsOnUpdate();
+    }
+
+    /**
+     * Returns the full name of the user.
+     *
+     * @return string
+     */
+    public function fullName() : string
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     /**
@@ -73,7 +96,7 @@ class User extends Authenticatable
      *
      * @return int
      */
-    public function amountOfSpaceLeft()
+    public function amountOfSpaceLeft(): int
     {
         return (int)($this->allowed_space - $this->files->sum('size'));
     }
@@ -93,7 +116,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function files()
+    public function files(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(File::class, 'user_id');
     }
