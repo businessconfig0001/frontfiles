@@ -5,8 +5,16 @@
     <div class="container profile">
 
         <div class="row info">
-            <h1 class="title">{{ $user->name }}</h1>
-            <a href="{{ url($user->path()) }}">Your public profile</a>
+            <h1 class="title">{{ $user->fullName() }}</h1>
+
+            <p>
+                <a href="{{ url($user->path()) }}">Your public profile</a>
+            </p>
+
+            <p>
+                Your account type is: {{ $user->roles()->pluck('name')->first() }}
+            </p>
+
         </div>
 
         <div class="row storage">

@@ -3,8 +3,9 @@
 namespace FrontFiles\Http\Controllers\Auth;
 
 use FrontFiles\User;
-use FrontFiles\Http\Controllers\Controller;
+use FrontFiles\Utility\Helper;
 use Illuminate\Support\Facades\Validator;
+use FrontFiles\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -46,9 +47,14 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:100',
-            'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'email'         => 'required|string|email|max:100|unique:users',
+            'first_name'    => 'required|string|max:100',
+            'last_name'     => 'required|string|max:100',
+            'avatar'        => 'nullable|image:jpeg,jpg,png|max:5242880',
+            'bio'           => 'nullable|string|max:500',
+            'location'      => 'required|string|max:100',
+            'type'          => 'required|in:user,corporative',
+            'password'      => 'required|string|min:6|confirmed',
         ]);
     }
 
@@ -60,10 +66,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if(request()->file('avatar'))
+        {
+            $rawImg         = request()->file('avatar');
+            $extension      = (string)$rawImg->clientExtension();
+            $short_id       = Helper::generateRandomAlphaNumericString(12);
+            $avatar_name    = $short_id . '.' . $extension;
+            $avatarUrl      = Helper::storeUserAvatarAndReturnUrl($avatar_name);
+        }
+
         return User::create([
-            'name'      => $data['name'],
-            'email'     => $data['email'],
-            'password'  => $data['password'],
-        ]);
+            'email'         => $data['email'],
+            'first_name'    => $data['first_name'],
+            'last_name'     => $data['last_name'],
+            'avatar'        => $avatarUrl ?? 'http://via.placeholder.com/450x450',
+            'avatar_name'   => $avatar_name ?? null,
+            'bio'           => $data['bio'] ?? 'I am new here!',
+            'location'      => $data['location'],
+            'password'      => $data['password'],
+        ])->assignRole($data['type']);
     }
 }

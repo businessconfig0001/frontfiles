@@ -3,10 +3,10 @@
 namespace FrontFiles;
 
 use FrontFiles\Utility\Helper;
-use Illuminate\{ Database\Eloquent\Model, Support\Facades\Storage, Contracts\Filesystem\FileNotFoundException };
 use WindowsAzure\Common\ServicesBuilder;
-use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
 use MicrosoftAzure\Storage\Common\ServiceException;
+use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
+use Illuminate\{ Database\Eloquent\Model, Support\Facades\Storage, Contracts\Filesystem\FileNotFoundException };
 
 class File extends Model
 {
@@ -18,7 +18,7 @@ class File extends Model
     protected $fillable = [
         'user_id', 'short_id', 'drive', 'type', 'extension',
         'size', 'original_name', 'name', 'url', 'title',
-        'description', 'what', 'where', 'when', 'who'
+        'description', 'where', 'when', 'why'
     ];
 
     /**
@@ -28,8 +28,9 @@ class File extends Model
     {
         parent::boot();
 
-        //Automatically deletes from the storage the associated file
+        //Automatically deletes from the storage the associated file and the tags relation.
         static::deleting(function($file){
+
             switch($file->drive){
                 case 'dropbox':
                     $client = new \Spatie\Dropbox\Client($file->owner->dropbox_token);
@@ -49,8 +50,12 @@ class File extends Model
                         throw new FileNotFoundException('We couln\'t find this file!');
                     else
                         Storage::delete($container . '/' . $file->name);
+
                     break;
             }
+
+            $file->tagsWhat()->detach();
+            $file->tagsWho()->detach();
         });
     }
 
@@ -163,11 +168,31 @@ class File extends Model
     }
 
     /**
+     * Tags associated to this file.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tagsWho(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(TagWho::class, 'file_tagwho', 'file_id', 'tagwho_id');
+    }
+
+    /**
+     * Tags associated to this file.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tagsWhat(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(TagWhat::class, 'file_tagwhat', 'file_id', 'tagwhat_id');
+    }
+
+    /**
      * Creator of the File.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function owner()
+    public function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

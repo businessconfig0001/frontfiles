@@ -24,15 +24,18 @@ class UsersTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach($this->user_mails as $email){
-            $name = $faker->name;
+        foreach($this->user_mails as $email)
             User::create([
-                'name' => $name,
-                'email' => $email,
-                'password' => 'secret',
+                'email'         => $email,
+                'first_name'    => $faker->firstName,
+                'last_name'     => $faker->lastName,
+                'avatar'        => 'http://via.placeholder.com/450x450',
+                'bio'           => $faker->text,
+                'location'      => 'Odivelas, Lisbon, Portugal',
+                'password'      => 'secret',
                 'allowed_space' => 10737418240,
-                'confirmed' => true,
-            ])->assignRole('user-basic');
-        }
+                'confirmed'     => true,
+            ])->assignRole('user');
+
     }
 }

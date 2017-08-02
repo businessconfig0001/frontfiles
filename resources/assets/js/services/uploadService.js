@@ -1,17 +1,20 @@
 const url = '/files'
-function upload(data){
-	console.log(data)
+function upload(data,progress){
 	//add data
 	let form = formDataFactory(data.data)
-
 	//add img
 	form.append('file',data.file,data.name)
 
 	//upload
 	return new Promise((resolve,reject) =>
-		axios.post(window.location.protocol + "//" + window.location.host + url,form)
+		axios.post(window.location.protocol + "//" + window.location.host + url,form,{
+			onUploadProgress:progress
+		})
 		.then(resolve)
-		.catch(reject)
+		.catch(err=>{
+			data.errors=err.response.data
+			reject(data)
+		})
 	)
 }
 
@@ -19,8 +22,11 @@ function formDataFactory(data){
 	let form= new FormData()
 	let keys = Object.keys(data)
 	for(let i = 0 ; i < keys.length ; i++ ){
-		console.log(keys[i])
-		form.append(keys[i],data[keys[i]])
+		console.log('prossesing',keys[i])
+		if(data[keys[i]] instanceof Array){
+				form.append(keys[i],JSON.stringify(data[keys[i]]))
+		}
+		else form.append(keys[i],data[keys[i]])
 	}
 	return form
 }
