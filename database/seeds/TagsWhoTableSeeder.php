@@ -16,6 +16,6 @@ class TagsWhoTableSeeder extends Seeder
         $faker = Faker::create();
 
         foreach(range(1, 30) as $index)
-            TagWho::create(['name' => $faker->word]);
+            TagWho::create(['name' => $faker->unique()->word]);
     }
 }

@@ -174,7 +174,7 @@ class File extends Model
      */
     public function tagsWho(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(TagWho::class, 'file_tagwhat', 'file_id', 'tagwhat_id');
+        return $this->belongsToMany(TagWho::class, 'file_tagwho', 'file_id', 'tagwho_id');
     }
 
     /**
@@ -184,7 +184,7 @@ class File extends Model
      */
     public function tagsWhat(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(TagWhat::class, 'file_tagwho', 'file_id', 'tagwho_id');
+        return $this->belongsToMany(TagWhat::class, 'file_tagwhat', 'file_id', 'tagwhat_id');
     }
 
     /**

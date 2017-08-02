@@ -2,8 +2,9 @@
 
 namespace FrontFiles\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use FrontFiles\File;
+use FrontFiles\{ TagWhat, TagWho };
+use Illuminate\Foundation\Http\FormRequest;
 
 class CreateFileRequest extends FormRequest
 {
@@ -51,8 +52,8 @@ class CreateFileRequest extends FormRequest
             'description'   => 'required|string',
             'where'         => 'required|string|max:175',
             'when'          => 'required|date',
-            'what.*'        => 'required|string|max:50|unique:tagswhat,name',
-            'who.*'         => 'required|string|max:50|unique:tagswho,name',
+            'what.*'        => 'required|string|max:25',
+            'who.*'         => 'required|string|max:25',
             'why'           => 'nullable|string|max:160',
             'drive'         => 'required|in:azure,dropbox',
         ];
@@ -83,7 +84,6 @@ class CreateFileRequest extends FormRequest
             return redirect(route('files.upload'))->with(['error'=>'File is not valid']);
         }
 
-        dd('works');
         $rawFile    = request()->file('file');
         $short_id   = File::generateUniqueShortID();
         $extension  = (string)$rawFile->clientExtension();
@@ -106,8 +106,25 @@ class CreateFileRequest extends FormRequest
             'why'           => request('why'),
         ]);
 
-        $file->tagsWhat()->attach(request('what'));
-        $file->tagsWho()->attach(request('who'));
+        $tagsWhat = json_decode(request('what'), true);
+        $tagsWho = json_decode(request('who'), true);
+        $tagsWhatIds = [];
+        $tagsWhoIds = [];
+
+        foreach($tagsWhat as $tagWhat)
+            if(!TagWhat::where('name', $tagWhat)->exists())
+                array_push($tagsWhatIds, TagWhat::create(['name' => $tagWhat])->id);
+            else
+                array_push($tagsWhatIds, TagWhat::where('name', $tagWhat)->first()->id);
+
+        foreach($tagsWho as $tagWho)
+            if(!TagWho::where('name', $tagWho)->exists())
+                array_push($tagsWhoIds, TagWho::create(['name' => $tagWho])->id);
+            else
+                array_push($tagsWhoIds, TagWho::where('name', $tagWho)->first()->id);
+
+        $file->tagsWhat()->sync($tagsWhatIds);
+        $file->tagsWho()->sync($tagsWhoIds);
 
         if(request()->wantsJson())
             return response()->json(['status' => 'File uploaded successfully!', 'data' => $file], 201);
