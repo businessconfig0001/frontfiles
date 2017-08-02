@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
                 'password'      => 'secret',
                 'allowed_space' => 10737418240,
                 'confirmed'     => true,
-            ])->assignRole('user-basic');
+            ])->assignRole('user');
 
     }
 }

@@ -53,6 +53,7 @@ class RegisterController extends Controller
             'avatar'        => 'nullable|image:jpeg,jpg,png|max:5242880',
             'bio'           => 'nullable|string|max:500',
             'location'      => 'required|string|max:100',
+            'type'          => 'required|in:user,corporative',
             'password'      => 'required|string|min:6|confirmed',
         ]);
     }
@@ -83,6 +84,6 @@ class RegisterController extends Controller
             'bio'           => $data['bio'] ?? 'I am new here!',
             'location'      => $data['location'],
             'password'      => $data['password'],
-        ]);
+        ])->assignRole($data['type']);
     }
 }

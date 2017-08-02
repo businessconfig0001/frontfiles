@@ -91,6 +91,23 @@
                         </div>
                         <!-- /Location -->
 
+                        <!-- Type -->
+                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                            <label for="type" class="col-md-4 control-label">Type</label>
+
+                            <div class="col-md-6">
+                                <input id="type" type="radio" name="type" value="user" class="form-control"checked>Regular
+                                <input id="type" type="radio" name="type" value="corporative" class="form-control">Corporative
+
+                                @if ($errors->has('type'))
+                                    <span class="help-block">
+                                    <strong>{{ $errors->first('type') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                        <!-- /Type -->
+
                         <!-- Email -->
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
