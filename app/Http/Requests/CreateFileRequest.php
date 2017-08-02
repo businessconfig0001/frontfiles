@@ -18,6 +18,27 @@ class CreateFileRequest extends FormRequest
     }
 
     /**
+     * Corrects data.
+     *
+     * @return array
+     */
+    protected function validationData(): array
+    {
+        $all = parent::validationData();
+
+        if (is_string($what = array_get($all, 'what')))
+            $what = json_decode($what, true);
+
+        if (is_string($who = array_get($all, 'who')))
+            $who = json_decode($who, true);
+
+        $all['what'] = $what;
+        $all['who'] = $who;
+
+        return $all;
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -30,8 +51,8 @@ class CreateFileRequest extends FormRequest
             'description'   => 'required|string',
             'where'         => 'required|string|max:175',
             'when'          => 'required|date',
-            'what.*'        => 'required|string|max:50|unique:tagsWhat',
-            'who.*'         => 'required|string|max:50|unique:tagsWho',
+            'what.*'        => 'required|string|max:50|unique:tagswhat,name',
+            'who.*'         => 'required|string|max:50|unique:tagswho,name',
             'why'           => 'nullable|string|max:160',
             'drive'         => 'required|in:azure,dropbox',
         ];
@@ -62,6 +83,7 @@ class CreateFileRequest extends FormRequest
             return redirect(route('files.upload'))->with(['error'=>'File is not valid']);
         }
 
+        dd('works');
         $rawFile    = request()->file('file');
         $short_id   = File::generateUniqueShortID();
         $extension  = (string)$rawFile->clientExtension();
