@@ -25,7 +25,7 @@ export class Errors{
 	 * @returns {Boolean} boolean 
 	 */
 	any(){
-		return Objects.keys(this.errors) > 0;
+		return Object.keys(this.errors) > 0;
 	}
 
 	/**
@@ -34,6 +34,7 @@ export class Errors{
 	 * @returns if exists returns the error else returns false
 	 */
 	get(field){
+		console.log('getting ' + field)
 		if(this.errors[field]) return this.errors[field];
 		return false;
 	}

@@ -2,34 +2,34 @@
 <div class="form-wrapper">
 	<h3>File: <span>{{upload.name}}</span></h3>
 	<p>
-		<display-error :error="upload.errors.has('title') ? form.errors.get('title') : false"></display-error>
+		<display-error :error="errors['title']"></display-error>
 		<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
 	</p>
 	<p>
-		<display-error :error="upload.errors.has('description') ? form.errors.get('description') : false"></display-error>
+		<display-error :error="errors['title']"></display-error>
 		<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="upload.data.description"></textarea>
 		
 	</p>
 	<p>
-		<display-error :error="upload.errors.has('what') ? form.errors.get('what') : false"></display-error>
+		<display-error :error="errors['title']"></display-error>
 		<tag-input placeholder="#What" :tags="upload.data.what"></tag-input>
 		
 	</p>
 	<p>
-		<display-error :error="upload.errors.has('who') ? form.errors.get('who') : false "></display-error>
+		<display-error :error="errors['title']"></display-error>
 		<tag-input placeholder="#Who" :tags="upload.data.who"></tag-input>			
 	</p>
 	<p>
-		<display-error :error="upload.errors.has('where') ? form.errors.get('where') : false"></display-error>
+		<display-error :error="errors['title']"></display-error>
 		<input type="" ref="where" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where" @focus.once="initPlace"/>
 		
 	</p>
 	<p>
-		<display-error :error="upload.errors.has('when') ? form.errors.get('when') : false"></display-error>
+		<display-error :error="errors['title']"></display-error>
 		<input type="text" name="when" id="when" class="form-control" placeholder="#When" onfocus="(this.type='date')" v-model="upload.data.when"/>
 	</p>
 	<p>
-		<display-error :error="upload.errors.has('why') ? form.errors.get('why') : false"></display-error>
+		<display-error :error="errors['title']"></display-error>
 		<textarea name="why" id="why" class="form-control" placeholder="#Why" v-model="upload.data.why"></textarea>
 		
 	</p>
@@ -56,6 +56,10 @@ export default {
 		upload:{
 			required:true,
 			type:Object
+		},
+		errors:{
+			required:false,
+			type:Object
 		}
 	},
 	data () {
@@ -72,6 +76,11 @@ export default {
 					})	
 				}
 				catch(e){}	
+		}
+	},
+	watch:{
+		errors(){
+			console.log('errors changed')
 		}
 	}
 };

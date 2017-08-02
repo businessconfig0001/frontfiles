@@ -1,6 +1,5 @@
 const url = '/files'
 function upload(data,progress){
-	console.log(data)
 	//add data
 	let form = formDataFactory(data.data)
 	//add img
@@ -13,9 +12,8 @@ function upload(data,progress){
 		})
 		.then(resolve)
 		.catch(err=>{
-			console.log(err)
 			data.errors=err.response.data
-			reject(err)
+			reject(data)
 		})
 	)
 }
@@ -24,8 +22,11 @@ function formDataFactory(data){
 	let form= new FormData()
 	let keys = Object.keys(data)
 	for(let i = 0 ; i < keys.length ; i++ ){
-		console.log(data[keys[i]])
-		form.append(keys[i],data[keys[i]])
+		console.log('prossesing',keys[i])
+		if(keys[i] === 'what' ||keys[i] === 'who'){
+				form.append(keys[i],JSON.stringify(data[keys[i]]))
+		}
+		else form.append(keys[i],data[keys[i]])
 	}
 	return form
 }
