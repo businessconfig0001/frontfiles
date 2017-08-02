@@ -35,9 +35,8 @@
 	</p>
 	<p>
 		<display-error :error="upload.errors['drive']"></display-error>
-		<input type="radio" name="drive" value="azure" class="form-control" v-model="upload.data.drive" checked> Azure<br>
-		<input type="radio" name="drive" value="google" class="form-control" v-model="upload.data.drive"> Google Drive<br>
-		<input type="radio" name="drive" value="dropbox" class="form-control" v-model="upload.data.drive"> Dropbox
+		<input type="radio" name="drive" value="nothing" class="form-control" v-model="upload.data.drive" checked> Default
+		<input type="radio" name="drive" value="dropbox" class="form-control" v-model="upload.data.drive"> Dropbox (please configure it first)
 	</p>
 
 </div>

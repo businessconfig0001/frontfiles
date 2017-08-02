@@ -55,7 +55,7 @@ class CreateFileRequest extends FormRequest
             'what.*'        => 'required|string|max:25',
             'who.*'         => 'required|string|max:25',
             'why'           => 'nullable|string|max:160',
-            'drive'         => 'required|in:azure,dropbox',
+            'drive'         => 'required|in:nothing,dropbox',
         ];
     }
 
@@ -89,10 +89,12 @@ class CreateFileRequest extends FormRequest
         $extension  = (string)$rawFile->clientExtension();
         $name       = $short_id . '.' . $extension;
 
+        $drive = request('drive') === 'dropbox' ? 'dropbox' : 'azure';
+
         $file = File::create([
             'user_id'       => auth()->user()->id,
             'short_id'      => $short_id,
-            'drive'         => request('drive'),
+            'drive'         => $drive,
             'type'          => File::getFileType((string)$rawFile->getMimeType()),
             'extension'     => $extension,
             'size'          => (int)$rawFile->getClientSize(),
