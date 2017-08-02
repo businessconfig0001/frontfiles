@@ -15,7 +15,6 @@ export default {
   name: 'display-error',
   props:{
   	error:{
-
   	}
   },
   data () {
