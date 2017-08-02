@@ -72,7 +72,8 @@ export default {
 				let placebox=new google.maps.places.Autocomplete(event.target)
 				try{
 					placebox.addListener('place_changed',() => {
-						this.upload.data.where = placebox.getPlace().address_components[0].long_name
+						console.log(placebox.getPlace())
+						this.upload.data.where = placebox.getPlace().formatted_address
 					})	
 				}
 				catch(e){}	

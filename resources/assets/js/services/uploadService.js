@@ -23,7 +23,7 @@ function formDataFactory(data){
 	let keys = Object.keys(data)
 	for(let i = 0 ; i < keys.length ; i++ ){
 		console.log('prossesing',keys[i])
-		if(keys[i] === 'what' ||keys[i] === 'who'){
+		if(data[keys[i]] instanceof Array){
 				form.append(keys[i],JSON.stringify(data[keys[i]]))
 		}
 		else form.append(keys[i],data[keys[i]])
