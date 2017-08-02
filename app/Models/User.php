@@ -2,9 +2,10 @@
 
 namespace FrontFiles;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\{ HasSlug, SlugOptions };
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -18,8 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'email', 'first_name', 'last_name',
-        'slug', 'avatar', 'bio', 'location',
-        'dropbox_token', 'password',
+        'slug', 'avatar', 'avatar_name', 'bio',
+        'location', 'dropbox_token', 'password',
         'confirmation_code', 'confirmed'
     ];
 
@@ -41,9 +42,19 @@ class User extends Authenticatable
 
         //Automatically deletes this user's files (from the storage and the database)
         static::deleting(function($user){
+
+            //Delete user's avatar
+            if($user->avatar_name)
+                if(!Storage::exists('user-avatars/' . $user->avatar_name))
+                    throw new FileNotFoundException('We couln\'t find this file!');
+                else
+                    Storage::delete('user-avatars/' . $user->avatar_name);
+
+            //Delete user's files
             File::where('user_id', $user->id)->get()->each(function($file){
                 $file->delete();
             });
+
         });
     }
 

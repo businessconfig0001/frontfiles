@@ -3,8 +3,9 @@
 namespace FrontFiles\Http\Controllers\Auth;
 
 use FrontFiles\User;
-use FrontFiles\Http\Controllers\Controller;
+use FrontFiles\Utility\Helper;
 use Illuminate\Support\Facades\Validator;
+use FrontFiles\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -64,12 +65,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //dd(request());
+        if(request()->file('avatar'))
+        {
+            $rawImg         = request()->file('avatar');
+            $extension      = (string)$rawImg->clientExtension();
+            $short_id       = Helper::generateRandomAlphaNumericString(12);
+            $avatar_name    = $short_id . '.' . $extension;
+            $avatarUrl      = Helper::storeUserAvatarAndReturnUrl($avatar_name);
+        }
+
         return User::create([
             'email'         => $data['email'],
             'first_name'    => $data['first_name'],
             'last_name'     => $data['last_name'],
-            'avatar'        => $data['avatar'] ?? 'http://via.placeholder.com/450x450',
+            'avatar'        => $avatarUrl ?? 'http://via.placeholder.com/450x450',
+            'avatar_name'   => $avatar_name ?? null,
             'bio'           => $data['bio'] ?? 'I am new here!',
             'location'      => $data['location'],
             'password'      => $data['password'],

@@ -3,10 +3,10 @@
 namespace FrontFiles;
 
 use FrontFiles\Utility\Helper;
-use Illuminate\{ Database\Eloquent\Model, Support\Facades\Storage, Contracts\Filesystem\FileNotFoundException };
 use WindowsAzure\Common\ServicesBuilder;
-use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
 use MicrosoftAzure\Storage\Common\ServiceException;
+use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
+use Illuminate\{ Database\Eloquent\Model, Support\Facades\Storage, Contracts\Filesystem\FileNotFoundException };
 
 class File extends Model
 {
@@ -50,6 +50,7 @@ class File extends Model
                         throw new FileNotFoundException('We couln\'t find this file!');
                     else
                         Storage::delete($container . '/' . $file->name);
+
                     break;
             }
 
