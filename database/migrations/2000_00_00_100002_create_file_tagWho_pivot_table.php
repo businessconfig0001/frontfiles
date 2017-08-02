@@ -13,9 +13,9 @@ class CreateFileTagWhoPivotTable extends Migration
     public function up()
     {
         Schema::create('file_tagwho', function (Blueprint $table) {
-            $table->integer('file_id')->unsigned()->index();
+            $table->unsignedBigInteger('file_id')->index();
             $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
-            $table->integer('tagwho_id')->unsigned()->index();
+            $table->unsignedBigInteger('tagwho_id')->index();
             $table->foreign('tagwho_id')->references('id')->on('tagswho')->onDelete('cascade');
             $table->primary(['file_id', 'tagwho_id']);
         });

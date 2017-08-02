@@ -36,6 +36,9 @@ class CreateFilesTable extends Migration
 
             $table->timestamps();
         });
+
+        Schema::table('files', function($table) {
+        });
     }
 
     /**
