@@ -8,7 +8,7 @@
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
 
-                    <form class="form-horizontal" method="POST" action="{{ route('auth.register') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('auth.register') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <!-- First Name -->
@@ -64,7 +64,7 @@
                             <label for="bio" class="col-md-4 control-label">Bio</label>
 
                             <div class="col-md-6">
-                                <textarea id="bio" name="bio" class="form-control" required autofocus>{{ old('bio') }}</textarea>
+                                <textarea id="bio" name="bio" class="form-control" autofocus>{{ old('bio') }}</textarea>
 
                                 @if ($errors->has('bio'))
                                     <span class="help-block">

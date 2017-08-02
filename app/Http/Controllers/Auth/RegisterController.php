@@ -49,7 +49,7 @@ class RegisterController extends Controller
             'email'         => 'required|string|email|max:100|unique:users',
             'first_name'    => 'required|string|max:100',
             'last_name'     => 'required|string|max:100',
-            'avatar'        => 'nullable|image',
+            'avatar'        => 'nullable|image:jpeg,jpg,png|max:5242880',
             'bio'           => 'nullable|string|max:500',
             'location'      => 'required|string|max:100',
             'password'      => 'required|string|min:6|confirmed',
@@ -64,6 +64,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //dd(request());
         return User::create([
             'email'         => $data['email'],
             'first_name'    => $data['first_name'],
