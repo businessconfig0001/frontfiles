@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'email'         => $data['email'],
             'first_name'    => $data['first_name'],
             'last_name'     => $data['last_name'],
-            'avatar'        => $data['avatar'] ?? 'http://via.placeholder.com/300x300',
+            'avatar'        => $data['avatar'] ?? 'http://via.placeholder.com/450x450',
             'bio'           => $data['bio'] ?? 'I am new here!',
             'location'      => $data['location'],
             'password'      => $data['password'],
