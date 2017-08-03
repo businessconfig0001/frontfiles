@@ -1,6 +1,7 @@
 <?php
 
 namespace FrontFiles\Utility;
+
 use WindowsAzure\Common\ServicesBuilder;
 use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
 use MicrosoftAzure\Storage\Common\ServiceException;

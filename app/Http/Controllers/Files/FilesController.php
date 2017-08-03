@@ -16,9 +16,7 @@ class FilesController extends Controller
      */
     public function index()
     {
-        $files = File::where('user_id', auth()->user()->id)
-            ->latest()
-            ->get();
+        $files = File::where('user_id', auth()->user()->id)->latest()->get();
 
         return request()->wantsJson() ? $files : view('files.index', compact('files'));
     }
@@ -30,9 +28,7 @@ class FilesController extends Controller
      */
     public function create()
     {
-        $files = File::where('user_id', auth()->user()->id)
-            ->latest()
-            ->get();
+        $files = File::where('user_id', auth()->user()->id)->latest()->get();
 
         $this->checkIfTokensAreStillValid();
 
@@ -108,7 +104,8 @@ class FilesController extends Controller
         if(request()->expectsJson())
             return response(['status' => 'File successfully deleted!'], 204);
 
-        return back();
+        return back()
+            ->with('message', 'File deleted!');
     }
 
     /**

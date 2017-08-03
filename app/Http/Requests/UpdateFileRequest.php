@@ -2,8 +2,8 @@
 
 namespace FrontFiles\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use FrontFiles\File;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateFileRequest extends FormRequest
 {
@@ -29,8 +29,8 @@ class UpdateFileRequest extends FormRequest
             'description'   => 'required|string',
             'where'         => 'required|string|max:175',
             'when'          => 'required|date',
-            'what.*'        => 'required|string|max:50|unique:tagsWhat',
-            'who.*'         => 'required|string|max:50|unique:tagsWho',
+            //'what.*'        => 'required|string|max:50|unique:tagsWhat',
+            //'who.*'         => 'required|string|max:50|unique:tagsWho',
             'why'           => 'nullable|string|max:160',
         ];
     }
@@ -51,12 +51,14 @@ class UpdateFileRequest extends FormRequest
             'why'           => request('why'),
         ]);
 
-        $file->tagsWhat()->sync(request('what'));
-        $file->tagsWho()->sync(request('who'));
+        //$file->tagsWhat()->sync(request('what'));
+        //$file->tagsWho()->sync(request('who'));
 
         if(request()->expectsJson())
             return response(['status' => 'File successfully edited!'], 200);
 
-        return redirect(route('files'));
+        return redirect()
+            ->route('files')
+            ->with('message', 'File successfully updated.');
     }
 }

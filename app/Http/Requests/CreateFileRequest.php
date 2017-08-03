@@ -47,7 +47,7 @@ class CreateFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'file'          => 'required|file|allowed_file|has_enough_space',
+            'file'          => 'required|file|allowed_file|has_enough_space|size:524288000',
             'title'         => 'required|string|max:175',
             'description'   => 'required|string',
             'where'         => 'required|string|max:175',
