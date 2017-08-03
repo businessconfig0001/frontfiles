@@ -50,14 +50,14 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-//        $user = User::find(auth()->user()->id);
-//
-//        $this->authorize('edit', $user);
-//
-//        if(request()->expectsJson())
-//            return response()->json(['data' => $user], 200);
-//
-//        return view('profile.edit', compact('user'));
+        $user = User::find(auth()->user()->id);
+
+        $this->authorize('edit', $user);
+
+        if(request()->expectsJson())
+            return response()->json(['data' => $user], 200);
+
+        return view('profile.edit', compact('user'));
     }
 
     /**

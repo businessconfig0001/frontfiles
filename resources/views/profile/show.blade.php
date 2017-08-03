@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-				
 
 <!-- /profile -->
 <section class="profile-container">
@@ -74,7 +73,6 @@
 						<div class="box box-offset-small"></div>
 					</div>	
 				</div>
-				
 
 			</div>
 		</div>
