@@ -36,7 +36,7 @@
 	<p>
 		<display-error :error="upload.errors['drive']"></display-error>
 		<input type="radio" name="drive" value="nothing" class="form-control" v-model="upload.data.drive" checked> Default
-		<input type="radio" name="drive" value="dropbox" class="form-control" v-model="upload.data.drive"> Dropbox (please configure it first)
+		<input type="radio" name="drive" value="dropbox" class="form-control" v-model="upload.data.drive" v-show="dropbox"> Dropbox
 	</p>
 
 </div>
@@ -59,6 +59,8 @@ export default {
 		errors:{
 			required:false,
 			type:Object
+		},
+		dropbox:{
 		}
 	},
 	data () {

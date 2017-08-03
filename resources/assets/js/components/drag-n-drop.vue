@@ -19,7 +19,7 @@
 
 		<div class="col-xs-12 col-sm-3 form" v-show="uploads.length">
 			<div v-for="upload in uploads" class="form-group">
-				<upload-form :upload="upload" :errors="upload.errors"></upload-form>
+				<upload-form :upload="upload" :errors="upload.errors" :dropbox="dropbox"></upload-form>
 			</div>
 			<a class="submit btn btn-primary" @click.prevent="uploadFile">Save</a>
 		</div>
@@ -52,6 +52,10 @@
 			files:{
 				required:true,
 				type:Array
+			},
+			dropbox:{
+				required:true,
+				type:Object
 			}
 		},
 		mounted(){
