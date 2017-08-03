@@ -1,8 +1,17 @@
 <template>
 <div class="block-container">
-	<video controls>
+	<video controls v-if="file.type === 'video'">
 		<source :src="file.url">
 	</video>
+	<img v-else-if="file.type === 'image'" src="" alt="">
+	<audio controls v-else-if="file.type === 'audio'">
+		<source :src="file.url">
+	</audio>
+	<div v-else>
+		<a :href="file.url">
+			<i class="fa fa-download"></i>
+		</a>
+	</div>
 	<div v-if="status">
 		<h2>{{file.title}}</h2>
 		<p>{{file.description}}</p>
