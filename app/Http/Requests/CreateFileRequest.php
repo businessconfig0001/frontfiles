@@ -47,7 +47,7 @@ class CreateFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'file'          => 'required|file|allowed_file|has_enough_space|size:524288000',
+            'file'          => 'required|file|allowed_file|has_enough_space|max:524288000',
             'title'         => 'required|string|max:175',
             'description'   => 'required|string',
             'where'         => 'required|string|max:175',
@@ -108,29 +108,38 @@ class CreateFileRequest extends FormRequest
             'why'           => request('why'),
         ]);
 
-        $tagsWhat = json_decode(request('what'), true);
-        $tagsWho = json_decode(request('who'), true);
-        $tagsWhatIds = [];
-        $tagsWhoIds = [];
+        $file->tagsWhat()->sync(
+            $this->getTagIds(request('what'), TagWhat::class)
+        );
 
-        foreach($tagsWhat as $tagWhat)
-            if(!TagWhat::where('name', $tagWhat)->exists())
-                array_push($tagsWhatIds, TagWhat::create(['name' => $tagWhat])->id);
-            else
-                array_push($tagsWhatIds, TagWhat::where('name', $tagWhat)->first()->id);
-
-        foreach($tagsWho as $tagWho)
-            if(!TagWho::where('name', $tagWho)->exists())
-                array_push($tagsWhoIds, TagWho::create(['name' => $tagWho])->id);
-            else
-                array_push($tagsWhoIds, TagWho::where('name', $tagWho)->first()->id);
-
-        $file->tagsWhat()->sync($tagsWhatIds);
-        $file->tagsWho()->sync($tagsWhoIds);
+        $file->tagsWho()->sync(
+            $this->getTagIds(request('who'), TagWho::class)
+        );
 
         if(request()->wantsJson())
             return response()->json(['status' => 'File uploaded successfully!', 'data' => $file], 201);
 
         return redirect(route('files.upload'))->with(['status' => 'File uploaded successfully!']);
+    }
+
+    /**
+     * Returns an array with the id's of the tags.
+     *
+     * @param string $tags
+     * @param $type
+     * @return array
+     */
+    protected function getTagIds(string $tags, $type) : array
+    {
+        $tagsFiltered = json_decode($tags, true);
+        $output = [];
+
+        foreach($tagsFiltered as $tag)
+            if(!$type::where('name', $tag)->exists())
+                array_push($output, $type::create(['name' => $tag])->id);
+            else
+                array_push($output, $type::where('name', $tag)->first()->id);
+
+        return $output;
     }
 }
