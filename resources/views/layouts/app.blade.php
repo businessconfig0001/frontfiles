@@ -96,4 +96,5 @@
         ga('create', 'UA-102556173-1', 'auto');
         ga('send', 'pageview');
     </script>
+    @yield('scripts')
 </html>
