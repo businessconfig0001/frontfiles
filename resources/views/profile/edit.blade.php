@@ -2,6 +2,18 @@
 
 @section('content')
 
-    <h1>{{ $user->fullName() }}</h1>
+    <p>{{ $user->fullName() }}</p>
+
+    <p>{{ $user->first_name }}</p>
+
+    <p>{{ $user->last_name }}</p>
+
+    <p>{{ $user->email }}</p>
+
+    <p>{{ $user->bio }}</p>
+
+    <p>{{ $user->location }}</p>
+
+    <button>disconnect dropbox</button>
 
 @endsection
