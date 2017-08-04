@@ -168,3 +168,9 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+<script>
+    new google.maps.places.Autocomplete(document.getElementById('location'))
+</script>
+@endsection
