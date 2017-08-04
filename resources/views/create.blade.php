@@ -3,8 +3,7 @@
 @section('content')
                 <!-- form-container -->
                 <section class="form-container">
-                	{{ $dropbox_token}}
-				    <drag-n-drop :dropbox={{ $dropbox}}></drag-n-drop>
+				    <drag-n-drop :dropbox={{ $dropbox_token}}></drag-n-drop>
                 </section><!-- form-container -->
 	
 
