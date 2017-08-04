@@ -30,9 +30,15 @@ class FilesController extends Controller
     {
         $files = File::where('user_id', auth()->user()->id)->latest()->get();
 
-        $this->checkIfTokensAreStillValid();
+        $dropbox_token = $this->checkIfTokensAreStillValid();
 
-        return request()->wantsJson() ? $files : view('files.create', compact('files'));
+        if(request()->expectsJson())
+            return response([
+                'data' => $file,
+                'dropbox_token' => $dropbox_token
+            ], 200);
+
+        return view('files.create', compact('files', 'dropbox_token'));
     }
 
     /**
@@ -110,6 +116,8 @@ class FilesController extends Controller
 
     /**
      * Verifies if the tokens are still valid.
+     *
+     * @return bool
      */
     protected function checkIfTokensAreStillValid()
     {
@@ -117,8 +125,10 @@ class FilesController extends Controller
 
         try{
             Socialite::driver('dropbox')->userFromToken($user->dropbox_token);
+            return true;
         } catch(\Exception $e) {
             $user->update(['dropbox_token' => null]);
+            return false;
         }
     }
 }
