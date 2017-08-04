@@ -76,7 +76,7 @@
 				  			when:'',
 				  			who:[],
 				  			why:'',
-							drive:''
+							drive:'nothing'
 				  		}
 				  		if(this.uploads[x]) d = this.uploads[x].data 
 					  	this.uploads[x]={ 

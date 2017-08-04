@@ -38,7 +38,7 @@ export default {
 			}	
 		},
 		removeTag(t){
-			this.tags=this.tags.splice(this.tags.indexOf(t),1)
+			this.tags=this.tags.filter(x => x !== t)
 		}
 	}
 };
