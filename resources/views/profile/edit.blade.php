@@ -48,7 +48,7 @@
                             <label for="avatar" class="col-md-4 control-label">Avatar</label>
 
                             <div class="col-md-6">
-                                <input id="avatar" type="file" class="form-control" name="avatar" value="{{ $user->avatar) }}" accept="image/*">
+                                <input id="avatar" type="file" class="form-control" name="avatar" value="{{ $user->avatar }}" accept="image/*">
 
                                 @if ($errors->has('avatar'))
                                     <span class="help-block">
