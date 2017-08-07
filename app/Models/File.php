@@ -118,7 +118,7 @@ class File extends Model
      *
      * @param string $name
      * @return string
-     */
+
     public static function storeAndReturnUrl(string $name) : string
     {
         /* AZURE STUFF - TODO
@@ -132,7 +132,8 @@ class File extends Model
             request()
                 ->file('file')
                 ->storeAs($container, $name, $config);
-         */
+
+         //AQUI
 
         $filesystem = DriversHelper::userDropbox(auth()->user()->dropbox_token);
 
@@ -140,7 +141,7 @@ class File extends Model
 
         return 'https://www.dropbox.com/home/Apps/FrontFiles-WebApp/'.$name;
     }
-
+     *
     /** TODO
      * Checks if the current user container exists in the azure blob storage
      * If it does not exist, he creates it.
