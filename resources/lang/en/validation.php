@@ -89,6 +89,7 @@ return [
     'url'                  => 'The :attribute format is invalid.',
     'allowed_file'         => 'The :attribute type is invalid.',
     'has_enough_space'     => 'You have reached your storage limit.',
+    'valid_token'          => 'Your :attribute token is invalid. Please connect again.',
 
     /*
     |--------------------------------------------------------------------------

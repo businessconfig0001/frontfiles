@@ -2,8 +2,7 @@
 
 namespace FrontFiles\Http\Requests;
 
-use FrontFiles\File;
-use FrontFiles\{ TagWhat, TagWho };
+use FrontFiles\{ File, TagWhat, TagWho, Utility\DriversHelper };
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateFileRequest extends FormRequest
@@ -47,7 +46,7 @@ class CreateFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'file'          => 'required|file|allowed_file|has_enough_space|max:524288000',
+            'file'          => 'required|file|allowed_file|max:524288000',
             'title'         => 'required|string|max:175',
             'description'   => 'required|string',
             'where'         => 'required|string|max:175',
@@ -55,7 +54,7 @@ class CreateFileRequest extends FormRequest
             'what.*'        => 'required|string|max:25',
             'who.*'         => 'required|string|max:25',
             'why'           => 'nullable|string|max:160',
-            'drive'         => 'required|in:nothing,dropbox',
+            'drive'         => 'required|string|valid_token|in:dropbox',
         ];
     }
 
@@ -89,18 +88,18 @@ class CreateFileRequest extends FormRequest
         $extension  = (string)$rawFile->clientExtension();
         $name       = $short_id . '.' . $extension;
 
-        $drive = request('drive') === 'dropbox' ? 'dropbox' : 'azure';
+        $this->storeFile($name);
 
         $file = File::create([
             'user_id'       => auth()->user()->id,
             'short_id'      => $short_id,
-            'drive'         => $drive,
+            'drive'         => request('drive'),
             'type'          => File::getFileType((string)$rawFile->getMimeType()),
             'extension'     => $extension,
             'size'          => (int)$rawFile->getClientSize(),
             'original_name' => (string)$rawFile->getClientOriginalName(),
             'name'          => $name,
-            'url'           => File::storeAndReturnUrl($name),
+            'url'           => $this->getUrl($name),
             'title'         => request('title'),
             'description'   => request('description'),
             'where'         => request('where'),
@@ -141,5 +140,28 @@ class CreateFileRequest extends FormRequest
                 array_push($output, $type::where('name', $tag)->first()->id);
 
         return $output;
+    }
+
+    /**
+     * Stores the file.
+     *
+     * @param string $name
+     */
+    protected function storeFile(string $name)
+    {
+        $filesystem = DriversHelper::userDropbox(auth()->user()->dropbox_token);
+
+        $filesystem->write($name, file_get_contents(request()->file('file')));
+    }
+
+    /**
+     * Returns the file URL.
+     *
+     * @param string $name
+     * @return string
+     */
+    protected function getUrl(string $name) : string
+    {
+        return env('DROPBOX_APP_URL') . '/' . env('DROPBOX_APP_FOLDER') . '/' . $name;
     }
 }
