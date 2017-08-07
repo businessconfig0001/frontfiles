@@ -2,8 +2,9 @@
 
 namespace FrontFiles\Http\Controllers\Files;
 
-use FrontFiles\{File, User };
-use Laravel\Socialite\Facades\Socialite;
+use FrontFiles\{
+    File, Inspections\TokenValidator\TokenValidator
+};
 use FrontFiles\Http\Controllers\Controller;
 use FrontFiles\Http\Requests\{ CreateFileRequest, UpdateFileRequest };
 
@@ -115,19 +116,15 @@ class FilesController extends Controller
     }
 
     /**
-     * Verifies if the tokens are still valid.
+     * Verifies if the Dropbox token is still valid.
      *
      * @return bool
      */
     protected function checkIfDropboxTokenIsStillValid()
     {
-        $user = User::find(auth()->user()->id);
-
         try{
-            Socialite::driver('dropbox')->userFromToken($user->dropbox_token);
-            return true;
-        } catch(\Exception $e) {
-            $user->update(['dropbox_token' => null]);
+            return (new TokenValidator)->check('dropbox', auth()->user()->id);
+        } catch(\Exception $e){
             return false;
         }
     }

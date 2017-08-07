@@ -55,7 +55,7 @@ class CreateFileRequest extends FormRequest
             'what.*'        => 'required|string|max:25',
             'who.*'         => 'required|string|max:25',
             'why'           => 'nullable|string|max:160',
-            'drive'         => 'required|string|in:dropbox',
+            'drive'         => 'required|string|valid_token|in:dropbox',
         ];
     }
 
