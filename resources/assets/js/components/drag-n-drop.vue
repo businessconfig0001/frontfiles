@@ -167,7 +167,7 @@
 		.input-file {
 			opacity: 0; /* invisible but it's there! */
 			width: 100%;
-			height: 500px;
+			height: 250px;
 			position: absolute;
 			cursor: pointer;
 		}
