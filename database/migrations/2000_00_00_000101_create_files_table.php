@@ -27,12 +27,13 @@ class CreateFilesTable extends Migration
             $table->string('original_name');
             $table->string('name', 20);
             $table->string('url');
+            $table->string('azure_url')->nullable();
             $table->string('title');
             $table->text('description');
 
             $table->string('where');
             $table->date('when');
-            $table->string('why')->nullable();;
+            $table->string('why')->nullable();
 
             $table->timestamps();
         });
