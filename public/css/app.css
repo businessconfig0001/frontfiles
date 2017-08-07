@@ -8372,6 +8372,10 @@ button.close {
   margin-top: 6rem;
 }
 
+.btn {
+  border-radius: 0;
+}
+
 .btn-primary {
   background-color: blue !important;
 }
@@ -9089,7 +9093,7 @@ img {
 
 .main-header .sub-title {
   padding-top: 15px;
-  font-size: 1.6rem;
+  font-size: 1.4em;
   font-weight: bolder;
   width: 300%;
   margin-left: -80%;

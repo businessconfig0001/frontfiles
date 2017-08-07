@@ -7,14 +7,14 @@
 	<audio controls v-else-if="file.type === 'audio'">
 		<source :src="file.url">
 	</audio>
-	<div v-else>
+	<div v-else class="download-file">
 		<a :href="file.url">
 			<i class="fa fa-download"></i>
 		</a>
 	</div>
 	<div v-if="status">
 		<h2>{{file.title}}</h2>
-		<p>{{file.description}}</p>
+		<p>{{short_desc}}</p>
 		<ul>
 			<li v-show="file.where">#Where: <span>{{file.where}}</span></li>
 			<li v-show="file.when">#When: <span>{{date}}</span></li>
@@ -78,6 +78,10 @@ export default {
   computed:{
   	date(){
   		return moment(this.file.when).format('DD/MM/YYYY')
+  	},
+  	short_desc(){
+  		if(this.file.description.length > 100) return this.file.description.substring(0,100) + ' ...'
+  		return this.file.description
   	}
   },
   data () {
@@ -116,8 +120,9 @@ export default {
 	background-color:rgb(255,255,255);
 	padding: 1rem;
 
-	video{
+	video,img,audio,.download-file{
 		width:100%;
+		height:18rem;
 	}
 
 	.btn{

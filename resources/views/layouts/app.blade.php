@@ -55,7 +55,6 @@
                                                 <li><a href="{{ route('auth.login') }}">Login</a></li>
                                                 <li><a href="{{ route('auth.register') }}">Register</a></li>
                                             @else
-                                                <li><a href="{{ route('files') }}">Files</a></li>
                                                 <li>
                                                     <a href="{{ route('auth.logout') }}"
                                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -66,9 +65,10 @@
                                                     </form>
                                                 </li>
                                                 <li><a href="{{ route('profile') }}">Profile</a></li>
+                                                <li><a href="{{ route('files.upload') }}" class="btn btn-border-black">Upload</a></li>
                                             @endif
 
-                                            <li><a href="{{ route('files.upload') }}" class="btn btn-border-black">Upload</a></li>
+                                           
 
                                         </ul>
                                     </div>
