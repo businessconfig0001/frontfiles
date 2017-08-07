@@ -30,7 +30,7 @@ class FilesController extends Controller
     {
         $files = File::where('user_id', auth()->user()->id)->latest()->get();
 
-        $dropbox_token = $this->checkIfTokensAreStillValid();
+        $dropbox_token = $this->checkIfDropboxTokenIsStillValid();
 
         if(request()->expectsJson())
             return response([
@@ -119,7 +119,7 @@ class FilesController extends Controller
      *
      * @return bool
      */
-    protected function checkIfTokensAreStillValid()
+    protected function checkIfDropboxTokenIsStillValid()
     {
         $user = User::find(auth()->user()->id);
 

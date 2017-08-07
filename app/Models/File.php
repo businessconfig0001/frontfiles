@@ -2,6 +2,7 @@
 
 namespace FrontFiles;
 
+use FrontFiles\Utility\DriversHelper;
 use FrontFiles\Utility\Helper;
 use WindowsAzure\Common\ServicesBuilder;
 use MicrosoftAzure\Storage\Common\ServiceException;
@@ -31,18 +32,8 @@ class File extends Model
         //Automatically deletes from the storage the associated file and the tags relation.
         static::deleting(function($file){
 
+            /*
             switch($file->drive){
-                case 'dropbox':
-                    $client = new \Spatie\Dropbox\Client($file->owner->dropbox_token);
-                    $adapter = new \Spatie\FlysystemDropbox\DropboxAdapter($client);
-                    $filesystem = new \League\Flysystem\Filesystem($adapter);
-
-                    if(!$filesystem->has($file->name))
-                        throw new FileNotFoundException('We couln\'t find this file!');
-                    else
-                        $filesystem->delete($file->name);
-
-                    break;
                 default:
                     $container = 'user-id-' . $file->owner->id;
 
@@ -53,6 +44,14 @@ class File extends Model
 
                     break;
             }
+            */
+
+            $filesystem = DriversHelper::userDropbox($file->owner->dropbox_token);
+
+            if(!$filesystem->has($file->name))
+                throw new FileNotFoundException('We couln\'t find this file!');
+            else
+                $filesystem->delete($file->name);
 
             $file->tagsWhat()->detach();
             $file->tagsWho()->detach();
@@ -64,7 +63,7 @@ class File extends Model
      *
      * @return \Illuminate\Contracts\Routing\UrlGenerator|string
      */
-    public function path()
+    public function path() : string
     {
         return url("/files/{$this->short_id}");
     }
@@ -74,7 +73,7 @@ class File extends Model
      *
      * @return \Illuminate\Contracts\Routing\UrlGenerator|string
      */
-    public function realPath()
+    public function realPath() : string
     {
         return url("/files/{$this->id}");
     }
@@ -85,7 +84,7 @@ class File extends Model
      * @param int $length
      * @return string
      */
-    public static function generateUniqueShortID(int $length = 8)
+    public static function generateUniqueShortID(int $length = 8) : string
     {
         $output = Helper::generateRandomAlphaNumericString();
 
@@ -101,7 +100,7 @@ class File extends Model
      * @param string $mimeType
      * @return string
      */
-    public static function getFileType(string $mimeType = 'document')
+    public static function getFileType(string $mimeType = 'document') : string
     {
         $type = explode('/', $mimeType)[0];
 
@@ -120,38 +119,35 @@ class File extends Model
      * @param string $name
      * @return string
      */
-    public static function storeAndReturnUrl(string $name)
+    public static function storeAndReturnUrl(string $name) : string
     {
-        switch(request('drive'))
-        {
-            case 'dropbox':
-                $client = new \Spatie\Dropbox\Client(auth()->user()->dropbox_token);
-                $adapter = new \Spatie\FlysystemDropbox\DropboxAdapter($client);
-                $filesystem = new \League\Flysystem\Filesystem($adapter);
-                $filesystem->write($name, file_get_contents(request()->file('file')));
+        /* AZURE STUFF - TODO
+        $container = 'user-id-' . auth()->user()->id;
+        $config = config('filesystems.default');
 
-                return 'https://www.dropbox.com/home/Apps/'.auth()->user()->dropbox_app_name.'/'.$name;
+        if($config === 'azure')
+            static::createContainerIfNeeded($container);
 
-            default:
-                $container = 'user-id-' . auth()->user()->id;
-                $config = config('filesystems.default');
+        return config('filesystems.disks.' . $config . '.url') .
+            request()
+                ->file('file')
+                ->storeAs($container, $name, $config);
+         */
 
-                if($config === 'azure')
-                    static::createContainerIfNeeded($container);
+        $filesystem = DriversHelper::userDropbox(auth()->user()->dropbox_token);
 
-                return config('filesystems.disks.' . $config . '.url') .
-                    request()
-                        ->file('file')
-                        ->storeAs($container, $name, $config);
-        }
+        $filesystem->write($name, file_get_contents(request()->file('file')));
+
+        return 'https://www.dropbox.com/home/Apps/FrontFiles-WebApp/'.$name;
     }
 
-    /**
+    /** TODO
      * Checks if the current user container exists in the azure blob storage
      * If it does not exist, he creates it.
      *
      * @param string $container
      */
+    /*
     protected static function createContainerIfNeeded(string $container)
     {
         //BLOBS_ONLY means that its public
@@ -166,6 +162,7 @@ class File extends Model
             //If there's an exception, it means that the container (folder) already exists
         }
     }
+    */
 
     /**
      * Tags associated to this file.
