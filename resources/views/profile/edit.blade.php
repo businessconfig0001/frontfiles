@@ -4,9 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Edit profile</div>
-                <div class="panel-body">
+            <div>
+                <h1 class="auth-title">Edit profile</h1>
+                <div>
 
                     <form class="form-horizontal" method="POST" action="{{ route('profile.update') }}">
                         {{ csrf_field() }}
@@ -78,11 +78,18 @@
 
                         <!-- Type -->
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                            <label for="type" class="col-md-4 control-label">Type</label>
+                            <label for="type" class="col-md-4 control-label radio-label">Type</label>
 
-                            <div class="col-md-6">
-                                <input id="type" type="radio" name="type" value="user" class="form-control" {{ $user->hasRole('user') ? 'checked' : '' }}>Regular
-                                <input id="type" type="radio" name="type" value="corporative" class="form-control" {{ $user->hasRole('corporative') ? 'checked' : '' }}>Corporative
+                            <div class="col-md-6 register-radio">
+                                <div>
+                                   <input type="radio" name="type" value="user" class="form-control" id="indu" checked>
+                                    <label for="indu">Individual</label> 
+                                </div>
+                                <div>
+                                    <input id="coll" type="radio" name="type" value="corporative" class="form-control">
+                                    <label  for="coll">Collective</label>
+                                </div>
+                                
 
                                 @if ($errors->has('type'))
                                     <span class="help-block">

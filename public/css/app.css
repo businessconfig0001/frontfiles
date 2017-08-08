@@ -8522,11 +8522,9 @@ button.close {
 .profile .storage .box {
   display: inline-block;
   width: 30%;
-  background-color: #eee;
-  border: 1px dashed blue;
+  border: 1px solid blue;
   padding: 1rem;
   margin: 1rem;
-  border-radius: 10px;
   text-align: center;
 }
 
