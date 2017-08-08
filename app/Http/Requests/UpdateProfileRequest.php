@@ -46,7 +46,9 @@ class UpdateProfileRequest extends FormRequest
             'last_name'     => request('last_name'),
             'bio'           => request('bio') ?? 'I am new here!',
             'location'      => request('location'),
-        ])->assignRole(request('type'));
+        ]);
+
+        $user->syncRoles([request('type')]);
 
         if(request()->expectsJson())
             return response(['status' => 'Profile successfully edited!'], 200);
