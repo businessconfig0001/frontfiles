@@ -22,7 +22,7 @@
 				<upload-form :upload="upload" :errors="upload.errors" :dropbox="dropbox"></upload-form>
 			</div>
 			<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Save</a>
-			<a href="/profile" v-else class="submit btn btn-primary">Connect to dropbox</a>
+			<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
 			
 		</div>
 		
