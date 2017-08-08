@@ -8522,11 +8522,9 @@ button.close {
 .profile .storage .box {
   display: inline-block;
   width: 30%;
-  background-color: #eee;
-  border: 1px dashed blue;
+  border: 1px solid blue;
   padding: 1rem;
   margin: 1rem;
-  border-radius: 10px;
   text-align: center;
 }
 
@@ -8541,6 +8539,47 @@ button.close {
 
 .profile .storage .box p {
   padding: 1rem;
+}
+
+.auth-title {
+  color: blue;
+  font-size: 2rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.radio-label {
+  padding-top: 1rem !important;
+}
+
+.register-radio div {
+  float: left;
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.register-radio div label {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 1rem;
+  text-align: center;
+  background-color: #eee;
+}
+
+.register-radio div input[type='radio'] {
+  visibility: hidden;
+  margin: 0px;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  width: 1px;
+}
+
+.register-radio div input[type='radio']:checked + label {
+  color: white;
+  background-color: blue;
 }
 
 /*-------------------------------------
@@ -9463,5 +9502,9 @@ img {
   content: "";
   display: table;
   clear: both;
+}
+
+body {
+  background-color: white;
 }
 

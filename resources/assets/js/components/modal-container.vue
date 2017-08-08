@@ -1,10 +1,10 @@
 <template>
 	<div v-show="show" class="modal-background clearfix">
 		<div class="modal-wrapper modal-content col-md-4">
-			<p class="modal-text">
-				{{text}}
-			</p>
-			<a @click.prevent="close" class="btn btn-primary modal-button">Ok</a>
+			<div class="modal-text">
+				<slot></slot>
+			</div>
+			<a @click.prevent="close(true)" class="btn btn-primary modal-button">Ok</a>
 	  		<a href="#" class="close" @click.prevent="close">&#10005</a>
 		</div>
 	</div>
@@ -23,12 +23,14 @@ export default {
 			scroll(0,0)
 			return this.$store.state.showModal
 		},
-		text(){
-			return this.$store.state.modalText
+		modelData(){
+			return this.$store.state.modalData
 		}
+
 	},
 	methods:{
-		close(){
+		close(confirm = false){
+			if(confirm)localStorage.setItem(this.modelData,true)
 			this.$store.commit('closeModal')
 		}
 	},
@@ -57,8 +59,13 @@ export default {
   		transform: translate(-50%, -40%);
   		border-radius:0;
 
-  		p{
-  			padding:1rem;
+  		h1,h2{
+  			color:blue;
+  			padding:1rem 0;
+  		}
+  		h1{
+  			padding:2rem 0;
+  			font-size: 1.6rem;
   		}
 
 		.modal-button{

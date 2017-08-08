@@ -82,7 +82,7 @@
                 @yield('content')
 
             </div>
-            <modal-container></modal-container>
+            @yield('modals')
         </div><!-- /page structure -->
     </body>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7eCQwmRXS72DyZ5WwSmKS6DIT85Qwu8E&libraries=places"></script>

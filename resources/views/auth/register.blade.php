@@ -4,9 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
+                <h1 class="auth-title">Register</h1>
+                <div>
 
                     <form class="form-horizontal" method="POST" action="{{ route('auth.register') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -93,11 +92,18 @@
 
                         <!-- Type -->
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                            <label for="type" class="col-md-4 control-label">Type</label>
+                            <label for="type" class="col-md-4 control-label radio-label">Type</label>
 
-                            <div class="col-md-6">
-                                <input id="type" type="radio" name="type" value="user" class="form-control"checked>Individual
-                                <input id="type" type="radio" name="type" value="corporative" class="form-control">Collective
+                            <div class="col-md-6 register-radio">
+                                <div>
+                                   <input type="radio" name="type" value="user" class="form-control" id="indu" checked>
+                                    <label for="indu">Individual</label> 
+                                </div>
+                                <div>
+                                    <input id="coll" type="radio" name="type" value="corporative" class="form-control">
+                                    <label  for="coll">Collective</label>
+                                </div>
+                                
 
                                 @if ($errors->has('type'))
                                     <span class="help-block">
@@ -162,12 +168,14 @@
 
                     </form>
 
-                </div>
             </div>
         </div>
     </div>
-    <register-modal></register-modal>
 </div>
+@endsection
+
+@section('modals')
+   <register-modal></register-modal>
 @endsection
 
 @section('scripts')
