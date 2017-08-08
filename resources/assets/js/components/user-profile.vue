@@ -73,25 +73,39 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<files-display :files="files"></files-display>
+		</div>
 </section>
 </template>
 
 <script>
+import filesDisplay from './files-display'
 export default {
 
-  name: 'user-profile',
-  props:{
-  	user:{
-  		required:true,
-  		type:Object
-  	}
-  },
-  data () {
-    return {
+	name: 'user-profile',
+	components:{
+		filesDisplay
+	},
+	props:{
+		user:{
+			required:true,
+			type:Object
+		},
+		files:{
+			required:true,
+			type:Array
+		}
+	},
+	data () {
+		return {
 
-    };
-  }
-};
+		}
+	},
+	mounted(){
+		this.$store.commit('openModal','You are now an official FrontFiler and we are ready to start receiving your editorial footage, images or illustrations. You can complete your profile information whenever you want. After you upload your files, they will be available for sale and for sharing (the compressed copy).During this Beta phase, files can be sold by us directly to the client, and only if they show urgent relevancy. However, you decide whether you wish to sell or not, as well as set the price for all of your files.In the next platform’s phase you will have full control over the sales , which will be automatic and direct from you to the buyer')
+	}
+}
 </script>
 
 <style lang="css" scoped>
