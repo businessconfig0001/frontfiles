@@ -45,7 +45,7 @@
 
                         <!-- Avatar -->
                         <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
-                            <label for="avatar" class="col-md-4 control-label">Avatar</label>
+                            <label for="avatar" class="col-md-4 control-label">Profile picture</label>
 
                             <div class="col-md-6">
                                 <input id="avatar" type="file" class="form-control" name="avatar" value="{{ old('avatar') }}" accept="image/*">
@@ -61,7 +61,7 @@
 
                         <!-- Bio -->
                         <div class="form-group{{ $errors->has('bio') ? ' has-error' : '' }}">
-                            <label for="bio" class="col-md-4 control-label">Bio</label>
+                            <label for="bio" class="col-md-4 control-label">About you</label>
 
                             <div class="col-md-6">
                                 <textarea id="bio" name="bio" class="form-control" autofocus>{{ old('bio') }}</textarea>
@@ -96,8 +96,8 @@
                             <label for="type" class="col-md-4 control-label">Type</label>
 
                             <div class="col-md-6">
-                                <input id="type" type="radio" name="type" value="user" class="form-control"checked>Regular
-                                <input id="type" type="radio" name="type" value="corporative" class="form-control">Corporative
+                                <input id="type" type="radio" name="type" value="user" class="form-control"checked>Individual
+                                <input id="type" type="radio" name="type" value="corporative" class="form-control">Collective
 
                                 @if ($errors->has('type'))
                                     <span class="help-block">
