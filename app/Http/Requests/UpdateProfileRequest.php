@@ -50,6 +50,10 @@ class UpdateProfileRequest extends FormRequest
 
         $user->syncRoles([request('type')]);
 
+        $user->generateSlug();
+
+        $user->save();
+
         if(request()->expectsJson())
             return response(['status' => 'Profile successfully edited!'], 200);
 
