@@ -135,7 +135,7 @@ class ProfileController extends Controller
         $user->update(['dropbox_token' => $dropboxUser->token]);
 
         return redirect()
-            ->route('profile')
+            ->route('files.upload')
             ->with('message', 'Dropbox successfully connected!');
     }
 }
