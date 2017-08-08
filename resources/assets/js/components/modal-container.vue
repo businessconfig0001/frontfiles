@@ -45,6 +45,7 @@ export default {
 	height:100%;
 	top:0;
 	left:0;
+	overflow:hidden;
 
 
 	.modal-wrapper.modal-content{
@@ -52,8 +53,8 @@ export default {
 		padding:3rem;
 		position:absolute;
 		left:50%;
-		top: 10%;
-  		transform: translate(-50%, -10%);
+		top: 40%;
+  		transform: translate(-50%, -40%);
   		border-radius:0;
 
   		p{

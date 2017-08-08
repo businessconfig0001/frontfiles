@@ -2,6 +2,6 @@
 
 @section('content')
 
-<user-profile :user="{{ $user }}"></user-profile>
+<user-profile :user="{{ $user }}" :files="{{ $files }}"></user-profile>
 
 @endsection

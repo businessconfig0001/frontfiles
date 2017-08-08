@@ -35,13 +35,16 @@ class ProfileController extends Controller
     {
         $user = User::where('slug', $slug)->firstOrFail();
 
+         $files = File::where('user_id', $user->id)->latest()->get();
+
         $this->authorize('view', $user);
 
         if(request()->expectsJson())
             return response()->json(['data' => $user], 200);
         $user=json_encode($user);
+        $files=json_encode($files);
 
-        return view('profile.show', compact('user'));
+        return view('profile.show', compact('user','files'));
     }
 
     /**

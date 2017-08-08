@@ -12,7 +12,7 @@
 			<i class="fa fa-download"></i>
 		</a>
 	</div>
-	<div v-if="status">
+	<div v-if="status" class="file-info">
 		<h2>{{file.title}}</h2>
 		<p>{{short_desc}}</p>
 		<ul>
@@ -122,11 +122,22 @@ export default {
 
 	video,img,audio,.download-file{
 		width:100%;
-		height:18rem;
+
+	}
+
+	.file-info{
+		padding:.5rem;
+
+		h2{
+			padding: .5rem 0;
+			font-weight:bolder;
+			text-align:center;
+		}
+		
 	}
 
 	.btn{
-		width:15rem;
+		width:100%;
 		margin: 0.5rem auto;
 	}
 }
