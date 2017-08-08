@@ -2,7 +2,7 @@
 
 namespace FrontFiles\Http\Controllers\Profile;
 
-use FrontFiles\{ User, File };
+use FrontFiles\User;
 use Laravel\Socialite\Facades\Socialite;
 use FrontFiles\Http\Controllers\Controller;
 use FrontFiles\Http\Requests\UpdateProfileRequest;
@@ -20,15 +20,10 @@ class ProfileController extends Controller
 
         $this->authorize('view', $user);
 
-        $files = File::where('user_id', auth()->user()->id)->latest()->get();
-
         if(request()->expectsJson())
-            return response()->json([
-                'data' => $user,
-                'files' => $files
-            ], 200);
+            return response()->json(['data' => $user], 200);
 
-        return view('profile.index', compact('user', 'files'));
+        return view('profile.index', compact('user'));
     }
 
     /**

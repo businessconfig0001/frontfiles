@@ -25,7 +25,11 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'token' => 'nullable|string|max:64',
+            'first_name'    => 'required|string|max:100',
+            'last_name'     => 'required|string|max:100',
+            'bio'           => 'nullable|string|max:500',
+            'location'      => 'required|string|max:100',
+            'type'          => 'required|in:user,corporative',
         ];
     }
 
@@ -37,12 +41,17 @@ class UpdateProfileRequest extends FormRequest
      */
     public function persist(User $user)
     {
-        if(request('token'))
-            $user->update(['dropbox_token' => request('token')]);
+        $user->update([
+            'first_name'    => request('first_name'),
+            'last_name'     => request('last_name'),
+            'bio'           => request('bio') ?? 'I am new here!',
+            'location'      => request('location'),
+        ])->assignRole(request('type'));
 
         if(request()->expectsJson())
             return response(['status' => 'Profile successfully edited!'], 200);
 
-        return redirect(route('profile'));
+        return redirect(route('profile'))
+            ->with('message', 'Profile successfully edited!');
     }
 }
