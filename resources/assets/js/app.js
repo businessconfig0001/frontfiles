@@ -7,7 +7,8 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -18,7 +19,44 @@ window.Vue = require('vue');
 Vue.component('drag-n-drop', require('./components/drag-n-drop.vue'))
 Vue.component('files-display',require('./components/files-display.vue'))
 Vue.component('tag-input',require('./components/tag-input.vue'))
+Vue.component('modal-container',require('./components/modal-container.vue'))
+Vue.component('user-profile',require('./components/user-profile.vue'))
+Vue.component('profile-modal',require('./components/profile-modal.vue'))
+Vue.component('register-modal',require('./components/register-modal.vue'))
+
+/**
+ * Vuex data store implementation
+*/
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+	state: {
+		showModal:false,
+		modalText:''
+		
+	},
+	actions: {
+
+	},
+	mutations: {
+		openModal(state,text){
+			state.showModal = true
+			state.modalText = text
+		},
+		closeModal(state){
+			state.showModal = false
+		}
+
+
+	},
+	getters: {
+
+	}
+})
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store
 });

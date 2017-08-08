@@ -35,8 +35,13 @@
 	</p>
 	<p>
 		<display-error :error="upload.errors['drive']"></display-error>
-		<input type="radio" name="drive" value="nothing" class="form-control" v-model="upload.data.drive" checked> Default
-		<input type="radio" name="drive" value="dropbox" class="form-control" v-model="upload.data.drive"> Dropbox (please configure it first)
+		<div class="radio" v-show="dropbox">	
+			<input type="radio" name="drive" value="dropbox" class="form-control" id="dropbox"v-model="upload.data.drive">
+		 	<label class="btn btn-secondary" for="dropbox">Dropbox</label>
+		 			
+		</div>
+			
+		
 	</p>
 
 </div>
@@ -59,6 +64,8 @@ export default {
 		errors:{
 			required:false,
 			type:Object
+		},
+		dropbox:{
 		}
 	},
 	data () {
@@ -86,5 +93,27 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+	.radio{
+		display:flex;
+
+		.btn-secondary{
+			background-color:#eee;
+			flex:1;
+			border:2px solid #eee;
+		}
+
+		input[type='radio']{
+			visibility:hidden;
+			flex:1;
+			margin: 0px;
+
+			&:checked  + label{
+				color:blue;
+				background-color:white;
+				border:2px solid blue;
+			
+			}
+		}		
+	}
 </style>

@@ -32,11 +32,13 @@ export default {
 	},
 	methods:{
 		addTag(){
-			this.tags.push(this.new_tag)
-			this.new_tag='';
+			if(this.new_tag){
+				this.tags.push(this.new_tag)
+				this.new_tag='';
+			}	
 		},
 		removeTag(t){
-			this.tags=this.tags.splice(this.tags.indexOf(t),1)
+			this.tags=this.tags.filter(x => x !== t)
 		}
 	}
 };

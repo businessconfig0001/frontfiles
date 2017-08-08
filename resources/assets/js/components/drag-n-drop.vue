@@ -1,7 +1,7 @@
 <template>
 <div class="drag-container">
 	<form enctype="multipart/form-data" novalidate class="clearfix">
-		<div class="col-sm-7 col-xs-12 bg-blue text-center dropbox">
+		<div class="col-sm-4 col-offset-2 col-xs-12 bg-blue text-center dropbox">
 			<input type="file" multiple name="file" :disabled="state ==='saving'" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*,video/*,audio/*,application/pdf" class="input-file">
 			<p v-if="state === 'saving'" class="progress">
 			  	Uploading {{ fileCount }} files...
@@ -19,15 +19,14 @@
 
 		<div class="col-xs-12 col-sm-3 form" v-show="uploads.length">
 			<div v-for="upload in uploads" class="form-group">
-				<upload-form :upload="upload" :errors="upload.errors"></upload-form>
+				<upload-form :upload="upload" :errors="upload.errors" :dropbox="dropbox"></upload-form>
 			</div>
-			<a class="submit btn btn-primary" @click.prevent="uploadFile">Save</a>
+			<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Save</a>
+			<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
+			
 		</div>
 		
 	</form>
-	<div class="file-container">
-		<files-display :files="files"></files-display>
-	</div>
 </div>
 	
 </template>
@@ -52,9 +51,14 @@
 			files:{
 				required:true,
 				type:Array
+			},
+			dropbox:{
+				required:false,
+				default:() => false
 			}
 		},
 		mounted(){
+			this.$store.commit('openModal','For optimal indexing, it is extremely important that you describe and tag your material very precisely.Provide a short title and an accurate description of the event. Key words / tags will make it easier to find your work in a search.You must try to answer basic questions like #who, #what, #where, #when, #why, #how.')
 		},
 		methods:{
 			filesChange(fieldName, fileList) {
@@ -72,7 +76,7 @@
 				  			when:'',
 				  			who:[],
 				  			why:'',
-							drive:''
+							drive:'nothing'
 				  		}
 				  		if(this.uploads[x]) d = this.uploads[x].data 
 					  	this.uploads[x]={ 
@@ -114,67 +118,79 @@
 </script>
 
 <style lang="scss" scoped>
-h3{
-	font-size:1.2rem;
-	padding:1rem;
+.drag-container{
+	margin:2rem;
 
-	span{
-		color:white
+	h3{
+		font-size:1.2rem;
+		padding:1rem;
+
+		span{
+			color:white
+		}
+
 	}
+	form{
+		display:block
 
-}
-form{
-	display:block
-
-	input{
-		&[placeholder]{
-			color:#C7C7CD !important;
+		input{
+			&[placeholder]{
+				color:#C7C7CD !important;
+			}
 		}
 	}
-}
-.dropbox {
-	outline-offset: -10px;
-	padding: 10px 10px;
-	min-height: 500px; /* minimum height */
-	position: relative;
-	cursor: pointer;
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	&:hover {
-		background: lightblue; /* when mouse over to the drop zone, change color */
-	}
-
-	.progress{
-		width:60%;
-
-		progress:{
-			width:100%;
-		}
-	}
-
-	.input-file {
-		opacity: 0; /* invisible but it's there! */
-		width: 100%;
-		height: 500px;
-		position: absolute;
+	.dropbox {
+		outline-offset: -10px;
+		padding: 10px 10px;
+		min-height: 250px; /* minimum height */
+		position: relative;
 		cursor: pointer;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		border:4px solid blue;
+
+		&:hover {
+			background: #F5F8FA;
+			border:4px dashed blue;
+			p{
+				color:blue;
+			}
+			
+		}
+
+		.progress{
+			width:60%;
+
+			progress:{
+				width:100%;
+			}
+		}
+
+		.input-file {
+			opacity: 0; /* invisible but it's there! */
+			width: 100%;
+			height: 250px;
+			position: absolute;
+			cursor: pointer;
+		}
+
+		p {
+			font-size: 1.2em;
+			text-align: center;
+			color:white;
+
+		}
+
 	}
-
-	p {
-		font-size: 1.2em;
-		text-align: center;
-		color:white;
-
+	.form-group{
+		display:block;
+		padding-bottom:2rem;
 	}
+	.file-container{
+		display:block;
+		width:100%;
+	}
+}
 
-}
-.form-group{
-	display:block;
-	padding-bottom:2rem;
-}
-.file-container{
-	display:block;
-	width:100%;
-}
 </style>

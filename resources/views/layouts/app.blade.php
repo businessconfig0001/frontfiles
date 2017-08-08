@@ -55,7 +55,6 @@
                                                 <li><a href="{{ route('auth.login') }}">Login</a></li>
                                                 <li><a href="{{ route('auth.register') }}">Register</a></li>
                                             @else
-                                                <li><a href="{{ route('files') }}">Files</a></li>
                                                 <li>
                                                     <a href="{{ route('auth.logout') }}"
                                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -66,9 +65,10 @@
                                                     </form>
                                                 </li>
                                                 <li><a href="{{ route('profile') }}">Profile</a></li>
+                                                <li><a href="{{ route('files.upload') }}" class="btn btn-border-black">Upload</a></li>
                                             @endif
 
-                                            <li><a href="{{ route('files.upload') }}" class="btn btn-border-black">Upload</a></li>
+                                           
 
                                         </ul>
                                     </div>
@@ -82,6 +82,7 @@
                 @yield('content')
 
             </div>
+            <modal-container></modal-container>
         </div><!-- /page structure -->
     </body>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7eCQwmRXS72DyZ5WwSmKS6DIT85Qwu8E&libraries=places"></script>
@@ -96,4 +97,5 @@
         ga('create', 'UA-102556173-1', 'auto');
         ga('send', 'pageview');
     </script>
+    @yield('scripts')
 </html>

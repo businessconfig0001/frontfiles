@@ -2,8 +2,9 @@
 
 namespace FrontFiles\Http\Controllers\Files;
 
-use FrontFiles\{File, User };
-use Laravel\Socialite\Facades\Socialite;
+use FrontFiles\{
+    File, Inspections\TokenValidator\TokenValidator
+};
 use FrontFiles\Http\Controllers\Controller;
 use FrontFiles\Http\Requests\{ CreateFileRequest, UpdateFileRequest };
 
@@ -16,9 +17,7 @@ class FilesController extends Controller
      */
     public function index()
     {
-        $files = File::where('user_id', auth()->user()->id)
-            ->latest()
-            ->get();
+        $files = File::where('user_id', auth()->user()->id)->latest()->get();
 
         return request()->wantsJson() ? $files : view('files.index', compact('files'));
     }
@@ -30,13 +29,19 @@ class FilesController extends Controller
      */
     public function create()
     {
-        $files = File::where('user_id', auth()->user()->id)
-            ->latest()
-            ->get();
+        $files = File::where('user_id', auth()->user()->id)->latest()->get();
 
-        $this->checkIfTokensAreStillValid();
+        $dropbox_token = $this->checkIfDropboxTokenIsStillValid();
+        
+        if(request()->expectsJson())
+            return response([
+                'data' => $file,
+                'dropbox_token' => $dropbox_token
+            ], 200);
 
-        return request()->wantsJson() ? $files : view('files.create', compact('files'));
+        $dropbox_token = json_encode($dropbox_token);
+
+        return view('files.create', compact('files', 'dropbox_token'));
     }
 
     /**
@@ -108,20 +113,21 @@ class FilesController extends Controller
         if(request()->expectsJson())
             return response(['status' => 'File successfully deleted!'], 204);
 
-        return back();
+        return back()
+            ->with('message', 'File deleted!');
     }
 
     /**
-     * Verifies if the tokens are still valid.
+     * Verifies if the Dropbox token is still valid.
+     *
+     * @return bool
      */
-    protected function checkIfTokensAreStillValid()
+    protected function checkIfDropboxTokenIsStillValid() : bool
     {
-        $user = User::find(auth()->user()->id);
-
         try{
-            Socialite::driver('dropbox')->userFromToken($user->dropbox_token);
-        } catch(\Exception $e) {
-            $user->update(['dropbox_token' => null]);
+            return (new TokenValidator)->check('dropbox', auth()->user()->id);
+        } catch(\Exception $e){
+            return false;
         }
     }
 }

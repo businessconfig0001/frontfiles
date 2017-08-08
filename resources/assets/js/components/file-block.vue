@@ -1,11 +1,20 @@
 <template>
 <div class="block-container">
-	<video controls>
+	<video controls v-if="file.type === 'video'">
 		<source :src="file.url">
 	</video>
-	<div v-if="status">
+	<img v-else-if="file.type === 'image'" src="" alt="">
+	<audio controls v-else-if="file.type === 'audio'">
+		<source :src="file.url">
+	</audio>
+	<div v-else class="download-file">
+		<a :href="file.url">
+			<i class="fa fa-download"></i>
+		</a>
+	</div>
+	<div v-if="status" class="file-info">
 		<h2>{{file.title}}</h2>
-		<p>{{file.description}}</p>
+		<p>{{short_desc}}</p>
 		<ul>
 			<li v-show="file.where">#Where: <span>{{file.where}}</span></li>
 			<li v-show="file.when">#When: <span>{{date}}</span></li>
@@ -69,6 +78,10 @@ export default {
   computed:{
   	date(){
   		return moment(this.file.when).format('DD/MM/YYYY')
+  	},
+  	short_desc(){
+  		if(this.file.description.length > 100) return this.file.description.substring(0,100) + ' ...'
+  		return this.file.description
   	}
   },
   data () {
@@ -107,12 +120,24 @@ export default {
 	background-color:rgb(255,255,255);
 	padding: 1rem;
 
-	video{
+	video,img,audio,.download-file{
 		width:100%;
+
+	}
+
+	.file-info{
+		padding:.5rem;
+
+		h2{
+			padding: .5rem 0;
+			font-weight:bolder;
+			text-align:center;
+		}
+		
 	}
 
 	.btn{
-		width:15rem;
+		width:100%;
 		margin: 0.5rem auto;
 	}
 }

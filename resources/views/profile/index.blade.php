@@ -12,6 +12,10 @@
             </p>
 
             <p>
+                <a href="{{ route('profile.edit') }}">Edit profile</a>
+            </p>
+
+            <p>
                 Your account type is: {{ $user->roles()->pluck('name')->first() }}
             </p>
 
@@ -35,5 +39,5 @@
         </div>
 
     </div>
-
+    <profile-modal></profile-modal>
 @endsection

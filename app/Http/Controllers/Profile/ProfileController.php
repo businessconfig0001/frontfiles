@@ -2,7 +2,7 @@
 
 namespace FrontFiles\Http\Controllers\Profile;
 
-use FrontFiles\User;
+use FrontFiles\{ User, File};
 use Laravel\Socialite\Facades\Socialite;
 use FrontFiles\Http\Controllers\Controller;
 use FrontFiles\Http\Requests\UpdateProfileRequest;
@@ -37,10 +37,15 @@ class ProfileController extends Controller
 
         $this->authorize('view', $user);
 
-        if(request()->expectsJson())
-            return response()->json(['data' => $user], 200);
+        $files = File::where('user_id', $user->id)->latest()->get();
 
-        return view('profile.show', compact('user'));
+        if(request()->expectsJson())
+            return response()->json([
+                'data'  => $user,
+                'files' => $files,
+            ], 200);
+
+        return view('profile.show', compact('user','files'));
     }
 
     /**
@@ -50,14 +55,14 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-//        $user = User::find(auth()->user()->id);
-//
-//        $this->authorize('edit', $user);
-//
-//        if(request()->expectsJson())
-//            return response()->json(['data' => $user], 200);
-//
-//        return view('profile.edit', compact('user'));
+        $user = User::find(auth()->user()->id);
+
+        $this->authorize('edit', $user);
+
+        if(request()->expectsJson())
+            return response()->json(['data' => $user], 200);
+
+        return view('profile.edit', compact('user'));
     }
 
     /**

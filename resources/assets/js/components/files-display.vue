@@ -33,7 +33,7 @@ export default {
 <style lang="scss" scoped>
 	li{
 		width:33%;
-		padding:2rem;
+		padding:.5rem;
 		display:inline-block;
 	}
 </style>
