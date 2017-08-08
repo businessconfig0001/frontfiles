@@ -166,6 +166,7 @@
             </div>
         </div>
     </div>
+    <register-modal></register-modal>
 </div>
 @endsection
 

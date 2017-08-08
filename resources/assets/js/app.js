@@ -21,6 +21,8 @@ Vue.component('files-display',require('./components/files-display.vue'))
 Vue.component('tag-input',require('./components/tag-input.vue'))
 Vue.component('modal-container',require('./components/modal-container.vue'))
 Vue.component('user-profile',require('./components/user-profile.vue'))
+Vue.component('profile-modal',require('./components/profile-modal.vue'))
+Vue.component('register-modal',require('./components/register-modal.vue'))
 
 /**
  * Vuex data store implementation
