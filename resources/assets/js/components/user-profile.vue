@@ -9,7 +9,7 @@
 				<div class="profile-content col-xs-8">
 					<div class="row">
 						<div class="col-xs-5">
-							<h1 class="title txt-large">{{ user.fullName }}</h1>
+							<h1 class="title txt-large">{{ user.first_name + " " + user.last_name }}</h1>
 							<div class="box">
 								<h2 class=" subtitle location">{{ user.location }}</h2>
 								<p class="txt-small">{{ user.bio }}</p>
