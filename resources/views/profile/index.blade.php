@@ -39,5 +39,5 @@
         </div>
 
     </div>
-
+    <profile-modal></profile-modal>
 @endsection
