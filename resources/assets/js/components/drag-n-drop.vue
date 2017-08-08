@@ -51,7 +51,6 @@
 				type:Array
 			},
 			dropbox:{
-				required:true,
 				type:Object
 			}
 		},

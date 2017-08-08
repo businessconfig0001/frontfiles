@@ -1,10 +1,10 @@
 <template>
 	<div v-show="show" class="modal-background clearfix">
-		<div class="modal-wrapper col-md-4">
-			<p class="modal-content">
-				
+		<div class="modal-wrapper modal-content col-md-4">
+			<p class="modal-text">
+				{{text}}
 			</p>
-			<a @click.prevent="close" class="btn btn-primary">Ok</a>
+			<a @click.prevent="close" class="btn btn-primary modal-button">Ok</a>
 	  		<a href="#" class="close" @click.prevent="close">&#10005</a>
 		</div>
 	</div>
@@ -22,12 +22,18 @@ export default {
 		show(){
 			scroll(0,0)
 			return this.$store.state.showModal
+		},
+		text(){
+			return this.$store.state.modalText
 		}
 	},
 	methods:{
 		close(){
 			this.$store.commit('closeModal')
 		}
+	},
+	mounted(){
+		this.$store.commit('openModal','For optimal indexing, it is extremely important that you describe and tag your material very precisely.Provide a short title and an accurate description of the event. Key words / tags will make it easier to find your work in a search.You must try to answer basic questions like #who, #what, #where, #when, #why, #how.')
 	}
 };
 </script>
@@ -41,17 +47,27 @@ export default {
 	width:100%;
 	height:100%;
 	top:0;
+	left:0;
 
 
-	.modal-wrapper{
+	.modal-wrapper.modal-content{
 		background-color:white;
 		padding:3rem;
 		position:absolute;
 		left:50%;
 		top: 10%;
   		transform: translate(-50%, -10%);
+  		border-radius:0;
 
-		
+  		p{
+  			padding:1rem;
+  		}
+
+		.modal-button{
+			width:60%;
+			margin-top:1rem;
+			margin-left:20%;
+		}		
 		.close{
 			padding:1rem;
 			position:absolute;

@@ -39,6 +39,7 @@ class ProfileController extends Controller
 
         if(request()->expectsJson())
             return response()->json(['data' => $user], 200);
+        $user=json_encode($user);
 
         return view('profile.show', compact('user'));
     }
