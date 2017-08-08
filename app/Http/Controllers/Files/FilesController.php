@@ -39,6 +39,8 @@ class FilesController extends Controller
                 'dropbox_token' => $dropbox_token
             ], 200);
 
+        dd($dropbox_token);
+
         return view('files.create', compact('files', 'dropbox_token'));
     }
 
@@ -120,7 +122,7 @@ class FilesController extends Controller
      *
      * @return bool
      */
-    protected function checkIfDropboxTokenIsStillValid()
+    protected function checkIfDropboxTokenIsStillValid() : bool
     {
         try{
             return (new TokenValidator)->check('dropbox', auth()->user()->id);
