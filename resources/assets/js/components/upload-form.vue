@@ -33,6 +33,16 @@
 		<textarea name="why" id="why" class="form-control" placeholder="#Why" v-model="upload.data.why"></textarea>
 		
 	</p>
+	<p>
+		<display-error :error="upload.errors['drive']"></display-error>
+		<div class="radio" v-show="dropbox">	
+			<input type="radio" name="drive" value="dropbox" class="form-control"  id="dropbox"v-model="upload.data.drive" >			
+		 	<label class="btn btn-secondary" for="dropbox">Dropbox</label>
+		 			
+		</div>
+			
+		
+	</p>
 
 </div>
 
@@ -90,6 +100,7 @@ export default {
 		.btn-secondary{
 			background-color:#eee;
 			flex:1;
+			border:2px solid #eee;
 		}
 
 		input[type='radio']{
@@ -97,9 +108,11 @@ export default {
 			flex:1;
 			margin: 0px;
 
-			.btn-secondary + &:checked {
-				color:white;
-				background-color:blue;
+			&:checked  + label{
+				color:blue;
+				background-color:white;
+				border:2px solid blue;
+			
 			}
 		}		
 	}
