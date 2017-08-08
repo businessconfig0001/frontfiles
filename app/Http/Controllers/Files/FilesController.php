@@ -32,13 +32,13 @@ class FilesController extends Controller
         $files = File::where('user_id', auth()->user()->id)->latest()->get();
 
         $dropbox_token = $this->checkIfDropboxTokenIsStillValid();
-
+        
         if(request()->expectsJson())
             return response([
                 'data' => $file,
                 'dropbox_token' => $dropbox_token
             ], 200);
-
+        $dropbox_token = json_encode($dropbox_token);
         return view('files.create', compact('files', 'dropbox_token'));
     }
 

@@ -21,7 +21,9 @@
 			<div v-for="upload in uploads" class="form-group">
 				<upload-form :upload="upload" :errors="upload.errors" :dropbox="dropbox"></upload-form>
 			</div>
-			<a class="submit btn btn-primary" @click.prevent="uploadFile">Save</a>
+			<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Save</a>
+			<a href="/profile" v-else class="submit btn btn-primary">Connect to dropbox</a>
+			
 		</div>
 		
 	</form>
@@ -51,7 +53,8 @@
 				type:Array
 			},
 			dropbox:{
-				type:Object
+				required:false,
+				default:() => false
 			}
 		},
 		mounted(){

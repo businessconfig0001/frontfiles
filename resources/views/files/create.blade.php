@@ -2,9 +2,8 @@
 
 @section('content')
     <!-- form-container -->
-    <h1>{{ $dropbox_token }}</h1>
     <section class="form-container">
-	    <drag-n-drop :files="{{$files}}" :dropbox="'ddd'"></drag-n-drop>
+	    <drag-n-drop :files="{{$files}}" :dropbox="{{ $dropbox_token }}"></drag-n-drop>
     </section><!-- form-container -->
 
     <!-- /modules -->
