@@ -1,0 +1,40 @@
+.auth-title{
+	color:blue;
+	font-size:2rem;
+	text-align:center;
+	padding:1rem;
+}
+.radio-label{
+	padding-top:1rem !important;
+}
+.register-radio{
+
+	div{
+		float:left;
+		width: 50%;
+		display: flex;
+
+		label{
+			flex:1;
+			padding:1rem;
+			text-align:center;
+			background-color:#eee;
+		}
+		input[type='radio']{
+			visibility:hidden;
+			margin: 0px;
+			clip: rect(0, 0, 0, 0);
+    		height: 1px;
+    		width: 1px;
+		
+
+			&:checked  + label{
+				color:white;
+				background-color:blue;
+			
+			}
+		}
+	}
+
+		
+}

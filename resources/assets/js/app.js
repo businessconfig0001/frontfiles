@@ -34,7 +34,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		showModal:false,
-		modalText:''
+		modalData:''
 		
 	},
 	actions: {
@@ -43,7 +43,7 @@ const store = new Vuex.Store({
 	mutations: {
 		openModal(state,text){
 			state.showModal = true
-			state.modalText = text
+			state.modalData = text
 		},
 		closeModal(state){
 			state.showModal = false

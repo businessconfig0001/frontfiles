@@ -36,7 +36,7 @@
 	<p>
 		<display-error :error="upload.errors['drive']"></display-error>
 		<div class="radio" v-show="dropbox">	
-			<input type="radio" name="drive" value="dropbox" class="form-control"  id="dropbox"v-model="upload.data.drive" >			
+			<input type="radio" name="drive" value="dropbox" class="form-control"  id="dropbox" v-model="upload.data.drive" checked>			
 		 	<label class="btn btn-secondary" for="dropbox">Dropbox</label>
 		 			
 		</div>
