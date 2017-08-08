@@ -19,9 +19,9 @@ class FileTagWhoTableSeeder extends Seeder
         $tagIds = TagWho::pluck('id')->all();
 
         foreach(range(1, 30) as $index)
-            DB::table('file_tagWho')->insert([
+            DB::table('file_tagwho')->insert([
                 'file_id' => $faker->randomElement($fileIds),
-                'tagWho_id' => $faker->unique()->randomElement($tagIds)
+                'tagwho_id' => $faker->unique()->randomElement($tagIds)
             ]);
     }
 }
