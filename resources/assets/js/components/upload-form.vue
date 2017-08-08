@@ -94,6 +94,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.form-wrapper{
+	
+	h3{
+		padding:1rem 0;
+		color:blue;
+	}
+
 	.radio{
 		display:flex;
 
@@ -116,4 +123,6 @@ export default {
 			}
 		}		
 	}
+}
+
 </style>
