@@ -39,8 +39,6 @@ class FilesController extends Controller
                 'dropbox_token' => $dropbox_token
             ], 200);
 
-        dd($dropbox_token);
-
         return view('files.create', compact('files', 'dropbox_token'));
     }
 
