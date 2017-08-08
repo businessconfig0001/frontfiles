@@ -7,9 +7,8 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
 
-import store from './store'
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -21,6 +20,36 @@ Vue.component('drag-n-drop', require('./components/drag-n-drop.vue'))
 Vue.component('files-display',require('./components/files-display.vue'))
 Vue.component('tag-input',require('./components/tag-input.vue'))
 Vue.component('modal-container',require('./components/modal-container.vue'))
+
+/**
+ * Vuex data store implementation
+*/
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+	state: {
+		showModal:false,
+		
+	},
+	actions: {
+
+	},
+	mutations: {
+		openModal(state){
+			state.showModal = true
+		},
+		closeModal(state){
+			state.showModal = false
+		}
+
+
+	},
+	getters: {
+
+	}
+})
 
 const app = new Vue({
     el: '#app',
