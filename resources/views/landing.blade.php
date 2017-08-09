@@ -70,7 +70,7 @@
 		                	</div>
 		                	<div class="step">
 		                		<div class="container">
-		                			<div class="col-xs-10">2. Shoot a Photo & Video</div>
+		                			<div class="col-xs-10">2. Shoot Photo & Video</div>
 		                			<div class="col-xs-2 icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
 		                		</div>
 		                	</div>
@@ -82,7 +82,7 @@
 		                	</div>
 		                	<div class="step">
 		                		<div class="container">
-		                			<div class="col-xs-10">4. Price and License</div>
+		                			<div class="col-xs-10">4. Set the Price and License</div>
 		                			<div class="col-xs-2 icon">$ &copy;</div>
 		                		</div>
 		                	</div>
@@ -94,7 +94,7 @@
 		                	</div>
 		                	<div class="step">
 		                		<div class="container">
-		                			<div class="col-xs-10">6. Keep independent</div>
+		                			<div class="col-xs-10">6. Stay independent</div>
 		                			<div class="col-xs-2 icon"><i class="fa fa-bolt" aria-hidden="true"></i></div>
 		                		</div>
 		                	</div>
@@ -102,9 +102,9 @@
 	                </div>
                 </section>
 
-                <section class="col-xs-12 ff-divisor"></section>
-                <section class="col-xs-12 ff-divisor"></section>
-                <section class="col-xs-12 ff-divisor"></section>
+                <section class="col-xs-12">
+                        	<img src="{{ url('assets/images/ff-big.png') }}" class="img-responsive">
+                </section>
 
                 <section class="footer bg-blue col-xs-12">
                     <div class="container">
