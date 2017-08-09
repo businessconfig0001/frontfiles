@@ -1,7 +1,7 @@
 <template>
 <div>
 	<modal-container>
-		<h1>Dear friend, Welcome to FrontFiles:</h1>
+		<h1>Dear friend: <br />Welcome to FrontFiles</h1>
 		<p>
 			 Thank you for joining us on this Beta version and Platform testing. Please note that this is a community work-in-progress area. We are very pleased that you are helping us to improve its quality. 
 		</p>

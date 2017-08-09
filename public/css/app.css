@@ -8380,6 +8380,10 @@ button.close {
   background-color: blue !important;
 }
 
+.title-offset {
+  margin-left: 7rem;
+}
+
 #landing .hero-image {
   padding: 57% 0 0 0;
 }
@@ -8532,13 +8536,24 @@ button.close {
   width: 40%;
 }
 
+.profile .storage .box div.logo {
+  height: 123px;
+  margin-left: 30%;
+}
+
+.profile .storage .box div.logo img {
+  padding-top: 2rem;
+}
+
 .profile .storage .box .title {
   font-size: 1.6rem;
   padding-top: 1rem;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .profile .storage .box p {
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .auth-title {
@@ -8548,7 +8563,7 @@ button.close {
   padding: 1rem;
 }
 
-.radio-label {
+.offset-label {
   padding-top: 1rem !important;
 }
 
@@ -8567,6 +8582,7 @@ button.close {
   padding: 1rem;
   text-align: center;
   background-color: #eee;
+  cursor: pointer;
 }
 
 .register-radio div input[type='radio'] {
@@ -8580,6 +8596,10 @@ button.close {
 .register-radio div input[type='radio']:checked + label {
   color: white;
   background-color: blue;
+}
+
+.file-input {
+  width: 100%;
 }
 
 /*-------------------------------------

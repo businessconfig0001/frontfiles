@@ -26,13 +26,22 @@
 			.logo{
 				width:40%;
 			}
+			div.logo{
+				height:123px;
+				margin-left:30%;
 
+				img{
+					padding-top:2rem;
+				}
+			}
 			.title{
 				font-size:1.6rem;
 				padding-top:1rem;
+				padding-bottom:0;
+				margin-bottom:0;
 			}
 			p{
-				padding:1rem;
+				padding:1.5rem;
 			}
 		}
 	}

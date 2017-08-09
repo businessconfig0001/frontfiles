@@ -21,7 +21,7 @@
 			<div v-for="upload in uploads" class="form-group">
 				<upload-form :upload="upload" :errors="upload.errors" :dropbox="dropbox"></upload-form>
 			</div>
-			<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Save</a>
+			<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Upload</a>
 			<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
 			
 		</div>
@@ -32,8 +32,8 @@
 </template>
 
 <script>
-	import { Errors } from './../classes/Errors'
-	import { upload } from './../services/uploadService'
+	import { Errors } from './../../classes/Errors'
+	import { upload } from './../../services/uploadService'
 	import uploadForm from './upload-form'
 	export default {
 		name:'drag-n-drop',

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import filesDisplay from './files-display'
+import filesDisplay from './../files/files-display'
 export default {
 
 	name: 'user-profile',
