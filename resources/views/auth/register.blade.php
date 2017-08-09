@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-                <h1 class="auth-title">Register</h1>
+                <h1 class="auth-title title-offset">Register</h1>
                 <div>
 
                     <form class="form-horizontal" method="POST" action="{{ route('auth.register') }}" enctype="multipart/form-data">
@@ -44,11 +44,10 @@
 
                         <!-- Avatar -->
                         <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
-                            <label for="avatar" class="col-md-4 control-label">Profile picture</label>
+                            <label for="avatar" class="col-md-4 control-label offset-label">Profile picture</label>
 
                             <div class="col-md-6">
-                                <input id="avatar" type="file" class="form-control" name="avatar" value="{{ old('avatar') }}" accept="image/*">
-
+                                <file-input class="file-input" :options="{ name:'avatar',accept:'image',label:'upload picture' }"></file-input>
                                 @if ($errors->has('avatar'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('avatar') }}</strong>
@@ -92,7 +91,7 @@
 
                         <!-- Type -->
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                            <label for="type" class="col-md-4 control-label radio-label">Type</label>
+                            <label for="type" class="col-md-4 control-label offset-label">Type</label>
 
                             <div class="col-md-6 register-radio">
                                 <div>

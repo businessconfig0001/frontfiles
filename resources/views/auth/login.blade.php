@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="login-box">
-                <h1 class="auth-title">Login</h1>
+                <h1 class="auth-title title-offset">Login</h1>
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('auth.login') }}">
                         {{ csrf_field() }}

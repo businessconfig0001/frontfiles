@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div>
-                <h1 class="auth-title">Edit profile</h1>
+                <h1 class="auth-title title-offset">Edit profile</h1>
                 <div>
 
                     <form class="form-horizontal" method="POST" action="{{ route('profile.update') }}">

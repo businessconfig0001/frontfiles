@@ -11,6 +11,7 @@
 Homestead.json
 Homestead.yaml
 .env
+.env.example
 .DS_Store
 *.log
 .htaccess

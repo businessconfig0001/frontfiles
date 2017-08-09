@@ -16,13 +16,24 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('drag-n-drop', require('./components/drag-n-drop.vue'))
-Vue.component('files-display',require('./components/files-display.vue'))
-Vue.component('tag-input',require('./components/tag-input.vue'))
-Vue.component('modal-container',require('./components/modal-container.vue'))
-Vue.component('user-profile',require('./components/user-profile.vue'))
-Vue.component('profile-modal',require('./components/profile-modal.vue'))
-Vue.component('register-modal',require('./components/register-modal.vue'))
+//files
+Vue.component('drag-n-drop', require('./components/files/drag-n-drop.vue'))
+Vue.component('files-display',require('./components/files/files-display.vue'))
+
+
+//inputs
+Vue.component('tag-input',require('./components/inputs/tag-input.vue'))
+Vue.component('file-input',require('./components/inputs/file-input.vue'))
+
+
+//modals
+Vue.component('modal-container',require('./components/modals/modal-container.vue'))
+Vue.component('profile-modal',require('./components/modals/profile-modal.vue'))
+Vue.component('register-modal',require('./components/modals/register-modal.vue'))
+
+
+//profiles
+Vue.component('user-profile',require('./components/profiles/user-profile.vue'))
 
 /**
  * Vuex data store implementation

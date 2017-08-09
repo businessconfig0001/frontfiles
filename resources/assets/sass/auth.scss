@@ -4,7 +4,7 @@
 	text-align:center;
 	padding:1rem;
 }
-.radio-label{
+.offset-label{
 	padding-top:1rem !important;
 }
 .register-radio{
@@ -19,6 +19,7 @@
 			padding:1rem;
 			text-align:center;
 			background-color:#eee;
+			cursor:pointer;
 		}
 		input[type='radio']{
 			visibility:hidden;
@@ -37,4 +38,7 @@
 	}
 
 		
+}
+.file-input{
+	width:100%;
 }

@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import displayError from './display-error'
+import displayError from './../inputs/display-error'
 import moment from 'moment'
 export default {
 

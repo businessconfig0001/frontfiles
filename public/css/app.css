@@ -8380,6 +8380,10 @@ button.close {
   background-color: blue !important;
 }
 
+.title-offset {
+  margin-left: 7rem;
+}
+
 #landing .hero-image {
   padding: 57% 0 0 0;
 }
@@ -8436,8 +8440,8 @@ button.close {
 
 #landing #how-it-works .steps .step {
   padding: 0;
-  font-size: 40px;
-  line-height: 130px;
+  font-size: 48px;
+  line-height: 160px;
   display: block;
   float: left;
   width: 100%;
@@ -8445,8 +8449,29 @@ button.close {
 }
 
 #landing #how-it-works .steps .step .icon {
-  font-size: 80px;
   text-align: right;
+  position: relative;
+  height: 160px;
+}
+
+#landing #how-it-works .steps .step .icon img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+#landing #how-it-works .steps .step :before {
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 #landing #how-it-works .steps .step:nth-child(odd) {
@@ -8458,6 +8483,14 @@ button.close {
   color: black;
 }
 
+#landing #how-it-works .steps .step:nth-child(odd) :before {
+  border-top: 40px solid black;
+}
+
+#landing #how-it-works .steps .step:nth-child(1) :before {
+  border-top: 0px;
+}
+
 #landing #how-it-works .steps .step:nth-child(even) {
   color: #fff;
   background: black;
@@ -8465,6 +8498,10 @@ button.close {
 
 #landing #how-it-works .steps .step:nth-child(even) .icon {
   color: blue;
+}
+
+#landing #how-it-works .steps .step:nth-child(even) :before {
+  border-top: 40px solid blue;
 }
 
 .footer {
@@ -8504,6 +8541,10 @@ button.close {
   margin: 0.5rem 0 !important;
 }
 
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+}
+
 .profile {
   padding: 2rem;
 }
@@ -8532,13 +8573,24 @@ button.close {
   width: 40%;
 }
 
+.profile .storage .box div.logo {
+  height: 123px;
+  margin-left: 30%;
+}
+
+.profile .storage .box div.logo img {
+  padding-top: 2rem;
+}
+
 .profile .storage .box .title {
   font-size: 1.6rem;
   padding-top: 1rem;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .profile .storage .box p {
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .auth-title {
@@ -8548,7 +8600,7 @@ button.close {
   padding: 1rem;
 }
 
-.radio-label {
+.offset-label {
   padding-top: 1rem !important;
 }
 
@@ -8567,6 +8619,7 @@ button.close {
   padding: 1rem;
   text-align: center;
   background-color: #eee;
+  cursor: pointer;
 }
 
 .register-radio div input[type='radio'] {
@@ -8580,6 +8633,10 @@ button.close {
 .register-radio div input[type='radio']:checked + label {
   color: white;
   background-color: blue;
+}
+
+.file-input {
+  width: 100%;
 }
 
 /*-------------------------------------
