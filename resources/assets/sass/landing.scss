@@ -48,15 +48,34 @@
 		.steps{
 			.step{
 				padding: 0;
-				font-size: 40px;
-				line-height: 130px;
+				font-size: 48px;
+				line-height: 160px;
 			    display: block;
 			    float: left;
 			    width: 100%;
 			    font-weight: bold;
 				.icon{
-					font-size: 80px;
 					text-align: right;
+					position: relative;
+					height: 160px;
+					img{
+						position: absolute;
+						left: 0;
+						right: 0;
+						top: 0;
+						bottom: 0;
+						margin: auto;
+					}
+				}
+				:before{
+					width: 0; 
+				  	height: 0; 
+				  	border-left: 40px solid transparent;
+				  	border-right: 40px solid transparent;	
+    				margin: 0 auto;
+    				position: absolute;
+    				left: 0;
+    				right: 0;
 				}
 			}
 			.step:nth-child(odd) {
@@ -65,6 +84,14 @@
 			    .icon{
 			    	color: black;
 			    }
+			    :before{
+				  	border-top: 40px solid black; 
+				}
+			}
+			.step:nth-child(1){
+				:before{
+				  	border-top: 0px; 
+				}
 			}
 			.step:nth-child(even) {
 			    color: #fff;
@@ -72,6 +99,9 @@
 			    .icon{
 			    	color: blue;
 			    }
+			    :before{
+				  	border-top: 40px solid blue; 
+				}
 			}
 		}
 	}
@@ -115,4 +145,9 @@
 .newsletter{
 	width:15rem;
 	margin:0.5rem 0 !important;
+}
+
+@media only screen and (min-width: 600px) {
+    /* For tablets: */
+    
 }
