@@ -19,7 +19,8 @@ class File extends Model
     protected $fillable = [
         'user_id', 'short_id', 'drive', 'type', 'extension',
         'size', 'original_name', 'name', 'url', 'azure_url',
-        'title', 'description', 'where', 'when', 'why'
+        'processed', 'title', 'description', 'where', 'when',
+        'why'
     ];
 
     /**

@@ -28,6 +28,7 @@ class CreateFilesTable extends Migration
             $table->string('name', 20);
             $table->string('url');
             $table->string('azure_url')->nullable();
+            $table->boolean('processed')->default(false);
             $table->string('title');
             $table->text('description');
 
