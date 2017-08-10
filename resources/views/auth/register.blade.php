@@ -157,10 +157,13 @@
 
                         <!-- Button -->
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div v-if="allow" class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
+                            </div>
+                            <div v-else class="col-md-6 col-md-offset-4">
+                                <a class="btn btn-primary" @click.prevent="modal">Register</a>
                             </div>
                         </div>
                         <!-- Button -->
@@ -174,7 +177,13 @@
 @endsection
 
 @section('modals')
-   <register-modal></register-modal>
+   <register-modal v-if=allow></register-modal>
+   <modal-container v-else>
+       <h2>Ups! You should be part of our beta program.</h2>
+       <p>
+           Send an email to <a :href="'mailto:info@frontfiles.com'">info@frontfiles.com</a>. Our team will notify you as soon the platform is open for everyone.
+       </p>
+   </modal-container>
 @endsection
 
 @section('scripts')
