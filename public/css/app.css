@@ -8380,6 +8380,10 @@ button.close {
   background-color: blue !important;
 }
 
+.form-control {
+  border-radius: 0 !important;
+}
+
 .title-offset {
   margin-left: 7rem;
 }
@@ -8602,6 +8606,13 @@ button.close {
 
 .offset-label {
   padding-top: 1rem !important;
+}
+
+.beta-notice {
+  padding: 1rem;
+  padding-bottom: 3rem;
+  text-align: center;
+  margin-left: 7rem;
 }
 
 .register-radio div {
