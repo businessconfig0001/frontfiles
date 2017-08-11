@@ -40,6 +40,7 @@ Vue.component('user-profile',require('./components/profiles/user-profile.vue'))
 */
 import Vuex from 'vuex'
 
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -67,7 +68,21 @@ const store = new Vuex.Store({
 	}
 })
 
+import { getQuery } from './helpers'
 const app = new Vue({
     el: '#app',
-    store
+    store,
+    data(){
+    	return {
+    		allow:false
+    	}	
+    },
+    mounted(){
+    	if(getQuery('code') === 'secret')this.allow=true
+    },
+	methods:{
+		modal(){
+			this.$store.commit('openModal','')
+		}
+	}
 });
