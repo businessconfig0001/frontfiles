@@ -70,10 +70,11 @@ export default {
 
 		.modal-button{
 			width:60%;
-			margin-top:1rem;
+			margin:2rem;
 			margin-left:20%;
 		}		
 		.close{
+
 			padding:1rem;
 			position:absolute;
 			top:0;

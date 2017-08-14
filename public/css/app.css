@@ -8596,6 +8596,14 @@ button.close {
   padding: 1.5rem;
 }
 
+.auth-form {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%);
+}
+
 .auth-title {
   color: blue;
   font-size: 2rem;

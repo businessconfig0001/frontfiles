@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
                 <h1 class="auth-title title-offset">Register</h1>
                 <p class="beta-notice"> In order to register you have to be part of our beta program</p>
-                <div>
+                <div class="auth-form">
 
                     <form class="form-horizontal" method="POST" action="{{ route('auth.register') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
