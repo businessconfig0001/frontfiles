@@ -30,6 +30,7 @@ Vue.component('file-input',require('./components/inputs/file-input.vue'))
 Vue.component('modal-container',require('./components/modals/modal-container.vue'))
 Vue.component('profile-modal',require('./components/modals/profile-modal.vue'))
 Vue.component('register-modal',require('./components/modals/register-modal.vue'))
+Vue.component('welcome-modal',require('./components/modals/welcome-modal.vue'))
 
 
 //profiles
