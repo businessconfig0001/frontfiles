@@ -48,7 +48,9 @@
                 	</div>
                 </section>
 
-                <section class="ff-divisor"></section>
+                <section class="ff-divisor">
+                        	<img src="{{ url('assets/images/ff-bg.png') }}" class="img-responsive">
+                </section>
 
                 <section class="col-xs-12  no-pad hero">
                     <div class="hero-image">
@@ -70,7 +72,7 @@
 		                	</div>
 		                	<div class="step">
 		                		<div class="container">
-		                			<div class="col-xs-10">2. Shoot Photo & Video</div>
+		                			<div class="col-xs-10">2. Shoot Photo or Video</div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-shoot.png" class="img-responsive"></div>
 		                		</div>
 		                	</div>
