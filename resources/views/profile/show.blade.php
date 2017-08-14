@@ -8,6 +8,17 @@
 
 @section('modals')
 	<modal-container>
-		<welcome-modal></welcome-modal>	
+		<div slot="pt">
+		  
+		</div>
+		<div slot="br">
+		  
+		</div>
+		<div slot="es">
+		  
+		</div>
+		<div slot="en">
+			
+		</div>
 	</modal-container>
 @endsection
