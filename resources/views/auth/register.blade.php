@@ -180,10 +180,22 @@
 @section('modals')
    <register-modal v-if=allow></register-modal>
    <modal-container v-else>
-       <h2>Ups! You should be part of our beta program.</h2>
-       <p>
-           Send an email to <a :href="'mailto:info@frontfiles.com'">info@frontfiles.com</a>. Our team will notify you as soon the platform is open for everyone.
-       </p>
+        <slot name="pt">
+            
+        </slot>
+        <slot name="br">
+            
+        </slot>
+        <slot name="es">
+            
+        </slot>
+        <slot name="en">
+            <h2>Ups! You should be part of our beta program.</h2>
+            <p>
+               Send an email to <a :href="'mailto:info@frontfiles.com'">info@frontfiles.com</a>. Our team will notify you as soon the platform is open for everyone.
+            </p>
+       </slot>
+       
    </modal-container>
 @endsection
 
