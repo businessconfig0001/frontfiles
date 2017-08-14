@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div>
                 <h1 class="auth-title title-offset">Edit profile</h1>
-                <div>
+                <div class="auth-form">
 
                     <form class="form-horizontal" method="POST" action="{{ route('profile.update') }}">
                         {{ csrf_field() }}
@@ -43,6 +43,19 @@
                             </div>
                         </div>
                         <!-- /Last Name -->
+
+                        <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
+                            <label for="avatar" class="col-md-4 control-label offset-label">Profile picture</label>
+
+                            <div class="col-md-6">
+                                <file-input class="file-input" :options="{ name:'avatar',accept:'image',label:'upload picture' }"></file-input>
+                                @if ($errors->has('avatar'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('avatar') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <!-- Bio -->
                         <div class="form-group{{ $errors->has('bio') ? ' has-error' : '' }}">
