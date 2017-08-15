@@ -54,7 +54,7 @@
 			</p>
 			<h2>FrontFiles is a global web-based community of free reporters and journalists.</h2>
 			<p>
-				 By becoming a FrontFiler you will be part of a worldwide group of people committed to building a new model for news and information sourcing, produced by the users and based on true images, footage and reports and effective fact checking. By collaborating - sharing information, technology, equipment, lodging, transportation and more.
+				 By becoming a FrontFiler you will be part of a worldwide group of people committed to building a new model for news and information sourcing, produced by the users and based on true images, footage and reports and effective fact checking. By collaborating - sharing information, technology, equipment, lodging, transportation and more 
 			 </p>
 			 <h2>We empower ourselves and make our jobs easier.</h2>
 			 <p>

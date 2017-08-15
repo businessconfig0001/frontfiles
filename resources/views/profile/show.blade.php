@@ -37,7 +37,6 @@
 			<p>After you upload your files, they will be available for sale and for sharing (the compressed copy).</p>
 			<p>During this Beta phase, files can be sold through our commercial area directly to the client, and only if they show urgent relevancy.  However, you decide whether you wish to sell or not, as well as set the price for all of your files.</p>
 			<p>In the next platform’s phase you will have full control over the sales , which will be automatic and direct from you to the buyer.</p>
-
 		</div>
 	</modal-container>
 @endsection
