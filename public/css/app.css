@@ -8361,11 +8361,11 @@ button.close {
 }
 
 .bg-login {
-  background-image: url(/images/riot1.jpg?772273f557c0f17166a715dda6df8389);
+  background-image: url(/images/riot1.jpg?5cdf494078b7d1e7010da2156cc6aaff);
 }
 
 .bg-create {
-  background-image: url(/images/riot2.jpg?e383921d8faefbff667fe78592154096);
+  background-image: url(/images/riot2.jpg?2fdfa62e7b55af2a936f438a06ca2ef2);
 }
 
 .login-box {
@@ -9013,11 +9013,11 @@ img {
 }
 
 .btn-photo {
-  background: url(/images/upload2x.png?a42e510890362f45bd9e793ccd05cab4) center center no-repeat;
+  background: url(/images/upload2x.png?1de8ff468014c37caafca911242a5db4) center center no-repeat;
 }
 
 .btn-photo:active {
-  background-image: url(/images/upload2x.png?a42e510890362f45bd9e793ccd05cab4);
+  background-image: url(/images/upload2x.png?1de8ff468014c37caafca911242a5db4);
 }
 
 .blocks .block-image {
@@ -9116,7 +9116,7 @@ img {
 }
 
 .main-header .logo {
-  background: url(/images/logo2x.png?4c0bb1bd413e7b2cde19172ba198671e) left center no-repeat;
+  background: url(/images/logo2x.png?f7732e91b19dd92caca2e440ef591002) left center no-repeat;
   background-size: 50% auto;
   display: block;
   width: 100%;
