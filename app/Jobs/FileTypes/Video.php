@@ -26,7 +26,10 @@ class Video implements FileProcessInterface
 
         $video = $filesystem->read($file->name);
 
-        //add watermark and encoding
+        //add encoding
+
+
+        //add watermark
 
         //save to blob storage
 
