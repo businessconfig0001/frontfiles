@@ -49,8 +49,8 @@ class Video implements FileProcessInterface
         //save blob storage url in "azure_url" field, for previews
         //change value "processed" to true
         $file->update([
-            'azure_url' => config('filesystems.disks.' . $config . '.url') . $new_name,
-            'processed' => true, //TODO AQUIII
+            'azure_url' => config('filesystems.disks.' . $config . '.url') . $container . '/' . $new_name,
+            'processed' => true,
         ]);
 
         //warn user that video has been processed?
