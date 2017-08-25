@@ -8,6 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 
 class FetchAndProcessFile implements ShouldQueue
 {
@@ -44,6 +45,7 @@ class FetchAndProcessFile implements ShouldQueue
      */
     public function __construct(File $file)
     {
+        Log::info('teste construct');
         $this->file = $file;
     }
 
@@ -54,6 +56,7 @@ class FetchAndProcessFile implements ShouldQueue
      */
     public function handle()
     {
+        Log::info('teste handle');
         //Process the file, according to its type
         switch($this->file->type){
             case 'video':

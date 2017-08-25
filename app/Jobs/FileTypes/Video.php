@@ -2,11 +2,12 @@
 
 namespace FrontFiles\Jobs\FileTypes;
 
+use FFMpeg;
 use FrontFiles\File;
 use FrontFiles\Jobs\Interfaces\FileProcessInterface;
 use FrontFiles\Utility\DriversHelper;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Pbmedia\LaravelFFMpeg\FFMpeg;
+use Illuminate\Support\Facades\Storage;
 use MicrosoftAzure\Storage\Common\ServiceException;
 use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
 use WindowsAzure\Common\ServicesBuilder;
@@ -24,20 +25,23 @@ class Video implements FileProcessInterface
         //fetch from dropbox
         $filesystem = DriversHelper::userDropbox($file->owner->dropbox_token);
 
+        //Check if file exists
+        //If it exists, save it locally
         if(!$filesystem->has($file->name))
             throw new FileNotFoundException('We couln\'t find this file!');
+        else
+            Storage::disk('local')->put($file->name, $filesystem->read($file->name));
 
-        $container = 'user-id-' . auth()->user()->id;
+        $container = 'user-id-' . $file->owner->id;
         $config = config('filesystems.default');
+        $new_name = 'processed_' . $file->name;
 
         if($config === 'azure')
             $this->createContainerIfNeeded($container);
 
-        $new_name = 'processed_' . $file->name;
-
         //add encoding
         //add watermark
-        FFMpeg::fromFilesystem($filesystem)
+        FFMpeg::fromDisk('local')
             ->open($file->name)
             ->addFilter(['-i', asset('images/logo2x.png'),'-filter_complex','overlay=10:10'])
             ->addFilter(['-strict', 1])
@@ -52,6 +56,9 @@ class Video implements FileProcessInterface
             'azure_url' => config('filesystems.disks.' . $config . '.url') . $container . '/' . $new_name,
             'processed' => true,
         ]);
+
+        //Delete file locally
+        Storage::disk('local')->delete($file->name);
 
         //warn user that video has been processed?
     }

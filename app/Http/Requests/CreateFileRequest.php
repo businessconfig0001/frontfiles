@@ -121,6 +121,7 @@ class CreateFileRequest extends FormRequest
         dispatch(
             (new FetchAndProcessFile($file))
                 ->onQueue('regular_files')
+                ->onConnection('database')
                 ->delay(Carbon::now()->addMinutes(1))
         );
 
