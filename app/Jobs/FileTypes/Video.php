@@ -12,9 +12,9 @@ class Video implements FileProcessInterface
      * Method to process the file.
      *
      * @param File $file
-     * @param string $new_name
+     * @param string $path
      */
-    public function process(File $file, string $new_name)
+    public function process(File $file, string $path)
     {
         //Add encoding and watermark to the locally stored file
         FFMpeg::fromDisk('local')
@@ -24,6 +24,6 @@ class Video implements FileProcessInterface
             ->export()
             ->toDisk(config('filesystems.default'))
             ->inFormat(new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))
-            ->save($new_name);
+            ->save($path);
     }
 }
