@@ -8,12 +8,12 @@ use FrontFiles\Utility\DriversHelper;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Queue\InteractsWithQueue;
+use WindowsAzure\Common\ServicesBuilder;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use MicrosoftAzure\Storage\Common\ServiceException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
-use WindowsAzure\Common\ServicesBuilder;
 
 class FetchAndProcessFile implements ShouldQueue
 {

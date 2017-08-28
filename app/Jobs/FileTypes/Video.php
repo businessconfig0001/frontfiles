@@ -16,8 +16,7 @@ class Video implements FileProcessInterface
      */
     public function process(File $file, string $new_name)
     {
-        //add encoding
-        //add watermark
+        //Add encoding and watermark to the locally stored file
         FFMpeg::fromDisk('local')
             ->open($file->name)
             ->addFilter(['-i', asset('images/logo2x.png'),'-filter_complex','overlay=10:10'])
