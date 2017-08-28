@@ -29,7 +29,7 @@ class FetchAndProcessFile implements ShouldQueue
      *
      * @var int
      */
-    public $timeout = 180;
+    public $timeout = 300;
 
     /**
      * The file to be processed.
@@ -45,7 +45,6 @@ class FetchAndProcessFile implements ShouldQueue
      */
     public function __construct(File $file)
     {
-        Log::info('teste construct');
         $this->file = $file;
     }
 
@@ -56,7 +55,6 @@ class FetchAndProcessFile implements ShouldQueue
      */
     public function handle()
     {
-        Log::info('teste handle');
         //Process the file, according to its type
         switch($this->file->type){
             case 'video':
