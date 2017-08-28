@@ -13,8 +13,8 @@
 		</a>
 	</div>
 	<div v-if="status" class="file-info">
-		<h2>{{file.title}}</h2>
-		<p>{{short_desc}}</p>
+		<h2>{{ file.title }}</h2>
+		<p>{{ short_desc }}</p>
 		<ul>
 			<li v-show="file.where">#Where: <span>{{file.where}}</span></li>
 			<li v-show="file.when">#When: <span>{{date}}</span></li>
@@ -82,6 +82,8 @@ export default {
   	short_desc(){
   		if(this.file.description.length > 100) return this.file.description.substring(0,100) + ' ...'
   		return this.file.description
+  	},
+  	title(){
   	}
   },
   data () {
@@ -130,6 +132,7 @@ export default {
 
 		h2{
 			padding: .5rem 0;
+			height:50px;
 			font-weight:bolder;
 			text-align:center;
 		}

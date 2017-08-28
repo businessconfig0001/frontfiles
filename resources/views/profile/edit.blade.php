@@ -116,9 +116,7 @@
                         <!-- Button -->
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Edit
-                                </button>
+                                <input type="submit" class="btn btn-primary" value="Save">
                             </div>
                         </div>
                         <!-- Button -->
