@@ -171,9 +171,9 @@ class FetchAndProcessFile implements ShouldQueue
     protected function updateFile()
     {
         $this->file->update([
-            'azure_url' => config('filesystems.disks.' . config('filesystems.default') . '.url') . $this->container . '/' . $this->new_name,
-            'processed_name' => $this->new_name,
-            'processed' => true,
+            'azure_url'         => config('filesystems.disks.' . config('filesystems.default') . '.url') . $this->container . '/' . $this->new_name,
+            'processed_name'    => $this->new_name,
+            'processed'         => true,
         ]);
     }
 
