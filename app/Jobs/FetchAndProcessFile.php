@@ -144,10 +144,25 @@ class FetchAndProcessFile implements ShouldQueue
     protected function processFile()
     {
         //Generate class
-        $class = 'FileTypes\\' . ucfirst($this->file->type);
-
+        //$class = 'FileTypes\\' . ucfirst($this->file->type);
         //Dinamycally call the correct class to process the file
-        (new $class)->process($this->file, $this->new_name);
+        //(new $class)->process($this->file, $this->new_name);
+
+        //Process the file, according to its type
+        switch($this->file->type){
+            case 'video':
+                (new FileTypes\Video)->process($this->file, $this->new_name);
+                break;
+            case 'image':
+                (new FileTypes\Image)->process($this->file, $this->new_name);
+                break;
+            case 'audio':
+                (new FileTypes\Audio)->process($this->file, $this->new_name);
+                break;
+            case 'document':
+                (new FileTypes\Audio)->process($this->file, $this->new_name);
+                break;
+        }
     }
 
     /**
