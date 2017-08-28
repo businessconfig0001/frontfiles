@@ -4,8 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-                <h1 class="auth-title">Register</h1>
-                <div>
+                <h1 class="auth-title title-offset">Register</h1>
+                <p class="beta-notice"> In order to register you have to be part of our beta program</p>
+                <div class="auth-form">
 
                     <form class="form-horizontal" method="POST" action="{{ route('auth.register') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -44,11 +45,10 @@
 
                         <!-- Avatar -->
                         <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
-                            <label for="avatar" class="col-md-4 control-label">Profile picture</label>
+                            <label for="avatar" class="col-md-4 control-label offset-label">Profile picture</label>
 
                             <div class="col-md-6">
-                                <input id="avatar" type="file" class="form-control" name="avatar" value="{{ old('avatar') }}" accept="image/*">
-
+                                <file-input class="file-input" :options="{ name:'avatar',accept:'image',label:'upload picture' }"></file-input>
                                 @if ($errors->has('avatar'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('avatar') }}</strong>
@@ -92,7 +92,7 @@
 
                         <!-- Type -->
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                            <label for="type" class="col-md-4 control-label radio-label">Type</label>
+                            <label for="type" class="col-md-4 control-label offset-label">Type</label>
 
                             <div class="col-md-6 register-radio">
                                 <div>
@@ -158,10 +158,13 @@
 
                         <!-- Button -->
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div v-if="allow" class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
+                            </div>
+                            <div v-else class="col-md-6 col-md-offset-4">
+                                <a class="btn btn-primary" @click.prevent="modal">Register</a>
                             </div>
                         </div>
                         <!-- Button -->
@@ -175,7 +178,25 @@
 @endsection
 
 @section('modals')
-   <register-modal></register-modal>
+   <register-modal v-if=allow></register-modal>
+   <modal-container v-else>
+        <slot name="pt">
+            
+        </slot>
+        <slot name="br">
+            
+        </slot>
+        <slot name="es">
+            
+        </slot>
+        <slot name="en">
+            <h2>Ups! You should be part of our beta program.</h2>
+            <p>
+               Send an email to <a :href="'mailto:info@frontfiles.com'">info@frontfiles.com</a>. Our team will notify you as soon the platform is open for everyone.
+            </p>
+       </slot>
+       
+   </modal-container>
 @endsection
 
 @section('scripts')

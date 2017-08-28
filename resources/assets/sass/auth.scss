@@ -1,11 +1,24 @@
+.auth-form{
+	position:relative;
+	left:50%;
+	top: 50%;
+	transform: translate(-50%, 0%);
+}
 .auth-title{
 	color:blue;
 	font-size:2rem;
 	text-align:center;
 	padding:1rem;
 }
-.radio-label{
+.offset-label{
 	padding-top:1rem !important;
+}
+
+.beta-notice{
+	padding:1rem;
+	padding-bottom:3rem;
+	text-align:center;
+	margin-left:7rem;
 }
 .register-radio{
 
@@ -19,6 +32,7 @@
 			padding:1rem;
 			text-align:center;
 			background-color:#eee;
+			cursor:pointer;
 		}
 		input[type='radio']{
 			visibility:hidden;
@@ -37,4 +51,7 @@
 	}
 
 		
+}
+.file-input{
+	width:100%;
 }

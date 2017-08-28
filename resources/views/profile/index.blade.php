@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container profile">
-
+        <h1 class="auth-title">Dashboard</h1>
         <div class="row storage">
             <ul>
                 <li class="box">
@@ -23,7 +23,9 @@
                     <a href="{{ route('profile.edit') }}" class="btn btn-primary">Go to your profile</a>
                 </li>
                 <li class="box">
-                    <img  class="logo" src="/images/logo2x.png" alt="">
+                    <div class="logo">
+                      <img src="/images/logo2x.png" alt="">
+                     </div>   
                     <h3 class="title">Public profile</h3>
                     <p>View your profile as another user</p>
                     <a href="{{ url($user->path()) }}"  target="_blank" class="btn btn-primary">Go to your public profile</a>

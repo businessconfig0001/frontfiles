@@ -12,12 +12,12 @@
 	</p>
 	<p>
 		<display-error :error="errors['title']"></display-error>
-		<tag-input placeholder="#What" :tags="upload.data.what"></tag-input>
+		<tag-input placeholder="#What" class="form-control" :tags="upload.data.what"></tag-input>
 		
 	</p>
 	<p>
 		<display-error :error="errors['title']"></display-error>
-		<tag-input placeholder="#Who" :tags="upload.data.who"></tag-input>			
+		<tag-input placeholder="#Who" class="form-control" :tags="upload.data.who"></tag-input>			
 	</p>
 	<p>
 		<display-error :error="errors['title']"></display-error>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import  displayError from './display-error'
+import  displayError from './../inputs/display-error'
 export default {
 
 	name: 'upload-form',

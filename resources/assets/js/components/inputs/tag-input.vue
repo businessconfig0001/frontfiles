@@ -69,7 +69,7 @@ export default {
 				display:inline-block;
 
 				&[placeholder]{
-					color:#C7C7CD;
+					color:#B1B7BA;
 				}
 			}
 	}

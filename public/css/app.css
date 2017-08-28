@@ -8361,11 +8361,11 @@ button.close {
 }
 
 .bg-login {
-  background-image: url(/images/riot1.jpg?772273f557c0f17166a715dda6df8389);
+  background-image: url(/images/riot1.jpg?5cdf494078b7d1e7010da2156cc6aaff);
 }
 
 .bg-create {
-  background-image: url(/images/riot2.jpg?e383921d8faefbff667fe78592154096);
+  background-image: url(/images/riot2.jpg?2fdfa62e7b55af2a936f438a06ca2ef2);
 }
 
 .login-box {
@@ -8378,6 +8378,14 @@ button.close {
 
 .btn-primary {
   background-color: blue !important;
+}
+
+.form-control {
+  border-radius: 0 !important;
+}
+
+.title-offset {
+  margin-left: 7rem;
 }
 
 #landing .hero-image {
@@ -8436,8 +8444,8 @@ button.close {
 
 #landing #how-it-works .steps .step {
   padding: 0;
-  font-size: 40px;
-  line-height: 130px;
+  font-size: 48px;
+  line-height: 160px;
   display: block;
   float: left;
   width: 100%;
@@ -8445,8 +8453,29 @@ button.close {
 }
 
 #landing #how-it-works .steps .step .icon {
-  font-size: 80px;
   text-align: right;
+  position: relative;
+  height: 160px;
+}
+
+#landing #how-it-works .steps .step .icon img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+#landing #how-it-works .steps .step :before {
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 #landing #how-it-works .steps .step:nth-child(odd) {
@@ -8458,6 +8487,14 @@ button.close {
   color: black;
 }
 
+#landing #how-it-works .steps .step:nth-child(odd) :before {
+  border-top: 40px solid black;
+}
+
+#landing #how-it-works .steps .step:nth-child(1) :before {
+  border-top: 0px;
+}
+
 #landing #how-it-works .steps .step:nth-child(even) {
   color: #fff;
   background: black;
@@ -8465,6 +8502,10 @@ button.close {
 
 #landing #how-it-works .steps .step:nth-child(even) .icon {
   color: blue;
+}
+
+#landing #how-it-works .steps .step:nth-child(even) :before {
+  border-top: 40px solid blue;
 }
 
 .footer {
@@ -8504,6 +8545,10 @@ button.close {
   margin: 0.5rem 0 !important;
 }
 
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+}
+
 .profile {
   padding: 2rem;
 }
@@ -8532,13 +8577,32 @@ button.close {
   width: 40%;
 }
 
+.profile .storage .box div.logo {
+  height: 123px;
+  margin-left: 30%;
+}
+
+.profile .storage .box div.logo img {
+  padding-top: 2rem;
+}
+
 .profile .storage .box .title {
   font-size: 1.6rem;
   padding-top: 1rem;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .profile .storage .box p {
-  padding: 1rem;
+  padding: 1.5rem;
+}
+
+.auth-form {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%);
 }
 
 .auth-title {
@@ -8548,8 +8612,15 @@ button.close {
   padding: 1rem;
 }
 
-.radio-label {
+.offset-label {
   padding-top: 1rem !important;
+}
+
+.beta-notice {
+  padding: 1rem;
+  padding-bottom: 3rem;
+  text-align: center;
+  margin-left: 7rem;
 }
 
 .register-radio div {
@@ -8567,6 +8638,7 @@ button.close {
   padding: 1rem;
   text-align: center;
   background-color: #eee;
+  cursor: pointer;
 }
 
 .register-radio div input[type='radio'] {
@@ -8580,6 +8652,10 @@ button.close {
 .register-radio div input[type='radio']:checked + label {
   color: white;
   background-color: blue;
+}
+
+.file-input {
+  width: 100%;
 }
 
 /*-------------------------------------
@@ -9013,11 +9089,11 @@ img {
 }
 
 .btn-photo {
-  background: url(/images/upload2x.png?a42e510890362f45bd9e793ccd05cab4) center center no-repeat;
+  background: url(/images/upload2x.png?1de8ff468014c37caafca911242a5db4) center center no-repeat;
 }
 
 .btn-photo:active {
-  background-image: url(/images/upload2x.png?a42e510890362f45bd9e793ccd05cab4);
+  background-image: url(/images/upload2x.png?1de8ff468014c37caafca911242a5db4);
 }
 
 .blocks .block-image {
@@ -9116,7 +9192,7 @@ img {
 }
 
 .main-header .logo {
-  background: url(/images/logo2x.png?4c0bb1bd413e7b2cde19172ba198671e) left center no-repeat;
+  background: url(/images/logo2x.png?f7732e91b19dd92caca2e440ef591002) left center no-repeat;
   background-size: 50% auto;
   display: block;
   width: 100%;
@@ -9132,7 +9208,7 @@ img {
 
 .main-header .sub-title {
   padding-top: 15px;
-  font-size: 1.4em;
+  font-size: 1.1em;
   font-weight: bolder;
   width: 300%;
   margin-left: -80%;
@@ -9370,7 +9446,7 @@ img {
 }
 
 .profile-container .profile-content .title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #0000ff;
   padding-bottom: 5px;

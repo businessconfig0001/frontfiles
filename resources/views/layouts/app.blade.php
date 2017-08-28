@@ -64,7 +64,7 @@
                                                         {{ csrf_field() }}
                                                     </form>
                                                 </li>
-                                                <li><a href="{{ route('profile') }}">Profile</a></li>
+                                                <li><a href="{{ route('profile') }}">Dashboard</a></li>
                                                 <li><a href="{{ route('files.upload') }}" class="btn btn-border-black">Upload</a></li>
                                             @endif
 

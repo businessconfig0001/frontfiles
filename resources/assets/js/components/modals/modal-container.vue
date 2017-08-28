@@ -2,7 +2,26 @@
 	<div v-show="show" class="modal-background clearfix">
 		<div class="modal-wrapper modal-content col-md-4">
 			<div class="modal-text">
-				<slot></slot>
+				<div v-if="lang === 'es'">
+					<slot name="es"></slot>
+				</div>
+				<div v-else-if="lang ==='pt'">
+					<slot name="pt"></slot>
+				</div>
+				<div v-else-if="lang ==='br'">
+					<slot name="br"></slot>
+				</div>
+				<div v-else>
+					<slot name="en"></slot>
+				</div>
+				<div class="controls">
+					<ul>
+						<li :class="lang === 'en' ? 'active' : ''"><a @click.prevent="lang ='en'">EN</a></li>
+						<li :class="lang === 'es' ? 'active' : ''"><a @click.prevent="lang ='es'">ES</a></li>
+						<li :class="lang === 'br' ? 'active' : ''"><a @click.prevent="lang ='br'">BR</a></li>
+						<li :class="lang === 'pt' ? 'active' : ''"><a @click.prevent="lang ='pt'">PT</a></li>
+					</ul>
+				</div>
 			</div>
 			<a @click.prevent="close(true)" class="btn btn-primary modal-button">Ok</a>
 	  		<a href="#" class="close" @click.prevent="close">&#10005</a>
@@ -16,6 +35,7 @@ export default {
 	name: 'modal-container',
 	data () {
 		return {
+			lang:'pt'
 		}
 	},
 	computed:{
@@ -70,14 +90,29 @@ export default {
 
 		.modal-button{
 			width:60%;
-			margin-top:1rem;
+			margin:2rem;
 			margin-left:20%;
 		}		
 		.close{
+
 			padding:1rem;
 			position:absolute;
 			top:0;
 			right:0;
+		}
+
+		.controls{
+			float:right;
+			margin-top:1rem;
+
+			li{
+				display:inline-block;
+				padding:.5rem;
+
+				& + li {
+					border-left:1px solid blue;
+				}
+			}
 		}
 	}
 }
