@@ -58,6 +58,13 @@ class FetchAndProcessFile implements ShouldQueue
     protected $new_name;
 
     /**
+     * The file's path on the blob storage.
+     *
+     * @var string
+     */
+    protected $path;
+
+    /**
      * Create a new job instance.
      *
      * @param File $file
@@ -67,6 +74,7 @@ class FetchAndProcessFile implements ShouldQueue
         $this->file = $file;
         $this->container = 'user-id-' . $file->owner->id;
         $this->new_name = 'processed_' . $file->name;
+        $this->path = $this->container . '/' . $this->new_name;
     }
 
     /**
@@ -151,16 +159,16 @@ class FetchAndProcessFile implements ShouldQueue
         //Process the file, according to its type
         switch($this->file->type){
             case 'video':
-                (new FileTypes\Video)->process($this->file, $this->new_name);
+                (new FileTypes\Video)->process($this->file, $this->path);
                 break;
             case 'image':
-                (new FileTypes\Image)->process($this->file, $this->new_name);
+                (new FileTypes\Image)->process($this->file, $this->path);
                 break;
             case 'audio':
-                (new FileTypes\Audio)->process($this->file, $this->new_name);
+                (new FileTypes\Audio)->process($this->file, $this->path);
                 break;
             case 'document':
-                (new FileTypes\Audio)->process($this->file, $this->new_name);
+                (new FileTypes\Document)->process($this->file, $this->path);
                 break;
         }
     }
@@ -171,7 +179,7 @@ class FetchAndProcessFile implements ShouldQueue
     protected function updateFile()
     {
         $this->file->update([
-            'azure_url'         => config('filesystems.disks.' . config('filesystems.default') . '.url') . $this->container . '/' . $this->new_name,
+            'azure_url'         => config('filesystems.disks.' . config('filesystems.default') . '.url') . $this->path,
             'processed_name'    => $this->new_name,
             'processed'         => true,
         ]);
