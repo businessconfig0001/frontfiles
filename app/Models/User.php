@@ -6,6 +6,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\{ HasSlug, SlugOptions };
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class User extends Authenticatable
 {
