@@ -2,8 +2,11 @@
 
 namespace FrontFiles\Http\Requests;
 
-use FrontFiles\{ File, TagWhat, TagWho, Utility\DriversHelper };
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use FrontFiles\{
+    File, Jobs\FetchAndProcessFile, TagWhat, TagWho, Utility\DriversHelper
+};
 
 class CreateFileRequest extends FormRequest
 {
@@ -113,6 +116,13 @@ class CreateFileRequest extends FormRequest
 
         $file->tagsWho()->sync(
             $this->getTagIds(request('who'), TagWho::class)
+        );
+
+        dispatch(
+            (new FetchAndProcessFile($file))
+                ->onQueue('regular_files')
+                ->onConnection('database')
+                ->delay(Carbon::now()->addMinutes(1))
         );
 
         if(request()->wantsJson())

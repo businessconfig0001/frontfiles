@@ -4,10 +4,7 @@ namespace FrontFiles;
 
 use FrontFiles\Utility\DriversHelper;
 use FrontFiles\Utility\Helper;
-use WindowsAzure\Common\ServicesBuilder;
-use MicrosoftAzure\Storage\Common\ServiceException;
-use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
-use Illuminate\{ Database\Eloquent\Model, Support\Facades\Storage, Contracts\Filesystem\FileNotFoundException };
+use Illuminate\{ Database\Eloquent\Model, Contracts\Filesystem\FileNotFoundException };
 
 class File extends Model
 {
@@ -19,7 +16,8 @@ class File extends Model
     protected $fillable = [
         'user_id', 'short_id', 'drive', 'type', 'extension',
         'size', 'original_name', 'name', 'url', 'azure_url',
-        'title', 'description', 'where', 'when', 'why'
+        'processed', 'title', 'description', 'where', 'when',
+        'why'
     ];
 
     /**
@@ -112,58 +110,6 @@ class File extends Model
 
         return in_array($type, $acceptedTypes) ? $type : 'document';
     }
-
-    /**
-     * Stores the file and returns the url for this file.
-     *
-     * @param string $name
-     * @return string
-
-    public static function storeAndReturnUrl(string $name) : string
-    {
-        /* AZURE STUFF - TODO
-        $container = 'user-id-' . auth()->user()->id;
-        $config = config('filesystems.default');
-
-        if($config === 'azure')
-            static::createContainerIfNeeded($container);
-
-        return config('filesystems.disks.' . $config . '.url') .
-            request()
-                ->file('file')
-                ->storeAs($container, $name, $config);
-
-         //AQUI
-
-        $filesystem = DriversHelper::userDropbox(auth()->user()->dropbox_token);
-
-        $filesystem->write($name, file_get_contents(request()->file('file')));
-
-        return 'https://www.dropbox.com/home/Apps/FrontFiles-WebApp/'.$name;
-    }
-     *
-    /** TODO
-     * Checks if the current user container exists in the azure blob storage
-     * If it does not exist, he creates it.
-     *
-     * @param string $container
-     */
-    /*
-    protected static function createContainerIfNeeded(string $container)
-    {
-        //BLOBS_ONLY means that its public
-        $containerOptions = new CreateContainerOptions();
-        $containerOptions->setPublicAccess(PublicAccessType::BLOBS_ONLY);
-
-        try{
-            ServicesBuilder::getInstance()
-                ->createBlobService(config('filesystems.disks.azure.endpoint'))
-                ->createContainer($container, $containerOptions);
-        }catch(ServiceException $e){
-            //If there's an exception, it means that the container (folder) already exists
-        }
-    }
-    */
 
     /**
      * Tags associated to this file.
