@@ -2,9 +2,11 @@
 
 namespace FrontFiles\Utility;
 
+use Illuminate\Support\Facades\Storage;
 use WindowsAzure\Common\ServicesBuilder;
-use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
 use MicrosoftAzure\Storage\Common\ServiceException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
 
 class Helper
 {
@@ -44,6 +46,20 @@ class Helper
             request()
                 ->file('avatar')
                 ->storeAs($container, $name, $config);
+    }
+
+    /**
+     * If the user has an Avatar, it gets deleted.
+     *
+     * @param string $avatar_name
+     * @throws FileNotFoundException
+     */
+    public static function deleteUserAvatar(string $avatar_name){
+        if($avatar_name)
+            if(!Storage::exists('user-avatars/' . $avatar_name))
+                throw new FileNotFoundException('We couln\'t find this file!');
+            else
+                Storage::delete('user-avatars/' . $avatar_name);
     }
 
     /**

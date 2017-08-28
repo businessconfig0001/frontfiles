@@ -30,20 +30,6 @@ class File extends Model
         //Automatically deletes from the storage the associated file and the tags relation.
         static::deleting(function($file){
 
-            /*
-            switch($file->drive){
-                default:
-                    $container = 'user-id-' . $file->owner->id;
-
-                    if(!Storage::exists($container . '/' . $file->name))
-                        throw new FileNotFoundException('We couln\'t find this file!');
-                    else
-                        Storage::delete($container . '/' . $file->name);
-
-                    break;
-            }
-            */
-
             $filesystem = DriversHelper::userDropbox($file->owner->dropbox_token);
 
             if(!$filesystem->has($file->name))
