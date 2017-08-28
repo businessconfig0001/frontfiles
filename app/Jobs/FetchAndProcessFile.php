@@ -44,6 +44,20 @@ class FetchAndProcessFile implements ShouldQueue
     protected $file;
 
     /**
+     * The user container on azure blob storage.
+     *
+     * @var string
+     */
+    protected $container;
+
+    /**
+     * The file's new name.
+     *
+     * @var string
+     */
+    protected $new_name;
+
+    /**
      * Create a new job instance.
      *
      * @param File $file
@@ -51,6 +65,8 @@ class FetchAndProcessFile implements ShouldQueue
     public function __construct(File $file)
     {
         $this->file = $file;
+        $this->container = 'user-id-' . $file->owner->id;
+        $this->new_name = 'processed_' . $file->name;
     }
 
     /**
@@ -63,36 +79,15 @@ class FetchAndProcessFile implements ShouldQueue
         //Fetches file
         $this->fetchFile();
 
-        //Preparing the outcome
-        $container = 'user-id-' . $this->file->owner->id;
-        $new_name = 'processed_' . $this->file->name;
-
         //Creates a container in the blob storage, for the file owner
         if(config('filesystems.default') === 'azure')
-            $this->createContainerIfNeeded($container);
+            $this->createContainerIfNeeded();
 
-        //test
-//        $class = 'FileTypes\\' . ucfirst($this->file->type);
-//        (new $class)->process($this->file, $new_name);
-
-        //Process the file, according to its type
-        switch($this->file->type){
-            case 'video':
-                (new FileTypes\Video)->process($this->file, $new_name);
-                break;
-            case 'image':
-                (new FileTypes\Image)->process($this->file, $new_name);
-                break;
-            case 'audio':
-                (new FileTypes\Audio)->process($this->file, $new_name);
-                break;
-            case 'document':
-                (new FileTypes\Audio)->process($this->file, $new_name);
-                break;
-        }
+        //Process the file
+        $this->processFile();
 
         //Updates the file
-        $this->updateFile($container, $new_name);
+        $this->updateFile();
 
         //Delete file locally
         $this->deleteFileLocally();
@@ -127,10 +122,8 @@ class FetchAndProcessFile implements ShouldQueue
     /*
      * Checks if the current user container exists in the azure blob storage
      * If it does not exist, he creates it.
-     *
-     * @param string $container
      */
-    protected function createContainerIfNeeded(string $container)
+    protected function createContainerIfNeeded()
     {
         //BLOBS_ONLY means that its public
         $containerOptions = new CreateContainerOptions();
@@ -139,22 +132,32 @@ class FetchAndProcessFile implements ShouldQueue
         try{
             ServicesBuilder::getInstance()
                 ->createBlobService(config('filesystems.disks.azure.endpoint'))
-                ->createContainer($container, $containerOptions);
+                ->createContainer($this->container, $containerOptions);
         }catch(ServiceException $e){
             //If there's an exception, it means that the container (folder) already exists
         }
     }
 
     /**
-     * Updates the file with the URL for the preview and the processed option as true.
-     *
-     * @param string $container
-     * @param string $new_name
+     * Calls the correct class to process the file.
      */
-    protected function updateFile(string $container, string $new_name)
+    protected function processFile()
+    {
+        //Generate class
+        $class = 'FileTypes\\' . ucfirst($this->file->type);
+
+        //Dinamycally call the correct class to process the file
+        (new $class)->process($this->file, $this->new_name);
+    }
+
+    /**
+     * Updates the file with the URL for the preview and the processed option as true.
+     */
+    protected function updateFile()
     {
         $this->file->update([
-            'azure_url' => config('filesystems.disks.' . config('filesystems.default') . '.url') . $container . '/' . $new_name,
+            'azure_url' => config('filesystems.disks.' . config('filesystems.default') . '.url') . $this->container . '/' . $this->new_name,
+            'processed_name' => $this->new_name,
             'processed' => true,
         ]);
     }
