@@ -71,6 +71,10 @@ class FetchAndProcessFile implements ShouldQueue
         if(config('filesystems.default') === 'azure')
             $this->createContainerIfNeeded($container);
 
+        //test
+//        $class = 'FileTypes\\' . ucfirst($this->file->type);
+//        (new $class)->process($this->file, $new_name);
+
         //Process the file, according to its type
         switch($this->file->type){
             case 'video':
