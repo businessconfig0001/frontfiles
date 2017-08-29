@@ -142,7 +142,7 @@ class FetchAndProcessFile implements ShouldQueue
     {
         $processed_video = Storage::disk('local')->get($this->new_name);
 
-        Storage::disk('azure')->put('user-files/'.$this->new_name, file_get_contents($processed_video));
+        Storage::disk('azure')->put('user-files/'.$this->new_name, $processed_video);
     }
 
     /**
