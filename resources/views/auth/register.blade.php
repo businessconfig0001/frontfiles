@@ -201,6 +201,11 @@
 
 @section('scripts')
 <script>
-    new google.maps.places.Autocomplete(document.getElementById('location'))
+    window.onload=function(){
+        let location=document.getElementById('location')
+        location.addEventListener('focus',() => new google.maps.places.Autocomplete(location))
+        
+    }
+    
 </script>
 @endsection
