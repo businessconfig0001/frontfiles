@@ -55,7 +55,7 @@ return [
             'name'      => env('STORAGE_NAME'),
             'key'       => env('STORAGE_KEY'),
             'container' => env('STORAGE_CONTAINER'),
-            'url'       => 'https://ffcontents.blob.core.windows.net/user-files',
+            'url'       => 'https://ffcontents.blob.core.windows.net/',
             'endpoint'  => sprintf(
                 'DefaultEndpointsProtocol=https;AccountName=%s;AccountKey=%s',
                 env('STORAGE_NAME'),

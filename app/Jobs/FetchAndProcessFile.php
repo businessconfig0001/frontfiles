@@ -71,6 +71,10 @@ class FetchAndProcessFile implements ShouldQueue
         //Process the file
         $this->processFile();
 
+        //Save to the blob storage
+        if(config('filesystems.default') === 'azure')
+            $this->sendToAzureBlobStorage();
+
         //Updates the file
         $this->updateFile();
 
@@ -132,6 +136,16 @@ class FetchAndProcessFile implements ShouldQueue
     }
 
     /**
+     * Saves the processed file on the blob storage.
+     */
+    protected function sendToAzureBlobStorage()
+    {
+        $processed_video = Storage::disk('local')->get($this->new_name);
+
+        Storage::disk('azure')->put('user-files/'.$this->new_name, file_get_contents($processed_video));
+    }
+
+    /**
      * Updates the file with the URL for the preview and the processed option as true.
      */
     protected function updateFile()
@@ -149,5 +163,6 @@ class FetchAndProcessFile implements ShouldQueue
     protected function deleteFileLocally()
     {
         Storage::disk('local')->delete($this->file->name);
+        Storage::disk('local')->delete($this->new_name);
     }
 }
