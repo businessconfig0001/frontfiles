@@ -8,7 +8,7 @@
                 <h1 class="auth-title title-offset">Edit profile</h1>
                 <div class="auth-form">
 
-                    <form class="form-horizontal" method="POST" action="{{ route('profile.update') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {!! method_field('patch') !!}
 
