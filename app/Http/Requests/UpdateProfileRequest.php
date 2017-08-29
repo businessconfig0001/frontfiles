@@ -43,8 +43,6 @@ class UpdateProfileRequest extends FormRequest
      */
     public function persist(User $user)
     {
-        dd(request());
-
         $user->update([
             'first_name'    => request('first_name'),
             'last_name'     => request('last_name'),
