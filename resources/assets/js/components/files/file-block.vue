@@ -160,6 +160,19 @@ export default {
 			font-weight:bolder;
 			text-align:center;
 		}
+
+		p{
+			margin:.5rem 0;
+		}
+
+		li{
+			font-weight:bolder;
+			margin-bottom:.5rem;
+			span{
+				padding-left:.5rem;
+				font-weight:400;
+			}
+		}
 		
 	}
 
