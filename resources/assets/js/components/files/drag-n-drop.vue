@@ -3,13 +3,16 @@
 	<form enctype="multipart/form-data" novalidate class="clearfix">
 		<div class="col-sm-4 col-offset-2 col-xs-12 bg-blue text-center dropbox">
 			<input type="file" multiple name="file" :disabled="state ==='saving'" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*,video/*,audio/*,application/pdf" class="input-file">
-			<p v-if="state === 'saving'" class="progress">
+			<p v-if="state === 'saving'" class="progressbar">
 			  	Uploading {{ fileCount }} files...
 			  	<progress :value="progressBar.loaded" :max="progressBar.total"></progress>
 			  	</ul>
 			</p>
 			<p v-else-if="state === 'more'">
 			  	Add more files or <a @click.prevent="upload">save them</a>
+			</p>
+			<p v-else-if="state === 'done'">
+				Your content was sent to your dropbox account and is being processed.
 			</p>
 			<p v-else>
 			  	Drag your file(s) here to begin<br> or click to browse
@@ -35,10 +38,12 @@
 	import { Errors } from './../../classes/Errors'
 	import { upload } from './../../services/uploadService'
 	import uploadForm from './upload-form'
+	import datePicker from 'vue-datepicker'
 	export default {
 		name:'drag-n-drop',
 		components:{
-			uploadForm
+			uploadForm,
+			datePicker
 		},
 		data(){
 			return {
@@ -108,7 +113,7 @@
 					}))
 				}
 				Promise.all(promises)
-					.then(/*location.reload()*/)
+					.then(this.state='done')
 					.catch((data) => {
 						this.uploads[data.index]=data
 					})
@@ -160,11 +165,38 @@
 			
 		}
 
-		.progress{
+		.progressbar{
 			width:60%;
 
-			progress:{
+			progress[value]{
 				width:100%;
+				appearance: none;
+				-webkit-appearance: none;
+				border:none;
+				color:white;
+			}
+
+			progress[value]::-webkit-progress-value:after {
+			    /* Only webkit/blink browsers understand pseudo elements on pseudo classes. A rare phenomenon! */
+			    content: '';
+			    position: absolute;
+			    
+			    width:5px; height:5px;
+			    top:7px; right:7px;
+			    
+			    background-color: white;
+			    border-radius: 100%;
+			}
+
+			progress[value]::-webkit-progress-bar {
+			    background-color: rgba(0,0,0,0);
+			    color:white;
+			}
+
+			progress[value]::-webkit-progress-value {
+			    position: relative;
+			    background-color:#ddd;
+			    background-size: 35px 20px, 100% 100%, 100% 100%;
 			}
 		}
 

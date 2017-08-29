@@ -6,37 +6,37 @@
 		<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
 	</p>
 	<p>
-		<display-error :error="errors['title']"></display-error>
+		<display-error :error="errors['description']"></display-error>
 		<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="upload.data.description"></textarea>
 		
 	</p>
 	<p>
-		<display-error :error="errors['title']"></display-error>
+		<display-error :error="errors['what']"></display-error>
 		<tag-input placeholder="#What" class="form-control" :tags="upload.data.what"></tag-input>
 		
 	</p>
 	<p>
-		<display-error :error="errors['title']"></display-error>
+		<display-error :error="errors['who']"></display-error>
 		<tag-input placeholder="#Who" class="form-control" :tags="upload.data.who"></tag-input>			
 	</p>
 	<p>
-		<display-error :error="errors['title']"></display-error>
+		<display-error :error="errors['where']"></display-error>
 		<input type="" ref="where" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where" @focus.once="initPlace"/>
 		
 	</p>
 	<p>
-		<display-error :error="errors['title']"></display-error>
-		<input type="text" name="when" id="when" class="form-control" placeholder="#When" onfocus="(this.type='date')" v-model="upload.data.when"/>
+		<display-error :error="errors['when']"></display-error>
+		<date-picker :date="date" :option="options" class="form-control"></date-picker>
 	</p>
 	<p>
-		<display-error :error="errors['title']"></display-error>
+		<display-error :error="errors['why']"></display-error>
 		<textarea name="why" id="why" class="form-control" placeholder="#Why" v-model="upload.data.why"></textarea>
 		
 	</p>
 	<p>
 		<display-error :error="upload.errors['drive']"></display-error>
 		<div class="radio" v-show="dropbox">
-			<input type="radio" name="drive" value="dropbox" class="form-control"  id="dropbox" v-model="upload.data.drive" checked>
+			<input type="radio" name="drive" :value="'dropbox'" class="form-control"  id="dropbox" checked  @click="upload.data.drive = 'dropbox'">
 		 	<label class="btn btn-secondary" for="dropbox">Dropbox</label>
 		 			
 		</div>
@@ -49,12 +49,15 @@
 </template>
 
 <script>
+import datePicker from 'vue-datepicker'
 import  displayError from './../inputs/display-error'
+import moment from 'moment'
 export default {
 
 	name: 'upload-form',
 	components:{
-		displayError
+		displayError,
+		datePicker
 	},
 	props:{
 		upload:{
@@ -70,7 +73,20 @@ export default {
 	},
 	data () {
 		return {
-
+			date:moment(),
+			options:{
+				placeholder:'#When',
+				type: 'day',
+        		week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+        		month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        		format: 'YYYY-MM-DD',
+        		inputStyle: {
+		          	display: 'block',
+					width: '100%',
+					height: 'auto',
+					border:'none'
+        		}
+			}
 		};
 	},
 	methods:{
@@ -89,11 +105,14 @@ export default {
 		errors(){
 			console.log('errors changed')
 		}
+	},
+	mounted(){
+		this.upload.data.drive="dropbox"
 	}
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .form-wrapper{
 	
 	h3{
@@ -122,6 +141,10 @@ export default {
 			
 			}
 		}		
+	}
+
+	.cov-date-body{
+		background-color:blue !important;
 	}
 }
 

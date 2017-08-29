@@ -4,11 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-                <h1 class="auth-title title-offset">Register</h1>
+                <h1 class="auth-title title-offset">Create profile</h1>
                 <p class="beta-notice"> In order to register you have to be part of our beta program</p>
                 <div class="auth-form">
 
-                    <form class="form-horizontal" method="POST" action="{{ route('auth.register') }}" enctype="multipart/form-data">
+                    <form class="form-horizontal" method="POST" action="{{ route('auth.register') }}" enctype="multipart/form-data" id="register_form">
                         {{ csrf_field() }}
 
                         <!-- First Name -->
@@ -160,11 +160,11 @@
                         <div class="form-group">
                             <div v-if="allow" class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Register
+                                    Submit
                                 </button>
                             </div>
                             <div v-else class="col-md-6 col-md-offset-4">
-                                <a class="btn btn-primary" @click.prevent="modal">Register</a>
+                                <a class="btn btn-primary" @click.prevent="modal">Submit</a>
                             </div>
                         </div>
                         <!-- Button -->

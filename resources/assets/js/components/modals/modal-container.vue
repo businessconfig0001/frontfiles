@@ -50,6 +50,7 @@ export default {
 	},
 	methods:{
 		close(confirm = false){
+			this.$emit('close')
 			if(confirm)localStorage.setItem(this.modelData,true)
 			this.$store.commit('closeModal')
 		}
