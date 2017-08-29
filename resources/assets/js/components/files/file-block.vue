@@ -1,20 +1,32 @@
 <template>
 <div class="block-container">
-	<video controls v-if="file.type === 'video'">
-		<source :src="file.url">
-	</video>
-	<img v-else-if="file.type === 'image'" src="" alt="">
-	<audio controls v-else-if="file.type === 'audio'">
-		<source :src="file.url">
-	</audio>
-	<div v-else class="download-file">
-		<a :href="file.url">
-			<i class="fa fa-download"></i>
-		</a>
+	<div class="file-container" v-if="file.processed">
+		<video controls v-if="file.type === 'video'">
+			<source :src="file.azure_url">
+		</video>
+		<div v-else-if="file.type === 'image'">
+			<img  :src="file.azure_url" alt="">	
+			<a :href="file.azure_url">
+				<i class="fa fa-download"></i>
+			</a>
+		</div>
+		
+		<audio controls v-else-if="file.type === 'audio'">
+			<source :src="file.azure_url">
+		</audio>
+		<div v-else class="download-file">
+			<a :href="file.azure_url">
+				<i class="fa fa-download"></i>
+			</a>
+		</div>
 	</div>
+	<div class="file-container" v-else>
+		<h2>Your file is still being processed</h2>
+	</div>
+	
 	<div v-if="status" class="file-info">
-		<h2>{{file.title}}</h2>
-		<p>{{short_desc}}</p>
+		<h2>{{ file.title }}</h2>
+		<p>{{ short_desc }}</p>
 		<ul>
 			<li v-show="file.where">#Where: <span>{{file.where}}</span></li>
 			<li v-show="file.when">#When: <span>{{date}}</span></li>
@@ -82,6 +94,8 @@ export default {
   	short_desc(){
   		if(this.file.description.length > 100) return this.file.description.substring(0,100) + ' ...'
   		return this.file.description
+  	},
+  	title(){
   	}
   },
   data () {
@@ -120,6 +134,18 @@ export default {
 	background-color:rgb(255,255,255);
 	padding: 1rem;
 
+	.file-container{
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		width:100%;
+		height:13em;
+
+		h2{
+			color:#ddd;
+		}
+	}
+
 	video,img,audio,.download-file{
 		width:100%;
 
@@ -130,6 +156,7 @@ export default {
 
 		h2{
 			padding: .5rem 0;
+			height:50px;
 			font-weight:bolder;
 			text-align:center;
 		}

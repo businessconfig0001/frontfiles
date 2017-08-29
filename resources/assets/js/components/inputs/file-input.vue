@@ -1,6 +1,6 @@
 <template>
 <div class="file-input-wrapper">
-		<input type="file" :name="options.name" @change="change" :accept="options.accept" :value="value">
+		<input type="file" :name="options.name" @change="change" :accept="options.accept">
 		<label :for="options.name">{{label}}</label>	
 </div>
 </template>
@@ -14,9 +14,6 @@ export default {
 			type:Object,
 			required:true
 		},
-		value:{
-			required:false
-		}
 	},
 	data () {
 		return {
