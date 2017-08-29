@@ -52,7 +52,8 @@ class UpdateProfileRequest extends FormRequest
 
         if(request()->file('avatar'))
         {
-            Helper::deleteUserAvatar($user->avatar_name);
+            if($user->avatar_name)
+                Helper::deleteUserAvatar($user->avatar_name);
 
             $rawImg         = request()->file('avatar');
             $extension      = (string)$rawImg->clientExtension();
