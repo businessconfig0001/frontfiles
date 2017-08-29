@@ -54,8 +54,8 @@ return [
             'driver'    => 'azure',
             'name'      => env('STORAGE_NAME'),
             'key'       => env('STORAGE_KEY'),
-            'container' => 'user-files',
-            'url'       => 'https://ffcontents.blob.core.windows.net/',
+            'container' => env('STORAGE_CONTAINER'),
+            'url'       => 'https://ffcontents.blob.core.windows.net/user-files',
             'endpoint'  => sprintf(
                 'DefaultEndpointsProtocol=https;AccountName=%s;AccountKey=%s',
                 env('STORAGE_NAME'),
