@@ -22,7 +22,7 @@ class Video implements FileProcessInterface
             ->addFilter(['-i', asset('images/logo2x.png'),'-filter_complex','overlay=10:10'])
             ->addFilter(['-strict', 1])
             ->export()
-            ->toDisk(config('filesystems.default'))
+            ->toDisk('local')
             ->inFormat(new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))
             ->save($new_name);
     }
