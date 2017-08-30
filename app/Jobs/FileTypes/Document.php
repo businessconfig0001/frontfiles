@@ -15,6 +15,6 @@ class Document implements FileProcessInterface
      */
     public function process(File $file, string $new_name)
     {
-        throw new \Exception('Image processing not implemented yet.');
+        throw new \Exception('Document processing not implemented yet.');
     }
 }
