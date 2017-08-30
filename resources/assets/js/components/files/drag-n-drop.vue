@@ -118,6 +118,7 @@
 					.then(()=> {
 						console.log('upload complete')
 						this.state='done'
+						this.uploads=[]
 					})
 					.catch((data) => {
 						this.uploads[data.index]=data
@@ -200,9 +201,14 @@
 
 			progress[value]::-webkit-progress-value {
 			    position: relative;
-			    background-color:#ddd;
+			    background-image:
+					-webkit-linear-gradient( 135deg,transparent,transparent 33%,blue 33%,blue 66%,transparent 66%),
+					-webkit-linear-gradient( top,#ddd,#ddd);
 			    background-size: 35px 20px, 100% 100%, 100% 100%;
+				animation: animate-stripes 5s linear infinite;
 			}
+
+			@keyframes animate-stripes { 100% { background-position: -100px 0; } }
 		}
 
 		.input-file {
