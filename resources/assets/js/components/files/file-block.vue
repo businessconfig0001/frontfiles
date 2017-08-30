@@ -52,7 +52,7 @@
 			<li>
 				<display-error v-show="file.errors" :error="file.errors['where']"></display-error>
 				<label for="where">#Where:</label>
-				 <input type="text" name="where"  class="form-control" v-model="file.where">
+				 <input type="text" name="where"  class="form-control" @focus="initPlace" v-model="file.where">
 			</li>
 			<li>
 				<display-error v-show="file.errors" :error="file.errors['when']"></display-error>
@@ -161,7 +161,16 @@ export default {
   	},
   	changeDate(date){
   		this.file.when = moment(date).format('YYYY-MM-DD')
-  	}
+  	},
+  	initPlace(event){
+		let placebox=new google.maps.places.Autocomplete(event.target)
+		try{
+			placebox.addListener('place_changed',() => {
+				this.file.where = placebox.getPlace().formatted_address
+			})	
+		}
+		catch(e){}	
+	},
   }
 };
 </script>
