@@ -3,9 +3,10 @@
 namespace FrontFiles\Jobs\FileTypes;
 
 use FrontFiles\File;
+use Illuminate\Support\Facades\Storage;
 use FrontFiles\Jobs\Interfaces\FileProcessInterface;
 
-class Document implements FileProcessInterface
+class Audios implements FileProcessInterface
 {
     /**
      * Method to process the file.
@@ -15,6 +16,7 @@ class Document implements FileProcessInterface
      */
     public function process(File $file, string $new_name)
     {
-        throw new \Exception('Document processing not implemented yet.');
+        Storage::disk('local')->delete($this->file->name);
+        throw new \Exception('Audio processing not implemented yet.');
     }
 }

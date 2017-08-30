@@ -5,7 +5,7 @@ namespace FrontFiles\Jobs\FileTypes;
 use FrontFiles\File;
 use FrontFiles\Jobs\Interfaces\FileProcessInterface;
 
-class Video implements FileProcessInterface
+class Videos implements FileProcessInterface
 {
     /**
      * Method to process the file.
@@ -23,5 +23,7 @@ class Video implements FileProcessInterface
             ->toDisk('local')
             ->inFormat(new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))
             ->save($new_name);
+
+        FFMpeg::cleanupTemporaryFiles();
     }
 }
