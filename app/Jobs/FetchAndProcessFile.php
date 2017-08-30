@@ -121,16 +121,16 @@ class FetchAndProcessFile implements ShouldQueue
         //Process the file, according to its type
         switch($this->file->type){
             case 'video':
-                (new FileTypes\Video)->process($this->file, $this->new_name);
+                (new FileTypes\Videos)->process($this->file, $this->new_name);
                 break;
             case 'image':
-                (new FileTypes\Image)->process($this->file, $this->new_name);
+                (new FileTypes\Images)->process($this->file, $this->new_name);
                 break;
             case 'audio':
-                (new FileTypes\Audio)->process($this->file, $this->new_name);
+                (new FileTypes\Audios)->process($this->file, $this->new_name);
                 break;
             case 'document':
-                (new FileTypes\Document)->process($this->file, $this->new_name);
+                (new FileTypes\Documents)->process($this->file, $this->new_name);
                 break;
         }
     }
@@ -164,6 +164,5 @@ class FetchAndProcessFile implements ShouldQueue
     {
         Storage::disk('local')->delete($this->file->name);
         Storage::disk('local')->delete($this->new_name);
-        FFMpeg::cleanupTemporaryFiles();
     }
 }
