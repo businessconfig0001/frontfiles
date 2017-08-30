@@ -3,7 +3,6 @@
 namespace FrontFiles\Jobs\FileTypes;
 
 use FrontFiles\File;
-use Intervention\Image\Facades\Image as Image;
 use FrontFiles\Jobs\Interfaces\FileProcessInterface;
 
 class Images implements FileProcessInterface
@@ -16,7 +15,7 @@ class Images implements FileProcessInterface
      */
     public function process(File $file, string $new_name)
     {
-        Image::make(public_path('userFiles/') . $file->name)
+        \Image::make(public_path('userFiles/') . $file->name)
             ->insert(asset('watermarks/watermark.png'), 'top-right', 10, 10)
             ->text('ID: ' . $file->short_id , 25, 25, function($font){
                 $font->file(4);
