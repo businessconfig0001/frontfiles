@@ -48,7 +48,7 @@
                 	</div>
                 </section>
 
-                <section class="ff-divisor">
+                <section class="ff-divisor-new">
                         	<img src="{{ url('assets/images/ff-bg.png') }}" class="img-responsive">
                 </section>
 
