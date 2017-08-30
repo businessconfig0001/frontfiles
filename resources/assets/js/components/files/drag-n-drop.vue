@@ -106,6 +106,7 @@
 				let promises=[]
 				for (let u in this.uploads){
 					promises.push(upload(this.uploads[u],(e) => {
+						console.log(e.loaded)
 						this.progressBar.loaded +=e.loaded - this.uploads[u].previous
 						this.uploads[u].previous=e.loaded
 						
