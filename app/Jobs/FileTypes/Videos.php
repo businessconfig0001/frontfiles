@@ -2,6 +2,7 @@
 
 namespace FrontFiles\Jobs\FileTypes;
 
+use FFMpeg;
 use FrontFiles\File;
 use FrontFiles\Jobs\Interfaces\FileProcessInterface;
 
