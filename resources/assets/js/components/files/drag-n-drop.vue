@@ -64,7 +64,6 @@
 		computed:{
 			progress(){
 				let p=this.$store.state.progress
-				if(p >= this.progressBar.loaded && p !== 0)this.state='done'
 				return p
 			}
 		},
@@ -116,7 +115,10 @@
 					promises.push(upload(this.uploads[u],this.$store))
 				}
 				Promise.all(promises)
-					.then(console.log('upload complete'))
+					.then(()=> {
+						console.log('upload complete')
+						this.state='done'
+					})
 					.catch((data) => {
 						this.uploads[data.index]=data
 					})

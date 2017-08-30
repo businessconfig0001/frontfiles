@@ -48,6 +48,7 @@ const store = new Vuex.Store({
 		showModal:false,
 		modalData:'',
 		progress:0,
+		previousProgress:0
 		
 	},
 	actions: {
@@ -66,6 +67,7 @@ const store = new Vuex.Store({
 		},
 		addProgress(state,p){
 			state.progress +=p
+			state.previousProgress=p
 		}
 
 
