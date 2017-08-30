@@ -21,6 +21,13 @@ class File extends Model
     ];
 
     /**
+     * The accessors to append custom attributes to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['path'];
+
+    /**
      * Global query scopes for the File model.
      */
     protected static function boot()
@@ -95,6 +102,16 @@ class File extends Model
         ];
 
         return in_array($type, $acceptedTypes) ? $type : 'document';
+    }
+
+    /**
+     * Get the file's path.
+     *
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function getPathAttribute()
+    {
+        return $this->path();
     }
 
     /**
