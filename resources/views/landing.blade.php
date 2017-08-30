@@ -12,7 +12,7 @@
                 <!-- /HERO !-->
 
                 <section id="about-us">
-                	<div class="container">
+                	<div class="container-fluid">
                 		<div class="col-sm-6 col-xs-12">
 	                		<h3>WHO</h3>
 	                		<h2>WE ARE</h2>
@@ -111,8 +111,8 @@
                 <section class="footer bg-blue col-xs-12">
                     <div class="container">
                         <div class="col-sm-4 col-xs-12">
-                        	<img src="{{ url('assets/images/logo-white.png') }}" class="img-responsive">
-                        	<p>&nbsp;</p>
+                        	<img src="{{ url('assets/images/logo-white-footer.png') }}" class="img-responsive">
+                        	<p>&nbsp;</p><p>&nbsp;</p>
                         	<p><a href="mailto: info@frontfiles.com">info@frontfiles.com</a></p>
                         </div>
                         <div class="col-sm-8 col-xs-12">
