@@ -55,11 +55,10 @@ class Helper
      * @throws FileNotFoundException
      */
     public static function deleteUserAvatar(string $avatar_name){
-        if($avatar_name)
-            if(!Storage::exists('user-avatars/' . $avatar_name))
-                throw new FileNotFoundException('We couln\'t find this file!');
-            else
-                Storage::delete('user-avatars/' . $avatar_name);
+        if(!Storage::exists('user-avatars/' . $avatar_name))
+            throw new FileNotFoundException('We couln\'t find this file!');
+        else
+            Storage::delete('user-avatars/' . $avatar_name);
     }
 
     /**

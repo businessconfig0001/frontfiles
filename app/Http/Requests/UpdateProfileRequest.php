@@ -43,8 +43,6 @@ class UpdateProfileRequest extends FormRequest
      */
     public function persist(User $user)
     {
-        dd(request());
-
         $user->update([
             'first_name'    => request('first_name'),
             'last_name'     => request('last_name'),
@@ -54,7 +52,8 @@ class UpdateProfileRequest extends FormRequest
 
         if(request()->file('avatar'))
         {
-            Helper::deleteUserAvatar($user->avatar_name);
+            if($user->avatar_name)
+                Helper::deleteUserAvatar($user->avatar_name);
 
             $rawImg         = request()->file('avatar');
             $extension      = (string)$rawImg->clientExtension();

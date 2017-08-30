@@ -15,6 +15,6 @@ class Image implements FileProcessInterface
      */
     public function process(File $file, string $new_name)
     {
-
+        throw new \Exception('Image processing not implemented yet.');
     }
 }
