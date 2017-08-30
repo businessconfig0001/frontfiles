@@ -8406,7 +8406,7 @@ button.close {
 
 #landing #about-us {
   padding: 50px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   clear: both;
   color: #000;
@@ -8444,8 +8444,8 @@ button.close {
 
 #landing #how-it-works .steps .step {
   padding: 0;
-  font-size: 48px;
-  line-height: 160px;
+  font-size: 36px;
+  line-height: 120px;
   display: block;
   float: left;
   width: 100%;
@@ -8455,7 +8455,7 @@ button.close {
 #landing #how-it-works .steps .step .icon {
   text-align: right;
   position: relative;
-  height: 160px;
+  height: 120px;
 }
 
 #landing #how-it-works .steps .step .icon img {
@@ -8518,13 +8518,14 @@ button.close {
 
 .footer .fa {
   color: #fff;
-  font-size: 30px;
+  font-size: 40px;
   margin: 0 5px;
   float: right;
 }
 
 .footer a {
   color: #fff;
+  font-size: 18px;
 }
 
 .text-blue {
@@ -8536,8 +8537,8 @@ button.close {
 }
 
 .ff-divisor {
-  background: #eee url(/assets/images/ff-bg.png) repeat;
-  height: 100px;
+  /*background: #eee url(/assets/images/ff-bg.png) repeat;
+  height: 100px;*/
 }
 
 .newsletter {
