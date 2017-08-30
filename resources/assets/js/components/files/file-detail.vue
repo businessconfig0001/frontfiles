@@ -1,6 +1,6 @@
 <template>
 <div class="file-wrapper">
-	<div class="file col-md-8">
+	<div class="file col-md-12">
 		<div class="file-container" v-if="file.processed">
 			<video controls v-if="file.type === 'video'">
 				<source :src="file.azure_url">
@@ -20,21 +20,27 @@
 					<i class="fa fa-download"></i>
 				</a>
 			</div>
+
 		</div>
+
 		<div class="file-container" v-else>
 			<h2>Your file is still being processed</h2>
 		</div>
+		
 	</div>
-	<div class="file-info col-md-4">
-		<h2><a :href="file.path">{{ file.title }}</a></h2>
-		<p>file.description</p>
-		<ul>
-			<li v-show="file.where">#Where: <span>{{file.where}}</span></li>
-			<li v-show="file.when">#When: <span>{{file.when}}</span></li>
-			<li v-show="file.who">#Who: <span>{{file.who}}</span></li>
-			<li v-show="file.what">#What: <span>{{file.what}}</span></li>
-			<li v-show="file.why">#Why: <span>{{file.why}}</span></li>
-		</ul>
+	<div class="file-info col-md-8">
+		<div class="info">
+			<h2>{{file.title}}</h2>
+			<p class="col-md-6">{{file.description}}</p>
+			<ul class="col-md-6">
+				<li v-show="file.where">#Where: <span>{{file.where}}</span></li>
+				<li v-show="file.when">#When: <span>{{file.when}}</span></li>
+				<li v-show="file.who">#Who: <span>{{file.who}}</span></li>
+				<li v-show="file.what">#What: <span>{{file.what}}</span></li>
+				<li v-show="file.why">#Why: <span>{{file.why}}</span></li>
+			</ul>	
+		</div>
+		
 	</div>
 </div>
 </template>
@@ -43,7 +49,12 @@
 export default {
 
 	name: 'file-detail',
-
+	props:{
+		file:{
+			required:true,
+			type:Object
+		}
+	},
 	data () {
 		return {
 
@@ -53,4 +64,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.file-wrapper{
+	.file{
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		height:100%;
+		height:30rem;
+	}
+
+	.file-info{
+		margin:2rem 1rem;
+		h2{
+			color:blue;
+			font-size:2rem;
+			margin-bottom:2rem;
+		}
+
+		li{
+			padding:.4rem;
+			color:blue;
+			font-weight:bolder;
+
+			span{
+				font-weight:400;
+				color: #636b6f;
+			}
+		}
+	}
+}
 </style>

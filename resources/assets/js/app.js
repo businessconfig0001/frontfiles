@@ -19,6 +19,7 @@ require('./bootstrap');
 //files
 Vue.component('drag-n-drop', require('./components/files/drag-n-drop.vue'))
 Vue.component('files-display',require('./components/files/files-display.vue'))
+Vue.component('file-detail',require('./components/files/file-detail.vue'))
 
 
 //inputs
