@@ -31,9 +31,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	li{
-		width:33%;
-		padding:.5rem;
-		display:inline-block;
+.display-container{
+	width:100%;
+	overflow-x:scroll;
+	.video-list{
+		display:flex;
+		flex-direction: column; 
+  		flex-wrap: wrap;
+  		max-height:1600px;
+  		max-width:100vw;
+  		width:100%;
+
+  		li{
+			width:33%;
+			padding:.5rem;
+		}
 	}
+	
+}
+	
 </style>
