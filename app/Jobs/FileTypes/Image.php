@@ -15,6 +15,8 @@ class Image implements FileProcessInterface
      */
     public function process(File $file, string $new_name)
     {
-        throw new \Exception('Image processing not implemented yet.');
+        \Intervention\Image\Facades\Image::make(public_path('userFiles/') . $file->name)
+            ->insert(asset('watermarks/watermark.png'), 'top-right', 10, 10)
+            ->save(public_path('userFiles/') . $new_name);
     }
 }
