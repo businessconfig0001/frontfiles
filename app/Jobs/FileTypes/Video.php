@@ -2,7 +2,6 @@
 
 namespace FrontFiles\Jobs\FileTypes;
 
-use FFMpeg;
 use FrontFiles\File;
 use FrontFiles\Jobs\Interfaces\FileProcessInterface;
 
@@ -16,10 +15,9 @@ class Video implements FileProcessInterface
      */
     public function process(File $file, string $new_name)
     {
-        //Add encoding and watermark to the locally stored file
         FFMpeg::fromDisk('local')
             ->open($file->name)
-            ->addFilter(['-i', asset('images/watermark.png'),'-filter_complex','overlay=main_w-overlay_w-10:10'])
+            ->addFilter(['-i', asset('watermarks/watermark.png'), '-filter_complex', 'overlay=main_w-overlay_w-10:10'])
             ->addFilter(['-strict', 1])
             ->export()
             ->toDisk('local')

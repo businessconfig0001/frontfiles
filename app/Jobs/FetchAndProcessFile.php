@@ -164,5 +164,6 @@ class FetchAndProcessFile implements ShouldQueue
     {
         Storage::disk('local')->delete($this->file->name);
         Storage::disk('local')->delete($this->new_name);
+        FFMpeg::cleanupTemporaryFiles();
     }
 }
