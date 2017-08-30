@@ -1,6 +1,6 @@
 <template>
 <div>
-	<modal-container>
+	<modal-container @close="handleClose">
 		<div slot="pt">
 		  	<h1>Caro(a) amigo(a): <br/> Bem-vindo(a) ao FrontFiles</h1>
 			<p>
@@ -77,7 +77,7 @@ export default {
 	mounted(){
 		let modalName = 'register'
 		if(!localStorage.getItem(modalName))this.$store.commit('openModal',modalName)
-	}
+	},
 };
 </script>
 
