@@ -19,7 +19,7 @@ class Video implements FileProcessInterface
         //Add encoding and watermark to the locally stored file
         FFMpeg::fromDisk('local')
             ->open($file->name)
-            ->addFilter(['-i', asset('images/logo2x.png'),'-filter_complex','overlay=10:10'])
+            ->addFilter(['-i', asset('images/watermark.png'),'-filter_complex','overlay=main_w-overlay_w-10:10'])
             ->addFilter(['-strict', 1])
             ->export()
             ->toDisk('local')
