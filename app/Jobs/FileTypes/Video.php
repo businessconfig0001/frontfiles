@@ -17,7 +17,7 @@ class Video implements FileProcessInterface
     {
         FFMpeg::fromDisk('local')
             ->open($file->name)
-            ->addFilter(['-i', asset('watermarks/watermark.png'),'-filter_complex','overlay=main_w-overlay_w-10:10'])
+            ->addFilter(['-i', asset('watermarks/watermark.png'), '-filter_complex', 'overlay=main_w-overlay_w-10:10'])
             ->addFilter(['-strict', 1])
             ->export()
             ->toDisk('local')
