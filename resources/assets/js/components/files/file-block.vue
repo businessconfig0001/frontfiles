@@ -160,7 +160,7 @@ export default {
   			.catch(console.error)
   	},
   	changeDate(date){
-  		this.file.when = date
+  		this.file.when = moment(date).format('YYYY-MM-DD')
   	}
   }
 };
