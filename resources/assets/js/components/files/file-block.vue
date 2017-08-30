@@ -29,42 +29,54 @@
 		<p>{{ short_desc }}</p>
 		<ul>
 			<li v-show="file.where">#Where: <span>{{file.where}}</span></li>
-			<li v-show="file.when">#When: <span>{{date}}</span></li>
+			<li v-show="file.when">#When: <span>{{formatted_date}}</span></li>
 			<li v-show="file.who">#Who: <span>{{file.who}}</span></li>
 			<li v-show="file.what">#What: <span>{{file.what}}</span></li>
+			<li v-show="file.why">#Why: <span>{{file.why}}</span></li>
 		</ul>
 		<a class="btn btn-primary" @click.prevent="status = false">edit</a>
 		<a class="btn btn-primary" @click.prevent="del">delete</a>
 	</div>
-	<div v-else>
+	<div v-else class="file-edit">
 			<p>
 				<display-error v-show="file.errors" :error="file.errors['title']"></display-error>
+				<label for="title">Title</label>
 				<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="file.title"/>
 			</p>
 			<p>
 				<display-error v-show="file.errors" :error="file.errors['description']"></display-error>
+				<label for="description">Description</label>
 				<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="file.description"></textarea>
 			</p>
 			<ul>
 			<li>
 				<display-error v-show="file.errors" :error="file.errors['where']"></display-error>
-				#Where: <input type="text" name="where"  class="form-control" v-model="file.where">
+				<label for="where">#Where:</label>
+				 <input type="text" name="where"  class="form-control" v-model="file.where">
 			</li>
 			<li>
 				<display-error v-show="file.errors" :error="file.errors['when']"></display-error>
-				#When: <input type="date" name="when"  class="form-control" v-model="file.when">
+				<label for="when">#When:</label>
+				 <date-picker :option="options" name="when"  class="form-control" :date="date" @change="changeDate"></date-picker>
 			</li>
 			<li>
 				<display-error v-show="file.errors" :error="file.errors['who']"></display-error>
-				#Who: <input type="text" name="who"  class="form-control"v-model="file.who">
+				<label for="who">#Who: </label>
+				<tag-input type="text" name="who"  class="form-control tag-input" :tags="file.who"></tag-input>
 			</li>
 			<li>
 				<display-error v-show="file.errors" :error="file.errors['what']"></display-error>
-				#What: <input type="text" name="what"  class="form-control" v-model="file.what">
+				<label class="what">#What:</label>
+				<tag-input type="text" name="what"  class="form-control tag-input" :tags="file.what"></tag-input>
+			</li>
+			<li>
+				<display-error v-show="file.errors" :error="file.errors['why']"></display-error>
+				<label for="why">#Why:</label>
+				 <input type="text" name="why"  class="form-control" v-model="file.why">
 			</li>
 		</ul>
-			<a class="btn btn-primary" @click.prevent="update">edit</a>
-			<a class="btn btn-primary" @click.prevent="status = true ">Go back</a>
+			<a class="btn btn-primary" @click.prevent="update">Save</a>
+			<a class="btn btn-primary" @click.prevent="status = true ">Go back without save</a>
 	</div>
 </div>
 </template>
@@ -72,11 +84,13 @@
 <script>
 import displayError from './../inputs/display-error'
 import moment from 'moment'
+import datePicker from 'vue-datepicker'
 export default {
 
   name: 'file-block',
   components:{
-  	displayError
+  	displayError,
+  	datePicker
   },
   props:{
   	file:{
@@ -89,7 +103,10 @@ export default {
   },
   computed:{
   	date(){
-  		return moment(this.file.when).format('DD/MM/YYYY')
+  		return moment(this.file.when)
+  	},
+  	formatted_date(){
+  		this.date.format('DD/MM/YYYY')
   	},
   	short_desc(){
   		if(this.file.description.length > 100) return this.file.description.substring(0,100) + ' ...'
@@ -101,7 +118,25 @@ export default {
   data () {
     return {
     	status:true,
-    	url:'/files'
+    	url:'/files',
+    	options:{
+				placeholder:'#When',
+				type: 'day',
+        		week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+        		month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        		format: 'YYYY-MM-DD',
+        		inputStyle: {
+		          	display: 'block',
+					width: '100%',
+					height: 'auto',
+					border:'none'
+        		},
+        		color: {
+				    header: 'blue',
+				    headerText: 'white'
+				  }
+
+		}
     };
   },
   methods:{
@@ -123,6 +158,9 @@ export default {
   		axios.delete(window.location.protocol + "//" + window.location.host + this.url + '/' + this.file.id)
   			.then(this.$emit('remove'))
   			.catch(console.error)
+  	},
+  	changeDate(date){
+  		this.file.when = date
   	}
   }
 };
@@ -174,6 +212,13 @@ export default {
 			}
 		}
 		
+	}
+
+	.file-edit{
+		input,textarea,.tag-input{
+			width:100%;
+			margin-bottom:1rem;
+		}
 	}
 
 	.btn{

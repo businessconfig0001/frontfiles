@@ -8577,6 +8577,10 @@ button.close {
   width: 40%;
 }
 
+.profile .storage .box .logo.avatar {
+  border-radius: 50%;
+}
+
 .profile .storage .box div.logo {
   height: 123px;
   margin-left: 30%;
@@ -9427,7 +9431,6 @@ img {
 .profile-container {
   color: #0000ff;
   margin-bottom: 40px;
-  border-top: 1rem solid #0000ff;
   padding: 5rem;
 }
 
