@@ -1,5 +1,5 @@
 const url = '/files'
-function upload(data,progress){
+function upload(data,store){
 	//add data
 	let form = formDataFactory(data.data)
 	//add img
@@ -11,7 +11,7 @@ function upload(data,progress){
 		return axios.post(window.location.protocol + "//" + window.location.host + url,form,{
 			onUploadProgress:function(e){
 				console.log(e.loaded)
-				this.$store.commit('addProgress',e.loaded - previous)
+				store.commit('addProgress',e.loaded - previous)
 				previous=e.loaded
 			}
 		})

@@ -64,7 +64,7 @@
 		computed:{
 			progress(){
 				let p=this.$store.state.progress
-				if(p >= this.progressBar.loaded)this.state='done'
+				if(p >= this.progressBar.loaded && p !== 0)this.state='done'
 				return p
 			}
 		},
@@ -113,7 +113,7 @@
 				}
 				let promises=[]
 				for (let u in this.uploads){
-					promises.push(upload(this.uploads[u]))
+					promises.push(upload(this.uploads[u],this.$store))
 				}
 				Promise.all(promises)
 					.then(console.log('upload complete'))
