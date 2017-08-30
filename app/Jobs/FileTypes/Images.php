@@ -2,8 +2,8 @@
 
 namespace FrontFiles\Jobs\FileTypes;
 
-use Image;
 use FrontFiles\File;
+use Intervention\Image\Facades\Image as Image;
 use FrontFiles\Jobs\Interfaces\FileProcessInterface;
 
 class Images implements FileProcessInterface

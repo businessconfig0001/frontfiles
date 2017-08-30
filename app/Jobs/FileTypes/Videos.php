@@ -2,8 +2,8 @@
 
 namespace FrontFiles\Jobs\FileTypes;
 
-use FFMpeg;
 use FrontFiles\File;
+use Pbmedia\LaravelFFMpeg\FFMpegFacade as FFMpeg;
 use FrontFiles\Jobs\Interfaces\FileProcessInterface;
 
 class Videos implements FileProcessInterface
