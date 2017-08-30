@@ -25,6 +25,10 @@
 
 			.logo{
 				width:40%;
+
+				&.avatar{
+					border-radius:50%;
+				}
 			}
 			div.logo{
 				height:123px;

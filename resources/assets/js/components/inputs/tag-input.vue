@@ -18,7 +18,7 @@ export default {
 		tags:{
 			required:false,
 			type:Array,
-			default:[]
+			default:() => []
 		},
 		placeholder:{
 			required:false,

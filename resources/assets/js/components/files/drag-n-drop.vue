@@ -38,12 +38,11 @@
 	import { Errors } from './../../classes/Errors'
 	import { upload } from './../../services/uploadService'
 	import uploadForm from './upload-form'
-	import datePicker from 'vue-datepicker'
+	import moment from 'moment'
 	export default {
 		name:'drag-n-drop',
 		components:{
 			uploadForm,
-			datePicker
 		},
 		data(){
 			return {
@@ -79,7 +78,7 @@
 				  			description:'',
 				  			what:[],
 				  			where:'',
-				  			when:'',
+				  			when:moment(),
 				  			who:[],
 				  			why:'',
 							drive:'nothing'

@@ -26,7 +26,7 @@
 	</p>
 	<p>
 		<display-error :error="errors['when']"></display-error>
-		<date-picker :date="date" :option="options" class="form-control"></date-picker>
+		<date-picker :date="upload.data.when" :option="options" class="form-control" @change="changeDate"></date-picker>
 	</p>
 	<p>
 		<display-error :error="errors['why']"></display-error>
@@ -73,7 +73,6 @@ export default {
 	},
 	data () {
 		return {
-			date:moment(),
 			options:{
 				placeholder:'#When',
 				type: 'day',
@@ -87,7 +86,7 @@ export default {
 					border:'none'
         		}
 			}
-		};
+		}
 	},
 	methods:{
 		initPlace(event){
@@ -99,7 +98,10 @@ export default {
 					})	
 				}
 				catch(e){}	
-		}
+		},
+		changeDate(date){
+  			this.upload.date.when = date
+  		}
 	},
 	watch:{
 		errors(){

@@ -17,7 +17,7 @@
                     @endif
                 </li>
                 <li class="box">
-                    <img  class="logo" src="{{$user->avatar}}" alt="">
+                    <img  class="logo avatar" src="{{$user->avatar}}" alt="">
                     <h3 class="title">Your profile</h3>
                     <p>Go and edit your profile</p>
                     <a href="{{ route('profile.edit') }}" class="btn btn-primary">Go to your profile</a>
