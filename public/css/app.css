@@ -8388,6 +8388,10 @@ button.close {
   margin-left: 7rem;
 }
 
+.align-right {
+  float: right;
+}
+
 #landing .hero-image {
   padding: 57% 0 0 0;
 }

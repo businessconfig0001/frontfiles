@@ -1,5 +1,9 @@
 @extends('layouts.app')
-
+@section('slogan')
+<div class="col-xs-12 col-sm-3">
+	<h2 class="text-blue sub-title">The Global Platform for Independent Journalism</h2>
+</div>
+@endsection
 @section('content')
 
 <div id="landing">
