@@ -68,7 +68,9 @@ class FilesController extends Controller
         $this->authorize('view', $file);
 
         if(request()->expectsJson())
-            return $file;
+            return response([
+                'data' => $file,
+            ], 200);
 
         return view('files.show', compact('file'));
     }
