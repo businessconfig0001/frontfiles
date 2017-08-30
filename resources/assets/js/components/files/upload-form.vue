@@ -99,8 +99,9 @@ export default {
 				}
 				catch(e){}	
 		},
-		changeDate(date){
-  			this.upload.date.when = moment(date).format('YYYY-MM-DD')
+		changeDate(d){
+			console.log(d)
+  			this.upload.data.when = moment(d).format('YYYY-MM-DD')
   		}
 	},
 	watch:{
