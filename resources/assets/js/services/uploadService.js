@@ -6,15 +6,22 @@ function upload(data,progress){
 	form.append('file',data.file,data.name)
 
 	//upload
-	return new Promise((resolve,reject) =>
-		axios.post(window.location.protocol + "//" + window.location.host + url,form,{
-			onUploadProgress:progress
+	return new Promise((resolve,reject) => {
+		let previous=0
+		return axios.post(window.location.protocol + "//" + window.location.host + url,form,{
+			onUploadProgress:function(e){
+				console.log(e.loaded)
+				this.$store.commit('addProgress',e.loaded - previous)
+				previous=e.loaded
+			}
 		})
 		.then(resolve)
 		.catch(err=>{
 			data.errors=err.response.data
 			reject(data)
 		})
+	}
+		
 	)
 }
 

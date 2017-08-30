@@ -93,14 +93,12 @@ export default {
 				let placebox=new google.maps.places.Autocomplete(event.target)
 				try{
 					placebox.addListener('place_changed',() => {
-						console.log(placebox.getPlace())
 						this.upload.data.where = placebox.getPlace().formatted_address
 					})	
 				}
 				catch(e){}	
 		},
 		changeDate(d){
-			console.log(d)
   			this.upload.data.when = moment(d).format('YYYY-MM-DD')
   		}
 	},

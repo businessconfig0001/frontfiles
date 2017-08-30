@@ -5,7 +5,7 @@
 			<input type="file" multiple name="file" :disabled="state ==='saving'" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*,video/*,audio/*,application/pdf" class="input-file">
 			<p v-if="state === 'saving'" class="progressbar">
 			  	Uploading {{ fileCount }} files...
-			  	<progress :value="progressBar.loaded" :max="progressBar.total"></progress>
+			  	<progress :value="progress" :max="progressBar.total"></progress>
 			  	</ul>
 			</p>
 			<p v-else-if="state === 'more'">
@@ -61,6 +61,13 @@
 				default:() => false
 			}
 		},
+		computed:{
+			progress(){
+				let p=this.$store.state.progress
+				if(p >= this.progressBar.loaded)this.state='done'
+				return p
+			}
+		},
 		mounted(){
 			let modalName= 'first_upload'
 			if(!localStorage.getItem(modalName))this.$store.commit('openModal',modalName)
@@ -97,6 +104,7 @@
 				  this.state='more'
 			},
 			uploadFile(){
+				this.$store.commit('resetProgress')
 				this.state='saving'
 				let total=this.uploads.reduce((total,x) => total += x.size,0)
 				this.progressBar={
@@ -105,15 +113,10 @@
 				}
 				let promises=[]
 				for (let u in this.uploads){
-					promises.push(upload(this.uploads[u],(e) => {
-						console.log(e.loaded)
-						this.progressBar.loaded +=e.loaded - this.uploads[u].previous
-						this.uploads[u].previous=e.loaded
-						
-					}))
+					promises.push(upload(this.uploads[u]))
 				}
 				Promise.all(promises)
-					.then(this.state='done')
+					.then(console.log('upload complete'))
 					.catch((data) => {
 						this.uploads[data.index]=data
 					})
