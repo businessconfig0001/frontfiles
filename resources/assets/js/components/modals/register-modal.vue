@@ -17,7 +17,7 @@
 			 </p>
 		</div>
 		<div slot="br">
-	  		amigo(a): <br/> Bem-vindo(a) ao FrontFiles</h1>
+			<h1>Caro(a) amigo(a): <br/> Bem-vindo(a) ao FrontFiles</h1>
 			<p>
 				Você está prestes a acessar a versão Beta da Plataforma FrontFiles. 
 				Tenha em mente que esta área está em construção pela comunidade de usuários e temos o enorme prazer de contar com a sua colaboração para ajudar a plataforma a melhorar sua performance.
