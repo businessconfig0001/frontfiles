@@ -127,13 +127,13 @@
 			},
 			changeWhatTags(tag){
 				this.uploads.map(u => {
-					u.data.what.push(tag)
+					if(u.name !== this.uploads[0].name)u.data.what.push(tag)
 					return u
 				})
 			},
 			changeWhoTags(tag){
 				this.uploads.map(u => {
-					u.data.who.push(tag)
+					if(u.name !== this.uploads[0].name)u.data.who.push(tag)
 					return u
 				})
 			}
