@@ -4,7 +4,7 @@
 		<video controls v-if="file.type === 'video'">
 			<source :src="file.azure_url">
 		</video>
-		<div v-else-if="file.type === 'image'">
+		<div class="img" v-else-if="file.type === 'image'">
 			<img  :src="file.azure_url" alt="">	
 			<a :href="file.azure_url">
 				<i class="fa fa-download"></i>
@@ -178,17 +178,32 @@ export default {
 		display:flex;
 		justify-content:center;
 		align-items:center;
-		width:100%;
 		height:13em;
+		overflow:hidden;
 
 		h2{
 			color:#ddd;
 		}
 	}
-
-	video,img,audio,.download-file{
+	video,img{
+		height:100%;
+	}
+	audio,.download-file{
 		width:100%;
 
+	}
+	.img{
+		position: relative;
+
+			a{
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				z-index: 100;
+				font-size: 1rem;
+				margin: .5rem;
+				color:#eee
+			}
 	}
 
 	.file-info{

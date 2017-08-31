@@ -18,8 +18,7 @@
 					<ul>
 						<li :class="lang === 'en' ? 'active' : ''"><a @click.prevent="lang ='en'">EN</a></li>
 						<li :class="lang === 'es' ? 'active' : ''"><a @click.prevent="lang ='es'">ES</a></li>
-						<li :class="lang === 'br' ? 'active' : ''"><a @click.prevent="lang ='br'">BR</a></li>
-						<li :class="lang === 'pt' ? 'active' : ''"><a @click.prevent="lang ='pt'">PT</a></li>
+						<li :class="lang === 'br' ? 'active' : ''"><a @click.prevent="lang ='br'">PT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -35,7 +34,7 @@ export default {
 	name: 'modal-container',
 	data () {
 		return {
-			lang:'pt'
+			lang:'br'
 		}
 	},
 	computed:{
