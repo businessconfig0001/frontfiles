@@ -31,7 +31,7 @@
 				
 			</div>
 			<div class="file-info row">
-				<div class="info col-md-8">
+				<div class="info col-md-8 col-md-offset-2">
 					<h2>{{file.title}}</h2>
 					<p class="col-md-6">{{file.description}}</p>
 					<ul class="col-md-6">
