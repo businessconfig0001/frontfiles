@@ -69,7 +69,11 @@ export default {
 		display:flex;
 		justify-content:center;
 		align-items:center;
-		height:10rem;
+
+		.file-container:first-child{
+			height:30rem;
+			width:auto;
+		}
 
 		.img{
 			position: relative;
