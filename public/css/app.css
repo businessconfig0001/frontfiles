@@ -8579,6 +8579,7 @@ button.close {
 
 .profile .storage .box .logo {
   width: 40%;
+  min-height: 123px;
 }
 
 .profile .storage .box .logo.avatar {

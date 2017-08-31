@@ -23,6 +23,10 @@ export default {
 		placeholder:{
 			required:false,
 			type:String
+		},
+		name:{
+			required:false,
+			type:String
 		}
 	},
 	data () {
@@ -34,13 +38,15 @@ export default {
 		addTag(){
 			if(this.new_tag){
 				this.tags.push(this.new_tag)
+				this.$emit('change',this.new_tag)
 				this.new_tag='';
+				
 			}	
 		},
 		removeTag(t){
 			this.tags=this.tags.filter(x => x !== t)
 		}
-	}
+	},
 };
 </script>
 

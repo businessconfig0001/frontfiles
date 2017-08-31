@@ -1,11 +1,11 @@
 <template>
 <div class="file-wrapper">
-	<div class="file col-md-12">
+	<div class="file col-md-12 row">
 		<div class="file-container" v-if="file.processed">
 			<video controls v-if="file.type === 'video'">
 				<source :src="file.azure_url">
 			</video>
-			<div v-else-if="file.type === 'image'">
+			<div class="img" v-else-if="file.type === 'image'">
 				<img  :src="file.azure_url" alt="">	
 				<a :href="file.azure_url">
 					<i class="fa fa-download"></i>
@@ -28,8 +28,8 @@
 		</div>
 		
 	</div>
-	<div class="file-info col-md-8">
-		<div class="info">
+	<div class="file-info row">
+		<div class="info col-md-8">
 			<h2>{{file.title}}</h2>
 			<p class="col-md-6">{{file.description}}</p>
 			<ul class="col-md-6">
@@ -69,11 +69,25 @@ export default {
 		display:flex;
 		justify-content:center;
 		align-items:center;
-		height:100%;
-		height:30rem;
+		height:10rem;
+
+		.img{
+			position: relative;
+
+			a{
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				z-index: 100;
+				font-size: 2rem;
+				margin: 1rem;
+				color:#eee
+			}
+		}
 	}
 
 	.file-info{
+		display:block;
 		margin:2rem 1rem;
 		h2{
 			color:blue;
