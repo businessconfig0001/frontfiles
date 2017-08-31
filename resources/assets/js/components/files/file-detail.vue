@@ -72,6 +72,7 @@ export default {
 
 		.file-container{
 			video{
+				width:auto;
 				height:30rem;
 			}
 		}
@@ -80,6 +81,7 @@ export default {
 			position: relative;
 
 			img{
+				width:auto;
 				height: 30rem;
 			}
 
