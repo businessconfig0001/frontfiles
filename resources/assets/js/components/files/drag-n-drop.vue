@@ -21,8 +21,9 @@
 
 
 		<div class="col-xs-12 col-sm-3 form" v-show="uploads.length">
-			<div v-for="upload in uploads" class="form-group">
-				<upload-form :upload="upload" :errors="upload.errors" :dropbox="dropbox"></upload-form>
+			<div v-for="(upload,index) in uploads" class="form-group">
+				<upload-form v-if="index === 0" :upload="upload" :errors="upload.errors" :dropbox="dropbox" :who="upload.data.who" :what="upload.data.what" @changeWhat="changeWhatTags" @changeWho="changeWhoTags"></upload-form>
+				<upload-form v-else :upload="upload" :errors="upload.errors" :dropbox="dropbox" :who="upload.data.who" :what="upload.data.what"></upload-form>
 			</div>
 			<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Upload</a>
 			<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
@@ -123,6 +124,18 @@
 					.catch((data) => {
 						this.uploads[data.index]=data
 					})
+			},
+			changeWhatTags(tag){
+				this.uploads.map(u => {
+					u.data.what.push(tag)
+					return u
+				})
+			},
+			changeWhoTags(tag){
+				this.uploads.map(u => {
+					u.data.who.push(tag)
+					return u
+				})
 			}
 
 		}

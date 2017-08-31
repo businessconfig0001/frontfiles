@@ -26,13 +26,6 @@
 	
 	<div v-if="status" class="file-info">
 		<h2><a :href="file.path">{{ file.title }}</a></h2>
-		<p>{{ short_desc }}</p>
-		<ul>
-			<li v-show="file.where">#Where: <span>{{file.where}}</span></li>
-			<li v-show="file.when">#When: <span>{{file.when}}</span></li>
-			<li v-show="file.who">#Who: <span>{{file.who}}</span></li>
-			<li v-show="file.what">#What: <span>{{file.what}}</span></li>
-			<li v-show="file.why">#Why: <span>{{file.why}}</span></li>
 		</ul>
 		<a class="btn btn-primary" @click.prevent="status = false">edit</a>
 		<a class="btn btn-primary" @click.prevent="del">delete</a>
@@ -206,6 +199,9 @@ export default {
 			height:50px;
 			font-weight:bolder;
 			text-align:center;
+			a{
+				color:blue;
+			}
 		}
 
 		p{

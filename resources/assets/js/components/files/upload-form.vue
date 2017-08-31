@@ -12,12 +12,12 @@
 	</p>
 	<p>
 		<display-error :error="errors['what']"></display-error>
-		<tag-input placeholder="#What" class="form-control" :tags="upload.data.what"></tag-input>
+		<tag-input placeholder="#What" class="form-control" :tags="what" @change="changeWhat" :name="'whatTags'"></tag-input>
 		
 	</p>
 	<p>
 		<display-error :error="errors['who']"></display-error>
-		<tag-input placeholder="#Who" class="form-control" :tags="upload.data.who"></tag-input>			
+		<tag-input placeholder="#Who" class="form-control" :tags="who" @change="changeWho" :name="'whoTags'"></tag-input>			
 	</p>
 	<p>
 		<display-error :error="errors['where']"></display-error>
@@ -69,6 +69,14 @@ export default {
 			type:Object
 		},
 		dropbox:{
+		},
+		who:{
+			required:true,
+			type:Array
+		},
+		what:{
+			required:true,
+			type:Array
 		}
 	},
 	data () {
@@ -100,12 +108,13 @@ export default {
 		},
 		changeDate(d){
   			this.upload.data.when = moment(d).format('YYYY-MM-DD')
-  		}
-	},
-	watch:{
-		errors(){
-			console.log('errors changed')
-		}
+  		},
+  		changeWhat(tags){
+  			this.$emit('changeWhat',tags)
+  		},
+  		changeWho(tags){
+  			this.$emit('changeWho',tags)
+  		},
 	},
 	mounted(){
 		this.upload.data.drive="dropbox"
