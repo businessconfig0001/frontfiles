@@ -180,9 +180,6 @@
 @section('modals')
    <register-modal v-if=allow></register-modal>
    <modal-container v-else>
-        <slot name="pt">
-            
-        </slot>
         <slot name="br">
             
         </slot>
