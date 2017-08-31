@@ -70,13 +70,18 @@ export default {
 		justify-content:center;
 		align-items:center;
 
-		.file-container:first-child{
-			height:30rem;
-			width:auto;
+		.file-container{
+			video{
+				height:30rem;
+			}
 		}
 
 		.img{
 			position: relative;
+
+			img{
+				height: 30rem;
+			}
 
 			a{
 				position: absolute;
