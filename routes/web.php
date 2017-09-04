@@ -37,27 +37,13 @@ Route::group([
         $video->filters()
             ->resize(new \FFMpeg\Coordinate\Dimension(550, 550))
             ->watermark(public_path('watermarks/watermark.png'), [
-                'position' => 'relative',
-                'top' => 10,
-                'right' => 10,
+                'position'  => 'relative',
+                'top'       => 10,
+                'right'     => 10,
             ])
             ->synchronize();
 
         $video->save($format, public_path('userFiles/').'processed_small.mp4');
-
-        /*
-        FFMpeg::fromDisk('local')
-            ->open('small.mp4')
-            ->addFilter(['-vf', 'scale=250:250'])
-            ->addFilter(['-i', asset('watermarks/watermark.png'), '-filter_complex', 'overlay=main_w-overlay_w-10:10'])
-            ->addFilter(['-strict', 1])
-            ->export()
-            ->toDisk('local')
-            ->inFormat(new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))
-            ->save('processed_small.mp4');
-
-        FFMpeg::cleanupTemporaryFiles()
-        */
 
         return 'OK!';
     });
