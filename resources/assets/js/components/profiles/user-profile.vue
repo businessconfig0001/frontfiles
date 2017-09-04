@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div class="container files">
-			<files-display :files="files"></files-display>
+			<files-display :_files="files"></files-display>
 		</div>
 </section>
 </template>

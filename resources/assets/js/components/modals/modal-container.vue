@@ -99,7 +99,7 @@ export default {
   		}
   		h1{
   			padding:2rem 0;
-  			font-size: 1.6rem;
+  			font-size: 1.4rem;
   		}
 
 		.modal-button{
@@ -121,7 +121,19 @@ export default {
 
 			li{
 				display:inline-block;
-				padding:.5rem;
+				padding:.2rem;
+
+				a{
+					color:#ddd;
+					font-size:12px;
+				}
+
+				&.active{
+					a{
+						color:blue;
+					}
+					
+				}
 
 				& + li {
 					border-left:1px solid blue;

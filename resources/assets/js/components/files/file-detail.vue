@@ -2,7 +2,7 @@
 <div class="container">
     <div class="show-container">
 		<div class="file-wrapper">
-			<div class="file col-md-12 row">
+			<div class="file row">
 				<div class="file-container" v-if="file.processed">
 					<video controls v-if="file.type === 'video'">
 						<source :src="file.azure_url">
@@ -28,21 +28,21 @@
 				<div class="file-container" v-else>
 					<h2>Your file is still being processed</h2>
 				</div>
+				<div class="file-info row">
+					<div class="info">
+						<h2>{{file.title}}</h2>
+						<span class="date">Uploaded on {{date_string}}</span>
+						<p class="col-md-6">{{file.description}}</p>
+						<ul class="col-md-6">
+							<li v-show="file.where">#Where: <span>{{file.where}}</span></li>
+							<li v-show="file.when">#When: <span>{{file.when}}</span></li>
+							<li v-show="file.who">#Who: <span>{{file.who}}</span></li>
+							<li v-show="file.what">#What: <span>{{file.what}}</span></li>
+							<li v-show="file.why">#Why: <span>{{file.why}}</span></li>
+						</ul>	
+					</div>
 				
-			</div>
-			<div class="file-info row">
-				<div class="info col-md-8 col-md-offset-2">
-					<h2>{{file.title}}</h2>
-					<p class="col-md-6">{{file.description}}</p>
-					<ul class="col-md-6">
-						<li v-show="file.where">#Where: <span>{{file.where}}</span></li>
-						<li v-show="file.when">#When: <span>{{file.when}}</span></li>
-						<li v-show="file.who">#Who: <span>{{file.who}}</span></li>
-						<li v-show="file.what">#What: <span>{{file.what}}</span></li>
-						<li v-show="file.why">#Why: <span>{{file.why}}</span></li>
-					</ul>	
 				</div>
-				
 			</div>
 		</div>
 	</div>
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
 
 	name: 'file-detail',
@@ -63,6 +64,11 @@ export default {
 		return {
 
 		}
+	},
+	computed:{
+		date_string(){
+			return moment(this.file.created_at).format('MMMM Do YYYY, h:mm:ss a')
+		}
 	}
 };
 </script>
@@ -73,14 +79,16 @@ export default {
 }
 .file-wrapper{
 	.file{
-		display:flex;
-		justify-content:center;
-		align-items:center;
 
 		.file-container{
-			video{
+			display:flex;
+			justify-content:center;
+			align-items:center;
+			height:30rem;
+
+			video,audio{
 				width:auto;
-				height:30rem;
+				
 			}
 		}
 
@@ -107,24 +115,30 @@ export default {
 	.file-info{
 		display:block;
 		margin:2rem 1rem;
+		width:100%;
 		h2{
 			color:blue;
 			font-size:2rem;
-			margin-bottom:2rem;
-			text-align:center;
-		}
-		
-		p{
-			text-align:center;
+			margin-bottom:.5rem;
 		}
 		li{
+			font-weight:400;
+			color: #636b6f;
 			padding:.4rem;
-			color:blue;
-			font-weight:bolder;
+			
 
 			span{
-				font-weight:400;
-				color: #636b6f;
+				color:blue;
+				font-weight:bolder;
+			}
+		}
+		.info{
+			.date{
+				color:#ddd;
+				float:left;
+				width:100%;
+				margin-bottom:2rem;
+				margin-left:.5rem;
 			}
 		}
 	}

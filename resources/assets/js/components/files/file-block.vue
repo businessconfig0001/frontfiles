@@ -22,54 +22,12 @@
 	</div>
 	<div class="file-container" v-else>
 		<h2>Your file is still being processed</h2>
-	</div>
-	
-	<div v-if="status" class="file-info">
+	</div>	
+	<div class="file-info">
 		<h2><a :href="file.path">{{ file.title }}</a></h2>
 		</ul>
-		<a class="btn btn-primary" @click.prevent="status = false">edit</a>
-		<a class="btn btn-primary" @click.prevent="del">delete</a>
-	</div>
-	<div v-else class="file-edit">
-			<p>
-				<display-error v-show="file.errors" :error="file.errors['title']"></display-error>
-				<label for="title">Title</label>
-				<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="file.title"/>
-			</p>
-			<p>
-				<display-error v-show="file.errors" :error="file.errors['description']"></display-error>
-				<label for="description">Description</label>
-				<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="file.description"></textarea>
-			</p>
-			<ul>
-			<li>
-				<display-error v-show="file.errors" :error="file.errors['where']"></display-error>
-				<label for="where">#Where:</label>
-				 <input type="text" name="where"  class="form-control" @focus="initPlace" v-model="file.where">
-			</li>
-			<li>
-				<display-error v-show="file.errors" :error="file.errors['when']"></display-error>
-				<label for="when">#When:</label>
-				 <date-picker :option="options" name="when"  class="form-control" :date="date" @change="changeDate"></date-picker>
-			</li>
-			<li>
-				<display-error v-show="file.errors" :error="file.errors['who']"></display-error>
-				<label for="who">#Who: </label>
-				<tag-input type="text" name="who"  class="form-control tag-input" :tags="file.who"></tag-input>
-			</li>
-			<li>
-				<display-error v-show="file.errors" :error="file.errors['what']"></display-error>
-				<label class="what">#What:</label>
-				<tag-input type="text" name="what"  class="form-control tag-input" :tags="file.what"></tag-input>
-			</li>
-			<li>
-				<display-error v-show="file.errors" :error="file.errors['why']"></display-error>
-				<label for="why">#Why:</label>
-				 <input type="text" name="why"  class="form-control" v-model="file.why">
-			</li>
-		</ul>
-			<a class="btn btn-primary" @click.prevent="update">Save</a>
-			<a class="btn btn-primary" @click.prevent="status = true ">Go back without save</a>
+		<a class="btn btn-secondary" @click.prevent="showEditModal">edit</a>
+		<a class="btn btn-secondary" @click.prevent="del">delete</a>
 	</div>
 </div>
 </template>
@@ -105,8 +63,6 @@ export default {
   		if(this.file.description.length > 100) return this.file.description.substring(0,100) + ' ...'
   		return this.file.description
   	},
-  	title(){
-  	}
   },
   data () {
     return {
@@ -133,19 +89,8 @@ export default {
     };
   },
   methods:{
-  	update(){
-  		let f = new FormData();
-  		f.append('title',this.file.title)
-  		f.append('description',this.file.description)
-  		f.append('who',this.file.who)
-  		f.append('when',this.file.when)
-  		f.append('what',this.file.what)
-  		f.append('where',this.file.where)
-		f.append('_method', 'PATCH')
-
-  		axios.post(window.location.protocol + "//" + window.location.host + this.url + '/' + this.file.id, f)
-  			.then(status = true)
-  			.catch(this.file.erros = res.response.data)
+  	showEditModal(){
+  		this.$store.commit('editModal',this.file.title)
   	},
   	del(){
   		axios.delete(window.location.protocol + "//" + window.location.host + this.url + '/' + this.file.id)
