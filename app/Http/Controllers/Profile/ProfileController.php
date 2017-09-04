@@ -35,8 +35,6 @@ class ProfileController extends Controller
     {
         $user = User::where('slug', $slug)->firstOrFail();
 
-        $this->authorize('view', $user);
-
         $files = File::where('user_id', $user->id)->latest()->get();
 
         if(request()->expectsJson())
