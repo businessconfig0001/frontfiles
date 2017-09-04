@@ -32,10 +32,24 @@
 export default {
 
 	name: 'modal-container',
+	props:{
+		showmodal:{
+			required:false,
+			default:() => false,
+			type:Boolean
+		}
+	},
 	data () {
 		return {
-			lang:'br'
+			lang:'en'
 		}
+	},
+	mounted(){
+		if(this.showmodal){
+			this.$store.commit('openModal','')
+			console.log('opening')
+		}
+
 	},
 	computed:{
 		show(){

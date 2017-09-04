@@ -179,7 +179,7 @@
 
 @section('modals')
    <register-modal v-if=allow></register-modal>
-   <modal-container v-else>
+   <modal-container v-else :showmodal="true">
         <div slot="br">
             <h1>Caro(a) amigo(a): <br/> Bem-vindo(a) ao FrontFiles</h1>
             <p>
