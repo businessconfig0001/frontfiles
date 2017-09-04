@@ -42,26 +42,30 @@ Route::group([
  * Profile routes
  */
 Route::group([
-    'namespace' => 'Profile',
-    'middleware' => 'auth',
     'prefix' => 'profile',
+    'namespace' => 'Profile',
 ], function () {
-    Route::get('/', 'ProfileController@index')->name('profile');
-    Route::get('/edit', 'ProfileController@edit')->name('profile.edit');
-    Route::get('/dropbox', 'ProfileController@dropbox')->name('profile.dropbox');
-    Route::get('/dropbox/callback', 'ProfileController@dropboxCallback')->name('profile.dropbox.callback');
+
+    Route::group(['middleware' => 'auth'], function(){
+        Route::get('/', 'ProfileController@index')->name('profile');
+        Route::get('/edit', 'ProfileController@edit')->name('profile.edit');
+        Route::get('/dropbox', 'ProfileController@dropbox')->name('profile.dropbox');
+        Route::get('/dropbox/callback', 'ProfileController@dropboxCallback')->name('profile.dropbox.callback');
+        Route::patch('/', 'ProfileController@update')->name('profile.update');
+        Route::delete('/', 'ProfileController@destroy')->name('profile.delete');
+    });
+
     Route::get('/{slug}', 'ProfileController@show')->name('profile.show');
-    Route::patch('/', 'ProfileController@update')->name('profile.update');
-    Route::delete('/', 'ProfileController@destroy')->name('profile.delete');
 });
 
 /**
  * Files routes
  */
 Route::group([
+    'prefix' => 'files',
     'namespace' => 'Files',
     'middleware' => 'auth',
-    'prefix' => 'files',
+
 ], function () {
     Route::get('/', 'FilesController@index')->name('files');
     Route::post('/', 'FilesController@store')->name('files');
