@@ -21,6 +21,8 @@ class Video implements FileMimeTypeInterface
         'video/x-msvideo',
         'video/vnd.vivo',
         'video/quicktime',
+        'video/mpeg4-generic',
+        'video/x-ms-wmv',
     ];
 
     /**
