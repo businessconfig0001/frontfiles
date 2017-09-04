@@ -188,7 +188,6 @@ return [
         FrontFiles\Providers\AzureStorageServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
-        Pbmedia\LaravelFFMpeg\FFMpegServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
     ],
 
@@ -243,7 +242,6 @@ return [
          * Custom Facades
          */
         'Socialite'     => Laravel\Socialite\Facades\Socialite::class,
-        'FFMpeg'        => Pbmedia\LaravelFFMpeg\FFMpegFacade::class,
         'Image'         => Intervention\Image\Facades\Image::class,
     ],
 
