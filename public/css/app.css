@@ -8452,14 +8452,10 @@ button.close {
   clear: both;
 }
 
-#landing #how-it-works h3, 
-#landing #how-it-works h2
-{ padding-left: 65px; }
-
 #landing #how-it-works .steps .step {
-  padding: 0 50px;
-  font-size: 40px;
-  line-height: 120px;
+  padding: 0;
+  font-size: 48px;
+  line-height: 160px;
   display: block;
   float: left;
   width: 100%;
@@ -8479,7 +8475,6 @@ button.close {
   top: 0;
   bottom: 0;
   margin: auto;
-  max-width: 150px;
 }
 
 #landing #how-it-works .steps .step :before {
@@ -8524,7 +8519,7 @@ button.close {
 }
 
 .footer {
-  padding: 60px 50px 200px;
+  padding: 60px 0 200px;
 }
 
 .footer img {
@@ -9520,10 +9515,6 @@ img {
   font-weight: 600;
   padding: 3px 5px;
   text-transform: uppercase;
-}
-
-.page-payment-info.home {
-    margin: 0;
 }
 
 .page-payment-info {
