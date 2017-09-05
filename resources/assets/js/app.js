@@ -19,6 +19,7 @@ require('./bootstrap');
 //files
 Vue.component('drag-n-drop', require('./components/files/drag-n-drop.vue'))
 Vue.component('files-display',require('./components/files/files-display.vue'))
+Vue.component('file-detail',require('./components/files/file-detail.vue'))
 
 
 //inputs
@@ -46,7 +47,12 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		showModal:false,
-		modalData:''
+		showEdit:'',
+		modalData:'',
+		progress:0,
+		previousProgress:0,
+		whoTags:[],
+		whatTags:[]
 		
 	},
 	actions: {
@@ -59,6 +65,25 @@ const store = new Vuex.Store({
 		},
 		closeModal(state){
 			state.showModal = false
+		},
+		editModal(state,name){
+			state.showEdit=name
+		},
+		closeEdit(state){
+			state.showEdit=''
+		},
+		resetProgress(state){
+			state.progress = 0
+		},
+		addProgress(state,p){
+			state.progress +=p
+			state.previousProgress=p
+		},
+		changeWhoTags(state,tags){
+			state.whoTags=tags
+		},
+		changeWhatTags(state,tags){
+			state.whatTags=tags
 		}
 
 

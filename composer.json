@@ -9,12 +9,14 @@
   "type": "project",
   "require": {
     "php": ">=7.1",
+    "intervention/image": "^2.4",
     "laravel/framework": "5.4.*",
     "laravel/socialite": "^3.0",
     "laravel/tinker": "~1.0",
     "league/flysystem-azure": "^1.0",
     "microsoft/azure-storage": "0.10.2",
     "microsoft/windowsazure": "^0.5",
+    "pbmedia/laravel-ffmpeg": "^1.1",
     "socialiteproviders/dropbox": "^4.0",
     "spatie/flysystem-dropbox": "^1.0",
     "spatie/laravel-permission": "^2.2",
@@ -38,10 +40,7 @@
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "tests/"
-    },
-    "files": [
-      "tests/utilities/functions.php"
-    ]
+    }
   },
   "scripts": {
     "post-root-package-install": [

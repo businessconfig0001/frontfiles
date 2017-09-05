@@ -8361,11 +8361,11 @@ button.close {
 }
 
 .bg-login {
-  background-image: url(/images/riot1.jpg?5cdf494078b7d1e7010da2156cc6aaff);
+  background-image: url(/images/riot1.jpg?772273f557c0f17166a715dda6df8389);
 }
 
 .bg-create {
-  background-image: url(/images/riot2.jpg?2fdfa62e7b55af2a936f438a06ca2ef2);
+  background-image: url(/images/riot2.jpg?e383921d8faefbff667fe78592154096);
 }
 
 .login-box {
@@ -8380,12 +8380,22 @@ button.close {
   background-color: blue !important;
 }
 
+.btn-secondary {
+  background-color: white !important;
+  border: 1px solid blue;
+  color: blue;
+}
+
 .form-control {
   border-radius: 0 !important;
 }
 
 .title-offset {
   margin-left: 7rem;
+}
+
+.align-right {
+  float: right;
 }
 
 #landing .hero-image {
@@ -8459,7 +8469,7 @@ button.close {
 #landing #how-it-works .steps .step .icon {
   text-align: right;
   position: relative;
-  height: 120px;
+  height: 160px;
 }
 
 #landing #how-it-works .steps .step .icon img {
@@ -8580,6 +8590,11 @@ button.close {
 
 .profile .storage .box .logo {
   width: 40%;
+  min-height: 123px;
+}
+
+.profile .storage .box .logo.avatar {
+  border-radius: 50%;
 }
 
 .profile .storage .box div.logo {
@@ -8626,6 +8641,7 @@ button.close {
   padding-bottom: 3rem;
   text-align: center;
   margin-left: 7rem;
+  font-size: 15px;
 }
 
 .register-radio div {
@@ -8661,6 +8677,10 @@ button.close {
 
 .file-input {
   width: 100%;
+}
+
+.login-box .checkbox label {
+  font-size: 14px;
 }
 
 /*-------------------------------------
@@ -9094,11 +9114,11 @@ img {
 }
 
 .btn-photo {
-  background: url(/images/upload2x.png?1de8ff468014c37caafca911242a5db4) center center no-repeat;
+  background: url(/images/upload2x.png?a42e510890362f45bd9e793ccd05cab4) center center no-repeat;
 }
 
 .btn-photo:active {
-  background-image: url(/images/upload2x.png?1de8ff468014c37caafca911242a5db4);
+  background-image: url(/images/upload2x.png?a42e510890362f45bd9e793ccd05cab4);
 }
 
 .blocks .block-image {
@@ -9197,7 +9217,7 @@ img {
 }
 
 .main-header .logo {
-  background: url(/images/logo2x.png?f7732e91b19dd92caca2e440ef591002) left center no-repeat;
+  background: url(/images/logo2x.png?4c0bb1bd413e7b2cde19172ba198671e) left center no-repeat;
   background-size: 50% auto;
   display: block;
   width: 100%;
@@ -9432,7 +9452,6 @@ img {
 .profile-container {
   color: #0000ff;
   margin-bottom: 40px;
-  border-top: 1rem solid #0000ff;
   padding: 5rem;
 }
 

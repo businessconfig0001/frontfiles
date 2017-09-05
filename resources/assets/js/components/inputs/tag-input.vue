@@ -6,7 +6,7 @@
 			<a @click.prevent="removeTag(tag)"><i class="fa fa-times"></i></a>
 		</li>
 	</ul>
-	<input type="text" v-model="new_tag" :placeholder="placeholder" @keyup.enter="addTag">
+	<input type="text" v-model="new_tag" :placeholder="placeholder" @keyup.enter="addTag" @blur="addTag">
 </div>
 </template>
 
@@ -18,9 +18,13 @@ export default {
 		tags:{
 			required:false,
 			type:Array,
-			default:[]
+			default:() => []
 		},
 		placeholder:{
+			required:false,
+			type:String
+		},
+		name:{
 			required:false,
 			type:String
 		}
@@ -34,13 +38,15 @@ export default {
 		addTag(){
 			if(this.new_tag){
 				this.tags.push(this.new_tag)
+				this.$emit('change',this.new_tag)
 				this.new_tag='';
+				
 			}	
 		},
 		removeTag(t){
 			this.tags=this.tags.filter(x => x !== t)
 		}
-	}
+	},
 };
 </script>
 
@@ -48,6 +54,7 @@ export default {
 	.tag-wrapper{
 		background-color:white;
 		padding:0.5rem;
+		height:auto;
 
 		.tags{
 			display:inline-block;
