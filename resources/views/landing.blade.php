@@ -18,7 +18,8 @@
 	                		<h2>WE ARE</h2>
 	                		<p>FF is an open, collaborative network platform of media activists, freelance journalists & witness citizens.</p>
 	                		<p>We created from bottom up a new powerful management and monetary tool to keep our journalistic work independent & autonomous.</p>
-	                		<p>Truth travels faster in social networks and we want to help the fire spread. We are in for the long ride.</p>
+	                		<p>Truth travels faster in social networks and we want to help the fire spread.</p>
+	                		<p>We are in for the long ride.</p>
 	                		<p class="text-blue">Join us.</p>
 	                	</div>
                 		<div class="col-sm-6 col-xs-12"></div>
@@ -59,43 +60,43 @@
                 </section>
 
                 <section id="how-it-works">
-	                <div class="container">
+	                <div class="container-fluid">
 	                	<h3>HOW IT</h3>
 		                <h2>WORKS</h2>
 		                </div>
 		                <section class="steps">
 		                	<div class="step">
-		                		<div class="container">
+		                		<div class="container-fluid">
 		                			<div class="col-xs-10">1. Create a Profile</div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-profile.png" class="img-responsive"></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
-		                		<div class="container">
+		                		<div class="container-fluid">
 		                			<div class="col-xs-10">2. Shoot Photo or Video</div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-shoot.png" class="img-responsive"></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
-		                		<div class="container">
+		                		<div class="container-fluid">
 		                			<div class="col-xs-10">3. Tag it</div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-tag.png" class="img-responsive"></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
-		                		<div class="container">
+		                		<div class="container-fluid">
 		                			<div class="col-xs-10">4. Set the Price and License</div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-price.png" class="img-responsive"></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
-		                		<div class="container">
+		                		<div class="container-fluid">
 		                			<div class="col-xs-10">5. Upload & Sell</div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-upload.png" class="img-responsive"></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
-		                		<div class="container">
+		                		<div class="container-fluid">
 		                			<div class="col-xs-10">6. Stay independent</div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-independent.png" class="img-responsive"></div>
 		                		</div>
@@ -109,7 +110,7 @@
                 </section>
 
                 <section class="footer bg-blue col-xs-12">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="col-sm-4 col-xs-12">
                         	<img src="{{ url('assets/images/logo-white-footer.png') }}" class="img-responsive">
                         	<p>&nbsp;</p><p>&nbsp;</p>

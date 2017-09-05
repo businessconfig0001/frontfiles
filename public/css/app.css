@@ -8406,7 +8406,7 @@ button.close {
 
 #landing #about-us {
   padding: 50px;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
   clear: both;
   color: #000;
@@ -8442,9 +8442,13 @@ button.close {
   clear: both;
 }
 
+#landing #how-it-works h3, 
+#landing #how-it-works h2
+{ padding-left: 65px; }
+
 #landing #how-it-works .steps .step {
-  padding: 0;
-  font-size: 36px;
+  padding: 0 50px;
+  font-size: 40px;
   line-height: 120px;
   display: block;
   float: left;
@@ -8465,6 +8469,7 @@ button.close {
   top: 0;
   bottom: 0;
   margin: auto;
+  max-width: 150px;
 }
 
 #landing #how-it-works .steps .step :before {
@@ -8509,7 +8514,7 @@ button.close {
 }
 
 .footer {
-  padding: 60px 0 200px;
+  padding: 60px 50px 200px;
 }
 
 .footer img {
@@ -8518,14 +8523,13 @@ button.close {
 
 .footer .fa {
   color: #fff;
-  font-size: 40px;
+  font-size: 30px;
   margin: 0 5px;
   float: right;
 }
 
 .footer a {
   color: #fff;
-  font-size: 18px;
 }
 
 .text-blue {
@@ -8537,8 +8541,8 @@ button.close {
 }
 
 .ff-divisor {
-  /*background: #eee url(/assets/images/ff-bg.png) repeat;
-  height: 100px;*/
+  background: #eee url(/assets/images/ff-bg.png) repeat;
+  height: 100px;
 }
 
 .newsletter {
@@ -9497,6 +9501,10 @@ img {
   font-weight: 600;
   padding: 3px 5px;
   text-transform: uppercase;
+}
+
+.page-payment-info.home {
+    margin: 0;
 }
 
 .page-payment-info {
