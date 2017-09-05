@@ -22,6 +22,7 @@ Route::group([
     Route::get('/index', 'HomeController@main')->name('main');
     Route::get('/watermark', function(){
 
+        /*
         $ffmpeg = FFMpeg\FFMpeg::create([
             'ffmpeg.binaries'  => '/usr/local/bin/ffmpeg',
             'ffprobe.binaries' => '/usr/local/bin/ffprobe',
@@ -29,21 +30,36 @@ Route::group([
             'ffmpeg.threads'   => 12,
         ]);
 
-        $format = (new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))
-            ->setKiloBitrate(300);
-
         $video = $ffmpeg->open(public_path('userFiles/').'small.mp4');
 
         $video->filters()
-            ->resize(new \FFMpeg\Coordinate\Dimension(550, 550))
+            ->resize(new \FFMpeg\Coordinate\Dimension(1, 360), 'width')
             ->watermark(public_path('watermarks/watermark.png'), [
                 'position'  => 'relative',
                 'top'       => 10,
                 'right'     => 10,
             ])
+            ->custom('')
             ->synchronize();
 
-        $video->save($format, public_path('userFiles/').'processed_small.mp4');
+        $video->save(
+            (new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))->setKiloBitrate(300),
+            public_path('userFiles/').'processed_small.mp4'
+        );
+        */
+
+        $input = public_path('userFiles/').'teste.mp4';
+        $output = public_path('userFiles/').'processed_small.mp4';
+        $watermark = public_path('watermarks/watermark.png');
+
+        $process = new Symfony\Component\Process\Process(
+            "/usr/local/bin/ffmpeg -i {$input} -c:v libx264 -b:v 192k -bufsize 192k -vf scale=-1:360,setdar=16:9 {$output}"
+        );
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful())
+            throw new Symfony\Component\Process\Exception\ProcessFailedException($process);
 
         return 'OK!';
     });
