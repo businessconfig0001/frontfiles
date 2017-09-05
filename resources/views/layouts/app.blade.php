@@ -15,7 +15,7 @@
             window.csrfToken = "{{ csrf_token() }}";
         </script>
     </head>
-    <body class="page-payment-info">
+    <body class="page-payment-info @if(Request::is('/')) home @endif">
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
