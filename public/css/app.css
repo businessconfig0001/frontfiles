@@ -8380,6 +8380,12 @@ button.close {
   background-color: blue !important;
 }
 
+.btn-secondary {
+  background-color: white !important;
+  border: 1px solid blue;
+  color: blue;
+}
+
 .form-control {
   border-radius: 0 !important;
 }
@@ -8630,6 +8636,7 @@ button.close {
   padding-bottom: 3rem;
   text-align: center;
   margin-left: 7rem;
+  font-size: 15px;
 }
 
 .register-radio div {
@@ -8665,6 +8672,10 @@ button.close {
 
 .file-input {
   width: 100%;
+}
+
+.login-box .checkbox label {
+  font-size: 14px;
 }
 
 /*-------------------------------------

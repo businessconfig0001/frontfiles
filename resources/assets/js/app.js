@@ -47,6 +47,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		showModal:false,
+		showEdit:'',
 		modalData:'',
 		progress:0,
 		previousProgress:0,
@@ -64,6 +65,12 @@ const store = new Vuex.Store({
 		},
 		closeModal(state){
 			state.showModal = false
+		},
+		editModal(state,name){
+			state.showEdit=name
+		},
+		closeEdit(state){
+			state.showEdit=''
 		},
 		resetProgress(state){
 			state.progress = 0
