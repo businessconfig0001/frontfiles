@@ -188,7 +188,6 @@ return [
         FrontFiles\Providers\AzureStorageServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -242,7 +241,6 @@ return [
          * Custom Facades
          */
         'Socialite'     => Laravel\Socialite\Facades\Socialite::class,
-        'Image'         => Intervention\Image\Facades\Image::class,
     ],
 
 ];

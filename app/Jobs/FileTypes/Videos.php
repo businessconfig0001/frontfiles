@@ -54,13 +54,13 @@ class Videos implements FileProcessInterface
         $text_options           = 'fontsize=10:fontcolor=White';
         //Text author
         $text_author            = $file->owner->fullName();
-        $text_author_position   = 'x=(w-text_w-40):y=(text_h)+45';
+        $text_author_position   = 'x=(w-text_w-10):y=(text_h)+20';
         //Text id
         $text_id                = 'ID\: '.$file->short_id;
-        $text_id_position       = 'x=(w-text_w-40):y=(text_h+60)';
+        $text_id_position       = 'x=(w-text_w-10):y=(text_h+35)';
         //Watermark + resizing + encoding + bitrate
         $watermark              = public_path('watermarks/watermark.png');
-        $watermark_position     = '(main_w-overlay_w-40):overlay_h+20';
+        $watermark_position     = 'main_w-overlay_w-10:10';
         $encoding               = 'libx264';
         $bitrate                = '192k';
         $scale                  = '-1:360';
