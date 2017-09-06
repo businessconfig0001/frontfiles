@@ -52,12 +52,12 @@ class Videos implements FileProcessInterface
         //Text
         $font                   = public_path('watermarks/arial_narrow.ttf');
         $text_options           = 'fontsize=10:fontcolor=White';
-        //Text author
-        $text_author            = $file->owner->fullName();
-        $text_author_position   = 'x=(w-text_w-10):y=(text_h)+20';
         //Text id
         $text_id                = 'ID\: '.$file->short_id;
-        $text_id_position       = 'x=(w-text_w-10):y=(text_h+35)';
+        $text_id_position       = 'x=(w-text_w-10):y=(text_h+24)';
+        //Text author
+        $text_author            = $file->owner->fullName();
+        $text_author_position   = 'x=(w-text_w-10):y=(text_h)+35';
         //Watermark + resizing + encoding + bitrate
         $watermark              = public_path('watermarks/watermark.png');
         $watermark_position     = 'main_w-overlay_w-10:10';
@@ -77,7 +77,7 @@ class Videos implements FileProcessInterface
         }
 
         $process2 = new Process(
-            "{$ffmpeg} -i {$output_temp} -vf \"[in]drawtext={$text_options}:fontfile='{$font}':text='{$text_author}':{$text_author_position},drawtext={$text_options}:fontfile='{$font}':text='{$text_id}':{$text_id_position}[out]\" -y -strict -2 {$output_final}"
+            "{$ffmpeg} -i {$output_temp} -vf \"[in]drawtext={$text_options}:fontfile='{$font}':text='{$text_id}':{$text_id_position},drawtext={$text_options}:fontfile='{$font}':text='{$text_author}':{$text_author_position}[out]\" -y -strict -2 {$output_final}"
         );
         $process2->run();
 
