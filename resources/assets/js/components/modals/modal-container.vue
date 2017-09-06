@@ -35,17 +35,18 @@ export default {
 	props:{
 		showmodal:{
 			required:false,
-			default:() => false,
-			type:Boolean
+			type:Boolean,
 		}
 	},
 	data () {
 		return {
-			lang:'en'
+			lang:'en',
+			_show:false
 		}
 	},
 	mounted(){
-		if(this.showmodal){
+		console.log(this.showmodal)
+		if(this._show){
 			this.$store.commit('openModal','')
 			console.log('opening')
 		}
@@ -64,6 +65,7 @@ export default {
 	methods:{
 		close(confirm = false){
 			this.$emit('close')
+
 			if(confirm)localStorage.setItem(this.modelData,true)
 			this.$store.commit('closeModal')
 		}
@@ -100,6 +102,13 @@ export default {
   		h1{
   			padding:2rem 0;
   			font-size: 1.4rem;
+  		}
+  		p{
+  			font-size:15px;
+
+  			& + p{
+  				margin-top:.5rem
+  			}
   		}
 
 		.modal-button{

@@ -60,6 +60,7 @@ const store = new Vuex.Store({
 	},
 	mutations: {
 		openModal(state,text){
+			console.log('opening',text)
 			state.showModal = true
 			state.modalData = text
 		},

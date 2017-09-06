@@ -1,5 +1,6 @@
 <template>
 <div class="file-input-wrapper">
+		<img v-show="link.length" :src="link" alt="">
 		<input type="file" :name="options.name" @change="change" :accept="options.accept">
 		<label :for="options.name">{{label}}</label>	
 </div>
@@ -17,15 +18,28 @@ export default {
 	},
 	data () {
 		return {
-			label:""
+			label:'',
+			file:'',
+			link:''
 		};
 	},
 	mounted(){
 		this.label=this.options.label
 	},
 	methods:{
-		change(event){
-			this.label = event.target.files[0].name
+		change(e){
+			let image=
+			console.log(image)
+			this.file=e.target.files[0]
+			this.label=this.file.name
+			if(FileReader){
+				let fr = new FileReader()
+
+				fr.onload = () => this.link = fr.result 
+
+				fr.readAsDataURL(this.file)
+
+			}
 		}
 	}
 }
@@ -35,6 +49,9 @@ export default {
 .file-input-wrapper{
 	display:flex;
 	position:relative;
+	img{
+		width:100%
+	}
 
 	input{
 		flex:1;

@@ -27,65 +27,70 @@
 		<h2><a :href="file.path">{{ file.title }}</a></h2>
 		</ul>
 		<a class="btn btn-secondary" @click.prevent="showEditModal">edit</a>
-		<a class="btn btn-secondary" @click.prevent="del">delete</a>
+		<a class="btn btn-secondary" @click.prevent="showDelete = true">delete</a>
 	</div>
+	<delete-modal :show="showDelete" :id="file.id" @close="showDelete=false" @remove="del"></delete-modal>
 </div>
 </template>
 
 <script>
+import deleteModal from './../modals/delete-modal'
 import displayError from './../inputs/display-error'
 import moment from 'moment'
 import datePicker from 'vue-datepicker'
 export default {
 
-  name: 'file-block',
-  components:{
-  	displayError,
-  	datePicker
-  },
-  props:{
-  	file:{
-  		required:true,
-  		type:Object
-  	}
-  },
-  mounted(){
-  	this.file.errors={}
-  },
-  computed:{
-  	date(){
-  		return moment(this.file.when)
-  	},
-  	formatted_date(){
-  		this.date.format('DD/MM/YYYY')
-  	},
-  	short_desc(){
-  		if(this.file.description.length > 100) return this.file.description.substring(0,100) + ' ...'
-  		return this.file.description
-  	},
-  },
-  data () {
-    return {
-    	status:true,
-    	url:'/files',
-    	options:{
-				placeholder:'#When',
-				type: 'day',
-        		week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-        		month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        		format: 'YYYY-MM-DD',
-        		inputStyle: {
-		          	display: 'block',
-					width: '100%',
-					height: 'auto',
-					border:'none'
-        		},
-        		color: {
-				    header: 'blue',
-				    headerText: 'white'
-				  }
-
+	name: 'file-block',
+	components:{
+		displayError,
+		datePicker,
+		deleteModal
+	},
+	props:{
+		file:{
+			required:true,
+			type:Object
 		}
+	},
+	mounted(){
+		this.file.errors={}
+	},
+	computed:{
+		date(){
+			return moment(this.file.when)
+		},
+		formatted_date(){
+			this.date.format('DD/MM/YYYY')
+		},
+		short_desc(){
+			if(this.file.description.length > 100) return this.file.description.substring(0,100) + ' ...'
+			return this.file.description
+		}
+	
+	},
+	data () {
+		return {
+			status:true,
+			url:'/files',
+			showDelete:false,
+			options:{
+					placeholder:'#When',
+					type: 'day',
+		    		week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+		    		month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+		    		format: 'YYYY-MM-DD',
+		    		inputStyle: {
+			          	display: 'block',
+						width: '100%',
+						height: 'auto',
+						border:'none'
+		    		},
+		    		color: {
+					    header: 'blue',
+					    headerText: 'white'
+					  }
+
+			}
     };
   },
   methods:{
@@ -93,9 +98,7 @@ export default {
   		this.$store.commit('editModal',this.file.title)
   	},
   	del(){
-  		axios.delete(window.location.protocol + "//" + window.location.host + this.url + '/' + this.file.id)
-  			.then(this.$emit('remove'))
-  			.catch(console.error)
+  		this.$emit('remove',this.file.id)
   	},
   	changeDate(date){
   		this.file.when = moment(date).format('YYYY-MM-DD')
@@ -108,7 +111,7 @@ export default {
 			})	
 		}
 		catch(e){}	
-	},
+	}
   }
 };
 </script>

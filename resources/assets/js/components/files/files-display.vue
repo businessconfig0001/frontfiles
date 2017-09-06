@@ -2,7 +2,7 @@
 <div class="display-container">
 	<ul class="video-list">
 		<li v-for="file in files">
-			<file-block :file="file"></file-block>
+			<file-block :file="file" @remove="remove"></file-block>
 		</li>
 	</ul>
 	<edit-modal :files="files" :url="'/files'" @edit="handleEdit"></edit-modal>
@@ -36,6 +36,9 @@ export default {
 				if(f.title = file.title)return file
 				return f
 			})
+		},
+		remove(id){
+			this.files=this.files.filter(f => f.id !== id)
 		}
 	},
 	mounted(){

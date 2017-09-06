@@ -2,39 +2,39 @@
 <div>
 	<div v-if="show.length > 0" class="modal-background clearfix">
 		<div class="modal-wrapper modal-content col-md-4 file-edit">
-			<ul>
+			<ul class="fields">
 				<li>
-					<display-error v-show="active.errors" :error="active.errors['title']"></display-error>
+					<display-error class="error" v-show="errors" :error="errors['title']"></display-error>
 					<label for="title">Title</label>
 					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="active.title"/>
 				</li>
 				<li>
-					<display-error v-show="active.errors" :error="active.errors['description']"></display-error>
+					<display-error class="error" v-show="errors" :error="errors['description']"></display-error>
 					<label for="description">Description</label>
 					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="active.description"></textarea>
 				</li>
 				<li>
-					<display-error v-show="active.errors" :error="active.errors['where']"></display-error>
+					<display-error class="error" v-show="errors" :error="errors['where']"></display-error>
 					<label for="where">#Where:</label>
-					 <input type="text" name="where"  class="form-control" @focus="initPlace" v-model="active.where">
+					 <input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="active.where">
 				</li>
 				<li>
-					<display-error v-show="active.errors" :error="active.errors['when']"></display-error>
+					<display-error class="error" v-show="errors" :error="errors['when']"></display-error>
 					<label for="when">#When:</label>
 					 <date-picker :option="options" name="when"  class="form-control" :date="date" @change="changeDate"></date-picker>
 				</li>
 				<li>
-					<display-error v-show="active.errors" :error="active.errors['who']"></display-error>
+					<display-error class="error" v-show="errors" :error="errors['who']"></display-error>
 					<label for="who">#Who: </label>
 					<tag-input type="text" name="who"  class="form-control tag-input" :tags="active.who"></tag-input>
 				</li>
 				<li>
-					<display-error v-show="active.errors" :error="active.errors['what']"></display-error>
+					<display-error class="error" v-show="errors" :error="errors['what']"></display-error>
 					<label class="what">#What:</label>
 					<tag-input type="text" name="what"  class="form-control tag-input" :tags="active.what"></tag-input>
 				</li>
 				<li>
-					<display-error v-show="active.errors" :error="active.errors['why']"></display-error>
+					<display-error class="error" v-show="errors" :error="errors['why']"></display-error>
 					<label for="why">#Why:</label>
 					 <input type="text" name="why"  class="form-control" v-model="active.why">
 				</li>
@@ -72,6 +72,7 @@ export default {
 	data () {
 		return {
 			active:{},
+			errors:false,
 			options:{
 				placeholder:'#When',
 				type: 'day',
@@ -125,19 +126,23 @@ export default {
 	  				console.log(res)
 	  				if(false)this.close(this.active)
 	  			})
-	  			.catch(res => this.active.errors = res.response.data)
+	  			.catch(res => this.errors = res.response.data)
 	  	},
 	  	changeDate(date){
   			this.file.when = moment(date).format('YYYY-MM-DD')
 	  	},
 	  	initPlace(event){
+	  		console.log("initializing field",event.target)
 			let placebox=new google.maps.places.Autocomplete(event.target)
+			console.log(placebox)
 			try{
 				placebox.addListener('place_changed',() => {
 					this.file.where = placebox.getPlace().formatted_address
 				})	
 			}
-			catch(e){}	
+			catch(e){
+				console.error(e)
+			}	
 		},
 	},
 };
@@ -147,7 +152,7 @@ export default {
 .modal-background{
 	transition: .4s ease-out;
 	position:absolute;
-	z-index:999999;
+	z-index:1000;
 	background-color:rgba(0,0,0,0.5);
 	width:100%;
 	height:100%;
@@ -176,9 +181,13 @@ export default {
 			label{
 				margin-bottom:.5rem
 			}
-			li{
+			.fields > li{
 				width:100%;
 				margin-bottom:1rem;
+
+					.error{
+						float:right;
+					}
 			}
 		}
 
