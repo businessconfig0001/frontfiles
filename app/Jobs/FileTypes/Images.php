@@ -11,9 +11,10 @@ class Images implements FileProcessInterface
      * Method to process the file.
      *
      * @param File $file
+     * @param string $tmp_name
      * @param string $new_name
      */
-    public function process(File $file, string $new_name)
+    public function process(File $file, string $tmp_name, string $new_name)
     {
         \Image::make(public_path('userFiles/') . $file->name)
             ->insert(asset('watermarks/watermark.png'), 'top-right', 10, 10)

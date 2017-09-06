@@ -41,6 +41,13 @@ class FetchAndProcessFile implements ShouldQueue
     protected $file;
 
     /**
+     * The file's temporary name.
+     *
+     * @var string
+     */
+    protected $tmp_name;
+
+    /**
      * The file's new name.
      *
      * @var string
@@ -55,6 +62,7 @@ class FetchAndProcessFile implements ShouldQueue
     public function __construct(File $file)
     {
         $this->file = $file;
+        $this->tmp_name = 'tmp_' . $file->name;
         $this->new_name = 'processed_' . $file->name;
     }
 
@@ -121,16 +129,16 @@ class FetchAndProcessFile implements ShouldQueue
         //Process the file, according to its type
         switch($this->file->type){
             case 'video':
-                (new FileTypes\Videos)->process($this->file, $this->new_name);
+                (new FileTypes\Videos)->process($this->file, $this->tmp_name, $this->new_name);
                 break;
             case 'image':
-                (new FileTypes\Images)->process($this->file, $this->new_name);
+                (new FileTypes\Images)->process($this->file, $this->tmp_name, $this->new_name);
                 break;
             case 'audio':
-                (new FileTypes\Audios)->process($this->file, $this->new_name);
+                (new FileTypes\Audios)->process($this->file, $this->tmp_name, $this->new_name);
                 break;
             case 'document':
-                (new FileTypes\Documents)->process($this->file, $this->new_name);
+                (new FileTypes\Documents)->process($this->file, $this->tmp_name, $this->new_name);
                 break;
         }
     }
@@ -164,5 +172,6 @@ class FetchAndProcessFile implements ShouldQueue
     {
         Storage::disk('local')->delete($this->file->name);
         Storage::disk('local')->delete($this->new_name);
+        Storage::disk('local')->delete($this->tmp_name);
     }
 }
