@@ -2,7 +2,8 @@
 <div class="file-input-wrapper">
 		<img v-show="link.length" :src="link" alt="">
 		<div class="input-wrapper">
-			<input type="file" :name="options.name" @change="change" :accept="options.accept">
+			<input  type="file" :name="options.name" @change="change" :accept="options.accept">
+			<input  ref="fileinput" type="file" :name="options.name" class="hidden">
 			<label :for="options.name">{{label}}</label>
 			<canvas ref="canvas" class="hidden"></canvas>	
 		</div>
@@ -34,8 +35,7 @@ export default {
 	},
 	methods:{
 		change(e){
-			let image=
-			console.log(image)
+			let image=new Image()
 			this.file=e.target.files[0]
 			this.label=this.file.name
 			if(FileReader){
@@ -56,7 +56,9 @@ export default {
 						canvas.width=200
 						canvas.height=200
 						ctx.drawImage(image,options.x,options.y,options.width,options.height,0,0,200,200)
-  						this.link = canvas.toDataURL("image/png")
+  						let dataUrl= canvas.toDataURL("image/png")
+  						this.link=dataUrl
+  						this.$refs.inputfile.setAttribute('value',dataUrl)
 					})	
 				}
 					
