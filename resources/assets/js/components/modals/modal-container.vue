@@ -1,6 +1,7 @@
 <template>
 	<div v-show="show" class="modal-background clearfix">
 		<div class="modal-wrapper modal-content col-md-4">
+
 			<div class="modal-text">
 				<div v-if="lang === 'es'">
 					<slot name="es"></slot>
@@ -14,17 +15,18 @@
 				<div v-else>
 					<slot name="en"></slot>
 				</div>
-				<div class="controls">
-					<ul>
-						<li :class="lang === 'en' ? 'active' : ''"><a @click.prevent="lang ='en'">EN</a></li>
-						<li :class="lang === 'es' ? 'active' : ''"><a @click.prevent="lang ='es'">ES</a></li>
-						<li :class="lang === 'br' ? 'active' : ''"><a @click.prevent="lang ='br'">PT</a></li>
-					</ul>
-				</div>
-			</div>
-			<a  v-show="showok" @click.prevent="close(true)" class="btn btn-primary modal-button">Ok</a>
+			</div>	
+			
+			<a  v-if="button" @click.prevent="close(true)" :class="button.className +  ' modal-button'">{{ button.text}}</a>
+			<a  v-else @click.prevent="close(true)" class="btn btn-primary modal-button">Ok</a><div class="controls">
+			<ul>
+				<li :class="lang === 'en' ? 'active' : ''"><a @click.prevent="lang ='en'">EN</a></li>
+				<li :class="lang === 'es' ? 'active' : ''"><a @click.prevent="lang ='es'">ES</a></li>
+				<li :class="lang === 'br' ? 'active' : ''"><a @click.prevent="lang ='br'">PT</a></li>
+			</ul>		
 	  		<a href="#" class="close" @click.prevent="close">&#10005</a>
 		</div>
+	</div>
 	</div>
 </template>
 
@@ -38,8 +40,7 @@ export default {
 			required:false,
 			default:() => false
 		},
-		showok:{
-			type:Boolean,
+		button:{
 			required:false,
 			default:() => true
 		}
@@ -117,7 +118,7 @@ export default {
 
 		.modal-button{
 			width:60%;
-			margin:2rem;
+			margin:1rem;
 			margin-left:20%;
 		}		
 		.close{

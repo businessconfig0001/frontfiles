@@ -2,38 +2,41 @@
 <div class="container">
     <div class="show-container">
 		<div class="file-wrapper">
-			<div class="file row">
-				<div class="file-container" v-if="file.processed">
-					<video controls v-if="file.type === 'video'">
-						<source :src="file.azure_url">
-					</video>
-					<div class="img" v-else-if="file.type === 'image'">
-						<img  :src="file.azure_url" alt="">	
-						<a :href="file.azure_url">
-							<i class="fa fa-download"></i>
-						</a>
+			<div class="file col-md-12">
+				<div class="col-md-8">
+						<div class="file-container" v-if="file.processed">
+							<video controls v-if="file.type === 'video'">
+								<source :src="file.azure_url">
+							</video>
+							<div class="img" v-else-if="file.type === 'image'">
+								<img  :src="file.azure_url" alt="">	
+								<a :href="file.azure_url">
+									<i class="fa fa-download"></i>
+								</a>
+							</div>
+							
+							<audio controls v-else-if="file.type === 'audio'">
+								<source :src="file.azure_url">
+							</audio>
+							<div v-else class="download-file">
+								<a :href="file.azure_url">
+									<i class="fa fa-download"></i>
+								</a>
+							</div>
 					</div>
-					
-					<audio controls v-else-if="file.type === 'audio'">
-						<source :src="file.azure_url">
-					</audio>
-					<div v-else class="download-file">
-						<a :href="file.azure_url">
-							<i class="fa fa-download"></i>
-						</a>
+					<div class="file-container" v-else>
+						<img src="/images/processing.png" alt="">
 					</div>
-
 				</div>
 
-				<div class="file-container" v-else>
-					<h2>Your file is still being processed</h2>
-				</div>
-				<div class="file-info row">
+				
+				<div class="file-info col-md-4">
 					<div class="info">
 						<h2>{{file.title}}</h2>
 						<span class="date">Uploaded on {{date_string}}</span>
-						<p class="col-md-6">{{file.description}}</p>
-						<ul class="col-md-6">
+						<p class="col-md-12">{{file.description}}</p>
+						
+						<ul class="col-md-12">
 							<li v-show="file.where">#Where: <span>{{file.where}}</span></li>
 							<li v-show="file.when">#When: <span>{{file.when}}</span></li>
 							<li v-show="file.who">#Who: <span>{{file.who}}</span></li>
@@ -84,7 +87,7 @@ export default {
 			display:flex;
 			justify-content:center;
 			align-items:center;
-			height:30rem;
+			min-height:80vh;
 
 			video,audio{
 				width:auto;
@@ -97,7 +100,6 @@ export default {
 
 			img{
 				width:auto;
-				height: 30rem;
 			}
 
 			a{
@@ -114,12 +116,12 @@ export default {
 
 	.file-info{
 		display:block;
-		margin:2rem 1rem;
-		width:100%;
+		
 		h2{
-			color:blue;
 			font-size:2rem;
-			margin-bottom:.5rem;
+
+			border-bottom:1px solid black;
+			margin-bottom:1rem;
 		}
 		li{
 			font-weight:400;

@@ -1,6 +1,5 @@
 <template>
 <div class="form-wrapper">
-	<h3>File: <span>{{upload.name}}</span></h3>
 	<p>
 		<display-error :error="errors['title']"></display-error>
 		<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
@@ -35,13 +34,11 @@
 	</p>
 	<p>
 		<display-error :error="upload.errors['drive']"></display-error>
-		<div class="radio" v-show="dropbox">
+		<div class="radio">
 			<input type="radio" name="drive" :value="'dropbox'" class="form-control"  id="dropbox" checked  @click="upload.data.drive = 'dropbox'">
 		 	<label class="btn btn-secondary" for="dropbox">Dropbox</label>
 		 			
-		</div>
-			
-		
+		</div>		
 	</p>
 
 </div>
@@ -67,8 +64,6 @@ export default {
 		errors:{
 			required:false,
 			type:Object
-		},
-		dropbox:{
 		},
 		who:{
 			required:true,
@@ -129,9 +124,15 @@ export default {
 		padding:1rem 0;
 		color:blue;
 	}
+	p{
+		width:50%;
+		padding:.5rem;
+		float:left;
+	}
 
 	.radio{
 		display:flex;
+		width:100%;
 
 		.btn-secondary{
 			background-color:#eee;

@@ -28,6 +28,11 @@ export default {
 			type:Boolean
 		}
 	},
+	watch:{
+		show(){
+			scroll(0,0)
+		}
+	},
 	methods:{
 		close(){
 			this.$emit('close')

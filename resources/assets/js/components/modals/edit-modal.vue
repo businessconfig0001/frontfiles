@@ -40,7 +40,7 @@
 				</li>
 			</ul>
 			<a class="btn btn-primary modal-button" @click.prevent="update(active.id)">Save</a>
-			<a class="btn btn-primary modal-button" @click.prevent="close">Go back without save</a>
+			<a class="btn btn-primary modal-button" @click.prevent="close">Cancel</a>
 			<a href="#" class="close" @click.prevent="close">&#10005</a>
 		</div>
 	</div>
@@ -120,10 +120,12 @@ export default {
 	  		f.append('what',this.active.what)
 	  		f.append('where',this.active.where)
 
-	  		axios.patch(window.location.protocol + "//" + window.location.host + this.url + '/' + id,f)
+	  		axios.patch(window.location.protocol + "//" + window.location.host + this.url + '/' + id,f,{
+	  				validateStatus:status => status < 422
+	  			})
 	  			.then(res => {
 	  				console.log(res)
-	  				if(false)this.close(this.active)
+	  				this.close(this.active)
 	  			})
 	  			.catch(res => this.errors = res.response.data)
 	  	},
