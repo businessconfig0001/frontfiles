@@ -193,11 +193,15 @@
 	
 	.upload-files{
 		margin-top:2rem;
+		position:static;
 		
 		.upload-button{
 			display:flex;
 			justify-content:center;
 			align-items:center;
+		}
+		.listing{
+			position:static;
 		}
 	}
 
