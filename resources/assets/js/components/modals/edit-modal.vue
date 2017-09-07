@@ -96,10 +96,12 @@ export default {
 			}
 		}
 	},
+	mounted(){
+		if(!this.active.what)Object.assign(this.active,{what:[]})
+		if(!this.active.who)Object.assign(this.active,{who:[]})
+		this.date={time:this.active.when}
+	},
 	computed:{
-		date(){
-			return moment(this.active.when)
-		},
 	},
 	watch:{
 		show(){
@@ -131,6 +133,8 @@ export default {
 	  			.catch(res => this.errors = res.response.data)
 	  	},
 	  	changeDate(date){
+	  		console.log('changing date')
+	  		this.date={time:date}
   			this.active.when = moment(date).format('YYYY-MM-DD')
 	  	},
 	  	initPlace(event){
@@ -139,7 +143,7 @@ export default {
 			console.log(placebox)
 			try{
 				placebox.addListener('place_changed',() => {
-					this.file.where = placebox.getPlace().formatted_address
+					this.active.where = placebox.getPlace().formatted_address
 				})	
 			}
 			catch(e){
