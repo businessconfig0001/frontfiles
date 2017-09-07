@@ -5,35 +5,55 @@
 			<file-block :file="file"></file-block>
 		</li>
 	</ul>
+	<edit-modal :files="files" :url="'/files'" @edit="handleEdit"></edit-modal>
 </div>
 </template>
 
 <script>
+import editModal from './../modals/edit-modal'
 import fileBlock from './file-block'
 export default {
 
 	name: 'files-display',
 	components:{
-		fileBlock
+		fileBlock,
+		editModal
 	},
 	props:{
-		files:{
+		_files:{
 			required:true,
 			type:Array
 		}
 	},
 	data () {
 		return {
-
+			files:[]
 		}
+	},
+	methods:{
+		handleEdit(file){
+			this.files=this.files.map(f => {
+				if(f.title = file.title)return file
+				return f
+			})
+		}
+	},
+	mounted(){
+		this.files= this._files
 	}
+	
 };
 </script>
 
 <style lang="scss" scoped>
-	li{
-		width:33%;
-		padding:.5rem;
-		display:inline-block;
-	}
+.display-container{
+	width:100%;
+  		li{
+			width:33%;
+			padding:.5rem;
+			float:left;
+		}
+	
+}
+	
 </style>

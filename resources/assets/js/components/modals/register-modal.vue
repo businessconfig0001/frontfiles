@@ -1,6 +1,6 @@
 <template>
 <div>
-	<modal-container>
+	<modal-container @close="handleClose">
 		<div slot="pt">
 		  	<h1>Caro(a) amigo(a): <br/> Bem-vindo(a) ao FrontFiles</h1>
 			<p>
@@ -17,7 +17,7 @@
 			 </p>
 		</div>
 		<div slot="br">
-	  		amigo(a): <br/> Bem-vindo(a) ao FrontFiles</h1>
+			<h1>Caro(a) amigo(a): <br/> Bem-vindo(a) ao FrontFiles</h1>
 			<p>
 				Você está prestes a acessar a versão Beta da Plataforma FrontFiles. 
 				Tenha em mente que esta área está em construção pela comunidade de usuários e temos o enorme prazer de contar com a sua colaboração para ajudar a plataforma a melhorar sua performance.
@@ -54,7 +54,7 @@
 			</p>
 			<h2>FrontFiles is a global web-based community of free reporters and journalists.</h2>
 			<p>
-				 By becoming a FrontFiler you will be part of a worldwide group of people committed to building a new model for news and information sourcing, produced by the users and based on true images, footage and reports and effective fact checking. By collaborating - sharing information, technology, equipment, lodging, transportation and more.
+				 By becoming a FrontFiler you will be part of a worldwide group of people committed to building a new model for news and information sourcing, produced by the users and based on true images, footage and reports and effective fact checking. By collaborating - sharing information, technology, equipment, lodging, transportation and more 
 			 </p>
 			 <h2>We empower ourselves and make our jobs easier.</h2>
 			 <p>
@@ -77,7 +77,7 @@ export default {
 	mounted(){
 		let modalName = 'register'
 		if(!localStorage.getItem(modalName))this.$store.commit('openModal',modalName)
-	}
+	},
 };
 </script>
 

@@ -18,8 +18,7 @@
 					<ul>
 						<li :class="lang === 'en' ? 'active' : ''"><a @click.prevent="lang ='en'">EN</a></li>
 						<li :class="lang === 'es' ? 'active' : ''"><a @click.prevent="lang ='es'">ES</a></li>
-						<li :class="lang === 'br' ? 'active' : ''"><a @click.prevent="lang ='br'">BR</a></li>
-						<li :class="lang === 'pt' ? 'active' : ''"><a @click.prevent="lang ='pt'">PT</a></li>
+						<li :class="lang === 'br' ? 'active' : ''"><a @click.prevent="lang ='br'">PT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -33,10 +32,24 @@
 export default {
 
 	name: 'modal-container',
+	props:{
+		showmodal:{
+			required:false,
+			default:() => false,
+			type:Boolean
+		}
+	},
 	data () {
 		return {
-			lang:'pt'
+			lang:'en'
 		}
+	},
+	mounted(){
+		if(this.showmodal){
+			this.$store.commit('openModal','')
+			console.log('opening')
+		}
+
 	},
 	computed:{
 		show(){
@@ -50,6 +63,7 @@ export default {
 	},
 	methods:{
 		close(confirm = false){
+			this.$emit('close')
 			if(confirm)localStorage.setItem(this.modelData,true)
 			this.$store.commit('closeModal')
 		}
@@ -85,7 +99,7 @@ export default {
   		}
   		h1{
   			padding:2rem 0;
-  			font-size: 1.6rem;
+  			font-size: 1.4rem;
   		}
 
 		.modal-button{
@@ -107,7 +121,19 @@ export default {
 
 			li{
 				display:inline-block;
-				padding:.5rem;
+				padding:.2rem;
+
+				a{
+					color:#ddd;
+					font-size:12px;
+				}
+
+				&.active{
+					a{
+						color:blue;
+					}
+					
+				}
 
 				& + li {
 					border-left:1px solid blue;
