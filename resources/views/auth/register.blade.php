@@ -159,7 +159,7 @@
                         <!-- Button -->
                         <div class="form-group">
                             <div v-if="allow" class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" @click.prevent="submit">
                                     Submit
                                 </button>
                             </div>
@@ -179,7 +179,7 @@
 
 @section('modals')
    <register-modal v-if=allow></register-modal>
-   <modal-container v-else :showmodal="true">
+   <modal-container v-else :showmodal="options.show">
         <div slot="br">
             <h1>Caro(a) amigo(a): <br/> Bem-vindo(a) ao FrontFiles</h1>
             <p>

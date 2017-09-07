@@ -34,23 +34,17 @@ export default {
 	name: 'modal-container',
 	props:{
 		showmodal:{
-			required:false,
 			type:Boolean,
+			required:false,
+			default:() => false
 		}
 	},
 	data () {
 		return {
 			lang:'en',
-			_show:false
 		}
 	},
 	mounted(){
-		console.log(this.showmodal)
-		if(this._show){
-			this.$store.commit('openModal','')
-			console.log('opening')
-		}
-
 	},
 	computed:{
 		show(){
@@ -61,6 +55,11 @@ export default {
 			return this.$store.state.modalData
 		}
 
+	},
+	watch:{
+		showmodal(){
+			if(this.showmodal)this.$store.commit('openModal','')
+		}
 	},
 	methods:{
 		close(confirm = false){
