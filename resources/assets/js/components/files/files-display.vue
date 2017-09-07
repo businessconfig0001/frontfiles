@@ -30,7 +30,7 @@ export default {
 	methods:{
 		handleEdit(file){
 			this.files=this.files.map(f => {
-				if(f.title = file.title)return file
+				if(f.title === file.title)return file
 				return f
 			})
 		},
