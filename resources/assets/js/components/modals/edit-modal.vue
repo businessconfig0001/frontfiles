@@ -117,10 +117,11 @@ export default {
 	  		let f = new FormData();
 	  		f.append('title',this.active.title)
 	  		f.append('description',this.active.description)
-	  		f.append('who',this.active.who)
+	  		f.append('who',JSON.stringify(this.active.who))
 	  		f.append('when',this.active.when)
-	  		f.append('what',this.active.what)
+	  		f.append('what',JSON.stringify(this.active.what))
 	  		f.append('where',this.active.where)
+	  		f.append('why',this.active.why)
 	  		f.append('_method','patch')
 
 	  		axios.post(window.location.protocol + "//" + window.location.host + this.url + '/' + id,f,{
