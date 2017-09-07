@@ -26,14 +26,16 @@
 	<div class="file-info">
 		<h2><a :href="file.path">{{ file.title }}</a></h2>
 		</ul>
-		<a class="btn btn-secondary" @click.prevent="showEditModal">edit</a>
+		<a class="btn btn-secondary" @click.prevent="showEdit = true">edit</a>
 		<a class="btn btn-secondary" @click.prevent="showDelete = true">delete</a>
 	</div>
+	<edit-modal :show="showEdit" :active="file" @edit="handleEdit" :url="'/files'"></edit-modal>
 	<delete-modal :show="showDelete" :id="file.id" @close="showDelete=false" @remove="del"></delete-modal>
 </div>
 </template>
 
 <script>
+import editModal from './../modals/edit-modal'
 import deleteModal from './../modals/delete-modal'
 import displayError from './../inputs/display-error'
 import moment from 'moment'
@@ -44,7 +46,8 @@ export default {
 	components:{
 		displayError,
 		datePicker,
-		deleteModal
+		deleteModal,
+		editModal
 	},
 	props:{
 		file:{
@@ -73,6 +76,7 @@ export default {
 			status:true,
 			url:'/files',
 			showDelete:false,
+			showEdit:false,
 			options:{
 					placeholder:'#When',
 					type: 'day',
@@ -94,8 +98,11 @@ export default {
     };
   },
   methods:{
-  	showEditModal(){
-  		this.$store.commit('editModal',this.file.title)
+  	handleEdit(file){
+  		this.showEdit= false
+  		if(file){
+  			this.$emit('edit',file)
+  		}
   	},
   	del(){
   		this.$emit('remove',this.file.id)

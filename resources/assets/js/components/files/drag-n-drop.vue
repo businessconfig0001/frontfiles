@@ -11,9 +11,7 @@
 			<p v-else-if="state === 'more'">
 			  	Add more files or <a @click.prevent="upload">save them</a>
 			</p>
-			<p v-else-if="state === 'done'">
-				Your content was sent to your dropbox account and is being processed.
-			</p>
+			<img v-else-if="state === 'done'" src="/images/processing.png" alt="">
 			<p v-else>
 			  	Drag your file(s) here to begin<br> or click to browse
 			</p>
@@ -28,6 +26,20 @@
 			<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Upload</a>
 			<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
 			
+		</div>
+
+		<div class="col-md-12" v-show="uploads.length">
+			<div class="col-md-8">
+				<ul>
+					<li v-for="upload in uploads">
+						
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-4">
+				<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Upload</a>
+				<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
+			</div>
 		</div>
 		
 	</form>
@@ -237,6 +249,10 @@
 			text-align: center;
 			color:white;
 
+		}
+
+		img{
+			width:100%;
 		}
 
 	}

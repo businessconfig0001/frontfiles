@@ -2,22 +2,19 @@
 <div class="display-container">
 	<ul class="video-list">
 		<li v-for="file in files">
-			<file-block :file="file" @remove="remove"></file-block>
+			<file-block :file="file" @remove="remove" @edit="handleEdit"></file-block>
 		</li>
 	</ul>
-	<edit-modal :files="files" :url="'/files'" @edit="handleEdit"></edit-modal>
 </div>
 </template>
 
 <script>
-import editModal from './../modals/edit-modal'
 import fileBlock from './file-block'
 export default {
 
 	name: 'files-display',
 	components:{
-		fileBlock,
-		editModal
+		fileBlock
 	},
 	props:{
 		_files:{

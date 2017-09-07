@@ -1,6 +1,6 @@
 <template>
 <div>
-	<div v-if="show.length > 0" class="modal-background clearfix">
+	<div v-if="show" class="modal-background clearfix">
 		<div class="modal-wrapper modal-content col-md-4 file-edit">
 			<ul class="fields">
 				<li>
@@ -55,14 +55,18 @@ export default {
 
 	name: 'edit-modal',
 	props:{
-		files:{
+		active:{
 			required:true,
-			type:Array
+			type:Object
 		},
 		url:{
 			required:true,
 			type:String
 		},
+		show:{
+			required:true,
+			type:Boolean
+		}
 
 	},
 	components:{
@@ -71,7 +75,6 @@ export default {
 	},
 	data () {
 		return {
-			active:{},
 			errors:false,
 			options:{
 				placeholder:'#When',
@@ -94,22 +97,18 @@ export default {
 		}
 	},
 	computed:{
-		show(){
-			scroll(0,0)
-			let name = this.$store.state.showEdit
-
-			this.active=this.files.filter(f => f.title === name)[0]
-			return name
-
-		},
 		date(){
 			return moment(this.active.when)
 		},
 	},
+	watch:{
+		show(){
+			scroll(0,0)
+		}
+	},
 	methods:{
 		close(file = false){
 			this.$emit('edit',file)
-			this.$store.commit('closeEdit')
 		},
 		update(id){
 			console.log(this.active)
