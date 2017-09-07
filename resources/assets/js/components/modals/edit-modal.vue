@@ -119,8 +119,9 @@ export default {
 	  		f.append('when',this.active.when)
 	  		f.append('what',this.active.what)
 	  		f.append('where',this.active.where)
+	  		f.append('_method','patch')
 
-	  		axios.patch(window.location.protocol + "//" + window.location.host + this.url + '/' + id,f,{
+	  		axios.post(window.location.protocol + "//" + window.location.host + this.url + '/' + id,f,{
 	  				validateStatus:status => status < 422
 	  			})
 	  			.then(res => {
