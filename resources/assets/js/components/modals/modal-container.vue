@@ -22,7 +22,7 @@
 					</ul>
 				</div>
 			</div>
-			<a @click.prevent="close(true)" class="btn btn-primary modal-button">Ok</a>
+			<a  v-show="showok" @click.prevent="close(true)" class="btn btn-primary modal-button">Ok</a>
 	  		<a href="#" class="close" @click.prevent="close">&#10005</a>
 		</div>
 	</div>
@@ -37,6 +37,11 @@ export default {
 			type:Boolean,
 			required:false,
 			default:() => false
+		},
+		showok:{
+			type:Boolean,
+			required:false,
+			default:() => true
 		}
 	},
 	data () {

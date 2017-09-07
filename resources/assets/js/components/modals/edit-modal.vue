@@ -129,7 +129,7 @@ export default {
 	  			.catch(res => this.errors = res.response.data)
 	  	},
 	  	changeDate(date){
-  			this.file.when = moment(date).format('YYYY-MM-DD')
+  			this.active.when = moment(date).format('YYYY-MM-DD')
 	  	},
 	  	initPlace(event){
 	  		console.log("initializing field",event.target)
@@ -162,6 +162,7 @@ export default {
 
 
 	.modal-wrapper.modal-content{
+		width:60%;
 		background-color:white;
 		padding:3rem;
 		position:absolute;
@@ -179,11 +180,13 @@ export default {
 
 		&.file-edit{
 			label{
-				margin-bottom:.5rem
+				margin-bottom:.5rem;
 			}
 			.fields > li{
-				width:100%;
-				margin-bottom:1rem;
+				width:50%;
+				float:left;
+				margin-bottom:.5rem;
+				padding:.5rem;
 
 					.error{
 						float:right;

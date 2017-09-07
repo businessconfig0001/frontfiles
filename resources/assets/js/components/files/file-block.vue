@@ -21,7 +21,7 @@
 		</div>
 	</div>
 	<div class="file-container" v-else>
-		<h2>Your file is still being processed</h2>
+		<img src="/images/processing.png" alt="">
 	</div>	
 	<div class="file-info">
 		<h2><a :href="file.path">{{ file.title }}</a></h2>
