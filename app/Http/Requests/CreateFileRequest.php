@@ -29,10 +29,10 @@ class CreateFileRequest extends FormRequest
     {
         $all = parent::validationData();
 
-        if (is_string($what = array_get($all, 'what')))
+        if(is_string($what = array_get($all, 'what')))
             $what = json_decode($what, true);
 
-        if (is_string($who = array_get($all, 'who')))
+        if(is_string($who = array_get($all, 'who')))
             $who = json_decode($who, true);
 
         $all['what'] = $what;
