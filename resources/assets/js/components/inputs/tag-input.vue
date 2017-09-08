@@ -38,13 +38,14 @@ export default {
 		addTag(){
 			if(this.new_tag){
 				this.tags.push(this.new_tag)
-				this.$emit('change',this.new_tag)
+				this.$emit('change',this.tags)
 				this.new_tag='';
 				
 			}	
 		},
 		removeTag(t){
 			this.tags=this.tags.filter(x => x !== t)
+			this.$emit('change',this.tags)
 		}
 	},
 };

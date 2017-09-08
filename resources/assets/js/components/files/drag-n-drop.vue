@@ -209,15 +209,15 @@
 						this.uploads[data.index]=data
 					})
 			},
-			changeWhatTags(tag){
+			changeWhatTags(tags){
 				this.uploads=this.uploads.map(u => {
-					u.data.what.push(tag)
+					u.data.what=tags
 					return u
 				})
 			},
-			changeWhoTags(tag){
+			changeWhoTags(tags){
 				this.uploads=this.uploads.map(u => {
-					u.data.who.push(tag)
+					u.data.who=tags
 					return u
 				})
 			},

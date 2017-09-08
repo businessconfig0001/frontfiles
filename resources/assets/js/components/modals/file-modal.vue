@@ -3,7 +3,7 @@
 	<div v-if="show" class="modal-background clearfix">
 		<div class="modal-wrapper modal-content col-md-4 file-edit">
 			<h3>File: <span>{{upload.name}}</span></h3>
-			<upload-form :upload="upload" :errors="upload.errors" :who="upload.data.who" :what="upload.data.what"></upload-form>
+			<upload-form :upload="upload" :errors="upload.errors" :who="upload.data.who" :what="upload.data.what" @changeWhat="changeWhat" @changeWho="changeWho"></upload-form>
 			<a class="btn btn-primary confirm" @click.prevent="close">close</a>
 			<a href="#" class="close" @click.prevent="close">&#10005</a>
 		</div>
@@ -42,6 +42,12 @@ export default {
 	methods:{
 		close(){
 			this.$emit('close')
+		},
+		changeWhat(tags){
+			this.upload.what=tags
+		},
+		changeWho(tags){
+			this.upload.who=tags
 		}	
 	}
 }

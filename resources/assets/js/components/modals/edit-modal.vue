@@ -26,12 +26,12 @@
 				<li>
 					<display-error class="error" v-show="errors" :error="errors['who']"></display-error>
 					<label for="who">#Who: </label>
-					<tag-input type="text" name="who"  class="form-control tag-input" :tags="active.who"></tag-input>
+					<tag-input type="text" name="who"  class="form-control tag-input" :tags="active.tagWho"></tag-input>
 				</li>
 				<li>
 					<display-error class="error" v-show="errors" :error="errors['what']"></display-error>
 					<label class="what">#What:</label>
-					<tag-input type="text" name="what"  class="form-control tag-input" :tags="active.what"></tag-input>
+					<tag-input type="text" name="what"  class="form-control tag-input" :tags="active.tagWhat"></tag-input>
 				</li>
 				<li>
 					<display-error class="error" v-show="errors" :error="errors['why']"></display-error>
@@ -100,8 +100,8 @@ export default {
 		}
 	},
 	mounted(){
-		if(!this.active.what)Object.assign(this.active,{what:[]})
-		if(!this.active.who)Object.assign(this.active,{who:[]})
+		if(!this.active.tagWhat)Object.assign(this.active,{tagWhat:[]})
+		if(!this.active.tagWho)Object.assign(this.active,{tagWho:[]})
 		this.date={time:this.active.when}
 	},
 	computed:{
@@ -120,9 +120,9 @@ export default {
 	  		let f = new FormData();
 	  		f.append('title',this.active.title)
 	  		f.append('description',this.active.description)
-	  		f.append('who',JSON.stringify(this.active.who))
+	  		f.append('who',JSON.stringify(this.active.tagWho))
 	  		f.append('when',this.active.when)
-	  		f.append('what',JSON.stringify(this.active.what))
+	  		f.append('what',JSON.stringify(this.active.tagWhat))
 	  		f.append('where',this.active.where)
 	  		f.append('why',this.active.why)
 	  		f.append('_method','patch')
