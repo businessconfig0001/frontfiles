@@ -81,4 +81,25 @@ class Helper
             //If there's an exception, it means that the container (folder) already exists
         }
     }
+
+    /**
+     * Returns an array with the id's of the tags.
+     *
+     * @param string $tags
+     * @param $type
+     * @return array
+     */
+    public static function getTagIds(string $tags, $type) : array
+    {
+        $tagsFiltered = json_decode($tags, true);
+        $output = [];
+
+        foreach($tagsFiltered as $tag)
+            if(!$type::where('name', $tag)->exists())
+                array_push($output, $type::create(['name' => $tag])->id);
+            else
+                array_push($output, $type::where('name', $tag)->first()->id);
+
+        return $output;
+    }
 }

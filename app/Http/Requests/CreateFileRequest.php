@@ -5,7 +5,7 @@ namespace FrontFiles\Http\Requests;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use FrontFiles\{
-    File, Jobs\FetchAndProcessFile, TagWhat, TagWho, Utility\DriversHelper
+    File, Jobs\FetchAndProcessFile, TagWhat, TagWho, Utility\DriversHelper, Utility\Helper
 };
 
 class CreateFileRequest extends FormRequest
@@ -111,11 +111,11 @@ class CreateFileRequest extends FormRequest
         ]);
 
         $file->tagsWhat()->sync(
-            $this->getTagIds(request('what'), TagWhat::class)
+            Helper::getTagIds(request('what'), TagWhat::class)
         );
 
         $file->tagsWho()->sync(
-            $this->getTagIds(request('who'), TagWho::class)
+            Helper::getTagIds(request('who'), TagWho::class)
         );
 
         dispatch(
@@ -129,27 +129,6 @@ class CreateFileRequest extends FormRequest
             return response()->json(['status' => 'File uploaded successfully!', 'data' => $file], 201);
 
         return redirect(route('files.upload'))->with(['status' => 'File uploaded successfully!']);
-    }
-
-    /**
-     * Returns an array with the id's of the tags.
-     *
-     * @param string $tags
-     * @param $type
-     * @return array
-     */
-    protected function getTagIds(string $tags, $type) : array
-    {
-        $tagsFiltered = json_decode($tags, true);
-        $output = [];
-
-        foreach($tagsFiltered as $tag)
-            if(!$type::where('name', $tag)->exists())
-                array_push($output, $type::create(['name' => $tag])->id);
-            else
-                array_push($output, $type::where('name', $tag)->first()->id);
-
-        return $output;
     }
 
     /**
