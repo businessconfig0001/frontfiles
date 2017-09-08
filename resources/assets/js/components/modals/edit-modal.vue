@@ -21,7 +21,7 @@
 				<li>
 					<display-error class="error" v-show="errors" :error="errors['when']"></display-error>
 					<label for="when">#When:</label>
-					 <date-picker :option="options" name="when"  class="form-control" :date="date" @change="changeDate"></date-picker>
+					 <date-picker :option="options" name="when"  class="form-control" :date="date" :limit="limit" @change="changeDate"></date-picker>
 				</li>
 				<li>
 					<display-error class="error" v-show="errors" :error="errors['who']"></display-error>
@@ -76,6 +76,10 @@ export default {
 	data () {
 		return {
 			errors:false,
+			limit:[{
+				type:'fromto',
+				to:moment().format('YYYY-MM-DD')
+			}],
 			options:{
 				placeholder:'#When',
 				type: 'day',
@@ -88,11 +92,10 @@ export default {
 					height: 'auto',
 					border:'none'
         		},
-        		color: {
+        		color:{
 				    header: 'blue',
 				    headerText: 'white'
-				  }
-
+				},
 			}
 		}
 	},

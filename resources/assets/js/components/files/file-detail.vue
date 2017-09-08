@@ -36,12 +36,12 @@
 						<span class="date">Uploaded on {{date_string}}</span>
 						<p class="col-md-12">{{file.description}}</p>
 						
-						<ul class="col-md-12">
-							<li v-show="file.where">#Where: <span>{{file.where}}</span></li>
-							<li v-show="file.when">#When: <span>{{file.when}}</span></li>
-							<li v-show="file.who">#Who: <span>{{file.who}}</span></li>
-							<li v-show="file.what">#What: <span>{{file.what}}</span></li>
-							<li v-show="file.why">#Why: <span>{{file.why}}</span></li>
+						<ul class="col-md-12 tags">
+							<li v-show="file.where"><span>{{file.where}}</span></li>
+							<li v-show="file.when"><span>{{file.when}}</span></li>
+							<li v-show="file.who"><span>{{file.who}}</span></li>
+							<li v-show="file.what"><span>{{file.what}}</span></li>
+							<li v-show="file.why"><span>{{file.why}}</span></li>
 						</ul>	
 					</div>
 				
@@ -136,11 +136,15 @@ export default {
 		}
 		.info{
 			.date{
-				color:#ddd;
+				color:#ccc;
 				float:left;
 				width:100%;
 				margin-bottom:2rem;
 				margin-left:.5rem;
+			}
+
+			.tags{
+				margin-top:1rem;
 			}
 		}
 	}

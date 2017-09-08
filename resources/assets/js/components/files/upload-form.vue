@@ -25,7 +25,7 @@
 	</p>
 	<p>
 		<display-error :error="errors['when']"></display-error>
-		<date-picker :option="options" class="form-control" @change="changeDate" :date="date"></date-picker>
+		<date-picker :option="options" class="form-control" @change="changeDate" :date="date" :limit="limit"></date-picker>
 	</p>
 	<p>
 		<display-error :error="errors['why']"></display-error>
@@ -79,6 +79,10 @@ export default {
 			date:{
 				time:''
 			},
+			limit:[{
+				type:'fromto',
+				to:moment().format('YYYY-MM-DD')
+			}],
 			options:{
 				placeholder:'#When',
 				type: 'day',

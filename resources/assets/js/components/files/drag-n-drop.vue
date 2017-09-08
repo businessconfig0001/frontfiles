@@ -25,12 +25,22 @@
 					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="title"/>
 				</p>
 				<p>
+					<date-picker :option="options" name="when"  class="form-control" :date="date" @change="changeDate" :limit="limit"></date-picker>
+				</p>
+				<p>
 					<tag-input placeholder="#What" class="form-control" @change="changeWhatTags" :name="'whatTags'"></tag-input>
 					
 				</p>
 				<p>
 					<tag-input placeholder="#Who" class="form-control" @change="changeWhoTags" :name="'whoTags'"></tag-input>			
 				</p>
+				<p>
+					<input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="where" placeholder="#Where">
+				</p>
+				<p>
+					<input type="text" name="why"  class="form-control" v-model="why" placeholder="#Why">
+				</p>
+				
 			</div>
 		</div>
 
@@ -41,7 +51,7 @@
 			<div class="col-md-8 listing">
 				<ul>
 					<li v-for="upload in uploads">
-						<file-overview :file="upload"></file-overview>
+						<file-overview :file="upload" @remove="removeFile"></file-overview>
 					</li>
 				</ul>
 			</div>
@@ -59,19 +69,48 @@
 	import { upload } from './../../services/uploadService'
 	import tagInput from './../inputs/tag-input'
 	import fileOverview from "./file-overview"
+	import datePicker from 'vue-datepicker'
 	import moment from 'moment'
 	export default {
 		name:'drag-n-drop',
 		components:{
 			fileOverview,
-			tagInput
+			tagInput,
+			datePicker
 		},
 		data(){
 			return {
 				state:'',
 				uploads:[],
 				progressBar:{},
-				title:''
+				title:'',
+				where:'',
+				why:'',
+				date:{
+					time:''
+				},
+					limit:[{
+					type:'fromto',
+					to:moment().format('YYYY-MM-DD')
+				}],
+				options:{
+					placeholder:'#When',
+					type: 'day',
+	        		week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+	        		month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+	        		format: 'YYYY-MM-DD',
+	        		inputStyle: {
+			          	display: 'block',
+						width: '100%',
+						height: 'auto',
+						border:'none'
+	        		},
+	        		color: {
+					    header: 'blue',
+					    headerText: 'white'
+					  }
+
+				}
 			}
 		},
 		props:{
@@ -88,8 +127,26 @@
 		},
 		watch:{
 			title(){
+				if(this.uploads.length === 1)this.uploads[0].title=this.title
+				else{
+					let counter= 1
+					this.uploads=this.uploads.map(u => {
+						u.data.title=this.title + '_' +counter
+						counter++
+						return u
+					})
+				}	
+				
+			},
+			where(){
 				this.uploads=this.uploads.map(u => {
-					u.data.title=this.title
+					u.data.where=this.where
+					return u
+				})
+			},
+			why(){
+				this.uploads=this.uploads.map(u => {
+					u.data.why=this.why
 					return u
 				})
 			}
@@ -97,6 +154,7 @@
 		mounted(){
 			let modalName= 'first_upload'
 			if(!localStorage.getItem(modalName))this.$store.commit('openModal',modalName)
+			this.date.time=moment().format('YYYY-MM-DD')
 		},
 		methods:{
 			filesChange(fieldName, fileList) {
@@ -162,6 +220,27 @@
 					u.data.who.push(tag)
 					return u
 				})
+			},
+			changeDate(d){
+				this.uploads=this.uploads.map(u => {
+					u.data.date=d
+					return u
+				})
+				this.date.time=d
+			},
+			initPlace(event){
+				let placebox=new google.maps.places.Autocomplete(event.target)
+				try{
+					placebox.addListener('place_changed',() => {
+						this.where = placebox.getPlace().formatted_address
+					})	
+				}
+				catch(e){
+					console.error(e)
+				}	
+			},
+			removeFile(name){
+				this.uploads=this.uploads.filter(f => f.name !== name)
 			}
 
 		}
