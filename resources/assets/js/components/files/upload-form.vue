@@ -1,6 +1,5 @@
 <template>
 <div class="form-wrapper">
-	<h3>File: <span>{{upload.name}}</span></h3>
 	<p>
 		<display-error :error="errors['title']"></display-error>
 		<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
@@ -26,7 +25,7 @@
 	</p>
 	<p>
 		<display-error :error="errors['when']"></display-error>
-		<date-picker :date="upload.data.when" :option="options" class="form-control" @change="changeDate"></date-picker>
+		<date-picker :option="options" class="form-control" @change="changeDate" :date="date" :limit="limit"></date-picker>
 	</p>
 	<p>
 		<display-error :error="errors['why']"></display-error>
@@ -35,13 +34,11 @@
 	</p>
 	<p>
 		<display-error :error="upload.errors['drive']"></display-error>
-		<div class="radio" v-show="dropbox">
+		<div class="radio">
 			<input type="radio" name="drive" :value="'dropbox'" class="form-control"  id="dropbox" checked  @click="upload.data.drive = 'dropbox'">
 		 	<label class="btn btn-secondary" for="dropbox">Dropbox</label>
 		 			
-		</div>
-			
-		
+		</div>		
 	</p>
 
 </div>
@@ -68,8 +65,6 @@ export default {
 			required:false,
 			type:Object
 		},
-		dropbox:{
-		},
 		who:{
 			required:true,
 			type:Array
@@ -81,6 +76,13 @@ export default {
 	},
 	data () {
 		return {
+			date:{
+				time:''
+			},
+			limit:[{
+				type:'fromto',
+				to:moment().format('YYYY-MM-DD')
+			}],
 			options:{
 				placeholder:'#When',
 				type: 'day',
@@ -107,6 +109,7 @@ export default {
 				catch(e){}	
 		},
 		changeDate(d){
+			date.time= d
   			this.upload.data.when = moment(d).format('YYYY-MM-DD')
   		},
   		changeWhat(tags){
@@ -129,9 +132,15 @@ export default {
 		padding:1rem 0;
 		color:blue;
 	}
+	p{
+		width:50%;
+		padding:.5rem;
+		float:left;
+	}
 
 	.radio{
 		display:flex;
+		width:100%;
 
 		.btn-secondary{
 			background-color:#eee;

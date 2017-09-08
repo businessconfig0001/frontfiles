@@ -8394,6 +8394,10 @@ button.close {
   margin-left: 7rem;
 }
 
+.align-right {
+  float: right;
+}
+
 body.page-payment-info.home {
   margin-bottom: 0;
 }
@@ -9607,5 +9611,9 @@ img {
 
 body {
   background-color: white;
+}
+
+.pac-container {
+  z-index: 1000000000 !important;
 }
 

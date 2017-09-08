@@ -99,15 +99,24 @@ const app = new Vue({
     store,
     data(){
     	return {
-    		allow:false
+    		allow:false,
+    		options:{
+    			show:false
+    		}
     	}	
     },
     mounted(){
     	if(getQuery('code') === 'secret')this.allow=true
+    	else this.options.show=true
     },
 	methods:{
 		modal(){
 			this.$store.commit('openModal','')
+		},
+		submit(){
+			let form=document.getElementById('register_form')
+			localStorage.setItem('register',true)
+			form.submit()
 		}
 	}
 });

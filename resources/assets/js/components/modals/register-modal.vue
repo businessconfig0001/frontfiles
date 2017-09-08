@@ -1,6 +1,6 @@
 <template>
 <div>
-	<modal-container @close="handleClose">
+	<modal-container>
 		<div slot="pt">
 		  	<h1>Caro(a) amigo(a): <br/> Bem-vindo(a) ao FrontFiles</h1>
 			<p>
@@ -71,12 +71,18 @@ export default {
 	name: 'register-modal',
 	data () {
 		return {
-
+			options:{
+				show:false
+			}
 		};
 	},
 	mounted(){
+		console.log('parent',this.options)
 		let modalName = 'register'
-		if(!localStorage.getItem(modalName))this.$store.commit('openModal',modalName)
+		if(!localStorage.getItem(modalName)){
+			console.log('schowing',localStorage.getItem(modalName))
+			this.$store.commit('openModal',modalName)
+		}
 	},
 };
 </script>
