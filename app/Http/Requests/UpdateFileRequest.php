@@ -3,7 +3,7 @@
 namespace FrontFiles\Http\Requests;
 
 use FrontFiles\{
-    File, TagWhat, TagWho
+    File, TagWhat, TagWho, Utility\Helper
 };
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -75,11 +75,11 @@ class UpdateFileRequest extends FormRequest
         ]);
 
         $file->tagsWhat()->sync(
-            $this->getTagIds(request('what'), TagWhat::class)
+            Helper::getTagIds(request('what'), TagWhat::class)
         );
 
         $file->tagsWho()->sync(
-            $this->getTagIds(request('who'), TagWho::class)
+            Helper::getTagIds(request('who'), TagWho::class)
         );
 
         if(request()->expectsJson())
@@ -88,26 +88,5 @@ class UpdateFileRequest extends FormRequest
         return redirect()
             ->route('files')
             ->with('message', 'File successfully updated.');
-    }
-
-    /**
-     * Returns an array with the id's of the tags.
-     *
-     * @param string $tags
-     * @param $type
-     * @return array
-     */
-    protected function getTagIds(string $tags, $type) : array
-    {
-        $tagsFiltered = json_decode($tags, true);
-        $output = [];
-
-        foreach($tagsFiltered as $tag)
-            if(!$type::where('name', $tag)->exists())
-                array_push($output, $type::create(['name' => $tag])->id);
-            else
-                array_push($output, $type::where('name', $tag)->first()->id);
-
-        return $output;
     }
 }
