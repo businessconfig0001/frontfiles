@@ -25,7 +25,7 @@ class File extends Model
      *
      * @var array
      */
-    protected $appends = ['path'];
+    protected $appends = ['path', 'what', 'who'];
 
     /**
      * Global query scopes for the File model.
@@ -112,6 +112,26 @@ class File extends Model
     public function getPathAttribute()
     {
         return $this->path();
+    }
+
+    /**
+     * Get the file's who tag.
+     *
+     * @return array
+     */
+    public function getWhoAttribute() : array
+    {
+        return $this->tagsWho()->pluck('name')->toArray();
+    }
+
+    /**
+     * Get the file's what tag.
+     *
+     * @return array
+     */
+    public function getWhatAttribute() : array
+    {
+        return $this->tagsWhat()->pluck('name')->toArray();
     }
 
     /**

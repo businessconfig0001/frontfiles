@@ -66,7 +66,6 @@ Route::group([
     'prefix' => 'files',
     'namespace' => 'Files',
     'middleware' => 'auth',
-
 ], function () {
     Route::get('/', 'FilesController@index')->name('files');
     Route::post('/', 'FilesController@store')->name('files');
