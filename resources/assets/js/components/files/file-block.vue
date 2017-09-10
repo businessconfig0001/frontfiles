@@ -28,7 +28,7 @@
 			<h2><a :href="file.path">{{ file.title }}</a></h2>
 			<p class="location">@{{file.where}} on {{date}}</p>
 		</div>
-		<div class="buttons">
+		<div class="buttons" v-if="active">
 			<a class="btn btn-secondary" @click.prevent="showEdit = true">edit</a>
 			<a class="btn btn-secondary" @click.prevent="showDelete = true">delete</a>
 		</div>
@@ -58,6 +58,10 @@ export default {
 		file:{
 			required:true,
 			type:Object
+		},
+		active:{
+			required:true,
+			type:Boolean
 		}
 	},
 	mounted(){
