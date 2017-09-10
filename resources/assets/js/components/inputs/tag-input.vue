@@ -6,7 +6,7 @@
 			<a @click.prevent="removeTag(tag)"><i class="fa fa-times"></i></a>
 		</li>
 	</ul>
-	<input type="text" v-model="new_tag" :placeholder="placeholder" @keyup.enter="addTag" @blur="addTag">
+	<input type="text" v-model="new_tag" :placeholder="placeholder" @keyup.enter="addTag" @blur="addTag" class="form-control">
 </div>
 </template>
 
@@ -54,8 +54,6 @@ export default {
 <style lang="scss" scoped>
 	.tag-wrapper{
 		background-color:white;
-		padding:0.5rem;
-		height:auto;
 
 		.tags{
 			display:inline-block;
@@ -65,11 +63,18 @@ export default {
 				display:inline-block;
 				background-color:blue;
 				color:white;
-				padding:0.5rem;
 				margin-left:0.2rem;
 				margin-top:0.1rem;
+				padding: 0 .2rem
 
 			}
+		}
+
+		.form-control{
+			margin:0;
+			padding:0;
+			width:8rem;
+			height:auto;
 		}
 
 		input{

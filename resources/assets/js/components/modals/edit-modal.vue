@@ -9,9 +9,25 @@
 					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="active.title"/>
 				</li>
 				<li>
+					<display-error class="error" v-show="errors" :error="errors['what']"></display-error>
+					<label class="what">#What:</label>
+					<tag-input type="text" name="what"  class="form-control tag-input" :tags="active.what"></tag-input>
+				</li>
+				<li>
 					<display-error class="error" v-show="errors" :error="errors['description']"></display-error>
 					<label for="description">Description</label>
 					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="active.description"></textarea>
+				</li>
+				<li>
+					<display-error class="error" v-show="errors" :error="errors['who']"></display-error>
+					<label for="who">#Who: </label>
+					<tag-input type="text" name="who"  class="form-control tag-input" :tags="active.who"></tag-input>
+				</li>
+				
+				<li>
+					<display-error class="error" v-show="errors" :error="errors['why']"></display-error>
+					<label for="why">#Why:</label>
+					 <input type="text" name="why"  class="form-control" v-model="active.why">
 				</li>
 				<li>
 					<display-error class="error" v-show="errors" :error="errors['where']"></display-error>
@@ -23,24 +39,12 @@
 					<label for="when">#When:</label>
 					 <date-picker :option="options" name="when"  class="form-control" :date="date" :limit="limit" @change="changeDate"></date-picker>
 				</li>
-				<li>
-					<display-error class="error" v-show="errors" :error="errors['who']"></display-error>
-					<label for="who">#Who: </label>
-					<tag-input type="text" name="who"  class="form-control tag-input" :tags="active.tagWho"></tag-input>
-				</li>
-				<li>
-					<display-error class="error" v-show="errors" :error="errors['what']"></display-error>
-					<label class="what">#What:</label>
-					<tag-input type="text" name="what"  class="form-control tag-input" :tags="active.tagWhat"></tag-input>
-				</li>
-				<li>
-					<display-error class="error" v-show="errors" :error="errors['why']"></display-error>
-					<label for="why">#Why:</label>
-					 <input type="text" name="why"  class="form-control" v-model="active.why">
-				</li>
+				
+				
+				
 			</ul>
-			<a class="btn btn-primary modal-button" @click.prevent="update(active.id)">Save</a>
-			<a class="btn btn-primary modal-button" @click.prevent="close">Cancel</a>
+			<a class="btn btn-primary modal-button" @click.prevent="update(active.id)">Save changes</a>
+			<a class="btn btn-secondary modal-button" @click.prevent="close">Cancel</a>
 			<a href="#" class="close" @click.prevent="close">&#10005</a>
 		</div>
 	</div>
@@ -100,8 +104,8 @@ export default {
 		}
 	},
 	mounted(){
-		if(!this.active.tagWhat)Object.assign(this.active,{tagWhat:[]})
-		if(!this.active.tagWho)Object.assign(this.active,{tagWho:[]})
+		if(!this.active.what)Object.assign(this.active,{what:[]})
+		if(!this.active.who)Object.assign(this.active,{who:[]})
 		this.date={time:this.active.when}
 	},
 	computed:{
@@ -120,9 +124,9 @@ export default {
 	  		let f = new FormData();
 	  		f.append('title',this.active.title)
 	  		f.append('description',this.active.description)
-	  		f.append('who',JSON.stringify(this.active.tagWho))
+	  		f.append('who',JSON.stringify(this.active.who))
 	  		f.append('when',this.active.when)
-	  		f.append('what',JSON.stringify(this.active.tagWhat))
+	  		f.append('what',JSON.stringify(this.active.what))
 	  		f.append('where',this.active.where)
 	  		f.append('why',this.active.why)
 	  		f.append('_method','patch')
@@ -183,9 +187,9 @@ export default {
 
 
 		.modal-button{
-			width:60%;
+			width:40%;
 			margin:.5rem;
-			margin-left:20%;
+			margin-left:30%;
 		}
 
 		&.file-edit{
@@ -210,6 +214,7 @@ export default {
 			top:0;
 			right:0;
 		}
+
 
 	
 	}

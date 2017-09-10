@@ -18,18 +18,11 @@
                 </li>
                 <li class="box">
                     <img  class="logo avatar" src="{{$user->avatar}}" alt="">
-                    <h3 class="title">Your profile</h3>
-                    <p>Go and edit your profile</p>
-                    <a href="{{ route('profile.edit') }}" class="btn btn-primary">Go to your profile</a>
+                    <h3 class="title">Profile</h3>
+                    <p></p>
+                    <a href="{{ url($user->path()) }}" class="btn btn-primary btn-fix">Go</a>
                 </li>
-                <li class="box">
-                    <div class="logo">
-                      <img src="/images/logo2x.png" alt="">
-                     </div>   
-                    <h3 class="title">Public profile</h3>
-                    <p>View your profile as another user</p>
-                    <a href="{{ url($user->path()) }}"  target="_blank" class="btn btn-primary">Go to your public profile</a>
-                </li>
+
             </ul>
             
             
