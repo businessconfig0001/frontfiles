@@ -1,15 +1,16 @@
 <template>
 <div class="file-overview clearfix">
-	<a @click.prevent="show =true" class="overview-wrapper clearfix col-md-8">
-		<div class="col-md-6">
-			<h2 >{{file.name}}</h2>	
+	<a @click.prevent="show =true" class="overview-wrapper clearfix col-md-10">
+		<div class="col-md-4 title-field">
+			<h2 class="short-title" >{{short_title}}</h2>
+			<h2 class="title-hover" ><img src="/images/edit-btn.png" alt="">{{file.name}}</h2>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-8 desc">
 			<p >{{short_desc}}</p>
 		</div>
 	</a>
-	<div class="col-md-3 remove">
-		<a class="btn btn-primary " @click.prevent="remove">Remove</a>
+	<div class="remove">
+		<a class="ir remove-link " @click.prevent="remove"></a>
 	</div>
 	
 	<file-modal :upload="file" :show="show" @close="show = false"></file-modal>
@@ -39,11 +40,15 @@ export default {
 		short_desc(){
 			if(this.file.data.description.lenght > 100)return this.file.data.description.substr(0,100)
 			return this.file.data.description
+		},
+		short_title(){
+			if(this.file.name.length > 10)return this.file.name.substr(0,10) + '...'
+				return this.file.name
 		}
 	},
 	methods:{
 		remove(){
-			this.$emit('remove',file.name)
+			this.$emit('remove',this.file.name)
 		}
 	}
 };
@@ -51,18 +56,57 @@ export default {
 
 <style lang="scss" scoped>
 .file-overview{
-	padding:1rem;
+	padding:.5rem;
 	border-top:1px solid #ccc;
 	h2{
-		margin-top: 22px;
+		margin-top: 11px;
     	margin-bottom: 11px;
+
+    	img{
+    		width:12px;
+    		margin-right:1rem;
+    	}
 	}
+	.desc{
+		margin-top:11px;
+		margin-bottom:11px;
+	}
+	.title-field{
+		.short-title{
+			dislay:block;
+			transition: .2s ease-in-out;
+		}
+
+		.title-hover{
+			display:none;
+			transition: .2s ease-in-out;
+		}
+
+		&:hover{
+			.short-title{
+				display:none;
+			}
+			.title-hover{
+				display:block;
+			}
+		}
+	}
+
 	.remove{
 		float:right;
+		padding-top:1rem;
+		padding-right:2rem;
+
+		.remove-link{
+			cursor:pointer;
+			background-image:url(/images/close-icon.svg);
+			background-repeat: no-repeat;
+			padding:1rem;
+		}
 	}
 
 	&:hover{
-		background-color:#ddd;
+		background-color:#eee;
 	}
 }
 </style>

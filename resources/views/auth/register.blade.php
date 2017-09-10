@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
                 <h1 class="auth-title title-offset">Create profile</h1>
-                <p class="beta-notice"> In order to register you have to be part of our beta program</p>
+                <p class="beta-notice"> In order to register you must be part of our beta program</p>
                 <div class="auth-form">
 
                     <form class="form-horizontal" method="POST" action="{{ route('auth.register') }}" enctype="multipart/form-data" id="register_form">
@@ -155,16 +155,22 @@
                             </div>
                         </div>
                         <!-- /Confirm Password -->
-
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <label><input type="checkbox" v-model="ethics"> I accept the <a href="https://drive.google.com/file/d/0B6hTJyXpVLXaU2F3UkFxamFCeHR6X3ZwTmJKWEp2bERUS2Y4/view" target="_blank">Code of ethics</a></label>   
+                            </div>
+                            
+                            
+                        </div>
                         <!-- Button -->
                         <div class="form-group">
                             <div v-if="allow" class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary" @click.prevent="submit">
+                                <button type="submit" class="btn btn-primary" @click.prevent="submit" :disabled="!ethics">
                                     Submit
                                 </button>
                             </div>
                             <div v-else class="col-md-6 col-md-offset-4">
-                                <a class="btn btn-primary" @click.prevent="modal">Submit</a>
+                                <a class="btn btn-primary" @click.prevent="modal" :disabled="!ethics">Submit</a>
                             </div>
                         </div>
                         <!-- Button -->

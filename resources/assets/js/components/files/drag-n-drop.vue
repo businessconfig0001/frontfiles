@@ -18,9 +18,9 @@
 		</div>
 
 
-		<div class="col-md-4 form" v-show="uploads.length">
-			<h3>Overall data</h3>
-			<div>
+		<div class="col-md-6 form" v-show="uploads.length">
+			<h3>Tell us more about your files</h3>
+			<div class="form-content clearfix">
 				<p>
 					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="title"/>
 				</p>
@@ -40,7 +40,10 @@
 				<p>
 					<input type="text" name="why"  class="form-control" v-model="why" placeholder="#Why">
 				</p>
-				
+				<div class="upload-button">
+					<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Upload all</a>
+					<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
+				</div>
 			</div>
 		</div>
 
@@ -48,16 +51,12 @@
 		
 	</form>
 	<div class="col-md-12 upload-files" v-show="uploads.length">
-			<div class="col-md-8 listing">
+			<div class="listing">
 				<ul>
 					<li v-for="upload in uploads">
 						<file-overview :file="upload" @remove="removeFile"></file-overview>
 					</li>
 				</ul>
-			</div>
-			<div class="col-md-4 upload-button">
-				<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Upload</a>
-				<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
 			</div>
 		</div>
 </div>
@@ -158,12 +157,14 @@
 		},
 		methods:{
 			filesChange(fieldName, fileList) {
+				console.log('new files')
 				if (!fileList.length) return;
 
 				// append the files to FormData
 				Array.from(Array(fileList.length).keys())
 				  .map(x => {
 				  		let name=fileList[x].name
+				  		console.log(name)
 				  		let d = {
 				  			title:'',
 				  			description:'',
@@ -174,8 +175,8 @@
 				  			why:'',
 							drive:'nothing'
 				  		}
-				  		if(this.uploads[x]) d = this.uploads[x].data 
-					  	this.uploads[x]={ 
+				  		//if(this.uploads[x].name === name) d = this.uploads[x].data 
+					  	this.uploads.push({ 
 					  		file:fileList[x],
 					  		size:fileList[x].size,
 					  		name:name,
@@ -183,7 +184,7 @@
 					  		errors:{},
 					  		index:x,
 					  		previous:0
-					  	}
+					  	})
 				  });
 				  this.state='more'
 			},
@@ -261,11 +262,24 @@
 
 	}
 	.form{
-		float:right;
+		p{
+			width:50%;
+			padding:.5rem;
+			float:left;
+		}
 
 		input{
 			&[placeholder]{
 				color:#C7C7CD !important;
+			}
+		}
+		.upload-button{
+			float:left;
+			width:100%;
+
+			a{
+				width:10rem;
+				margin:0 auto;
 			}
 		}
 	}
@@ -274,11 +288,7 @@
 		margin-top:2rem;
 		position:static;
 		
-		.upload-button{
-			display:flex;
-			justify-content:center;
-			align-items:center;
-		}
+
 		.listing{
 			position:static;
 		}

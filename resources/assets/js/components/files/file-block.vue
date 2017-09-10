@@ -26,6 +26,7 @@
 		</div>	
 		<div class="file-info">
 			<h2><a :href="file.path">{{ file.title }}</a></h2>
+			<p class="location">@{{file.where}} on {{date}}</p>
 		</div>
 		<div class="buttons">
 			<a class="btn btn-secondary" @click.prevent="showEdit = true">edit</a>
@@ -64,7 +65,7 @@ export default {
 	},
 	computed:{
 		date(){
-			return moment(this.file.when)
+			return moment(this.file.when).format('MMMM Do YYYY')
 		},
 		formatted_date(){
 			this.date.format('DD/MM/YYYY')
@@ -170,6 +171,7 @@ export default {
 		overflow:hidden;
 
 		h2{
+			text-align:left;
 			color:#ddd;
 		}
 	}
@@ -202,14 +204,14 @@ export default {
 			padding: .5rem 0;
 			height:50px;
 			font-weight:bolder;
-			text-align:center;
+			text-align:left;
 			a{
 				color:blue;
 			}
 		}
 
-		p{
-			margin:.5rem 0;
+		.location{
+			color:#ccc;
 		}
 
 		li{

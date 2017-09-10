@@ -52,7 +52,7 @@ const store = new Vuex.Store({
 		progress:0,
 		previousProgress:0,
 		whoTags:[],
-		whatTags:[]
+		whatTags:[],
 		
 	},
 	actions: {
@@ -102,7 +102,8 @@ const app = new Vue({
     		allow:false,
     		options:{
     			show:false
-    		}
+    		},
+    		ethics:false
     	}	
     },
     mounted(){
