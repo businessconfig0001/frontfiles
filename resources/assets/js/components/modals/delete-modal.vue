@@ -16,7 +16,7 @@ export default {
 	name: 'delete-modal',
 	data () {
 		return {
-			url:"'/files",
+			url:'/files',
 		}
 	},
 	props:{
@@ -38,7 +38,8 @@ export default {
 			this.$emit('close')
 		},
 		delRecord(){
-			axios.delete(window.location.protocol + "//" + window.location.host + this.url + '/' + this.id)
+			console.log(window.location.origin + this.url + '/' + this.id)
+			axios.delete(window.location.origin + this.url + '/' + this.id)
   			.then(this.$emit('remove'))
   			.catch(console.error)
 		}

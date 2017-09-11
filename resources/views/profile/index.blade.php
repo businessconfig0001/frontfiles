@@ -10,7 +10,8 @@
                     <img  class="logo" src="/images/dropbox_glyph_blue.svg" alt="">
                     <h3 class="title">Dropbox</h3>
                     @if($user->dropbox_token)
-                        <p>Dropbox connected!</p>
+                        <p></p>
+                        <p class="align-properly">Dropbox connected!</p>
                     @else
                         <p>Dropbox not configured!</p>
                         <a href="{{ route('profile.dropbox') }}" class="btn btn-primary">Connect to your Dropbox</a>

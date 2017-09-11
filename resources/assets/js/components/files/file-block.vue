@@ -29,8 +29,8 @@
 			<p class="location">@{{file.where}} on {{date}}</p>
 		</div>
 		<div class="buttons" v-if="active">
-			<a class="btn btn-secondary" @click.prevent="showEdit = true">edit</a>
-			<a class="btn btn-secondary" @click.prevent="showDelete = true">delete</a>
+			<a  @click.prevent="showEdit = true"><img src="/images/edit-btn.png" alt=""></a>
+			<a  @click.prevent="showDelete = true"><img src="/images/close-icon.svg" alt=""></a>
 		</div>
 	</div>
 	
@@ -152,15 +152,22 @@ export default {
 			margin-top:1rem;
 			visibility: hidden;
 			position:absolute;
-			top:10px;
-			right:10px;
+			bottom:110px;
+			right:5px;
 			z-index:100;
-			width:50%;
+			width:20%;
 			transition: .4s ease-in-out;
 			a{
 				float:left;
 				width:40%;
-				margin-right:.3rem
+				margin-right:.3rem;
+				cursor:pointer;
+
+				img{
+					width:20px;
+					height:20px;
+					
+				}
 			}
 				
 		}	

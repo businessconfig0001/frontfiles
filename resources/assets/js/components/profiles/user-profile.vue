@@ -9,7 +9,7 @@
 				<div class="profile-content col-xs-9">
 					<div class="row">
 						<div class="col-xs-12">
-							<h1 class="title">{{ user.first_name + " " + user.last_name }}<a v-if="current" href="/profile/edit" class="edit"><img src="/images/edit-btn.png" alt=""></a></h1>
+							<h1 class="title">{{ user.first_name + " " + user.last_name }}<a v-if="current" @click.prevent="show=true" class="edit"><img src="/images/edit-btn.png" alt=""></a></h1>
 							<div class="box">
 								<h2 class=" subtitle location">{{ user.location }}</h2>
 								<p class="txt-small">{{ user.bio }}</p>
@@ -24,16 +24,19 @@
 		<div class="container files">
 			<files-display :_files="files" :active="current"></files-display>
 		</div>
+		<profile-edit v-if="current" :user="user" :show="show" @close="show = false"></profile-edit>
 </section>
 </template>
 
 <script>
 import filesDisplay from './../files/files-display'
+import profileEdit from './../modals/profile-edit'
 export default {
 
 	name: 'user-profile',
 	components:{
-		filesDisplay
+		filesDisplay,
+		profileEdit
 	},
 	props:{
 		user:{
@@ -51,7 +54,8 @@ export default {
 	},
 	data () {
 		return {
-			current:false
+			current:false,
+			show:false
 		}
 	},
 	mounted(){

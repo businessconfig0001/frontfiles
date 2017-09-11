@@ -34,14 +34,26 @@
 					<div class="info">
 						<h2>{{file.title}}</h2>
 						<span class="date">Uploaded on {{date_string}}</span>
-						<p class="col-md-12">{{file.description}}</p>
+						<p>{{file.description}}</p>
 						
-						<ul class="col-md-12 tags">
-							<li v-show="file.where"><span>{{file.where}}</span></li>
-							<li v-show="file.when"><span>{{file.when}}</span></li>
-							<li v-show="file.who"><span>{{file.who}}</span></li>
-							<li v-show="file.what"><span>{{file.what}}</span></li>
-							<li v-show="file.why"><span>{{file.why}}</span></li>
+						<ul class="tags">
+							<li v-show="file.where">#Where<span>{{file.where}}</span></li>
+							<li v-show="file.when">#When<span>{{file.when}}</span></li>
+							<li v-show="file.who">#Who
+								<span>
+									<ul class="tag-list">
+										<li v-for="tag in file.who">{{tag}}</li>
+									</ul>
+								</span>
+							</li>
+							<li v-show="file.what">#What
+								<span>
+									<ul class="tag-list">
+										<li v-for="tag in file.what">{{tag}}</li>
+									</ul>
+								</span>
+							</li>
+							<li v-show="file.why">#Why<span>{{file.why}}</span></li>
 						</ul>	
 					</div>
 				
@@ -85,8 +97,8 @@ export default {
 
 		.file-container{
 			display:flex;
-			justify-content:center;
-			align-items:center;
+			justify-content:left;
+			align-items:left;
 			min-height:80vh;
 
 			video,audio{
@@ -126,12 +138,16 @@ export default {
 			font-weight:400;
 			color: #636b6f;
 			padding:.4rem;
+			padding-left:0;
+			margin-left:0;
 			
 
 			span{
 				color:blue;
 				font-weight:bolder;
+				padding:.2rem;
 			}
+
 		}
 		.info{
 			.date{
@@ -139,11 +155,20 @@ export default {
 				float:left;
 				width:100%;
 				margin-bottom:2rem;
-				margin-left:.5rem;
 			}
 
 			.tags{
 				margin-top:1rem;
+
+				.tag-list{
+					display:inline;
+					li{
+						display:inline-block;
+						background-color:blue;
+						padding:0 .2rem;
+						color:white;
+					}
+				}
 			}
 		}
 	}

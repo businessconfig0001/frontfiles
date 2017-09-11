@@ -44,10 +44,10 @@ export default {
 			this.$emit('close')
 		},
 		changeWhat(tags){
-			this.upload.what=tags
+			this.upload.data.what=tags
 		},
 		changeWho(tags){
-			this.upload.who=tags
+			this.upload.data.who=tags
 		}	
 	}
 }

@@ -25,6 +25,9 @@
 					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="title"/>
 				</p>
 				<p>
+					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="description"></textarea>
+				</p>
+				<p>
 					<date-picker :option="options" name="when"  class="form-control" :date="date" @change="changeDate" :limit="limit"></date-picker>
 				</p>
 				<p>
@@ -85,6 +88,7 @@
 				title:'',
 				where:'',
 				why:'',
+				description:'',
 				date:{
 					time:''
 				},
@@ -146,6 +150,12 @@
 			why(){
 				this.uploads=this.uploads.map(u => {
 					u.data.why=this.why
+					return u
+				})
+			},
+			description(){
+				this.uploads=this.uploads.map(u => {
+					u.data.description=this.description
 					return u
 				})
 			}
