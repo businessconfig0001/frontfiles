@@ -27,13 +27,13 @@
 				</p>
 
 				<div class="register-radio">
-					<display-error :error="errors['type']"></display-error>
+					<display-error :error="errors['role']"></display-error>
                     <div class="radio-wrapper">
-                       <input type="radio" name="type" value="user" class="form-control" id="indu" v-model="user.type" checked>
+                       <input type="radio" name="type" value="user" class="form-control" id="indu" v-model="user.role" checked>
                         <label for="indu">Individual</label> 
                     </div>
                     <div>
-                        <input id="coll" type="radio" name="type" value="corporative" class="form-control" v-model="user.type">
+                        <input id="coll" type="radio" name="type" value="corporative" class="form-control" v-model="user.role">
                         <label  for="coll">Collective</label>
                     </div>
                  </div>	
@@ -100,7 +100,7 @@ export default {
 			if(this.avatar)f.append('avatar',this.avatar)
 			f.append('bio',this.user.bio)
 			f.append('location',this.user.location)
-			f.append('type',this.user.type)
+			f.append('role',this.user.role)
 
 			f.append('_method','patch')
 
