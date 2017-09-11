@@ -32,13 +32,13 @@
 						<li>
 							<display-error class="error" v-show="errors" :error="errors['what']"></display-error>
 							<label class="what">#What:</label>
-							<tag-input type="text" name="what"  class="form-control tag-input" :tags="active.what"></tag-input>
+							<tag-input type="text" name="what"  class="form-control tag-input" :tags="active.what" @change="changeWhat"></tag-input>
 						</li>
 						
 						<li>
 							<display-error class="error" v-show="errors" :error="errors['who']"></display-error>
 							<label for="who">#Who: </label>
-							<tag-input type="text" name="who"  class="form-control tag-input" :tags="active.who"></tag-input>
+							<tag-input type="text" name="who"  class="form-control tag-input" :tags="active.who" @change="changeWho"></tag-input>
 						</li>
 						
 						<li>
@@ -170,6 +170,12 @@ export default {
 				console.error(e)
 			}	
 		},
+		changeWhat(tags){
+			this.active.what=tags
+		},
+		changeWho(tags){
+			this.active.who=tags
+		}
 	},
 };
 </script>
