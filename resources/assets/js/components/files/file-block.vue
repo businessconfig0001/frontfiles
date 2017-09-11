@@ -175,11 +175,7 @@ export default {
 	
 
 	.file-container{
-		display:flex;
-		justify-content:center;
-		align-items:center;
-		height:13em;
-		overflow:hidden;
+		width:100%;
 
 		h2{
 			text-align:left;
@@ -222,7 +218,8 @@ export default {
 		}
 
 		.location{
-			color:#ccc;
+			color:#bbb;
+			font-size:12px;
 		}
 
 		li{

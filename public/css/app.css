@@ -8632,6 +8632,10 @@ body.page-payment-info.home {
   padding: 1.5rem;
 }
 
+.profile .storage .box p + p {
+  padding: 1rem;
+}
+
 .auth-form {
   position: relative;
   left: 50%;
@@ -9625,5 +9629,27 @@ body {
 
 .pac-container {
   z-index: 1000000000 !important;
+}
+
+::-webkit-input-placeholder {
+  /* Chrome */
+  color: #b1b7ba !important;
+}
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #b1b7ba !important;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #b1b7ba !important;
+  opacity: 1;
+}
+
+:-moz-placeholder {
+  /* Firefox 4 - 18 */
+  color: #b1b7ba !important;
+  opacity: 1;
 }
 

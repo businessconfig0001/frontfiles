@@ -4,7 +4,7 @@
 		<div class="modal-wrapper modal-content col-md-4 file-edit">
 			<h3>File: <span>{{upload.name}}</span></h3>
 			<upload-form :upload="upload" :errors="upload.errors" :who="upload.data.who" :what="upload.data.what" @changeWhat="changeWhat" @changeWho="changeWho"></upload-form>
-			<a class="btn btn-primary confirm" @click.prevent="close">close</a>
+			<a class="btn btn-primary confirm" @click.prevent="close">Close</a>
 			<a href="#" class="close" @click.prevent="close">&#10005</a>
 		</div>
 	</div>
@@ -97,11 +97,11 @@ export default {
 					}
 			}
 
-			.confirm{
-				width:20rem;
-				margin:0 auto;
-				text-align:center;
-			}
+		}
+
+		.confirm{
+			width:40%;
+			margin-left:30%;
 		}
 
 		.close{

@@ -1,5 +1,5 @@
 <template>
-<div class="form-wrapper">
+<div class="form-wrapper clearfix">
 	<p>
 		<display-error :error="errors['title']"></display-error>
 		<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
@@ -32,14 +32,14 @@
 		<textarea name="why" id="why" class="form-control" placeholder="#Why" v-model="upload.data.why"></textarea>
 		
 	</p>
-	<p>
+	<div class="radio-wrapper clearfix">
 		<display-error :error="upload.errors['drive']"></display-error>
 		<div class="radio">
-			<input type="radio" name="drive" :value="'dropbox'" class="form-control"  id="dropbox" checked  @click="upload.data.drive = 'dropbox'">
-		 	<label class="btn btn-secondary" for="dropbox">Dropbox</label>
+			<input type="radio" name="drive" value="dropbox" class="form-control"  id="dropbox" v-model='upload.data.drive'>
+		 	<label class="" for="dropbox">Dropbox</label>
 		 			
 		</div>		
-	</p>
+	</div>
 
 </div>
 
@@ -94,6 +94,7 @@ export default {
 					width: '100%',
 					height: 'auto',
 					border:'none'
+
         		}
 			}
 		}
@@ -127,7 +128,11 @@ export default {
 
 <style lang="scss">
 .form-wrapper{
-	
+	display:block;
+
+	::-webkit-input-placeholder { /* Chrome */
+  		color: red;
+	}	
 	h3{
 		padding:1rem 0;
 		color:blue;
@@ -138,25 +143,30 @@ export default {
 		float:left;
 	}
 
+	.radio-wrapper{
+		width:100%;
+		float:left;
+	}
 	.radio{
 		display:flex;
-		width:100%;
+		width:50%;
 
-		.btn-secondary{
-			background-color:#eee;
-			flex:1;
-			border:2px solid #eee;
-		}
-
+		label{
+				flex:1;
+				background:#eee;
+				text-align:center;
+				padding:1rem;
+			}
+	
 		input[type='radio']{
 			visibility:hidden;
 			flex:1;
 			margin: 0px;
+			
 
 			&:checked  + label{
-				color:blue;
-				background-color:white;
-				border:2px solid blue;
+				background-color:blue;
+				color:white;
 			
 			}
 		}		
