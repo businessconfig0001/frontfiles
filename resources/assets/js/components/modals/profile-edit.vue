@@ -27,13 +27,13 @@
 				</p>
 
 				<div class="register-radio">
-					<display-error :error="errors['type']"></display-error>
+					<display-error :error="errors['role']"></display-error>
                     <div class="radio-wrapper">
-                       <input type="radio" name="type" value="user" class="form-control" id="indu" v-model="user.type" checked>
+                       <input type="radio" name="type" value="user" class="form-control" id="indu" v-model="user.role" checked>
                         <label for="indu">Individual</label> 
                     </div>
                     <div>
-                        <input id="coll" type="radio" name="type" value="corporative" class="form-control" v-model="user.type">
+                        <input id="coll" type="radio" name="type" value="corporative" class="form-control" v-model="user.role">
                         <label  for="coll">Collective</label>
                     </div>
                  </div>	
@@ -62,7 +62,7 @@ export default {
 		show:{
 			required:true,
 			type:Boolean
-		}
+		},
 
 	},
 	components:{
@@ -71,7 +71,8 @@ export default {
 	},
 	data () {
 		return {
-			errors:[]
+			errors:[],
+			avatar:false
 		}
 	},
 	watch:{
@@ -96,21 +97,24 @@ export default {
 			let f=new FormData()
 			f.append('first_name',this.user.first_name)
 			f.append('last_name',this.user.last_name)
-			f.append('avatar',this.user.avatar)
+			if(this.avatar)f.append('avatar',this.avatar)
 			f.append('bio',this.user.bio)
 			f.append('location',this.user.location)
-			f.append('type',this.user.type)
+			f.append('role',this.user.role)
 
 			f.append('_method','patch')
 
 			axios.post(window.location.origin + '/profile',f)
-				.then(this.close)
+				.then(res =>{
+					this.user=res.user
+					this.close()
+				})
 				.catch(res => this.errors=res.response.data)
 
 
 		},
 		avatar(data){
-			this.user.avatar= data
+			this.avatar= data
 		}
 	}
 }
@@ -137,6 +141,8 @@ export default {
 		top: 40%;
   		transform: translate(-50%, -40%);
   		border-radius:0;
+  		max-height:60vh;
+  		overflow-y:scroll;
 
   		h2{
   			font-size:2rem;
@@ -156,6 +162,7 @@ export default {
 
   		.register-radio{
   			width:80%;
+  			margin-left:10%;
 
 			.radio-wrapper{
 				float:left;

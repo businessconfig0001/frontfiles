@@ -21,28 +21,35 @@
 		<div class="col-md-6 form" v-show="uploads.length">
 			<h3>Tell us more about your files</h3>
 			<div class="form-content clearfix">
-				<p>
-					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="title"/>
-				</p>
-				<p>
-					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="description"></textarea>
-				</p>
-				<p>
-					<date-picker :option="options" name="when"  class="form-control" :date="date" @change="changeDate" :limit="limit"></date-picker>
-				</p>
-				<p>
-					<tag-input placeholder="#What" class="form-control" @change="changeWhatTags" :name="'whatTags'"></tag-input>
+				<div class="col-md-6">
+					<p>
+						<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="title"/>
+					</p>
+					<p>
+						<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="description"></textarea>
+					</p>
+					<p>
+						<input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="where" placeholder="#Where">
+					</p>
+					<p>
+						<date-picker :option="options" name="when"  class="form-control" :date="date" @change="changeDate" :limit="limit"></date-picker>
+					</p>
+				</div>
+				<div class="col-md-6">
+					<p>
+						<tag-input placeholder="#What" class="form-control" @change="changeWhatTags" :name="'whatTags'"></tag-input>
+						
+					</p>
+					<p>
+						<tag-input placeholder="#Who" class="form-control" @change="changeWhoTags" :name="'whoTags'"></tag-input>			
+					</p>
 					
-				</p>
-				<p>
-					<tag-input placeholder="#Who" class="form-control" @change="changeWhoTags" :name="'whoTags'"></tag-input>			
-				</p>
-				<p>
-					<input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="where" placeholder="#Where">
-				</p>
-				<p>
-					<input type="text" name="why"  class="form-control" v-model="why" placeholder="#Why">
-				</p>
+					<p>
+						<input type="text" name="why"  class="form-control" v-model="why" placeholder="#Why">
+					</p>	
+				</div>
+				
+				
 				<div class="upload-button">
 					<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Upload all</a>
 					<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
@@ -234,7 +241,7 @@
 			},
 			changeDate(d){
 				this.uploads=this.uploads.map(u => {
-					u.data.date=d
+					u.data.date=moment(d).format('YYYY-MM-DD')
 					return u
 				})
 				this.date.time=d
@@ -273,7 +280,7 @@
 	}
 	.form{
 		p{
-			width:50%;
+			width:100%;
 			padding:.5rem;
 			float:left;
 		}
