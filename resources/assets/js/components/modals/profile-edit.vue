@@ -138,10 +138,10 @@ export default {
 		padding:3rem;
 		position:absolute;
 		left:50%;
-		top: 40%;
-  		transform: translate(-50%, -40%);
+		top: 20%;
+  		transform: translate(-50%, -20%);
   		border-radius:0;
-  		max-height:60vh;
+  		max-height:80vh;
   		overflow-y:scroll;
 
   		h2{

@@ -190,7 +190,7 @@
 				  			when:moment(),
 				  			who:[],
 				  			why:'',
-							drive:'nothing'
+							drive:'dropbox'
 				  		}
 				  		//if(this.uploads[x].name === name) d = this.uploads[x].data 
 					  	this.uploads.push({ 
@@ -320,7 +320,8 @@
 		display:flex;
 		align-items:center;
 		justify-content:center;
-		border:4px solid blue;
+		border:4px solid transparant;
+		padding:0;
 
 		&:hover {
 			background: #F5F8FA;

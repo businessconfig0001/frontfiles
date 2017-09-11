@@ -49,6 +49,10 @@
 			p{
 				padding:1.5rem;
 			}
+
+			p + p{
+				padding:1rem;
+			}
 		}
 	}
 	
