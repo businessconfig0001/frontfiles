@@ -137,7 +137,7 @@
 		},
 		watch:{
 			title(){
-				if(this.uploads.length === 1)this.uploads[0].title=this.title
+				if(this.uploads.length === 1)this.uploads[0].data.title=this.title
 				else{
 					let counter= 1
 					this.uploads=this.uploads.map(u => {
