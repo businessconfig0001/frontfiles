@@ -4,41 +4,54 @@
 		<div class="modal-wrapper modal-content col-md-4 file-edit">
 			<ul class="fields">
 				<li>
-					<display-error class="error" v-show="errors" :error="errors['title']"></display-error>
-					<label for="title">Title</label>
-					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="active.title"/>
+					<ul>
+						<li>
+							<display-error class="error" v-show="errors" :error="errors['title']"></display-error>
+							<label for="title">Title</label>
+							<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="active.title"/>
+						</li>
+						<li>
+							<display-error class="error" v-show="errors" :error="errors['description']"></display-error>
+							<label for="description">Description</label>
+							<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="active.description"></textarea>
+						</li>
+						<li>
+							<display-error class="error" v-show="errors" :error="errors['where']"></display-error>
+							<label for="where">#Where:</label>
+							 <input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="active.where">
+						</li>
+						<li>
+							<display-error class="error" v-show="errors" :error="errors['when']"></display-error>
+							<label for="when">#When:</label>
+							 <date-picker :option="options" name="when"  class="form-control" :date="date" :limit="limit" @change="changeDate"></date-picker>
+						</li>
+					</ul>
 				</li>
 				<li>
-					<display-error class="error" v-show="errors" :error="errors['what']"></display-error>
-					<label class="what">#What:</label>
-					<tag-input type="text" name="what"  class="form-control tag-input" :tags="active.what"></tag-input>
-				</li>
-				<li>
-					<display-error class="error" v-show="errors" :error="errors['description']"></display-error>
-					<label for="description">Description</label>
-					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="active.description"></textarea>
-				</li>
-				<li>
-					<display-error class="error" v-show="errors" :error="errors['who']"></display-error>
-					<label for="who">#Who: </label>
-					<tag-input type="text" name="who"  class="form-control tag-input" :tags="active.who"></tag-input>
+					<ul>
+						<li>
+							<display-error class="error" v-show="errors" :error="errors['what']"></display-error>
+							<label class="what">#What:</label>
+							<tag-input type="text" name="what"  class="form-control tag-input" :tags="active.what"></tag-input>
+						</li>
+						
+						<li>
+							<display-error class="error" v-show="errors" :error="errors['who']"></display-error>
+							<label for="who">#Who: </label>
+							<tag-input type="text" name="who"  class="form-control tag-input" :tags="active.who"></tag-input>
+						</li>
+						
+						<li>
+							<display-error class="error" v-show="errors" :error="errors['why']"></display-error>
+							<label for="why">#Why:</label>
+							 <input type="text" name="why"  class="form-control" v-model="active.why">
+						</li>
+					</ul>
 				</li>
 				
-				<li>
-					<display-error class="error" v-show="errors" :error="errors['why']"></display-error>
-					<label for="why">#Why:</label>
-					 <input type="text" name="why"  class="form-control" v-model="active.why">
-				</li>
-				<li>
-					<display-error class="error" v-show="errors" :error="errors['where']"></display-error>
-					<label for="where">#Where:</label>
-					 <input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="active.where">
-				</li>
-				<li>
-					<display-error class="error" v-show="errors" :error="errors['when']"></display-error>
-					<label for="when">#When:</label>
-					 <date-picker :option="options" name="when"  class="form-control" :date="date" :limit="limit" @change="changeDate"></date-picker>
-				</li>
+				
+
+				
 				
 				
 				
@@ -141,7 +154,6 @@ export default {
 	  			.catch(res => this.errors = res.response.data)
 	  	},
 	  	changeDate(date){
-	  		console.log('changing date')
 	  		this.date={time:date}
   			this.active.when = moment(date).format('YYYY-MM-DD')
 	  	},
@@ -199,8 +211,12 @@ export default {
 			.fields > li{
 				width:50%;
 				float:left;
-				margin-bottom:.5rem;
-				padding:.5rem;
+				
+				 & > ul > li{
+					margin-bottom:.5rem;
+					padding:.5rem;
+	
+				}
 
 					.error{
 						float:right;

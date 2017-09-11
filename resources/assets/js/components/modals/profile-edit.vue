@@ -71,7 +71,8 @@ export default {
 	},
 	data () {
 		return {
-			errors:[]
+			errors:[],
+			avatar:false
 		}
 	},
 	watch:{
@@ -96,7 +97,7 @@ export default {
 			let f=new FormData()
 			f.append('first_name',this.user.first_name)
 			f.append('last_name',this.user.last_name)
-			f.append('avatar',this.user.avatar)
+			if(this.avatar)f.append('avatar',this.avatar)
 			f.append('bio',this.user.bio)
 			f.append('location',this.user.location)
 			f.append('type',this.user.type)
@@ -104,13 +105,16 @@ export default {
 			f.append('_method','patch')
 
 			axios.post(window.location.origin + '/profile',f)
-				.then(this.close)
+				.then(res =>{
+					this.user=res.user
+					this.close()
+				})
 				.catch(res => this.errors=res.response.data)
 
 
 		},
 		avatar(data){
-			this.user.avatar= data
+			this.avatar= data
 		}
 	}
 }
@@ -137,6 +141,8 @@ export default {
 		top: 40%;
   		transform: translate(-50%, -40%);
   		border-radius:0;
+  		max-height:60vh;
+  		overflow-y:scroll;
 
   		h2{
   			font-size:2rem;

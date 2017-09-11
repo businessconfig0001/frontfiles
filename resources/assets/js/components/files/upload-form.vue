@@ -109,7 +109,7 @@ export default {
 				catch(e){}	
 		},
 		changeDate(d){
-			date.time= d
+			this.date.time= d
   			this.upload.data.when = moment(d).format('YYYY-MM-DD')
   		},
   		changeWhat(tags){
