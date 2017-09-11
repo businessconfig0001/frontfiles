@@ -50,6 +50,9 @@ export default {
 		active:{
 			required:false,
 			default:() => false
+		},
+		role:{
+			
 		}
 	},
 	data () {
@@ -60,6 +63,7 @@ export default {
 	},
 	mounted(){
 		scroll(0,0)
+		this.user.role=this.role
 		let modalName='first_login'
 		if(!localStorage.getItem(modalName))this.$store.commit('openModal',modalName)
 		if(this.active){

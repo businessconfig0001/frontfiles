@@ -62,7 +62,7 @@ export default {
 		show:{
 			required:true,
 			type:Boolean
-		}
+		},
 
 	},
 	components:{
