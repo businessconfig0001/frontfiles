@@ -1,6 +1,8 @@
 <template>
 <div class="file-input-wrapper">
-		<img v-show="link.length" :src="link" alt="">
+		<div class="file-wrapper">
+			<img v-show="link.length" :src="link" alt="">	
+		</div>	
 		<div class="input-wrapper">
 			<input  type="file" :name="options.name" @change="change" :accept="options.accept">
 			<input  ref="fileinput" type="file" :name="options.name" class="hidden">
@@ -52,13 +54,13 @@ export default {
   						//cropper(image,canvas,result)
   						let options=result.topCrop
   						let ctx= canvas.getContext('2d')
-						console.log(image.width,image.height,options)
 						canvas.width=200
 						canvas.height=200
 						ctx.drawImage(image,options.x,options.y,options.width,options.height,0,0,200,200)
   						let dataUrl= canvas.toDataURL("image/png")
   						this.link=dataUrl
-  						this.$refs.inputfile.setAttribute('value',dataUrl)
+  						this.$emit('change',dataUrl)
+  						this.$refs.fileinput.setAttribute('value',dataUrl)
 					})	
 				}
 					
@@ -73,12 +75,19 @@ export default {
 
 <style lang="scss" scoped>
 .file-input-wrapper{
+	.file-wrapper{
+		display: flex;
+		justify-content:center;
+		align-items:center;
+		img{
+			width:200px
+		}	
+	}
+	
+
 	.input-wrapper{
 		display:flex;
 		position:relative;
-		img{
-			width:100%
-		}
 
 		input{
 			flex:1;

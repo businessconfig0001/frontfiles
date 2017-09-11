@@ -38,7 +38,9 @@ export default {
 	},
 	computed:{
 		short_desc(){
-			if(this.file.data.description.lenght > 100)return this.file.data.description.substr(0,100)
+			if(this.file.data.description.length > 50){
+				return this.file.data.description.substr(0,50) + '...'
+			}
 			return this.file.data.description
 		},
 		short_title(){
@@ -67,6 +69,17 @@ export default {
     		margin-right:1rem;
     	}
 	}
+
+	&:hover{
+		.title-field{
+			.short-title{
+				display:none;
+			}
+			.title-hover{
+				display:block;
+			}
+		}
+	}
 	.desc{
 		margin-top:11px;
 		margin-bottom:11px;
@@ -80,15 +93,6 @@ export default {
 		.title-hover{
 			display:none;
 			transition: .2s ease-in-out;
-		}
-
-		&:hover{
-			.short-title{
-				display:none;
-			}
-			.title-hover{
-				display:block;
-			}
 		}
 	}
 
