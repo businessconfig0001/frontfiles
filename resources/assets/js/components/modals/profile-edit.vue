@@ -162,6 +162,7 @@ export default {
 
   		.register-radio{
   			width:80%;
+  			margin-left:10%;
 
 			.radio-wrapper{
 				float:left;
