@@ -37,13 +37,16 @@ class ProfileController extends Controller
 
         $files = File::where('user_id', $user->id)->latest()->get();
 
+        $role = $user->getRoleNames()->toArray()[0];
+
         if(request()->expectsJson())
             return response()->json([
                 'data'  => $user,
+                'role'  => $role,
                 'files' => $files,
             ], 200);
 
-        return view('profile.show', compact('user','files'));
+        return view('profile.show', compact('user','files', 'role'));
     }
 
     /**
