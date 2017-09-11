@@ -183,7 +183,7 @@ export default {
 		}
 	}
 	video,img{
-		height:100%;
+		width:100%;
 	}
 	audio,.download-file{
 		width:100%;

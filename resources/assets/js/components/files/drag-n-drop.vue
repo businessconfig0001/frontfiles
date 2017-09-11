@@ -141,7 +141,7 @@
 				else{
 					let counter= 1
 					this.uploads=this.uploads.map(u => {
-						u.data.title=this.title + '_' +counter
+						u.data.title=this.title + ' - shoot ' +counter
 						counter++
 						return u
 					})
@@ -241,7 +241,7 @@
 			},
 			changeDate(d){
 				this.uploads=this.uploads.map(u => {
-					u.data.date=moment(d).format('YYYY-MM-DD')
+					u.data.when=moment(d).format('YYYY-MM-DD')
 					return u
 				})
 				this.date.time=d
@@ -283,12 +283,6 @@
 			width:100%;
 			padding:.5rem;
 			float:left;
-		}
-
-		input{
-			&[placeholder]{
-				color:#C7C7CD !important;
-			}
 		}
 		.upload-button{
 			float:left;

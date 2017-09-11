@@ -146,6 +146,7 @@ export default {
 	.radio-wrapper{
 		width:100%;
 		float:left;
+		display:none;
 	}
 	.radio{
 		display:flex;
