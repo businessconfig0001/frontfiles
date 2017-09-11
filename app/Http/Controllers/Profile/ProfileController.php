@@ -37,7 +37,7 @@ class ProfileController extends Controller
 
         $files = File::where('user_id', $user->id)->latest()->get();
 
-        $role = $user->getRoleNames()->toArray()[0];
+        $role = $user->getRoleNames();
 
         if(request()->expectsJson())
             return response()->json([
