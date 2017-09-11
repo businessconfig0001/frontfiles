@@ -63,7 +63,7 @@ export default {
 	},
 	mounted(){
 		scroll(0,0)
-		this.user.role=this.role
+		this.user.role=this.role[0]
 		let modalName='first_login'
 		if(!localStorage.getItem(modalName))this.$store.commit('openModal',modalName)
 		if(this.active){
