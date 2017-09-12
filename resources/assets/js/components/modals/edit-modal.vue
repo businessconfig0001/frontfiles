@@ -43,7 +43,7 @@
 						
 						<li>
 							<display-error class="error" v-show="errors" :error="errors['why']"></display-error>
-							<label for="why">#Why:</label>
+							<label for="why">#How:</label>
 							 <input type="text" name="why"  class="form-control" v-model="_file.why">
 						</li>
 					</ul>

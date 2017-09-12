@@ -26,12 +26,12 @@
 				<img src="/images/processing.png" alt="">
 			</div>	
 			<div class="file-info">
-				<h2><a :href="file.path">{{ file.title }}</a></h2>
+				<h2 class="title clearfix">{{ file.title }}</h2>
 				<p class="location">@{{file.where}} on {{date}}</p>
 			</div>
 			<div class="buttons" v-if="active">
-				<a  @click.prevent="showEdit = true">edit</a>
-				<a  @click.prevent="showDelete = true">delete</a>
+				<a  @click.prevent="showEdit = true"><img src="/images/edit-btn.png" alt=""></a>
+				<a  @click.prevent="showDelete = true"><img src="/images/close-icon.svg" alt=""></a>
 			</div>
 		</div>
 	</a>
@@ -220,11 +220,13 @@ export default {
 
 		h2{
 			padding: .5rem 0;
-			height:50px;
 			font-weight:bolder;
 			text-align:left;
+			font-size:15px;
+			color:blue;
 			a{
 				color:blue;
+				width:100%;
 			}
 		}
 

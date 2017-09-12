@@ -5,7 +5,7 @@
 			<h2>Edit file</h2>
 			<h3>File: <span>{{upload.name}}</span></h3>
 			<upload-form :upload="upload" :errors="upload.errors" :who="upload.data.who" :what="upload.data.what" @changeWhat="changeWhat" @changeWho="changeWho"></upload-form>
-			<a class="btn btn-primary confirm" @click.prevent="close">Close</a>
+			<a class="btn btn-primary confirm" @click.prevent="close">Save</a>
 			<a href="#" class="close" @click.prevent="close">&#10005</a>
 		</div>
 	</div>
