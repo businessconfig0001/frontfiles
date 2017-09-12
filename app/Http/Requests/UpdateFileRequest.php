@@ -48,12 +48,12 @@ class UpdateFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'         => 'required|string|max:175',
+            'title'         => 'required|string|max:40',
             'description'   => 'required|string',
             'where'         => 'required|string|max:175',
             'when'          => 'required|date',
-            'what.*'        => 'required|string|max:25',
-            'who.*'         => 'required|string|max:25',
+            'what.*'        => 'nullable|string|max:25',
+            'who.*'         => 'nullable|string|max:25',
             'why'           => 'nullable|string|max:160',
         ];
     }
@@ -74,13 +74,15 @@ class UpdateFileRequest extends FormRequest
             'why'           => request('why'),
         ]);
 
-        $file->tagsWhat()->sync(
-            Helper::getTagIds(request('what'), TagWhat::class)
-        );
+        if(request('what'))
+            $file->tagsWhat()->sync(
+                Helper::getTagIds(request('what'), TagWhat::class)
+            );
 
-        $file->tagsWho()->sync(
-            Helper::getTagIds(request('who'), TagWho::class)
-        );
+        if(request('who'))
+            $file->tagsWho()->sync(
+                Helper::getTagIds(request('who'), TagWho::class)
+            );
 
         if(request()->expectsJson())
             return response(['status' => 'File successfully edited!'], 200);

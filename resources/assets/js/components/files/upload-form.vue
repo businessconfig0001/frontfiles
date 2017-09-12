@@ -29,7 +29,7 @@
 	</p>
 	<p>
 		<display-error :error="errors['why']"></display-error>
-		<textarea name="why" id="why" class="form-control" placeholder="#Why" v-model="upload.data.why"></textarea>
+		<textarea name="why" id="why" class="form-control" placeholder="#How" v-model="upload.data.why"></textarea>
 		
 	</p>
 	<div class="radio-wrapper clearfix">
