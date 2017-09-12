@@ -3,14 +3,15 @@
 	<a @click.prevent="show =true" class="overview-wrapper clearfix col-md-10">
 		<div class="col-md-4 title-field">
 			<h2 class="short-title" >{{short_title}}</h2>
-			<h2 class="title-hover" ><img src="/images/edit-btn.png" alt="">{{file.name}}</h2>
+			<h2 class="title-hover" >{{file.name}}</h2>
 		</div>
 		<div class="col-md-8 desc">
 			<p >{{short_desc}}</p>
 		</div>
 	</a>
 	<div class="remove">
-		<a class="ir remove-link " @click.prevent="remove"></a>
+		<img src="/images/edit-btn.png" alt="">
+		<a class="remove-link " @click.prevent="remove"><img src="/images/close-icon.svg" alt=""></a>
 	</div>
 	
 	<file-modal :upload="file" :show="show" @close="show = false"></file-modal>
@@ -63,11 +64,6 @@ export default {
 	h2{
 		margin-top: 11px;
     	margin-bottom: 11px;
-
-    	img{
-    		width:12px;
-    		margin-right:1rem;
-    	}
 	}
 
 	&:hover{
@@ -101,11 +97,13 @@ export default {
 		padding-top:1rem;
 		padding-right:2rem;
 
+		img{
+    		width:16px;
+    		margin-right:1rem;
+    	}
+
 		.remove-link{
 			cursor:pointer;
-			background-image:url(/images/close-icon.svg);
-			background-repeat: no-repeat;
-			padding:1rem;
 		}
 	}
 

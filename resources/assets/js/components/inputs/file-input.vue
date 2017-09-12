@@ -1,15 +1,15 @@
 <template>
 <div class="file-input-wrapper">
 		<div class="file-wrapper">
-			<img v-show="link.length" :src="link" alt="">	
+			<img v-if="link.length" :src="link" alt="">	
 		</div>	
-		<div class="input-wrapper">
-			<input  type="file" :name="options.name" @change="change" :accept="options.accept">
+		<div v-show="!link.length"  class="input-wrapper">
+			<input  type="file" @change="change" :accept="options.accept">
 			<input  ref="fileinput" type="file" :name="options.name" class="hidden">
 			<label :for="options.name">{{label}}</label>
 			<canvas ref="canvas" class="hidden"></canvas>	
 		</div>
-		
+		<a  v-if="link.length" class="close" @click.prevent="remove" ><img src="/images/close-icon.svg" alt=""></a>
 </div>
 </template>
 
@@ -68,6 +68,12 @@ export default {
 				fr.readAsDataURL(this.file)
 
 			}
+		},
+		remove(){
+			this.label=this.options.label
+			this.link=''
+			this.$refs.fileinput.setAttribute('value',false)
+			this.$emit('change',false)
 		}
 	}
 }
@@ -75,12 +81,24 @@ export default {
 
 <style lang="scss" scoped>
 .file-input-wrapper{
+	position:relative;
+	.close{
+		position:absolute;
+		right:5px;
+		top:5px;
+
+		img{
+			width:12px;
+			height:12px;
+		}
+	}
 	.file-wrapper{
 		display: flex;
 		justify-content:center;
 		align-items:center;
 		img{
-			width:200px
+			width:200px;
+			border-radius:50%;
 		}	
 	}
 	

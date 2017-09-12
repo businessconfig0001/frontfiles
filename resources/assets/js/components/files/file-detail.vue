@@ -33,7 +33,7 @@
 				<div class="file-info col-md-4">
 					<div class="info">
 						<h2>{{file.title}}</h2>
-						<span class="date">Uploaded on {{date_string}}</span>
+						
 						<p>{{file.description}}</p>
 						
 						<ul class="tags">
@@ -53,8 +53,9 @@
 									</ul>
 								</span>
 							</li>
-							<li v-show="file.why">#Why<span>{{file.why}}</span></li>
-						</ul>	
+							<li v-show="file.why">#How<span>{{file.why}}</span></li>
+						</ul>
+						<span class="date">Uploaded on {{date_string}}</span>	
 					</div>
 				
 				</div>
@@ -91,6 +92,7 @@ export default {
 <style lang="scss" scoped>
 .container{
 	width:auto;
+	margin-top:2rem;
 }
 .file-wrapper{
 	.file{
@@ -133,6 +135,7 @@ export default {
 			font-size:2rem;
 			border-bottom:1px solid black;
 			margin-bottom:1rem;
+			text-transform: uppercase;
 		}
 		li{
 			font-weight:400;
@@ -144,14 +147,13 @@ export default {
 
 			span{
 				color:blue;
-				font-weight:bolder;
 				padding:.2rem;
 			}
 
 		}
 		.info{
 			.date{
-				color:#ccc;
+				color:#bbb;
 				float:left;
 				width:100%;
 				margin-bottom:2rem;
@@ -164,9 +166,8 @@ export default {
 					display:inline;
 					li{
 						display:inline-block;
-						background-color:blue;
+						color:blue;
 						padding:0 .2rem;
-						color:white;
 					}
 				}
 			}

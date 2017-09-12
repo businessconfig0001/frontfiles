@@ -23,29 +23,36 @@
 			<div class="form-content clearfix">
 				<div class="col-md-6">
 					<p>
+						<display-error :error="errors['title']"></display-error>
 						<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="title"/>
 					</p>
 					<p>
+						<display-error :error="errors['description']"></display-error>
 						<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="description"></textarea>
 					</p>
 					<p>
+						<display-error :error="errors['where']"></display-error>
 						<input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="where" placeholder="#Where">
 					</p>
 					<p>
+						<display-error :error="errors['when']"></display-error>
 						<date-picker :option="options" name="when"  class="form-control" :date="date" @change="changeDate" :limit="limit"></date-picker>
 					</p>
 				</div>
 				<div class="col-md-6">
 					<p>
+						<display-error :error="errors['what']"></display-error>
 						<tag-input placeholder="#What" class="form-control" @change="changeWhatTags" :name="'whatTags'"></tag-input>
 						
 					</p>
 					<p>
+						<display-error :error="errors['who']"></display-error>
 						<tag-input placeholder="#Who" class="form-control" @change="changeWhoTags" :name="'whoTags'"></tag-input>			
 					</p>
 					
 					<p>
-						<input type="text" name="why"  class="form-control" v-model="why" placeholder="#Why">
+						<display-error :error="errors['why']"></display-error>
+						<input type="text" name="why"  class="form-control" v-model="why" placeholder="#How">
 					</p>	
 				</div>
 				
@@ -79,17 +86,20 @@
 	import tagInput from './../inputs/tag-input'
 	import fileOverview from "./file-overview"
 	import datePicker from 'vue-datepicker'
+	import displayError from './../inputs/display-error'
 	import moment from 'moment'
 	export default {
 		name:'drag-n-drop',
 		components:{
 			fileOverview,
 			tagInput,
-			datePicker
+			datePicker,
+			displayError
 		},
 		data(){
 			return {
 				state:'',
+				errors:[],
 				uploads:[],
 				progressBar:{},
 				title:'',
@@ -127,6 +137,10 @@
 			dropbox:{
 				required:false,
 				default:() => false
+			},
+			profile:{
+				required:true,
+				type:Object
 			}
 		},
 		computed:{
@@ -222,9 +236,10 @@
 						console.log('upload complete')
 						this.state='done'
 						this.uploads=[]
+						window.location=window.location.origin + "/profile/" + this.profile.slug 
 					})
-					.catch((data) => {
-						this.uploads[data.index]=data
+					.catch((res) => {
+						this.errors=res.response.data
 					})
 			},
 			changeWhatTags(tags){

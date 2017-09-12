@@ -1,38 +1,40 @@
 <template>
 <div class="block-container">
-		<div class="file-wrapper">
-			<div class="file-container" v-if="file.processed">
-			<video controls v-if="file.type === 'video'">
-				<source :src="file.azure_url">
-			</video>
-			<div class="img" v-else-if="file.type === 'image'">
-				<img  :src="file.azure_url" alt="">	
-				<a :href="file.azure_url">
-					<i class="fa fa-download"></i>
-				</a>
+	<a class="link-wrapper" :href="file.path">
+			<div class="file-wrapper">
+				<div class="file-container" v-if="file.processed">
+				<video controls v-if="file.type === 'video'">
+					<source :src="file.azure_url">
+				</video>
+				<div class="img" v-else-if="file.type === 'image'">
+					<img  :src="file.azure_url" alt="">	
+					<a :href="file.azure_url">
+						<i class="fa fa-download"></i>
+					</a>
+				</div>
+				
+				<audio controls v-else-if="file.type === 'audio'">
+					<source :src="file.azure_url">
+				</audio>
+				<div v-else class="download-file">
+					<a :href="file.azure_url">
+						<i class="fa fa-download"></i>
+					</a>
+				</div>
 			</div>
-			
-			<audio controls v-else-if="file.type === 'audio'">
-				<source :src="file.azure_url">
-			</audio>
-			<div v-else class="download-file">
-				<a :href="file.azure_url">
-					<i class="fa fa-download"></i>
-				</a>
+			<div class="file-container" v-else>
+				<img src="/images/processing.png" alt="">
+			</div>	
+			<div class="file-info">
+				<h2><a :href="file.path">{{ file.title }}</a></h2>
+				<p class="location">@{{file.where}} on {{date}}</p>
+			</div>
+			<div class="buttons" v-if="active">
+				<a  @click.prevent="showEdit = true">edit</a>
+				<a  @click.prevent="showDelete = true">delete</a>
 			</div>
 		</div>
-		<div class="file-container" v-else>
-			<img src="/images/processing.png" alt="">
-		</div>	
-		<div class="file-info">
-			<h2><a :href="file.path">{{ file.title }}</a></h2>
-			<p class="location">@{{file.where}} on {{date}}</p>
-		</div>
-		<div class="buttons" v-if="active">
-			<a  @click.prevent="showEdit = true"><img src="/images/edit-btn.png" alt=""></a>
-			<a  @click.prevent="showDelete = true"><img src="/images/close-icon.svg" alt=""></a>
-		</div>
-	</div>
+	</a>
 	
 	<edit-modal :show="showEdit" :active="file" @edit="handleEdit" :url="'/files'"></edit-modal>
 	<delete-modal :show="showDelete" :id="file.id" @close="showDelete=false" @remove="del"></delete-modal>
@@ -138,6 +140,10 @@ export default {
 	width:100%;
 	background-color:rgb(255,255,255);
 	padding: 1rem;
+
+	.link-wrapper{
+		cursor:pointer;
+	}
 	.file-wrapper{
 		position:relative;
 
@@ -149,18 +155,21 @@ export default {
 		}
 
 		.buttons{
-			margin-top:1rem;
 			visibility: hidden;
 			position:absolute;
-			bottom:110px;
-			right:5px;
+			top:0;
+			left:0;
 			z-index:100;
-			width:20%;
+			height:70%;
+			width:40%;
 			transition: .4s ease-in-out;
 			a{
+				padding:3rem;
+				background-color:#eee;
+				opacity:.8;
 				float:left;
-				width:40%;
-				margin-right:.3rem;
+				width:100%;
+				height:50%;
 				cursor:pointer;
 
 				img{

@@ -2,6 +2,7 @@
 <div>
 	<div v-if="show" class="modal-background clearfix">
 		<div class="modal-wrapper modal-content col-md-4 file-edit">
+			<h2>Edit file</h2>
 			<h3>File: <span>{{upload.name}}</span></h3>
 			<upload-form :upload="upload" :errors="upload.errors" :who="upload.data.who" :what="upload.data.what" @changeWhat="changeWhat" @changeWho="changeWho"></upload-form>
 			<a class="btn btn-primary confirm" @click.prevent="close">Close</a>
@@ -75,7 +76,17 @@ export default {
   		transform: translate(-50%, -40%);
   		border-radius:0;
 
+		h2{
+			text-align:center;
+			font-size:2rem;
+			color:blue;
+			margin-bottom:2rem;
+		}
 
+		h3{
+			padding-left:.5rem;
+			margin-bottom:1rem;
+		}
 		.modal-button{
 			width:60%;
 			margin:.5rem;
