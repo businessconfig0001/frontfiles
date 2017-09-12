@@ -166,13 +166,15 @@ export default {
 			width:40%;
 			transition: .4s ease-in-out;
 			a{
-				padding:3rem;
 				background-color:#eee;
 				opacity:.8;
 				float:left;
 				width:100%;
 				height:50%;
 				cursor:pointer;
+				display:flex;
+				align-items:center;
+				justify-content:center;
 
 				img{
 					width:20px;
