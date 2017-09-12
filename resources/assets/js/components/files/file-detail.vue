@@ -136,7 +136,9 @@ export default {
 			border-bottom:1px solid black;
 			margin-bottom:1rem;
 			text-transform: uppercase;
+			overflow:hidden;
 		}
+
 		li{
 			font-weight:400;
 			color: #636b6f;

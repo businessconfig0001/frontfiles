@@ -224,6 +224,8 @@ export default {
 			text-align:left;
 			font-size:15px;
 			color:blue;
+			overflow:hidden;
+			max-height:40px;
 			a{
 				color:blue;
 				width:100%;
