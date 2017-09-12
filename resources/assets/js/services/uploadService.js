@@ -1,21 +1,20 @@
 const url = '/files'
-function upload(data,progress){
+function upload(data,store){
 	//add data
 	let form = formDataFactory(data.data)
 	//add img
 	form.append('file',data.file,data.name)
 
 	//upload
-	return new Promise((resolve,reject) =>
-		axios.post(window.location.protocol + "//" + window.location.host + url,form,{
-			onUploadProgress:progress
-		})
-		.then(resolve)
-		.catch(err=>{
-			data.errors=err.response.data
-			reject(data)
-		})
-	)
+	let previous=0
+	return axios.post(window.location.protocol + "//" + window.location.host + url,form,{
+		onUploadProgress:function(e){
+			console.log(e.loaded)
+			store.commit('addProgress',e.loaded- store.state.previousProgress)
+			previous=e.loaded
+		}
+	})
+		
 }
 
 function formDataFactory(data){

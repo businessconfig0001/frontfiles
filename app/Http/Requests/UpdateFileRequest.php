@@ -2,7 +2,9 @@
 
 namespace FrontFiles\Http\Requests;
 
-use FrontFiles\File;
+use FrontFiles\{
+    File, TagWhat, TagWho, Utility\Helper
+};
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateFileRequest extends FormRequest
@@ -18,6 +20,27 @@ class UpdateFileRequest extends FormRequest
     }
 
     /**
+     * Corrects data.
+     *
+     * @return array
+     */
+    protected function validationData(): array
+    {
+        $all = parent::validationData();
+
+        if(is_string($what = array_get($all, 'what')))
+            $what = json_decode($what, true);
+
+        if(is_string($who = array_get($all, 'who')))
+            $who = json_decode($who, true);
+
+        $all['what'] = $what;
+        $all['who'] = $who;
+
+        return $all;
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -29,8 +52,8 @@ class UpdateFileRequest extends FormRequest
             'description'   => 'required|string',
             'where'         => 'required|string|max:175',
             'when'          => 'required|date',
-            //'what.*'        => 'required|string|max:50|unique:tagsWhat',
-            //'who.*'         => 'required|string|max:50|unique:tagsWho',
+            'what.*'        => 'required|string|max:25',
+            'who.*'         => 'required|string|max:25',
             'why'           => 'nullable|string|max:160',
         ];
     }
@@ -51,8 +74,13 @@ class UpdateFileRequest extends FormRequest
             'why'           => request('why'),
         ]);
 
-        //$file->tagsWhat()->sync(request('what'));
-        //$file->tagsWho()->sync(request('who'));
+        $file->tagsWhat()->sync(
+            Helper::getTagIds(request('what'), TagWhat::class)
+        );
+
+        $file->tagsWho()->sync(
+            Helper::getTagIds(request('who'), TagWho::class)
+        );
 
         if(request()->expectsJson())
             return response(['status' => 'File successfully edited!'], 200);

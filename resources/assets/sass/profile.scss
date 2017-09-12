@@ -13,10 +13,11 @@
 	.storage{
 		ul{
 			display: flex;
+			align-items:center;
+			justify-content:center;
 		}
 		.box{
 
-			display:inline-block;
 			width: 30%;
 			border:1px solid blue;
 			padding:1rem;
@@ -25,6 +26,11 @@
 
 			.logo{
 				width:40%;
+				min-height:123px;
+
+				&.avatar{
+					border-radius:50%;
+				}
 			}
 			div.logo{
 				height:123px;
@@ -42,6 +48,10 @@
 			}
 			p{
 				padding:1.5rem;
+			}
+
+			p + p{
+				padding:1rem;
 			}
 		}
 	}

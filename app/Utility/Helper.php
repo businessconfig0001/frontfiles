@@ -2,9 +2,11 @@
 
 namespace FrontFiles\Utility;
 
+use Illuminate\Support\Facades\Storage;
 use WindowsAzure\Common\ServicesBuilder;
-use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
 use MicrosoftAzure\Storage\Common\ServiceException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use MicrosoftAzure\Storage\Blob\Models\{ CreateContainerOptions, PublicAccessType };
 
 class Helper
 {
@@ -47,6 +49,19 @@ class Helper
     }
 
     /**
+     * If the user has an Avatar, it gets deleted.
+     *
+     * @param string $avatar_name
+     * @throws FileNotFoundException
+     */
+    public static function deleteUserAvatar(string $avatar_name){
+        if(!Storage::exists('user-avatars/' . $avatar_name))
+            throw new FileNotFoundException('We couln\'t find this file!');
+        else
+            Storage::delete('user-avatars/' . $avatar_name);
+    }
+
+    /**
      * Checks if the container exists in the azure blob storage
      * If it does not exist, he creates it.
      *
@@ -65,5 +80,26 @@ class Helper
         }catch(ServiceException $e){
             //If there's an exception, it means that the container (folder) already exists
         }
+    }
+
+    /**
+     * Returns an array with the id's of the tags.
+     *
+     * @param string $tags
+     * @param $type
+     * @return array
+     */
+    public static function getTagIds(string $tags, $type) : array
+    {
+        $tagsFiltered = json_decode($tags, true);
+        $output = [];
+
+        foreach($tagsFiltered as $tag)
+            if(!$type::where('name', $tag)->exists())
+                array_push($output, $type::create(['name' => $tag])->id);
+            else
+                array_push($output, $type::where('name', $tag)->first()->id);
+
+        return $output;
     }
 }

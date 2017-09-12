@@ -8361,11 +8361,11 @@ button.close {
 }
 
 .bg-login {
-  background-image: url(/images/riot1.jpg?5cdf494078b7d1e7010da2156cc6aaff);
+  background-image: url(/images/riot1.jpg?772273f557c0f17166a715dda6df8389);
 }
 
 .bg-create {
-  background-image: url(/images/riot2.jpg?2fdfa62e7b55af2a936f438a06ca2ef2);
+  background-image: url(/images/riot2.jpg?e383921d8faefbff667fe78592154096);
 }
 
 .login-box {
@@ -8380,12 +8380,27 @@ button.close {
   background-color: blue !important;
 }
 
+.btn-secondary {
+  background-color: white !important;
+  border: 1px solid blue;
+  color: blue;
+}
+
 .form-control {
   border-radius: 0 !important;
 }
 
 .title-offset {
   margin-left: 7rem;
+}
+
+.align-right {
+  float: right;
+}
+
+.btn-fix {
+  width: 10rem;
+  margin-top: 15px;
 }
 
 body.page-payment-info.home {
@@ -8572,10 +8587,15 @@ body.page-payment-info.home {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .profile .storage .box {
-  display: inline-block;
   width: 30%;
   border: 1px solid blue;
   padding: 1rem;
@@ -8585,6 +8605,11 @@ body.page-payment-info.home {
 
 .profile .storage .box .logo {
   width: 40%;
+  min-height: 123px;
+}
+
+.profile .storage .box .logo.avatar {
+  border-radius: 50%;
 }
 
 .profile .storage .box div.logo {
@@ -8605,6 +8630,10 @@ body.page-payment-info.home {
 
 .profile .storage .box p {
   padding: 1.5rem;
+}
+
+.profile .storage .box p + p {
+  padding: 1rem;
 }
 
 .auth-form {
@@ -8631,6 +8660,7 @@ body.page-payment-info.home {
   padding-bottom: 3rem;
   text-align: center;
   margin-left: 7rem;
+  font-size: 15px;
 }
 
 .register-radio div {
@@ -8666,6 +8696,10 @@ body.page-payment-info.home {
 
 .file-input {
   width: 100%;
+}
+
+.login-box .checkbox label {
+  font-size: 14px;
 }
 
 /*-------------------------------------
@@ -9099,11 +9133,11 @@ img {
 }
 
 .btn-photo {
-  background: url(/images/upload2x.png?1de8ff468014c37caafca911242a5db4) center center no-repeat;
+  background: url(/images/upload2x.png?a42e510890362f45bd9e793ccd05cab4) center center no-repeat;
 }
 
 .btn-photo:active {
-  background-image: url(/images/upload2x.png?1de8ff468014c37caafca911242a5db4);
+  background-image: url(/images/upload2x.png?a42e510890362f45bd9e793ccd05cab4);
 }
 
 .blocks .block-image {
@@ -9202,7 +9236,7 @@ img {
 }
 
 .main-header .logo {
-  background: url(/images/logo2x.png?f7732e91b19dd92caca2e440ef591002) left center no-repeat;
+  background: url(/images/logo2x.png?4c0bb1bd413e7b2cde19172ba198671e) left center no-repeat;
   background-size: 50% auto;
   display: block;
   width: 100%;
@@ -9437,7 +9471,6 @@ img {
 .profile-container {
   color: #0000ff;
   margin-bottom: 40px;
-  border-top: 1rem solid #0000ff;
   padding: 5rem;
 }
 
@@ -9592,5 +9625,31 @@ img {
 
 body {
   background-color: white;
+}
+
+.pac-container {
+  z-index: 1000000000 !important;
+}
+
+::-webkit-input-placeholder {
+  /* Chrome */
+  color: #b1b7ba !important;
+}
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #b1b7ba !important;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #b1b7ba !important;
+  opacity: 1;
+}
+
+:-moz-placeholder {
+  /* Firefox 4 - 18 */
+  color: #b1b7ba !important;
+  opacity: 1;
 }
 

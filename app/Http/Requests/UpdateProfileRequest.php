@@ -2,8 +2,9 @@
 
 namespace FrontFiles\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use FrontFiles\User;
+use FrontFiles\Utility\Helper;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProfileRequest extends FormRequest
 {
@@ -27,9 +28,10 @@ class UpdateProfileRequest extends FormRequest
         return [
             'first_name'    => 'required|string|max:100',
             'last_name'     => 'required|string|max:100',
+            'avatar'        => 'nullable|image:jpeg,jpg,png|max:1048576',
             'bio'           => 'nullable|string|max:500',
             'location'      => 'required|string|max:100',
-            'type'          => 'required|in:user,corporative',
+            'role'          => 'required|in:user,corporative',
         ];
     }
 
@@ -48,7 +50,24 @@ class UpdateProfileRequest extends FormRequest
             'location'      => request('location'),
         ]);
 
-        $user->syncRoles([request('type')]);
+        if(request()->file('avatar'))
+        {
+            if($user->avatar_name)
+                Helper::deleteUserAvatar($user->avatar_name);
+
+            $rawImg         = request()->file('avatar');
+            $extension      = (string)$rawImg->clientExtension();
+            $short_id       = Helper::generateRandomAlphaNumericString(12);
+            $avatar_name    = $short_id . '.' . $extension;
+            $avatarUrl      = Helper::storeUserAvatarAndReturnUrl($avatar_name);
+
+            $user->update([
+                'avatar'        => $avatarUrl ?? 'http://via.placeholder.com/300x300',
+                'avatar_name'   => $avatar_name ?? null,
+            ]);
+        }
+
+        $user->syncRoles([request('role')]);
 
         $user->generateSlug();
 

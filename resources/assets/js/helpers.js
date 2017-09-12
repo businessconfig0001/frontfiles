@@ -55,8 +55,27 @@ function getQuery(query){
     return decodeURIComponent(results[2].replace(/\+/g, " "))
 }
 
+function addBuffer(string,length){
+	console.log(string.length,length)
+	while(string.length < length){
+		string=string += '\u0020' 
+		console.log('loop')
+	}
+	return string	
+}
+
+function cropper(img,canvas,options){
+	let ctx= canvas.getContext('2d')
+	let destX = canvas.width/2 - options.width / 2
+	let destY = canvas.height/ 2 - options.height /2
+	console.log(img.width,img.height,options)
+	ctx.drawImage(img,options.x,options.y,options.width,options.heigth,0,0,options.heigth,options.width)
+}
+
 export{
 	unique,
 	equals,
-	getQuery
+	getQuery,
+	addBuffer,
+	cropper
 }
