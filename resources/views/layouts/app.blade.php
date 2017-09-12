@@ -62,7 +62,13 @@
                                                         {{ csrf_field() }}
                                                     </form>
                                                 </li>
-                                                <li><a href="{{ route('profile') }}">Dashboard</a></li>
+
+                                                @if(auth()->user()->dropbox_token)
+                                                    <li><a href="{{ route('profile.show', auth()->user()->slug) }}">Profile</a></li>
+                                                @else
+                                                    <li><a href="{{ route('profile') }}">Dashboard</a></li>
+                                                @endif
+
                                                 <li><a href="{{ route('files.upload') }}" class="btn btn-border-black">Upload</a></li>
                                             @endif
 
