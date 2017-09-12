@@ -133,7 +133,7 @@ export default {
 	methods:{
 		close(){
 			this.active=this._file
-			this.$emit('edit',file)
+			this.$emit('edit',false)
 		},
 		update(id){
 			console.log(this.active)
