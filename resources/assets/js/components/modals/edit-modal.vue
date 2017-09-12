@@ -92,6 +92,7 @@ export default {
 	},
 	data () {
 		return {
+			_file:{}
 			errors:false,
 			limit:[{
 				type:'fromto',
@@ -117,6 +118,7 @@ export default {
 		}
 	},
 	mounted(){
+		this._file=this.active
 		if(!this.active.what)Object.assign(this.active,{what:[]})
 		if(!this.active.who)Object.assign(this.active,{who:[]})
 		this.date={time:this.active.when}
@@ -129,7 +131,8 @@ export default {
 		}
 	},
 	methods:{
-		close(file = false){
+		close(){
+			this.active=this._file
 			this.$emit('edit',file)
 		},
 		update(id){
