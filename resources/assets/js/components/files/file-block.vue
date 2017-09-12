@@ -88,6 +88,7 @@ export default {
 			url:'/files',
 			showDelete:false,
 			showEdit:false,
+			_file:{},
 			options:{
 					placeholder:'#When',
 					type: 'day',
@@ -110,6 +111,7 @@ export default {
   },
   methods:{
   	handleEdit(file){
+  		console.log('file',file)
   		this.showEdit= false
   		if(file){
   			this.$emit('edit',file)

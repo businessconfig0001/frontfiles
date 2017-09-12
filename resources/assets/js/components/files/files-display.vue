@@ -33,8 +33,9 @@ export default {
 	},
 	methods:{
 		handleEdit(file){
+			console.log('got here',file)
 			this.files=this.files.map(f => {
-				if(f.title === file.title)return file
+				if(f.id === file.id)return file
 				return f
 			})
 		},

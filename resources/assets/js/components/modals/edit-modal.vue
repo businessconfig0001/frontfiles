@@ -8,17 +8,17 @@
 						<li>
 							<display-error class="error" v-show="errors" :error="errors['title']"></display-error>
 							<label for="title">Title</label>
-							<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="active.title"/>
+							<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="_file.title"/>
 						</li>
 						<li>
 							<display-error class="error" v-show="errors" :error="errors['description']"></display-error>
 							<label for="description">Description</label>
-							<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="active.description"></textarea>
+							<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="_file.description"></textarea>
 						</li>
 						<li>
 							<display-error class="error" v-show="errors" :error="errors['where']"></display-error>
 							<label for="where">#Where:</label>
-							 <input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="active.where">
+							 <input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="_file.where">
 						</li>
 						<li>
 							<display-error class="error" v-show="errors" :error="errors['when']"></display-error>
@@ -32,19 +32,19 @@
 						<li>
 							<display-error class="error" v-show="errors" :error="errors['what']"></display-error>
 							<label class="what">#What:</label>
-							<tag-input type="text" name="what"  class="form-control tag-input" :tags="active.what" @change="changeWhat"></tag-input>
+							<tag-input type="text" name="what"  class="form-control tag-input" :tags="_file.what" @change="changeWhat"></tag-input>
 						</li>
 						
 						<li>
 							<display-error class="error" v-show="errors" :error="errors['who']"></display-error>
 							<label for="who">#Who: </label>
-							<tag-input type="text" name="who"  class="form-control tag-input" :tags="active.who" @change="changeWho"></tag-input>
+							<tag-input type="text" name="who"  class="form-control tag-input" :tags="_file.who" @change="changeWho"></tag-input>
 						</li>
 						
 						<li>
 							<display-error class="error" v-show="errors" :error="errors['why']"></display-error>
 							<label for="why">#Why:</label>
-							 <input type="text" name="why"  class="form-control" v-model="active.why">
+							 <input type="text" name="why"  class="form-control" v-model="_file.why">
 						</li>
 					</ul>
 				</li>
@@ -118,41 +118,37 @@ export default {
 		}
 	},
 	mounted(){
-		this._file=this.active
-		if(!this.active.what)Object.assign(this.active,{what:[]})
-		if(!this.active.who)Object.assign(this.active,{who:[]})
 		this.date={time:this.active.when}
+		this._file=JSON.parse(JSON.stringify(this.active))
 	},
 	computed:{
 	},
 	watch:{
 		show(){
 			scroll(0,0)
-		}
+		},
 	},
 	methods:{
 		close(){
-			this.active=this._file
 			this.$emit('edit',false)
 		},
 		update(id){
-			console.log(this.active)
 	  		let f = new FormData();
-	  		f.append('title',this.active.title)
-	  		f.append('description',this.active.description)
-	  		f.append('who',JSON.stringify(this.active.who))
-	  		f.append('when',this.active.when)
-	  		f.append('what',JSON.stringify(this.active.what))
-	  		f.append('where',this.active.where)
-	  		f.append('why',this.active.why)
+	  		f.append('title',this._file.title)
+	  		f.append('description',this._file.description)
+	  		f.append('who',JSON.stringify(this._file.who))
+	  		f.append('when',this._file.when)
+	  		f.append('what',JSON.stringify(this._file.what))
+	  		f.append('where',this._file.where)
+	  		f.append('why',this._file.why)
 	  		f.append('_method','patch')
-
+	  		console.log(this._file)
 	  		axios.post(window.location.protocol + "//" + window.location.host + this.url + '/' + id,f,{
 	  				validateStatus:status => status < 422
 	  			})
 	  			.then(res => {
 	  				console.log(res)
-	  				this.close(this.active)
+	  				this.$emit('edit',this._file)
 	  			})
 	  			.catch(res => this.errors = res.response.data)
 	  	},
@@ -174,10 +170,10 @@ export default {
 			}	
 		},
 		changeWhat(tags){
-			this.active.what=tags
+			this._file.what=tags
 		},
 		changeWho(tags){
-			this.active.who=tags
+			this._file.who=tags
 		}
 	},
 };
