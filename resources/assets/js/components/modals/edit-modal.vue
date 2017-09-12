@@ -92,7 +92,7 @@ export default {
 	},
 	data () {
 		return {
-			_file:{}
+			_file:{},
 			errors:false,
 			limit:[{
 				type:'fromto',
