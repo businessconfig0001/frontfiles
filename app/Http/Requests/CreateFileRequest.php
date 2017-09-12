@@ -50,12 +50,12 @@ class CreateFileRequest extends FormRequest
     {
         return [
             'file'          => 'required|file|allowed_file|max:524288000',
-            'title'         => 'required|string|max:175',
+            'title'         => 'required|string|max:40',
             'description'   => 'required|string',
             'where'         => 'required|string|max:175',
             'when'          => 'required|date',
-            'what.*'        => 'required|string|max:25',
-            'who.*'         => 'required|string|max:25',
+            'what.*'        => 'nullable|string|max:25',
+            'who.*'         => 'nullable|string|max:25',
             'why'           => 'nullable|string|max:160',
             'drive'         => 'required|string|valid_token|in:dropbox',
         ];
@@ -110,13 +110,15 @@ class CreateFileRequest extends FormRequest
             'why'           => request('why'),
         ]);
 
-        $file->tagsWhat()->sync(
-            Helper::getTagIds(request('what'), TagWhat::class)
-        );
+        if(request('what'))
+            $file->tagsWhat()->sync(
+                Helper::getTagIds(request('what'), TagWhat::class)
+            );
 
-        $file->tagsWho()->sync(
-            Helper::getTagIds(request('who'), TagWho::class)
-        );
+        if(request('who'))
+            $file->tagsWho()->sync(
+                Helper::getTagIds(request('who'), TagWho::class)
+            );
 
         dispatch(
             (new FetchAndProcessFile($file))
