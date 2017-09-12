@@ -121,10 +121,16 @@
                         	<p><a href="mailto: info@frontfiles.com">info@frontfiles.com</a></p>
                         </div>
                         <div class="col-sm-8 col-xs-12">
-                        	<i class="fa fa-facebook" aria-hidden="true"></i>
-                        	<i class="fa fa-twitter" aria-hidden="true"></i>
-                        	<i class="fa fa-instagram" aria-hidden="true"></i>
-                        	<i class="fa fa-youtube" aria-hidden="true"></i>
+                        
+
+
+
+
+
+                        	<a href="https://www.facebook.com/FrontFiles/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        	<a href="https://twitter.com/FrontFiles" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        	<a href="https://www.instagram.com/frontfiles/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        	<a href="" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </section>
