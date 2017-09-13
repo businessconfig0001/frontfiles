@@ -82,7 +82,7 @@ export default {
 
 <style lang="scss" scoped>
 .title{
-	font-size:1.8em;
+	font-size:1.8em !important;
 }
 .profile-picture{
 	padding-top:3rem;

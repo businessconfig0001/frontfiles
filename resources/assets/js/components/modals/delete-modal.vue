@@ -2,7 +2,10 @@
 	<div v-show="show" class="delete-background clearfix">
 		<div class="delete-form-wrapper col-md-4">
 			<h2>Delete item?</h2>
-			<div class="btns">
+			<div v-if="state=== 'loading'">
+				<loading-icon></loading-icon>
+			</div>
+			<div class="btns" v-else>
 				<a @click.prevent="delRecord" class="btn btn-primary">Yes</a>
 				<a @click.prevent="close" class="btn btn-primary">No</a>
 			</div>
@@ -11,12 +14,17 @@
 </template>
 
 <script>
+import loadingIcon from './../icons/loading-icon2'
 export default {
 
 	name: 'delete-modal',
+	components:{
+		loadingIcon
+	},
 	data () {
 		return {
 			url:'/files',
+			state:''
 		}
 	},
 	props:{
@@ -40,7 +48,14 @@ export default {
 		delRecord(){
 			console.log(window.location.origin + this.url + '/' + this.id)
 			axios.delete(window.location.origin + this.url + '/' + this.id)
-  			.then(this.$emit('remove'))
+  			.then(() => {
+  				this.state='loading'
+  				setTimeout(() => {
+  					this.state=''
+  					this.$emit('remove')	
+  				},3000)
+  				
+  			})
   			.catch(console.error)
 		}
 	}

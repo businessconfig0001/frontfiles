@@ -48,8 +48,8 @@
                             <label for="avatar" class="col-md-4 control-label offset-label">Profile picture</label>
 
                             <div class="col-md-6">
-                                <!-- file-input class="file-input" :options="{ name:'avatar',accept:'image',label:'upload picture' }"></file-input> -->
-                                <input type="file" name="avatar" accept="image">
+                                <file-input class="file-input" :options="{ name:'avatar',accept:'image',label:'upload picture' }"></file-input>
+                                <!-- <input type="file" name="avatar" accept="image"> -->
                                 @if ($errors->has('avatar'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('avatar') }}</strong>
