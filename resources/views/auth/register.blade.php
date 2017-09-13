@@ -91,29 +91,27 @@
                         </div>
                         <!-- /Location -->
 
-                        <!-- Type -->
-                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                            <label for="type" class="col-md-4 control-label offset-label">Type</label>
+                        <!-- Role -->
+                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                            <label for="role" class="col-md-4 control-label offset-label">Type</label>
 
                             <div class="col-md-6 register-radio">
                                 <div>
-                                   <input type="radio" name="type" value="user" class="form-control" id="indu" checked>
+                                   <input type="radio" name="role" value="user" class="form-control" id="indu" checked>
                                     <label for="indu">Individual</label> 
                                 </div>
                                 <div>
-                                    <input id="coll" type="radio" name="type" value="corporative" class="form-control">
+                                    <input id="coll" type="radio" name="role" value="corporative" class="form-control">
                                     <label  for="coll">Collective</label>
                                 </div>
-                                
-
-                                @if ($errors->has('type'))
+                                @if ($errors->has('role'))
                                     <span class="help-block">
-                                    <strong>{{ $errors->first('type') }}</strong>
+                                    <strong>{{ $errors->first('role') }}</strong>
                                 </span>
                                 @endif
                             </div>
                         </div>
-                        <!-- /Type -->
+                        <!-- /Role -->
 
                         <!-- Email -->
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
