@@ -15,7 +15,8 @@
 				</p>
 				<p>
 					<display-error :error="errors['avatar']"></display-error>
-					<file-input class="file-input" :options="{ name:'avatar',accept:'image',label:'upload picture' }" @change="avatar"></file-input>
+					<!-- <file-input class="file-input" :options="{ name:'avatar',accept:'image',label:'upload picture' }" @change="avatar"></file-input> -->
+					<input type="file" name="avatar" @change="process_file" accept="image/*" class="input-file">
 				</p>
 				<p>
 					<display-error :error="errors['bio']"></display-error>
@@ -73,7 +74,8 @@ export default {
 		return {
 			errors:[],
 			avatar:false,
-			user:JSON.parse(JSON.stringify(this.userprop))
+			user:JSON.parse(JSON.stringify(this.userprop)),
+			file:false
 		}
 	},
 	watch:{
@@ -100,7 +102,7 @@ export default {
 			let f=new FormData()
 			f.append('first_name',this.user.first_name)
 			f.append('last_name',this.user.last_name)
-			if(this.avatar)f.append('avatar',this.avatar)
+			if(this.file)f.append('avatar',this.file)
 			f.append('bio',this.user.bio)
 			f.append('location',this.user.location)
 			f.append('role',this.user.role)
@@ -118,6 +120,21 @@ export default {
 		},
 		avatar(data){
 			this.avatar= data
+		},
+		process_file(e){
+			if(!e.target.files) {
+				this.error="select a file to upload"
+				return 
+			}
+			this.file=e.target.files[0]
+			if(FileReader){
+				let fr = new FileReader()
+
+				fr.onload = () => this.link = fr.result 
+
+				fr.readAsDataURL(this.file)
+
+			}
 		}
 	}
 }

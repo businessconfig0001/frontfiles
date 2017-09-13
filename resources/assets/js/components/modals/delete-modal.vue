@@ -50,7 +50,6 @@ export default {
 			axios.delete(window.location.origin + this.url + '/' + this.id)
   			.then(() => {
   				setTimeout(() => {
-  					this.state=''
   					this.$emit('remove')	
   				},3000)
   				
