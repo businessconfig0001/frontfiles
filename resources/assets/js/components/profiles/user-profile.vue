@@ -24,7 +24,7 @@
 		<div class="container files">
 			<files-display :_files="files" :active="current"></files-display>
 		</div>
-		<profile-edit v-if="current" :user="user" :show="show" @close="show = false"></profile-edit>
+		<profile-edit v-if="current" :userprop="user" :show="show" @close="close"></profile-edit>
 </section>
 </template>
 
@@ -70,6 +70,12 @@ export default {
 			this.current = this.active.id === this.user.id
 		}
 
+	},
+	methods:{
+		close(res){
+			this.show=false
+			if(res)this.active=res
+		}
 	}
 }
 </script>

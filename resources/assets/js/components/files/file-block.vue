@@ -30,8 +30,8 @@
 				<p class="location">@{{file.where}} on {{date}}</p>
 			</div>
 			<div class="buttons" v-if="active">
-				<a  @click.prevent="showEdit = true"><img src="/images/edit-btn.png" alt=""></a>
 				<a  @click.prevent="showDelete = true"><img src="/images/close-icon.svg" alt=""></a>
+				<a  @click.prevent="showEdit = true"><img src="/images/edit-btn.png" alt=""></a>	
 			</div>
 		</div>
 	</a>
@@ -162,8 +162,8 @@ export default {
 			top:0;
 			left:0;
 			z-index:100;
-			height:70%;
-			width:40%;
+			height:40%;
+			width:20%;
 			transition: .4s ease-in-out;
 			a{
 				background-color:#eee;

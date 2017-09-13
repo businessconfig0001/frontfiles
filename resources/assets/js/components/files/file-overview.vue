@@ -100,11 +100,8 @@ export default {
 		img{
     		width:16px;
     		margin-right:1rem;
+    		cursor:pointer;
     	}
-
-		.remove-link{
-			cursor:pointer;
-		}
 	}
 
 	&:hover{

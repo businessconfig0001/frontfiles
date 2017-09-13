@@ -4,27 +4,8 @@
 		<div class="col-sm-4 col-offset-2 col-xs-12 bg-blue text-center dropbox">
 			<input type="file" multiple name="file" :disabled="state ==='saving'" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*,video/*,audio/*,application/pdf" class="input-file">
 			<div v-if="state === 'saving'" class="progressbar">
-			  	Uploading {{ fileCount }} files...
-			  	<div class="cogs" style="margin-top: 0px; opacity: 1;">
-			  		<svg height="50px" width="50px" viewBox="0 0 900 900">
-			  			<g class="cog" transform=" translate(90,0)">
-			  			<path transform="scale(0.5)" fill="#fff" d="M249.773 763.25q-5 -20 -23.75 -31.25t-40 -5l-76.25 22.5q-21.25 6.25 -43.75 -3.125t-32.5 -28.125l-26.25 -45q-10 -18.75 -6.25 -42.5t18.75 -38.75l56.25 -55q15 -15 15 -36.25t-15 -36.25l-56.25 -55q-16.25 -15 -18.75 -38.75t7.5 -42.5l25 -46.25q10 -18.75 32.5 -27.5t43.75 -2.5l76.25 21.25q21.25 6.25 40 -5t23.75 -31.25l18.75 -76.25q6.25 -21.25 25 -36.25t40 -15l51.25 0q21.25 0 40 15t25 36.25l20 76.25q6.25 21.25 24.375 31.25t38.125 5l76.25 -21.25q21.25 -6.25 43.75 2.5t32.5 27.5l26.25 46.25q10 18.75 6.25 42.5t-18.75 38.75l-56.25 55q-16.25 15 -15.625 36.25t15.625 36.25l56.25 55q15 15 18.75 38.75t-6.25 42.5l-26.25 45q-10 18.75 -32.5 28.125t-43.75 3.125l-76.25 -22.5q-20 -5 -38.125 5t-24.375 31.25l-20 77.5q-6.25 21.25 -25 35.625t-40 14.375l-51.25 0q-21.25 0 -40 -14.375t-25 -35.625zm110 -366.25q-43.75 0 -74.375 30.625t-30.625 73.125 30.625 73.125 74.375 30.625q42.5 0 73.125 -30t30.625 -73.75 -30.625 -73.75 -73.125 -30z">
-			  			</path>
-			  			</g>
-			  		</svg>    
-			  		<svg height="65px" width="65px" viewBox="0 0 900 900">
-				  		<g class="cog cog-opp" transform="translate(30,0)">
-					  		<path transform="scale(0.5)" fill="#fff" d="M249.773 763.25q-5 -20 -23.75 -31.25t-40 -5l-76.25 22.5q-21.25 6.25 -43.75 -3.125t-32.5 -28.125l-26.25 -45q-10 -18.75 -6.25 -42.5t18.75 -38.75l56.25 -55q15 -15 15 -36.25t-15 -36.25l-56.25 -55q-16.25 -15 -18.75 -38.75t7.5 -42.5l25 -46.25q10 -18.75 32.5 -27.5t43.75 -2.5l76.25 21.25q21.25 6.25 40 -5t23.75 -31.25l18.75 -76.25q6.25 -21.25 25 -36.25t40 -15l51.25 0q21.25 0 40 15t25 36.25l20 76.25q6.25 21.25 24.375 31.25t38.125 5l76.25 -21.25q21.25 -6.25 43.75 2.5t32.5 27.5l26.25 46.25q10 18.75 6.25 42.5t-18.75 38.75l-56.25 55q-16.25 15 -15.625 36.25t15.625 36.25l56.25 55q15 15 18.75 38.75t-6.25 42.5l-26.25 45q-10 18.75 -32.5 28.125t-43.75 3.125l-76.25 -22.5q-20 -5 -38.125 5t-24.375 31.25l-20 77.5q-6.25 21.25 -25 35.625t-40 14.375l-51.25 0q-21.25 0 -40 -14.375t-25 -35.625zm110 -366.25q-43.75 0 -74.375 30.625t-30.625 73.125 30.625 73.125 74.375 30.625q42.5 0 73.125 -30t30.625 -73.75 -30.625 -73.75 -73.125 -30z">
-					  		</path>
-				  		</g>
-			  		</svg>    
-			  		<svg height="65px" width="65px" viewBox="0 0 900 900">
-				  		<g class="cog" transform="translate(30,0)">
-					  		<path transform="scale(0.5)" fill="#fff" d="M249.773 763.25q-5 -20 -23.75 -31.25t-40 -5l-76.25 22.5q-21.25 6.25 -43.75 -3.125t-32.5 -28.125l-26.25 -45q-10 -18.75 -6.25 -42.5t18.75 -38.75l56.25 -55q15 -15 15 -36.25t-15 -36.25l-56.25 -55q-16.25 -15 -18.75 -38.75t7.5 -42.5l25 -46.25q10 -18.75 32.5 -27.5t43.75 -2.5l76.25 21.25q21.25 6.25 40 -5t23.75 -31.25l18.75 -76.25q6.25 -21.25 25 -36.25t40 -15l51.25 0q21.25 0 40 15t25 36.25l20 76.25q6.25 21.25 24.375 31.25t38.125 5l76.25 -21.25q21.25 -6.25 43.75 2.5t32.5 27.5l26.25 46.25q10 18.75 6.25 42.5t-18.75 38.75l-56.25 55q-16.25 15 -15.625 36.25t15.625 36.25l56.25 55q15 15 18.75 38.75t-6.25 42.5l-26.25 45q-10 18.75 -32.5 28.125t-43.75 3.125l-76.25 -22.5q-20 -5 -38.125 5t-24.375 31.25l-20 77.5q-6.25 21.25 -25 35.625t-40 14.375l-51.25 0q-21.25 0 -40 -14.375t-25 -35.625zm110 -366.25q-43.75 0 -74.375 30.625t-30.625 73.125 30.625 73.125 74.375 30.625q42.5 0 73.125 -30t30.625 -73.75 -30.625 -73.75 -73.125 -30z">
-					  		</path>
-				  		</g>
-			  		</svg>
-			  	</div>
+			  	Uploading files...
+			  	<loading-icon></loading-icon>
 			</div>
 			<div v-else-if="state === 'more'">
 			  	Add more files or <a @click.prevent="upload">save them</a>
@@ -106,13 +87,15 @@
 	import datePicker from 'vue-datepicker'
 	import displayError from './../inputs/display-error'
 	import moment from 'moment'
+	import loadingIcon from './../icons/loading-icon'
 	export default {
 		name:'drag-n-drop',
 		components:{
 			fileOverview,
 			tagInput,
 			datePicker,
-			displayError
+			displayError,
+			loadingIcon
 		},
 		data(){
 			return {
@@ -219,7 +202,7 @@
 				  			description:'',
 				  			what:[],
 				  			where:'',
-				  			when:moment(),
+				  			when:moment().format('YYYY-MM-DD'),
 				  			who:[],
 				  			why:'',
 							drive:'dropbox'
@@ -350,10 +333,14 @@
 		border:4px solid transparant;
 		padding:0;
 
+		& > div{
+			color:white;
+		}
+
 		&:hover {
 			background: #F5F8FA;
 			border:4px dashed blue;
-			p{
+			& > div{
 				color:blue;
 			}
 			
