@@ -10,7 +10,7 @@
 		</div>
 	</a>
 	<div class="remove">
-		<a @click.prevent="show =true"<img src="/images/edit-btn.png" alt=""></a>
+		<a @click.prevent="show =true"><img src="/images/edit-btn.png" alt=""></a>
 		<a class="remove-link " @click.prevent="remove"><img src="/images/close-icon.svg" alt=""></a>
 	</div>
 	
