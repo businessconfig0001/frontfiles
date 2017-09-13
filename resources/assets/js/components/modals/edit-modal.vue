@@ -126,6 +126,7 @@ export default {
 	watch:{
 		show(){
 			scroll(0,0)
+			if(this.show)this._file=JSON.parse(JSON.stringify(this.active))
 		},
 	},
 	methods:{

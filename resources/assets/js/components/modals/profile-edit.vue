@@ -55,7 +55,7 @@ export default {
 
 	name: 'file-modal',
 	props:{
-		user:{
+		userprop:{
 			required:true,
 			type:Object
 		},
@@ -72,12 +72,14 @@ export default {
 	data () {
 		return {
 			errors:[],
-			avatar:false
+			avatar:false,
+			user:JSON.parse(JSON.stringify(this.userprop))
 		}
 	},
 	watch:{
 		show(){
 			scroll(0,0)
+			if(this.show)this.user=JSON.parse(JSON.stringify(this.userprop))
 		}
 	},
 	methods:{
@@ -91,7 +93,7 @@ export default {
 			catch(e){}	
 		},
 		close(){
-			this.$emit('close')
+			this.$emit('close',false)
 		},
 		edit(){
 			let f=new FormData()
@@ -106,8 +108,8 @@ export default {
 
 			axios.post(window.location.origin + '/profile',f)
 				.then(res =>{
-					this.user=res.user
-					this.close()
+					this.$emit('close',this.user)
+					
 				})
 				.catch(res => this.errors=res.response.data)
 

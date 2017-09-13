@@ -3,18 +3,17 @@
 	<form enctype="multipart/form-data" novalidate class="clearfix">
 		<div class="col-sm-4 col-offset-2 col-xs-12 bg-blue text-center dropbox">
 			<input type="file" multiple name="file" :disabled="state ==='saving'" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*,video/*,audio/*,application/pdf" class="input-file">
-			<p v-if="state === 'saving'" class="progressbar">
-			  	Uploading {{ fileCount }} files...
-			  	<progress :value="progress" :max="progressBar.total"></progress>
-			  	</ul>
-			</p>
-			<p v-else-if="state === 'more'">
+			<div v-if="state === 'saving'" class="progressbar">
+			  	Uploading files...
+			  	<loading-icon></loading-icon>
+			</div>
+			<div v-else-if="state === 'more'">
 			  	Add more files or <a @click.prevent="upload">save them</a>
-			</p>
+			</div>
 			<img v-else-if="state === 'done'" src="/images/processing.png" alt="">
-			<p v-else>
+			<div v-else>
 			  	Drag your file(s) here to begin<br> or click to browse
-			</p>
+			</div>
 		</div>
 
 
@@ -88,13 +87,15 @@
 	import datePicker from 'vue-datepicker'
 	import displayError from './../inputs/display-error'
 	import moment from 'moment'
+	import loadingIcon from './../icons/loading-icon'
 	export default {
 		name:'drag-n-drop',
 		components:{
 			fileOverview,
 			tagInput,
 			datePicker,
-			displayError
+			displayError,
+			loadingIcon
 		},
 		data(){
 			return {
@@ -201,7 +202,7 @@
 				  			description:'',
 				  			what:[],
 				  			where:'',
-				  			when:moment(),
+				  			when:moment().format('YYYY-MM-DD'),
 				  			who:[],
 				  			why:'',
 							drive:'dropbox'
@@ -233,12 +234,12 @@
 				}
 				Promise.all(promises)
 					.then(()=> {
-						console.log('upload complete')
 						this.state='done'
 						this.uploads=[]
 						window.location=window.location.origin + "/profile/" + this.profile.slug 
 					})
 					.catch((res) => {
+						this.state='more'
 						this.errors=res.response.data
 					})
 			},
@@ -332,10 +333,14 @@
 		border:4px solid transparant;
 		padding:0;
 
+		& > div{
+			color:white;
+		}
+
 		&:hover {
 			background: #F5F8FA;
 			border:4px dashed blue;
-			p{
+			& > div{
 				color:blue;
 			}
 			

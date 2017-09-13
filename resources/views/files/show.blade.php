@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <file-detail :file="{{$file}}"></file-detail>
+    <file-detail :fileprop="{{$file}}" :user="{{ Auth::user() }}"></file-detail>
 @endsection

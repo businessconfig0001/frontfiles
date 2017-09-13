@@ -55,36 +55,61 @@
 							</li>
 							<li v-show="file.why">#How<span>{{file.why}}</span></li>
 						</ul>
-						<span class="date">Uploaded on {{date_string}}</span>	
+						<a class="btn btn-secondary" @click.prevent="showEdit = true">Edit</a>
+						<a class="btn btn-primary" @click.prevent="showDelete = true">Remove</a>
 					</div>
 				
 				</div>
+				<span class="date">Uploaded on {{date_string}}</span>	
 			</div>
 		</div>
 	</div>
+	<edit-modal :show="showEdit" :active="file" @edit="handleEdit" :url="'/files'"></edit-modal>
+	<delete-modal :show="showDelete" :id="file.id" @close="showDelete=false" @remove="del"></delete-modal>
 </div>
 </template>
 
 <script>
+import editModal from './../modals/edit-modal'
+import deleteModal from './../modals/delete-modal'
 import moment from 'moment'
 export default {
 
 	name: 'file-detail',
+	components:{
+		editModal,
+		deleteModal
+	},
 	props:{
-		file:{
+		fileprop:{
+			required:true,
+			type:Object
+		},
+		user:{
 			required:true,
 			type:Object
 		}
 	},
 	data () {
 		return {
-
+			file:JSON.parse(JSON.stringify(this.fileprop)),
+			showDelete:false,
+			showEdit:false,
 		}
 	},
 	computed:{
 		date_string(){
 			return moment(this.file.created_at).format('MMMM Do YYYY, h:mm:ss a')
 		}
+	},
+	methods:{
+		handleEdit(file){
+			if(file)this.file=file
+			this.showEdit=false
+	  	},
+	  	del(){
+	  		location.replace(location.origin + '/profile/' + this.user.slug)
+	  	},
 	}
 };
 </script>
@@ -95,6 +120,14 @@ export default {
 	margin-top:2rem;
 }
 .file-wrapper{
+	.date{
+		color:#bbb;
+		float:left;
+		width:100%;
+		margin-left:1rem;
+		padding-top:.5rem;
+		margin-bottom:2rem;
+	}
 	.file{
 
 		.file-container{
@@ -104,7 +137,7 @@ export default {
 			min-height:80vh;
 
 			video,audio{
-				width:auto;
+				width:100%;
 				
 			}
 		}
@@ -113,7 +146,7 @@ export default {
 			position: relative;
 
 			img{
-				width:auto;
+				width:100%;
 			}
 
 			a{
@@ -133,10 +166,14 @@ export default {
 		
 		h2{
 			font-size:2rem;
-			border-bottom:1px solid black;
 			margin-bottom:1rem;
 			text-transform: uppercase;
 			overflow:hidden;
+		}
+
+		p{
+			padding-bottom:.5rem;
+			border-bottom:1px solid black;
 		}
 
 		li{
@@ -154,6 +191,10 @@ export default {
 
 		}
 		.info{
+			.btn{
+				width:47%;
+				margin:1%;
+			}
 			.date{
 				color:#bbb;
 				float:left;

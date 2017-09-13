@@ -10,7 +10,7 @@
 		</div>
 	</a>
 	<div class="remove">
-		<img src="/images/edit-btn.png" alt="">
+		<a @click.prevent="show =true"><img src="/images/edit-btn.png" alt=""></a>
 		<a class="remove-link " @click.prevent="remove"><img src="/images/close-icon.svg" alt=""></a>
 	</div>
 	
@@ -100,11 +100,8 @@ export default {
 		img{
     		width:16px;
     		margin-right:1rem;
+    		cursor:pointer;
     	}
-
-		.remove-link{
-			cursor:pointer;
-		}
 	}
 
 	&:hover{

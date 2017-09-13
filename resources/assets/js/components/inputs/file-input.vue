@@ -5,7 +5,7 @@
 		</div>	
 		<div v-show="!link.length"  class="input-wrapper">
 			<input  type="file" @change="change" :accept="options.accept">
-			<input  ref="fileinput" type="file" :name="options.name" class="hidden">
+			<input  ref="fileinput" type="text" :name="options.name" class="hidden">
 			<label :for="options.name">{{label}}</label>
 			<canvas ref="canvas" class="hidden"></canvas>	
 		</div>

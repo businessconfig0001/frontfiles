@@ -12,7 +12,8 @@ function upload(data,store){
 			console.log(e.loaded)
 			store.commit('addProgress',e.loaded- store.state.previousProgress)
 			previous=e.loaded
-		}
+		},
+		validateStatus:status => status < 422
 	})
 		
 }
