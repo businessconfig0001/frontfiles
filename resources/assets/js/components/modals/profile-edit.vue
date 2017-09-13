@@ -93,6 +93,7 @@ export default {
 			catch(e){}	
 		},
 		close(){
+			if(this.show)this.user=JSON.parse(JSON.stringify(this.userprop))
 			this.$emit('close',false)
 		},
 		edit(){
