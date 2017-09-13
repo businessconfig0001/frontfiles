@@ -103,6 +103,9 @@ const app = new Vue({
     		options:{
     			show:false
     		},
+    		regOptions:{
+    			show:false,
+    		},
     		ethics:false
     	}	
     },
@@ -112,12 +115,13 @@ const app = new Vue({
     },
 	methods:{
 		modal(){
+			console.log('click')
 			this.$store.commit('openModal','')
 		},
 		submit(){
 			let form=document.getElementById('register_form')
 			localStorage.setItem('register',true)
 			form.submit()
-		}
+		},
 	}
 });

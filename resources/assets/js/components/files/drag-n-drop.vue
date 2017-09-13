@@ -234,12 +234,12 @@
 				}
 				Promise.all(promises)
 					.then(()=> {
-						console.log('upload complete')
 						this.state='done'
 						this.uploads=[]
 						window.location=window.location.origin + "/profile/" + this.profile.slug 
 					})
 					.catch((res) => {
+						this.state='more'
 						this.errors=res.response.data
 					})
 			},

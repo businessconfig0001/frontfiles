@@ -56,6 +56,7 @@ export default {
 		show(){
 			scroll(0,0)
 			return this.$store.state.showModal
+
 		},
 		modelData(){
 			return this.$store.state.modalData
