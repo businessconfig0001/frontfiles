@@ -47,7 +47,7 @@ export default {
 			required:true,
 			type:Array
 		},
-		active:{
+		activeprop:{
 			required:false,
 			default:() => false
 		},
@@ -58,7 +58,8 @@ export default {
 	data () {
 		return {
 			current:false,
-			show:false
+			show:false,
+			active:JSON.parse(JSON.stringify(this.activeprop))
 		}
 	},
 	mounted(){
@@ -74,7 +75,13 @@ export default {
 	methods:{
 		close(res){
 			this.show=false
-			if(res)this.active=res
+			if(!res){
+				console.log(false)
+			}
+			else{
+				console.log(res)
+				this.active=res
+			}
 		}
 	}
 }

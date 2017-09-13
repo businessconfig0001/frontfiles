@@ -46,10 +46,9 @@ export default {
 			this.$emit('close')
 		},
 		delRecord(){
-			console.log(window.location.origin + this.url + '/' + this.id)
+			this.state='loading'
 			axios.delete(window.location.origin + this.url + '/' + this.id)
   			.then(() => {
-  				this.state='loading'
   				setTimeout(() => {
   					this.state=''
   					this.$emit('remove')	

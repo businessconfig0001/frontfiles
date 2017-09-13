@@ -74,7 +74,10 @@ class UpdateProfileRequest extends FormRequest
         $user->save();
 
         if(request()->expectsJson())
-            return response(['status' => 'Profile successfully edited!'], 200);
+            return response([
+                'status' => 'Profile successfully edited!',
+                'slug' => $user->slug,
+            ], 200);
 
         return redirect(route('profile'))
             ->with('message', 'Profile successfully edited!');

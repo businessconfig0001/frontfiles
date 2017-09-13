@@ -109,7 +109,7 @@ export default {
 
 			axios.post(window.location.origin + '/profile',f)
 				.then(res =>{
-					this.$emit('close',this.user)
+					location.replace(location.origin +'/profile/' + res.data.slug)
 					
 				})
 				.catch(res => this.errors=res.response.data)
