@@ -127,7 +127,6 @@ export default {
 			display:flex;
 			justify-content:left;
 			align-items:left;
-			min-height:80vh;
 
 			video,audio{
 				width:100%;
