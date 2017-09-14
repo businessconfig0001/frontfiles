@@ -64,6 +64,23 @@ function addBuffer(string,length){
 	return string	
 }
 
+function addEvent(fn){
+	console.log('adding event')
+	try{
+		document.addEventListener('keydown',e => {
+			if(e.keycode === 13){
+				e.preventDefault();
+				console.log('event triggered')
+				fn()
+			}
+		})	
+	}
+	catch(e){
+		console.log(e)
+	}
+	
+}
+
 function cropper(img,canvas,options){
 	let ctx= canvas.getContext('2d')
 	let destX = canvas.width/2 - options.width / 2
@@ -97,5 +114,6 @@ export{
 	getQuery,
 	addBuffer,
 	cropper,
-	toBlob
+	toBlob,
+	addEvent
 }

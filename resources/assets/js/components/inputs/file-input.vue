@@ -41,6 +41,11 @@ export default {
 			let image=new Image()
 			this.file=e.target.files[0]
 			this.label=this.file.name
+			let data={
+				file:this.file,
+				name:this.label
+			}
+			this.$emit('file',data)
 			if(FileReader){
 				let fr = new FileReader()
 				let image= new Image()
@@ -62,7 +67,7 @@ export default {
   						let dataUrl= canvas.toDataURL("image/png")
   						let blob=toBlob(dataUrl)
   						this.link=dataUrl
-  						this.$emit('change',dataUrl)
+  						
 					})	
 				}
 					
@@ -74,8 +79,7 @@ export default {
 		remove(){
 			this.label=this.options.label
 			this.link=''
-			this.$refs.fileinput.setAttribute('value',false)
-			this.$emit('change',false)
+			this.$emit('file',false)
 		}
 	}
 }

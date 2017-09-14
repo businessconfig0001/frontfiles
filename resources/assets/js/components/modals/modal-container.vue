@@ -17,8 +17,8 @@
 				</div>
 			</div>	
 			
-			<a  v-if="button" @click.prevent="close(true)" :class="button.className +  ' modal-button'">{{ button.text}}</a>
-			<a  v-else @click.prevent="close(true)" class="btn btn-primary modal-button">Ok</a><div class="controls">
+			<a  v-if="button" @click.prevent="close(true)" @keyup.enter="close(true)" :class="button.className +  ' modal-button'">{{ button.text}}</a>
+			<a  v-else @click.prevent="close(true)" @keyup.enter="close(true)" class="btn btn-primary modal-button">Ok</a><div class="controls">
 			<ul>
 				<li :class="lang === 'en' ? 'active' : ''"><a @click.prevent="lang ='en'">EN</a></li>
 				<li :class="lang === 'es' ? 'active' : ''"><a @click.prevent="lang ='es'">ES</a></li>

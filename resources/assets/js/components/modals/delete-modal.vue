@@ -6,7 +6,7 @@
 				<loading-icon></loading-icon>
 			</div>
 			<div class="btns" v-else>
-				<a @click.prevent="delRecord" class="btn btn-primary">Yes</a>
+				<a @click.prevent="delRecord"  @keyup.enter="delRecord" class="btn btn-primary">Yes</a>
 				<a @click.prevent="close" class="btn btn-primary">No</a>
 			</div>
 		</div>

@@ -7,7 +7,7 @@
             <div class="login-box">
                 <h1 class="auth-title title-offset">Login</h1>
                 <div class="auth-form">
-                    <form class="form-horizontal" method="POST" action="{{ route('auth.login') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('auth.login') }}" id="loginForm">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -66,3 +66,7 @@
     </div>
 </div>    
 @endsection
+
+@section('scripts')
+
+@endsection('')
