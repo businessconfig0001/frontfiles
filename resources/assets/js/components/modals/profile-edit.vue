@@ -120,7 +120,9 @@ export default {
 
 			f.append('_method','patch')
 
-			axios.post(window.location.origin + '/profile',f)
+			axios.post(window.location.origin + '/profile',f,{
+				validateStatus:status => status < 422
+			})
 				.then(res =>{
 					location.replace(location.origin +'/profile/' + res.data.slug)
 					
