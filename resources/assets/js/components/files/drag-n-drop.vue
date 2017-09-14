@@ -17,45 +17,31 @@
 		</div>
 
 
-		<div class="col-md-6 form" v-show="uploads.length">
+		<div class="col-md-6 col-md-offset-2 upload-form" v-show="uploads.length">
 			<h3>Tell us more about your files</h3>
 			<div class="form-content clearfix">
-				<div class="col-md-6">
-					<p>
+				<div class="col-md-12">
+					<div class="input col-md-12">
 						<display-error :error="errors['title']"></display-error>
 						<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="title"/>
-					</p>
-					<p>
+					</div>
+					<div class="input col-md-12">
 						<display-error :error="errors['description']"></display-error>
 						<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="description"></textarea>
-					</p>
-					<p>
+					</div>
+					<div class="input col-md-6">
 						<display-error :error="errors['where']"></display-error>
 						<input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="where" placeholder="#Where">
-					</p>
-					<p>
+					</div>
+					<div class="input col-md-5 col-md-offset-1">
 						<display-error :error="errors['when']"></display-error>
 						<date-picker :option="options" name="when"  class="form-control" :date="date" @change="changeDate" :limit="limit"></date-picker>
-					</p>
-				</div>
-				<div class="col-md-6">
-					<p>
+					</div>
+					<div class="input col-md-12 tag-input">
 						<display-error :error="errors['what']"></display-error>
-						<tag-input placeholder="#What" class="form-control" @change="changeWhatTags" :name="'whatTags'"></tag-input>
-						
-					</p>
-					<p>
-						<display-error :error="errors['who']"></display-error>
-						<tag-input placeholder="#Who" class="form-control" @change="changeWhoTags" :name="'whoTags'"></tag-input>			
-					</p>
-					
-					<p>
-						<display-error :error="errors['why']"></display-error>
-						<input type="text" name="why"  class="form-control" v-model="why" placeholder="#How">
-					</p>	
+						<tag-input placeholder="#What #Who #How" class="form-control" @change="changeWhatTags" :name="'whatTags'"></tag-input>						
+					</div>
 				</div>
-				
-				
 				<div class="upload-button">
 					<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Upload all</a>
 					<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
@@ -288,17 +274,29 @@
 	h3{
 		font-size:1.2rem;
 		padding:1rem;
+		padding-top:0;
 
 		span{
 			color:white
 		}
 
 	}
-	.form{
+	.upload-form{
 		p{
 			width:100%;
 			padding:.5rem;
 			float:left;
+		}
+
+		.form-content{
+			.input{
+				padding:0;
+			}
+
+			.tag-input{
+				height:6rem;
+				margin-bottom: 1rem;
+			}
 		}
 		.upload-button{
 			float:left;

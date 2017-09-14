@@ -3,58 +3,31 @@
 	<div v-if="show" class="modal-background clearfix">
 		<div class="modal-wrapper modal-content col-md-4 file-edit">
 			<ul class="fields">
-				<li>
-					<ul>
-						<li>
-							<display-error class="error" v-show="errors" :error="errors['title']"></display-error>
-							<label for="title">Title</label>
-							<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="_file.title"/>
-						</li>
-						<li>
-							<display-error class="error" v-show="errors" :error="errors['description']"></display-error>
-							<label for="description">Description</label>
-							<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="_file.description"></textarea>
-						</li>
-						<li>
-							<display-error class="error" v-show="errors" :error="errors['where']"></display-error>
-							<label for="where">#Where:</label>
-							 <input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="_file.where">
-						</li>
-						<li>
-							<display-error class="error" v-show="errors" :error="errors['when']"></display-error>
-							<label for="when">#When:</label>
-							 <date-picker :option="options" name="when"  class="form-control" :date="date" :limit="limit" @change="changeDate"></date-picker>
-						</li>
-					</ul>
+				<li class="input col-md-12">
+					<display-error class="error" v-show="errors" :error="errors['title']"></display-error>
+					<label for="title">Title</label>
+					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="_file.title"/>
 				</li>
-				<li>
-					<ul>
-						<li>
-							<display-error class="error" v-show="errors" :error="errors['what']"></display-error>
-							<label class="what">#What:</label>
-							<tag-input type="text" name="what"  class="form-control tag-input" :tags="_file.what" @change="changeWhat"></tag-input>
-						</li>
-						
-						<li>
-							<display-error class="error" v-show="errors" :error="errors['who']"></display-error>
-							<label for="who">#Who: </label>
-							<tag-input type="text" name="who"  class="form-control tag-input" :tags="_file.who" @change="changeWho"></tag-input>
-						</li>
-						
-						<li>
-							<display-error class="error" v-show="errors" :error="errors['why']"></display-error>
-							<label for="why">#How:</label>
-							 <input type="text" name="why"  class="form-control" v-model="_file.why">
-						</li>
-					</ul>
+				<li class="input col-md-12">
+					<display-error class="error" v-show="errors" :error="errors['description']"></display-error>
+					<label for="description">Description</label>
+					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="_file.description"></textarea>
 				</li>
-				
-				
-
-				
-				
-				
-				
+				<li class="input col-md-6">
+					<display-error class="error" v-show="errors" :error="errors['where']"></display-error>
+					<label for="where">#Where:</label>
+					 <input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="_file.where">
+				</li>
+				<li class="input col-md-5 col-md-offset-1">
+					<display-error class="error" v-show="errors" :error="errors['when']"></display-error>
+					<label for="when">#When:</label>
+					 <date-picker :option="options" name="when"  class="form-control" :date="date" :limit="limit" @change="changeDate"></date-picker>
+				</li>
+				<li class="input col-md-12 tag-input">
+					<display-error class="error" v-show="errors" :error="errors['what']"></display-error>
+					<label class="what">#What #Why #How:</label>
+					<tag-input type="text" name="what"  class="form-control tag-input" :tags="_file.what" @change="changeWhat"></tag-input>
+				</li>				
 			</ul>
 			<a class="btn btn-primary modal-button" @click.prevent="update(active.id)">Save changes</a>
 			<a class="btn btn-secondary modal-button" @click.prevent="close">Cancel</a>
@@ -214,16 +187,16 @@ export default {
 			label{
 				margin-bottom:.5rem;
 			}
-			.fields > li{
-				width:50%;
-				float:left;
-				
-				 & > ul > li{
-					margin-bottom:.5rem;
-					padding:.5rem;
-	
-				}
+			.fields{
 
+					.input{
+						margin-bottom:1rem;
+					}
+
+					.tag-input{
+						height:6rem;
+						margin-bottom:2rem;
+					}
 					.error{
 						float:right;
 					}
