@@ -39,21 +39,13 @@
 						<ul class="tags">
 							<li v-show="file.where">#Where<span>{{file.where}}</span></li>
 							<li v-show="file.when">#When<span>{{file.when}}</span></li>
-							<li v-show="file.who">#Who
-								<span>
-									<ul class="tag-list">
-										<li v-for="tag in file.who">{{tag}}</li>
-									</ul>
-								</span>
-							</li>
-							<li v-show="file.what">#What
+							<li v-show="file.what">#What #Why #How
 								<span>
 									<ul class="tag-list">
 										<li v-for="tag in file.what">{{tag}}</li>
 									</ul>
 								</span>
 							</li>
-							<li v-show="file.why">#How<span>{{file.why}}</span></li>
 						</ul>
 						<a class="btn btn-secondary" @click.prevent="showEdit = true">Edit</a>
 						<a class="btn btn-primary" @click.prevent="showDelete = true">Remove</a>

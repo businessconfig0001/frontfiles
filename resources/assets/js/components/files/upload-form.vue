@@ -1,37 +1,29 @@
 <template>
 <div class="form-wrapper clearfix">
-	<p>
+	<div class="input col-md-12">
 		<display-error :error="errors['title']"></display-error>
 		<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
-	</p>
-	<p>
+	</div>
+	<div class="input col-md-12">
 		<display-error :error="errors['description']"></display-error>
 		<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="upload.data.description"></textarea>
 		
-	</p>
-	<p>
-		<display-error :error="errors['what']"></display-error>
-		<tag-input placeholder="#What" class="form-control" :tags="what" @change="changeWhat" :name="'whatTags'"></tag-input>
-		
-	</p>
-	<p>
-		<display-error :error="errors['who']"></display-error>
-		<tag-input placeholder="#Who" class="form-control" :tags="who" @change="changeWho" :name="'whoTags'"></tag-input>			
-	</p>
-	<p>
+	</div>
+	
+	<div class="input col-md-6">
 		<display-error :error="errors['where']"></display-error>
 		<input type="" ref="where" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where" @focus.once="initPlace"/>
 		
-	</p>
-	<p>
+	</div>
+	<div class="input col-md-5 col-md-offset-1">
 		<display-error :error="errors['when']"></display-error>
 		<date-picker :option="options" class="form-control" @change="changeDate" :date="date" :limit="limit"></date-picker>
-	</p>
-	<p>
-		<display-error :error="errors['why']"></display-error>
-		<textarea name="why" id="why" class="form-control" placeholder="#How" v-model="upload.data.why"></textarea>
+	</div>
+	<div class="input col-md-12 tag-input">
+		<display-error :error="errors['what']"></display-error>
+		<tag-input placeholder="#What #Why #How" class="form-control" :tags="what" @change="changeWhat" :name="'whatTags'"></tag-input>
 		
-	</p>
+	</div>
 	<div class="radio-wrapper clearfix">
 		<display-error :error="upload.errors['drive']"></display-error>
 		<div class="radio">
@@ -142,7 +134,11 @@ export default {
 		padding:.5rem;
 		float:left;
 	}
-
+	
+	.tag-input{
+		height:6rem;
+		margin-bottom:1rem;
+	}
 	.radio-wrapper{
 		width:100%;
 		float:left;
