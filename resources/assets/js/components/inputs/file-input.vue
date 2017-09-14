@@ -4,8 +4,8 @@
 			<img v-if="link.length" :src="link" alt="">	
 		</div>	
 		<div v-show="!link.length"  class="input-wrapper">
-			<input  type="file" @change="change" :accept="options.accept">
-			<input  ref="fileinput" type="text" :name="options.name" class="hidden">
+			<input  type="file" @change="change" :accept="options.accept" :name="options.name">
+			<input  type="hidden" v-model="crop"  name="crop">
 			<label :for="options.name">{{label}}</label>
 			<canvas ref="canvas" class="hidden"></canvas>	
 		</div>
@@ -15,7 +15,7 @@
 
 <script>
 import smartcrop from 'smartcrop'
-import { cropper } from './../../helpers'
+import { cropper,toBlob } from './../../helpers'
 export default {
 
 	name: 'file-input',
@@ -29,7 +29,8 @@ export default {
 		return {
 			label:'',
 			file:'',
-			link:''
+			link:'',
+			crop:'',
 		};
 	},
 	mounted(){
@@ -50,6 +51,7 @@ export default {
 
 				image.onload = () => {
 					smartcrop.crop(image, {width: 200, height: 200}).then(result => {
+						this.crop=JSON.stringify(result.topCrop)
 						let canvas=this.$refs.canvas
   						//cropper(image,canvas,result)
   						let options=result.topCrop
@@ -58,9 +60,9 @@ export default {
 						canvas.height=200
 						ctx.drawImage(image,options.x,options.y,options.width,options.height,0,0,200,200)
   						let dataUrl= canvas.toDataURL("image/png")
+  						let blob=toBlob(dataUrl)
   						this.link=dataUrl
   						this.$emit('change',dataUrl)
-  						this.$refs.fileinput.setAttribute('value',dataUrl)
 					})	
 				}
 					
