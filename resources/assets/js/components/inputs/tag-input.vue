@@ -1,11 +1,11 @@
 <template>
-<div class="tag-wrapper">
+<div class="tag-wrapper" @click="focus">
 	<ul class="tags">
 		<li v-for="tag in tags" class="tag">
 			{{ tag }}
 			<a @click.prevent="removeTag(tag)"><i class="fa fa-times"></i></a>
 		</li>
-		<li class="input"><input v-if="!disabled" v-model="new_tag" :placeholder="placeholder" @keyup.space="addTag" @blur="addTag" class="form-control" :disabled="disabled"></li>
+		<li class="input"><input  ref="input" v-if="!disabled" v-model="new_tag" :placeholder="placeholder" @keyup.space="addTag" @blur="addTag" class="form-control" :disabled="disabled"></li>
 	</ul>
 	
 </div>
@@ -52,6 +52,9 @@ export default {
 			this.$emit('change',this.tags)
 			let charcount = this.tags.reduce((total,t) => total +=t.length,0)
 			this.disabled=this.tags.length >= 40 || charcount >= 200
+		},
+		focus(){
+			this.$refs.input.focus()
 		}
 	},
 	watch:{
