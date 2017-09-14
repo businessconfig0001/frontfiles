@@ -110,7 +110,10 @@ export default {
 			let f=new FormData()
 			f.append('first_name',this.user.first_name)
 			f.append('last_name',this.user.last_name)
-			if(this.avatar)f.append('avatar',this.avatar.file,this.avatar.name)
+			if(this.avatar){
+				f.append('avatar',this.avatar.file,this.avatar.name)
+				f.append('crop',JSON.stringify(this.avatar.crop))
+			}
 			f.append('bio',this.user.bio)
 			f.append('location',this.user.location)
 			f.append('role',this.user.role)

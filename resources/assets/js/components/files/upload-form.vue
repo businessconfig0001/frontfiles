@@ -68,9 +68,6 @@ export default {
 	},
 	data () {
 		return {
-			date:{
-				time:''
-			},
 			limit:[{
 				type:'fromto',
 				to:moment().format('YYYY-MM-DD')
@@ -114,6 +111,11 @@ export default {
 	},
 	mounted(){
 		this.upload.data.drive="dropbox"
+	},
+	computed:{
+		date(){
+			return {time:this.upload.data.when}
+		}
 	}
 };
 </script>

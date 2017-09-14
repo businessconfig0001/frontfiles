@@ -27,6 +27,7 @@
 					<div class="file-container" v-else>
 						<img src="/images/processing.png" alt="">
 					</div>
+					<span class="date">Uploaded on {{date_string}}</span>	
 				</div>
 
 				
@@ -52,7 +53,7 @@
 					</div>
 				
 				</div>
-				<span class="date">Uploaded on {{date_string}}</span>	
+				
 			</div>
 		</div>
 	</div>
