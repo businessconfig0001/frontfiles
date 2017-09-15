@@ -16,7 +16,7 @@
             window.csrfToken = "{{ csrf_token() }}";
         </script>
 
-        <meta property="og:url" content="{{ url() }}" />
+        <meta property="og:url" content="{{ url()->current() }}" />
         <meta property="og:type" content="article" />
         <meta property="og:title" content="FrontFiles" />
         <meta property="og:description" content="FrontFiles content." />
