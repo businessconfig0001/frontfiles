@@ -5,6 +5,8 @@ namespace FrontFiles\Http\Requests;
 use FrontFiles\User;
 use FrontFiles\Utility\Helper;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
+use Intervention\Image\Facades\Image;
 
 class UpdateProfileRequest extends FormRequest
 {
@@ -55,11 +57,21 @@ class UpdateProfileRequest extends FormRequest
             if($user->avatar_name)
                 Helper::deleteUserAvatar($user->avatar_name);
 
+            $rawCrop        = json_decode(request('crop'), true);
+            $crop           = json_decode($rawCrop, true);
             $rawImg         = request()->file('avatar');
-            $extension      = (string)$rawImg->clientExtension();
             $short_id       = Helper::generateRandomAlphaNumericString(12);
-            $avatar_name    = $short_id . '.' . $extension;
-            $avatarUrl      = Helper::storeUserAvatarAndReturnUrl($avatar_name);
+            $avatar_name    = $short_id . '.' . (string)$rawImg->clientExtension();
+
+            $img = Image::make($rawImg)
+                ->crop($crop['width'], $crop['height'], $crop['x'], $crop['y'])
+                ->resize(null, 160, function ($constraint){
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->stream();
+
+            $avatarUrl = Helper::storeUserAvatarAndReturnUrl($avatar_name, $img->__toString());
 
             $user->update([
                 'avatar'        => $avatarUrl ?? 'http://via.placeholder.com/300x300',
