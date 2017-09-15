@@ -124,7 +124,7 @@ class CreateFileRequest extends FormRequest
             (new FetchAndProcessFile($file))
                 ->onQueue('regular_files')
                 ->onConnection('database')
-                ->delay(Carbon::now()->addMinutes(1))
+                ->delay(Carbon::now()->addMinutes(5))
         );
 
         if(request()->wantsJson())
