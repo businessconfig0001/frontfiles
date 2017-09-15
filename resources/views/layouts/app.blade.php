@@ -6,8 +6,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
+        <title>FrontFiles</title>
+        <meta name="description" content="FF is an open, collaborative network platform of media activists, freelance journalists & witness citizens.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url('/css/app.css') }}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,6 +15,13 @@
         <script>
             window.csrfToken = "{{ csrf_token() }}";
         </script>
+
+        <meta property="og:url" content="{{ url() }}" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="FrontFiles" />
+        <meta property="og:description" content="FrontFiles content." />
+        <meta property="og:image" content="{{ asset('images/logo2x.png') }}" />
+
     </head>
     <body class="page-payment-info @if(Request::is('/')) home @endif">
         <!--[if lt IE 7]>
@@ -70,8 +77,6 @@
 
                                                 <li><a href="{{ route('files.upload') }}" class="btn btn-border-black">Upload</a></li>
                                             @endif
-
-                                           
 
                                         </ul>
                                     </div>

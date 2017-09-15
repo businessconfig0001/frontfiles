@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 	@if (Auth::guest())
 		<file-detail :fileprop="{{$file}}"></file-detail>
 	@else
