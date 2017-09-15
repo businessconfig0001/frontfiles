@@ -4,3 +4,4 @@
 </IfModule>
 
 php_value upload_max_filesize 600M
+php_value post_max_size 600M
