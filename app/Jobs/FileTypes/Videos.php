@@ -63,7 +63,7 @@ class Videos implements FileProcessInterface
         $watermark_position     = 'main_w-overlay_w-10:10';
         $encoding               = 'libx264';
         $bitrate                = '192k';
-        $scale                  = 'trunc(oh*a/2)*2:360';
+        $scale                  = '-2:360';
 
         $process1 = new Process(
             "{$ffmpeg} -i {$source_file} -i {$watermark} -c:v {$encoding} -b:v {$bitrate} -bufsize {$bitrate} -filter_complex \"[0:v]scale={$scale}[bg];[bg][1:v]overlay={$watermark_position}\" -strict -2 {$output_temp}"
