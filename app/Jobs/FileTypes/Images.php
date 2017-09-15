@@ -61,7 +61,7 @@ class Images implements FileProcessInterface
         //Watermark + resizing + encoding + bitrate
         $watermark              = public_path('watermarks/watermark.png');
         $watermark_position     = 'main_w-overlay_w-10:10';
-        $scale                  = '-1:360';
+        $scale                  = 'trunc(oh*a/2)*2:360';
 
         $process1 = new Process(
             "{$ffmpeg} -i {$source_file} -i {$watermark} -filter_complex \"[0:v]scale={$scale}[bg];[bg][1:v]overlay={$watermark_position}\" -strict -2 {$output_temp}"
