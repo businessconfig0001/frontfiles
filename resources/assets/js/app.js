@@ -53,6 +53,7 @@ const store = new Vuex.Store({
 		previousProgress:0,
 		whoTags:[],
 		whatTags:[],
+		enter:false
 		
 	},
 	actions: {
@@ -84,7 +85,14 @@ const store = new Vuex.Store({
 		},
 		changeWhatTags(state,tags){
 			state.whatTags=tags
+		},
+		down(state){
+			state.enter=true
+		},
+		up(state){
+			state.enter=false
 		}
+
 
 
 	},
@@ -112,16 +120,28 @@ const app = new Vue({
     mounted(){
     	if(getQuery('code') === 'secret')this.allow=true
     	else this.options.show=true
+
+    	window.addEventListener('keydown',e => {
+    		if(e.keyCode === 13){
+    			this.$store.commit('down')
+    		}
+    	})
+
+    	window.addEventListener('keyup',e =>{
+    		if(e.keyCode === 13){
+    			this.$store.commit('up')
+    		}
+    	})
+
     },
 	methods:{
 		modal(){
 			console.log('click')
 			this.$store.commit('openModal','')
 		},
-		submit(){
-			let form=document.getElementById('register_form')
-			localStorage.setItem('register',true)
+		submit(name){
+			let form=document.getElementById(name)
 			form.submit()
 		},
-	}
+	},
 });

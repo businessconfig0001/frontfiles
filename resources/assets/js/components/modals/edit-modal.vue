@@ -2,42 +2,43 @@
 <div>
 	<div v-if="show" class="modal-background clearfix">
 		<div class="modal-wrapper modal-content col-md-4 file-edit">
-			<ul class="fields">
-				<li class="input col-md-12">
-					<display-error class="error" v-show="errors" :error="errors['title']"></display-error>
-					<label for="title">Title</label>
-					<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="_file.title"/>
-				</li>
-				<li class="input col-md-12">
-					<display-error class="error" v-show="errors" :error="errors['description']"></display-error>
-					<label for="description">Description</label>
-					<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="_file.description"></textarea>
-				</li>
-				<li class="input col-md-6">
-					<display-error class="error" v-show="errors" :error="errors['where']"></display-error>
-					<label for="where">#Where:</label>
-					 <input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="_file.where">
-				</li>
-				<li class="input col-md-5 col-md-offset-1">
-					<display-error class="error" v-show="errors" :error="errors['when']"></display-error>
-					<label for="when">#When:</label>
-					 <date-picker :option="options" name="when"  class="form-control" :date="date" :limit="limit" @change="changeDate"></date-picker>
-				</li>
-				<li class="input col-md-12 tag-input">
-					<display-error class="error" v-show="errors" :error="errors['what']"></display-error>
-					<label class="what">#What #Why #How:</label>
-					<tag-input type="text" name="what"  class="form-control tag-input" :tags="_file.what" @change="changeWhat"></tag-input>
-				</li>				
-			</ul>
-			<a class="btn btn-primary modal-button" @click.prevent="update(active.id)">Save changes</a>
-			<a class="btn btn-secondary modal-button" @click.prevent="close">Cancel</a>
-			<a href="#" class="close" @click.prevent="close">&#10005</a>
+					<ul class="fields">
+					<li class="input col-md-12">
+						<display-error class="error" v-show="errors" :error="errors['title']"></display-error>
+						<label for="title">Title</label>
+						<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="_file.title"/>
+					</li>
+					<li class="input col-md-12">
+						<display-error class="error" v-show="errors" :error="errors['description']"></display-error>
+						<label for="description">Description</label>
+						<textarea name="description" id="description" class="form-control" placeholder="Description" v-model="_file.description"></textarea>
+					</li>
+					<li class="input col-md-6">
+						<display-error class="error" v-show="errors" :error="errors['where']"></display-error>
+						<label for="where">#Where:</label>
+						 <input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="_file.where">
+					</li>
+					<li class="input col-md-5 col-md-offset-1">
+						<display-error class="error" v-show="errors" :error="errors['when']"></display-error>
+						<label for="when">#When:</label>
+						 <date-picker :option="options" name="when"  class="form-control" :date="date" :limit="limit" @change="changeDate"></date-picker>
+					</li>
+					<li class="input col-md-12 tag-input">
+						<display-error class="error" v-show="errors" :error="errors['what']"></display-error>
+						<label class="what">#What #Why #How:</label>
+						<tag-input type="text" name="what"  class="form-control tag-input" :tags="_file.what" @change="changeWhat"></tag-input>
+					</li>				
+				</ul>
+				<a class="btn btn-primary modal-button" @click.prevent="update" @keyup.enter="update">Save changes</a>
+				<a class="btn btn-secondary modal-button" @click.prevent="close">Cancel</a>
+				<a href="#" class="close" @click.prevent="close">&#10005</a>
 		</div>
 	</div>
 </div>
 </template>
 
 <script>
+import { addEvent } from './../../helpers'
 import moment from 'moment'
 import datePicker from 'vue-datepicker'
 import displayError from './../inputs/display-error'
@@ -94,19 +95,22 @@ export default {
 		this.date={time:this.active.when}
 		this._file=JSON.parse(JSON.stringify(this.active))
 	},
-	computed:{
-	},
 	watch:{
 		show(){
 			scroll(0,0)
-			if(this.show)this._file=JSON.parse(JSON.stringify(this.active))
+			if(this.show){
+				this._file=JSON.parse(JSON.stringify(this.active))
+			}
 		},
+		enter(){
+			if(this.show && this.enter)this.update()
+		}
 	},
 	methods:{
 		close(){
 			this.$emit('edit',false)
 		},
-		update(id){
+		update(){
 	  		let f = new FormData();
 	  		f.append('title',this._file.title)
 	  		f.append('description',this._file.description)
@@ -117,7 +121,7 @@ export default {
 	  		f.append('why',this._file.why)
 	  		f.append('_method','patch')
 	  		console.log(this._file)
-	  		axios.post(window.location.protocol + "//" + window.location.host + this.url + '/' + id,f,{
+	  		axios.post(window.location.protocol + "//" + window.location.host + this.url + '/' + this.active.id,f,{
 	  				validateStatus:status => status < 422
 	  			})
 	  			.then(res => {

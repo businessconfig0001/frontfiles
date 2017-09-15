@@ -15,8 +15,8 @@
 				</p>
 				<p>
 					<display-error :error="errors['avatar']"></display-error>
-					<!-- <file-input class="file-input" :options="{ name:'avatar',accept:'image',label:'upload picture' }" @change="avatar"></file-input> -->
-					<input type="file" name="avatar" @change="process_file" accept="image/*" class="input-file">
+					 <file-input class="file-input" :options="{ name:'avatar',accept:'image',label:'upload picture' }" @file="changeAvatar"></file-input> 
+					<!--<input type="file" name="avatar" @change="process_file" accept="image/*" class="input-file">-->
 				</p>
 				<p>
 					<display-error :error="errors['bio']"></display-error>
@@ -39,7 +39,7 @@
                     </div>
                  </div>	
 				
-                <a class="btn btn-primary" @click.prevent="edit">Save</a>
+                <a class="btn btn-primary" @click.prevent="edit" @keyup.enter="edit">Save</a>
 				<a class="btn btn-secondary" @click.prevent="close">Cancel</a>
             </div>
 
@@ -78,10 +78,18 @@ export default {
 			file:false
 		}
 	},
+	computed:{
+		enter(){
+			return this.$store.state.enter
+		}
+	},
 	watch:{
 		show(){
 			scroll(0,0)
 			if(this.show)this.user=JSON.parse(JSON.stringify(this.userprop))
+		},
+		enter(){
+			if(this.enter && this.show)this.edit()
 		}
 	},
 	methods:{
@@ -102,14 +110,19 @@ export default {
 			let f=new FormData()
 			f.append('first_name',this.user.first_name)
 			f.append('last_name',this.user.last_name)
-			if(this.file)f.append('avatar',this.file)
+			if(this.avatar){
+				f.append('avatar',this.avatar.file,this.avatar.name)
+				f.append('crop',JSON.stringify(this.avatar.crop))
+			}
 			f.append('bio',this.user.bio)
 			f.append('location',this.user.location)
 			f.append('role',this.user.role)
 
 			f.append('_method','patch')
 
-			axios.post(window.location.origin + '/profile',f)
+			axios.post(window.location.origin + '/profile',f,{
+				validateStatus:status => status < 400
+			})
 				.then(res =>{
 					location.replace(location.origin +'/profile/' + res.data.slug)
 					
@@ -118,24 +131,9 @@ export default {
 
 
 		},
-		avatar(data){
+		changeAvatar(data){
 			this.avatar= data
 		},
-		process_file(e){
-			if(!e.target.files) {
-				this.error="select a file to upload"
-				return 
-			}
-			this.file=e.target.files[0]
-			if(FileReader){
-				let fr = new FileReader()
-
-				fr.onload = () => this.link = fr.result 
-
-				fr.readAsDataURL(this.file)
-
-			}
-		}
 	}
 }
 </script>

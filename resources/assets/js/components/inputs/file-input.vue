@@ -62,7 +62,12 @@ export default {
   						let dataUrl= canvas.toDataURL("image/png")
   						let blob=toBlob(dataUrl)
   						this.link=dataUrl
-  						this.$emit('change',dataUrl)
+						this.$emit('file',{
+							file:this.file,
+							name:this.label,
+							crop:this.crop
+						})
+  						
 					})	
 				}
 					
@@ -74,8 +79,7 @@ export default {
 		remove(){
 			this.label=this.options.label
 			this.link=''
-			this.$refs.fileinput.setAttribute('value',false)
-			this.$emit('change',false)
+			this.$emit('file',false)
 		}
 	}
 }

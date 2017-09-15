@@ -1,6 +1,6 @@
 <template>
 <div class="drag-container">
-	<form enctype="multipart/form-data" novalidate class="clearfix">
+	<form enctype="multipart/form-data" novalidate class="clearfix" @mouseenter="focus = true" @mouseleave="focus = false">
 		<div class="col-sm-4 col-offset-2 col-xs-12 bg-blue text-center dropbox">
 			<input type="file" multiple name="file" :disabled="state ==='saving'" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*,video/*,audio/*,application/pdf" class="input-file">
 			<div v-if="state === 'saving'" class="progressbar">
@@ -17,7 +17,7 @@
 		</div>
 
 
-		<div class="col-md-6 col-md-offset-2 upload-form" v-show="uploads.length">
+		<div class="col-md-6 col-md-offset-2 upload-form" v-show="uploads.length"  >
 			<h3>Tell us more about your files</h3>
 			<div class="form-content clearfix">
 				<div class="col-md-12">
@@ -43,7 +43,7 @@
 					</div>
 				</div>
 				<div class="upload-button">
-					<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile">Upload all</a>
+					<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile" @keyup.enter="uploadFile">Upload all</a>
 					<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
 				</div>
 			</div>
@@ -93,6 +93,7 @@
 				where:'',
 				why:'',
 				description:'',
+				focus:false,
 				date:{
 					time:''
 				},
@@ -134,7 +135,10 @@
 			progress(){
 				let p=this.$store.state.progress
 				return p
-			}
+			},
+			enter(){
+				return this.$store.state.enter
+			},
 		},
 		watch:{
 			title(){
@@ -166,6 +170,9 @@
 					u.data.description=this.description
 					return u
 				})
+			},
+			enter(){
+				if(this.focus && this.enter && this.dropbox && this.uploads.length)this.uploadFile()
 			}
 		},
 		mounted(){
