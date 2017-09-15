@@ -32,9 +32,10 @@ class Helper
      * Stores the user avatar in the azure blob storage and returns its URL.
      *
      * @param string $name
+     * @param string $img
      * @return string
      */
-    public static function storeUserAvatarAndReturnUrl(string $name) : string
+    public static function storeUserAvatarAndReturnUrl(string $name, string $img) : string
     {
         $container = 'user-avatars';
         $config = config('filesystems.default');
@@ -42,10 +43,9 @@ class Helper
         if($config === 'azure')
             static::createContainerIfNeeded($container);
 
-        return config('filesystems.disks.' . $config . '.url') .
-            request()
-                ->file('avatar')
-                ->storeAs($container, $name, $config);
+        Storage::disk($config)->put($container . '/' . $name, $img);
+
+        return config('filesystems.disks.' . $config . '.url') . $container . '/' . $name;
     }
 
     /**
