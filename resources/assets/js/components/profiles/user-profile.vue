@@ -70,6 +70,7 @@ export default {
 		if(this.active){
 			this.current = this.active.id === this.user.id
 		}
+		else this.current=false
 
 	},
 	methods:{
