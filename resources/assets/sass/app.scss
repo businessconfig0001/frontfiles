@@ -2,6 +2,8 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
+@import "./loading";
+
 // Variables
 @import "variables";
 
@@ -17,6 +19,8 @@
 @import "./auth";
 
 @import "./theme/theme";
+
+
 
 
 .structural {
@@ -51,4 +55,9 @@ $placeholder:#b1b7ba;
 :-moz-placeholder { /* Firefox 4 - 18 */
   color: $placeholder !important;
   opacity: 1;
+}
+
+.modal-background{
+	overflow:hidden;
+	height:100% !important;
 }
