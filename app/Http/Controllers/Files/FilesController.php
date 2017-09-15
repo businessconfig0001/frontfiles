@@ -65,8 +65,6 @@ class FilesController extends Controller
     {
         $file = File::where('short_id', $short_id)->firstOrFail();
 
-        $this->authorize('view', $file);
-
         if(request()->expectsJson())
             return response([
                 'data' => $file,
