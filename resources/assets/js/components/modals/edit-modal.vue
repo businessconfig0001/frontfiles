@@ -95,6 +95,11 @@ export default {
 		this.date={time:this.active.when}
 		this._file=JSON.parse(JSON.stringify(this.active))
 	},
+	computed:{
+		enter(){
+			return this.$store.state.enter
+		}
+	},
 	watch:{
 		show(){
 			scroll(0,0)

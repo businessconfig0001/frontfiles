@@ -61,6 +61,7 @@
 				</ul>
 			</div>
 		</div>
+	<oops-modal :show="showErr" @close="showErr=false"></oops-modal>
 </div>
 	
 </template>
@@ -69,6 +70,7 @@
 	import { Errors } from './../../classes/Errors'
 	import { upload } from './../../services/uploadService'
 	import tagInput from './../inputs/tag-input'
+	import oopsModal from './../modals/oops-modal'
 	import fileOverview from "./file-overview"
 	import datePicker from 'vue-datepicker'
 	import displayError from './../inputs/display-error'
@@ -81,7 +83,8 @@
 			tagInput,
 			datePicker,
 			displayError,
-			loadingIcon
+			loadingIcon,
+			oopsModal
 		},
 		data(){
 			return {
@@ -94,6 +97,7 @@
 				why:'',
 				description:'',
 				focus:false,
+				showErr:false,
 				date:{
 					time:''
 				},
@@ -232,6 +236,7 @@
 						window.location=window.location.origin + "/profile/" + this.profile.slug 
 					})
 					.catch((res) => {
+						this.showErr=true
 						this.state='more'
 						this.errors=res.response.data
 					})

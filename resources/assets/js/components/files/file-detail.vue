@@ -48,8 +48,8 @@
 								</span>
 							</li>
 						</ul>
-						<a class="btn btn-secondary" @click.prevent="showEdit = true">Edit</a>
-						<a class="btn btn-primary" @click.prevent="showDelete = true">Remove</a>
+						<a v-if="current" class="btn btn-secondary" @click.prevent="showEdit = true">Edit</a>
+						<a v-if="current" class="btn btn-primary" @click.prevent="showDelete = true">Remove</a>
 					</div>
 				
 				</div>
@@ -57,8 +57,8 @@
 			</div>
 		</div>
 	</div>
-	<edit-modal :show="showEdit" :active="file" @edit="handleEdit" :url="'/files'"></edit-modal>
-	<delete-modal :show="showDelete" :id="file.id" @close="showDelete=false" @remove="del"></delete-modal>
+	<edit-modal v-if="current" :show="showEdit" :active="file" @edit="handleEdit" :url="'/files'"></edit-modal>
+	<delete-modal v-if="current" :show="showDelete" :id="file.id" @close="showDelete=false" @remove="del"></delete-modal>
 </div>
 </template>
 
@@ -79,9 +79,10 @@ export default {
 			type:Object
 		},
 		user:{
-			required:true,
-			type:Object
-		}
+			required:false,
+			type:Object,
+			default:() => {id:''}
+		},
 	},
 	data () {
 		return {
@@ -93,6 +94,11 @@ export default {
 	computed:{
 		date_string(){
 			return moment(this.file.created_at).format('MMMM Do YYYY, h:mm:ss a')
+		},
+		current(){
+
+			if(this.user)return this.file.user_id === this.user.id
+			else return false
 		}
 	},
 	methods:{
@@ -134,6 +140,7 @@ export default {
 		}
 
 		.img{
+			width:100%;
 			position: relative;
 
 			img{

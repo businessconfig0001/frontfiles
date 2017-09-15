@@ -6,8 +6,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
+        <title>FrontFiles</title>
+        <meta name="description" content="FF is an open, collaborative network platform of media activists, freelance journalists & witness citizens.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url('/css/app.css') }}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,15 +15,20 @@
         <script>
             window.csrfToken = "{{ csrf_token() }}";
         </script>
+
+        <meta property="og:url" content="{{ url()->current() }}" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="FrontFiles" />
+        <meta property="og:description" content="FrontFiles content." />
+        <meta property="og:image" content="{{ asset('images/logo2x.png') }}" />
+
     </head>
     <body class="page-payment-info @if(Request::is('/')) home @endif">
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
         <!-- page structure -->
-        <div class="container-fluid" id="app">
-            <div class="row">
+        <div class="container-fluid" id="app" v-cloak>
                 <!-- modules -->
                 <!-- header module -->
                 <header class="header main-header">
@@ -73,8 +78,6 @@
                                                 <li><a href="{{ route('files.upload') }}" class="btn btn-border-black">Upload</a></li>
                                             @endif
 
-                                           
-
                                         </ul>
                                     </div>
                                 </div><!-- /.navbar-collapse -->
@@ -82,66 +85,83 @@
                         </div><!-- /.container-fluid -->
                     </nav>
                 </header>
+                <div class="row loader">
+                    <div class="sk-fading-circle">
+                      <div class="sk-circle1 sk-circle"></div>
+                      <div class="sk-circle2 sk-circle"></div>
+                      <div class="sk-circle3 sk-circle"></div>
+                      <div class="sk-circle4 sk-circle"></div>
+                      <div class="sk-circle5 sk-circle"></div>
+                      <div class="sk-circle6 sk-circle"></div>
+                      <div class="sk-circle7 sk-circle"></div>
+                      <div class="sk-circle8 sk-circle"></div>
+                      <div class="sk-circle9 sk-circle"></div>
+                      <div class="sk-circle10 sk-circle"></div>
+                      <div class="sk-circle11 sk-circle"></div>
+                      <div class="sk-circle12 sk-circle"></div>
+                    </div>
+                </div>
                 <!-- /header module -->
+                <div class="row loaded-content">
+                        @yield('content')
+                         @if (Auth::guest())
+                                <modal-container :showmodal="regOptions.show">
+                                    <div slot="br">
+                                        <h1>Caro(a) amigo(a): <br/> Bem-vindo(a) ao FrontFiles</h1>
+                                        <p>
+                                            Você está prestes a acessar a versão Beta da Plataforma FrontFiles.
+                                            Tenha em mente que esta área está em construção pela comunidade de usuários e temos o enorme prazer de contar com a sua colaboração para ajudar a plataforma a melhorar sua performance.
 
-                @yield('content')
-                            @if (Auth::guest())
-                <modal-container :showmodal="regOptions.show">
-                    <div slot="br">
-                        <h1>Caro(a) amigo(a): <br/> Bem-vindo(a) ao FrontFiles</h1>
-                        <p>
-                            Você está prestes a acessar a versão Beta da Plataforma FrontFiles.
-                            Tenha em mente que esta área está em construção pela comunidade de usuários e temos o enorme prazer de contar com a sua colaboração para ajudar a plataforma a melhorar sua performance.
+                                        </p>
+                                        <h2>FrontFiles é uma comunidade web global de jornalistas e midialivristas.</h2>
+                                        <p>
+                                            Ao tornar-se um FrontFiler você fará parte de um grupo mundial de pessoas empenhadas em construir um novo modelo de fornecimento de notícias e informações, produzidas pelos usuários e baseadas em imagens, vídeos e relatos. Através do trabalho colaborativo - compartilhamento de dados, tecnologia, equipamentos, alojamento, transporte, etc…
+                                        </p>
+                                        <h2>Visamos empoderar a comunidade e tornar nosso trabalho mais fácil e eficiente.</h2>
+                                        <p>
+                                            Ao vender seus arquivos de imagem, vídeo ou ilustração de uma forma rápida, simples e sem burocracia, o usuário se empodera financeiramente. Este é o começo de uma longa e poderosa viagem. Vamos fazê-la juntos.
+                                        </p>
+                                    </div>
+                                    <div slot="es">
+                                        <h1>Estimado amigo: <br/> Bienvenido a FrontFiles</h1>
+                                        <p>
+                                            Está a punto de ingresar a la versión Beta de la plataforma FrontFiles Tenga en cuenta que este área está en construcción por la comunidad de usuarios y estamos muy agradecidos por su ayuda para mejorar su calidad.
 
-                        </p>
-                        <h2>FrontFiles é uma comunidade web global de jornalistas e midialivristas.</h2>
-                        <p>
-                            Ao tornar-se um FrontFiler você fará parte de um grupo mundial de pessoas empenhadas em construir um novo modelo de fornecimento de notícias e informações, produzidas pelos usuários e baseadas em imagens, vídeos e relatos. Através do trabalho colaborativo - compartilhamento de dados, tecnologia, equipamentos, alojamento, transporte, etc…
-                        </p>
-                        <h2>Visamos empoderar a comunidade e tornar nosso trabalho mais fácil e eficiente.</h2>
-                        <p>
-                            Ao vender seus arquivos de imagem, vídeo ou ilustração de uma forma rápida, simples e sem burocracia, o usuário se empodera financeiramente. Este é o começo de uma longa e poderosa viagem. Vamos fazê-la juntos.
-                        </p>
-                    </div>
-                    <div slot="es">
-                        <h1>Estimado amigo: <br/> Bienvenido a FrontFiles</h1>
-                        <p>
-                            Está a punto de ingresar a la versión Beta de la plataforma FrontFiles Tenga en cuenta que este área está en construcción por la comunidad de usuarios y estamos muy agradecidos por su ayuda para mejorar su calidad.
-
-                        </p>
-                        <h2>FrontFiles es una comunidad web global de periodistas y medios livres de comunicación.</h2>
-                        <p>
-                            Al convertirse en un FrontFiler, usted formará parte de un grupo mundial de personas comprometidas en construir un nuevo modelo de suministro de noticias e informaciones, producidas por los usuarios y basadas en imágenes, vídeos y relatos verdaderos, con efectiva confirmación de los hechos. A través del trabajo colaborativo - compartir datos, tecnologías, equipamientos, alojamiento, transporte, etc ...
-                        </p>
-                        <h2>Buscamos empoderar a la comunidad y hacer nuestro trabajo más fácil y eficiente.</h2>
-                        <p>
-                            Al vender sus archivos de imagen, vídeo o ilustración de una forma rápida, sencilla y sin burocracia, el usuario se empodera financieramente. Este es el comienzo de un largo y poderoso viaje. Vamos a hacerlo juntos.
-                        </p>
-                    </div>
-                    <div slot="en">
-                        <h1>Dear friend: <br />Welcome to FrontFiles</h1>
-                        <p>
-                            Thank you for joining us on this Beta version and Platform testing. Please note that this is a community work-in-progress area. We are very pleased that you are helping us to improve its quality.
-                        </p>
-                        <h2>FrontFiles is a global web-based community of free reporters and journalists.</h2>
-                        <p>
-                            By becoming a FrontFiler you will be part of a worldwide group of people committed to building a new model for news and information sourcing, produced by the users and based on true images, footage and reports and effective fact checking. By collaborating - sharing information, technology, equipment, lodging, transportation and more
-                        </p>
-                        <h2>We empower ourselves and make our jobs easier.</h2>
-                        <p>
-                            By selling our files in a way that’s fast, easy and free of bureaucracy, we find financial empowerment. This is the beginning of a long and powerful journey. Let’s do it together.
-                        </p>
-                        <!--
-                        <h2>Ups! You should be part of our beta program.</h2>
-                        <p>
-                           Send an email to <a :href="'mailto:info@frontfiles.com'">info@frontfiles.com</a>. Our team will notify you as soon the platform is open for everyone.
-                        </p>
-                        -->
-                    </div>
-               </modal-container>
-            @endif
-            </div>
-            @yield('modals')
+                                        </p>
+                                        <h2>FrontFiles es una comunidad web global de periodistas y medios livres de comunicación.</h2>
+                                        <p>
+                                            Al convertirse en un FrontFiler, usted formará parte de un grupo mundial de personas comprometidas en construir un nuevo modelo de suministro de noticias e informaciones, producidas por los usuarios y basadas en imágenes, vídeos y relatos verdaderos, con efectiva confirmación de los hechos. A través del trabajo colaborativo - compartir datos, tecnologías, equipamientos, alojamiento, transporte, etc ...
+                                        </p>
+                                        <h2>Buscamos empoderar a la comunidad y hacer nuestro trabajo más fácil y eficiente.</h2>
+                                        <p>
+                                            Al vender sus archivos de imagen, vídeo o ilustración de una forma rápida, sencilla y sin burocracia, el usuario se empodera financieramente. Este es el comienzo de un largo y poderoso viaje. Vamos a hacerlo juntos.
+                                        </p>
+                                    </div>
+                                    <div slot="en">
+                                        <h1>Dear friend: <br />Welcome to FrontFiles</h1>
+                                        <p>
+                                            Thank you for joining us on this Beta version and Platform testing. Please note that this is a community work-in-progress area. We are very pleased that you are helping us to improve its quality.
+                                        </p>
+                                        <h2>FrontFiles is a global web-based community of free reporters and journalists.</h2>
+                                        <p>
+                                            By becoming a FrontFiler you will be part of a worldwide group of people committed to building a new model for news and information sourcing, produced by the users and based on true images, footage and reports and effective fact checking. By collaborating - sharing information, technology, equipment, lodging, transportation and more
+                                        </p>
+                                        <h2>We empower ourselves and make our jobs easier.</h2>
+                                        <p>
+                                            By selling our files in a way that’s fast, easy and free of bureaucracy, we find financial empowerment. This is the beginning of a long and powerful journey. Let’s do it together.
+                                        </p>
+                                        <!--
+                                        <h2>Ups! You should be part of our beta program.</h2>
+                                        <p>
+                                           Send an email to <a :href="'mailto:info@frontfiles.com'">info@frontfiles.com</a>. Our team will notify you as soon the platform is open for everyone.
+                                        </p>
+                                        -->
+                                    </div>
+                               </modal-container>
+                    @endif
+                    @yield('modals')
+                </div>
+                
         </div><!-- /page structure -->
     </body>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7eCQwmRXS72DyZ5WwSmKS6DIT85Qwu8E&libraries=places"></script>

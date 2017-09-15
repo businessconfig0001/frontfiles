@@ -204,6 +204,8 @@ export default {
 	}
 	.img{
 		position: relative;
+		height:185px;
+		overflow:hidden;
 
 			a{
 				position: absolute;

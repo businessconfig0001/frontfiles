@@ -65,12 +65,15 @@ Route::group([
 Route::group([
     'prefix' => 'files',
     'namespace' => 'Files',
-    'middleware' => 'auth',
 ], function () {
-    Route::get('/', 'FilesController@index')->name('files');
-    Route::post('/', 'FilesController@store')->name('files');
-    Route::get('/upload', 'FilesController@create')->name('files.upload');
+
+    Route::group(['middleware' => 'auth'], function(){
+        Route::get('/', 'FilesController@index')->name('files');
+        Route::post('/', 'FilesController@store')->name('files');
+        Route::get('/upload', 'FilesController@create')->name('files.upload');
+        Route::patch('/{file}', 'FilesController@update')->name('files.update');
+        Route::delete('/{file}', 'FilesController@destroy')->name('files.delete');
+    });
+
     Route::get('/{short_id}', 'FilesController@show')->name('files.show');
-    Route::patch('/{file}', 'FilesController@update')->name('files.update');
-    Route::delete('/{file}', 'FilesController@destroy')->name('files.delete');
 });
