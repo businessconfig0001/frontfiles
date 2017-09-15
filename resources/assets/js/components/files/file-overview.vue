@@ -60,6 +60,7 @@ export default {
 <style lang="scss" scoped>
 .file-overview{
 	padding:.5rem;
+	padding-left:0;
 	border-top:1px solid #ccc;
 	h2{
 		margin-top: 11px;
@@ -81,6 +82,7 @@ export default {
 		margin-bottom:11px;
 	}
 	.title-field{
+		margin-left: -2rem;
 		.short-title{
 			dislay:block;
 			transition: .2s ease-in-out;
@@ -95,7 +97,7 @@ export default {
 	.remove{
 		float:right;
 		padding-top:1rem;
-		padding-right:2rem;
+		padding-right:9rem;
 
 		img{
     		width:16px;

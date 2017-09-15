@@ -17,7 +17,7 @@
 		</div>
 
 
-		<div class="col-md-6 col-md-offset-2 upload-form" v-show="uploads.length"  >
+		<div class="col-md-5 col-md-offset-2 upload-form" v-show="uploads.length"  >
 			<h3>Tell us more about your files</h3>
 			<div class="form-content clearfix">
 				<div class="col-md-12">
@@ -52,7 +52,7 @@
 		
 		
 	</form>
-	<div class="col-md-12 upload-files" v-show="uploads.length">
+	<div class="upload-files" v-show="uploads.length">
 			<div class="listing">
 				<ul>
 					<li v-for="upload in uploads">
@@ -337,6 +337,7 @@
 		justify-content:center;
 		border:4px solid transparant;
 		padding:0;
+		margin-top:2.5rem;
 
 		& > div{
 			color:white;

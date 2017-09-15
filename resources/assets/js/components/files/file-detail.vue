@@ -117,7 +117,6 @@ export default {
 		color:#bbb;
 		float:left;
 		width:100%;
-		margin-left:1rem;
 		padding-top:.5rem;
 		margin-bottom:2rem;
 	}
@@ -186,12 +185,6 @@ export default {
 			.btn{
 				width:47%;
 				margin:1%;
-			}
-			.date{
-				color:#bbb;
-				float:left;
-				width:100%;
-				margin-bottom:2rem;
 			}
 
 			.tags{
