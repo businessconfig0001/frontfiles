@@ -81,7 +81,7 @@ export default {
 		user:{
 			required:false,
 			type:Object,
-			default:() => {id=''}
+			default:() => {id:''}
 		},
 	},
 	data () {
