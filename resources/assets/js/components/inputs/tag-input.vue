@@ -40,6 +40,7 @@ export default {
 		addTag(){
 			if(this.new_tag === ' ')this.new_tag = ''
 			if(this.new_tag.length){
+				this.new_tag=this.new_tag.replace(' ','_')
 				this.tags.push('#' + this.new_tag)
 				this.$emit('change',this.tags)
 				this.new_tag='';
