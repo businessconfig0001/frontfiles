@@ -38,7 +38,8 @@ export default {
 	},
 	methods:{
 		addTag(){
-			if(this.new_tag){
+			if(this.new_tag === ' ')this.new_tag = ''
+			if(this.new_tag.length){
 				this.tags.push('#' + this.new_tag)
 				this.$emit('change',this.tags)
 				this.new_tag='';

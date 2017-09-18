@@ -186,14 +186,12 @@
 		},
 		methods:{
 			filesChange(fieldName, fileList) {
-				console.log('new files')
 				if (!fileList.length) return;
 
 				// append the files to FormData
 				Array.from(Array(fileList.length).keys())
 				  .map(x => {
 				  		let name=fileList[x].name
-				  		console.log(name)
 				  		let d = {
 				  			title:'',
 				  			description:'',
