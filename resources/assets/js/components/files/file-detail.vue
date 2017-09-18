@@ -38,6 +38,7 @@
 						<p>{{file.description}}</p>
 						
 						<ul class="tags">
+							<li>#Author <span>{{author}}</span></li>
 							<li v-show="file.where">#Where<span>{{file.where}}</span></li>
 							<li v-show="file.when">#When<span>{{file.when}}</span></li>
 							<li v-show="file.what">#What #Why #How
@@ -83,6 +84,10 @@ export default {
 			type:Object,
 			default:() => {id:''}
 		},
+		author:{
+			required:true,
+			type:String
+		}
 	},
 	data () {
 		return {
