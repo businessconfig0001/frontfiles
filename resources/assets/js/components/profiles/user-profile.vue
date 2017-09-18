@@ -93,7 +93,7 @@ export default {
 	font-size:1.8em !important;
 }
 .profile-picture{
-	padding-top:3rem;
+	padding-top:5rem;
 }
 .edit{
 	img{

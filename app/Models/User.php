@@ -82,6 +82,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Returns the full name of the user and his/her location.
+     *
+     * @return string
+     */
+    public function fullNameAndLocation() : string
+    {
+        return $this->first_name . ' ' . $this->last_name . ', ' . $this->location;
+    }
+
+    /**
      * Gets the path for the user's profile.
      *
      * @return \Illuminate\Contracts\Routing\UrlGenerator|string

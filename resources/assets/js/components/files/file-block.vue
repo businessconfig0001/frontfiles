@@ -195,17 +195,23 @@ export default {
 			color:#ddd;
 		}
 	}
-	video,img{
+	video{
+		height:185px;
 		width:100%;
 	}
 	audio,.download-file{
 		width:100%;
+		height:185px;
+
 
 	}
 	.img{
 		position: relative;
 		height:185px;
 		overflow:hidden;
+			img{
+				width:100%;
+			}
 
 			a{
 				position: absolute;

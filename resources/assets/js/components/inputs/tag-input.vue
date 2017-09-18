@@ -5,7 +5,7 @@
 			{{ tag }}
 			<a @click.prevent="removeTag(tag)"><i class="fa fa-times"></i></a>
 		</li>
-		<li class="input"><input  ref="input" v-if="!disabled" v-model="new_tag" :placeholder="placeholder" @keyup.space="addTag" @blur="addTag" @keyup.delete="removeLast" class="form-control" :disabled="disabled"></li>
+		<li class="input"><input  ref="input" v-if="!disabled" v-model="new_tag" :placeholder="placeholder" @keyup.space.prevent="addTag" @blur="addTag" @keyup.delete="removeLast" class="form-control" :disabled="disabled" @keyup="change"></li>
 	</ul>
 	
 </div>
@@ -33,12 +33,26 @@ export default {
 	data () {
 		return {
 			new_tag:'',
-			disabled:false
+			disabled:false,
+			previous:true,
+			last:''
 		};
 	},
 	methods:{
+		change(){
+				if(this.new_tag.length > 0 && this.last.length > 1){
+					this.last = this.new_tag
+					this.previous=true
+				}
+				else if(this.new_tag.length >= 1) this.last = this.new_tag
+				else this.last=''
+				console.log('last',this.last)
+			
+		},
 		addTag(){
-			if(this.new_tag){
+			if(this.new_tag === ' ')this.new_tag = ''
+			if(this.new_tag.length){
+				this.new_tag=this.new_tag.substr(0,this.new_tag.length -1).replace(' ','_')
 				this.tags.push('#' + this.new_tag)
 				this.$emit('change',this.tags)
 				this.new_tag='';
@@ -54,7 +68,7 @@ export default {
 			this.disabled=this.tags.length >= 40 || charcount >= 200
 		},
 		removeLast(){
-			if(this.tags.length)this.removeTag(this.tags[this.tags.length -1])
+			if(!this.new_tag.length  && this.tags.length && !this.last.length)this.removeTag(this.tags[this.tags.length -1])
 		},
 		focus(){
 			this.$refs.input.focus()
