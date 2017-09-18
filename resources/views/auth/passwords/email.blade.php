@@ -4,9 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-                <div class="panel-body">
+            <div class="login-box">
+                <h1 class="auth-title title-offset">Reset Password</h1>
+                <div class="auth-form">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}

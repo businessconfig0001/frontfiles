@@ -54,7 +54,7 @@ export default {
 			this.disabled=this.tags.length >= 40 || charcount >= 200
 		},
 		removeLast(){
-			if(this.tags.length)this.removeTag(this.tags[this.tags.length -1])
+			if(!this.new_tag.length && this.tags.length)this.removeTag(this.tags[this.tags.length -1])
 		},
 		focus(){
 			this.$refs.input.focus()
