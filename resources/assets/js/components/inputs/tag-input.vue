@@ -5,7 +5,7 @@
 			{{ tag }}
 			<a @click.prevent="removeTag(tag)"><i class="fa fa-times"></i></a>
 		</li>
-		<li class="input"><input  ref="input" v-if="!disabled" v-model="new_tag" :placeholder="placeholder" @keyup.space.prevent="addTag" @blur="addTag" @keyup.delete="removeLast" class="form-control" :disabled="disabled" @keyup="change"></li>
+		<li class="input"><input  ref="input" v-if="!disabled" v-model="new_tag" :placeholder="placeholder" @keyup.space.prevent="add(true)" @blur="add(false)" @keyup.delete="removeLast" class="form-control" :disabled="disabled" @keyup="change"></li>
 	</ul>
 	
 </div>
@@ -49,10 +49,16 @@ export default {
 				console.log('last',this.last)
 			
 		},
-		addTag(){
+		add(space){
 			if(this.new_tag === ' ')this.new_tag = ''
+			if(space)this.new_tag=this.new_tag.substr(0,this.new_tag.length -1).replace(' ','_')
+			else this.new_tag=this.new_tag.replace(' ','_')
+			this.addTag()
+		},
+		addTag(){
+			
 			if(this.new_tag.length){
-				this.new_tag=this.new_tag.substr(0,this.new_tag.length -1).replace(' ','_')
+				
 				this.tags.push('#' + this.new_tag)
 				this.$emit('change',this.tags)
 				this.new_tag='';
