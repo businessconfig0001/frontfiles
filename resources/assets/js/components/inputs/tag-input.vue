@@ -5,7 +5,7 @@
 			{{ tag }}
 			<a @click.prevent="removeTag(tag)"><i class="fa fa-times"></i></a>
 		</li>
-		<li class="input"><input  ref="input" v-if="!disabled" v-model="new_tag" :placeholder="placeholder" @keyup.space.prevent="addTag" @blur="addTag" @keyup.prevent.delete="removeLast" class="form-control" :disabled="disabled" @keyup="change"></li>
+		<li class="input"><input  ref="input" v-if="!disabled" v-model="new_tag" :placeholder="placeholder" @keyup.space.prevent="addTag" @blur="addTag" @keyup.delete="removeLast" class="form-control" :disabled="disabled" @keyup="change"></li>
 	</ul>
 	
 </div>
@@ -69,7 +69,6 @@ export default {
 		},
 		removeLast(){
 			if(!this.new_tag.length  && this.tags.length && !this.last.length)this.removeTag(this.tags[this.tags.length -1])
-			else this.new_tag=this.new_tag.substr(0,this.new_tag.length -1)
 		},
 		focus(){
 			this.$refs.input.focus()
