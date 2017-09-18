@@ -9696,7 +9696,6 @@ img {
 .profile-container {
   color: #0000ff;
   margin-bottom: 40px;
-  padding: 2rem;
 }
 
 .profile-container .profile-picture img {
@@ -9706,7 +9705,7 @@ img {
 }
 
 .profile-container .profile-content {
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 .profile-container .profile-content .row + .row {

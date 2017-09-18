@@ -1,7 +1,7 @@
   .profile-container {
     color:$blue;
     margin-bottom:40px;
-    padding:2rem;
+
 
     .profile-picture {
             img {
@@ -12,7 +12,7 @@
     }
 
     .profile-content{
-        margin-top:5rem;
+        margin-top:1rem;
 
         .row + .row{
             margin-top:2rem;
