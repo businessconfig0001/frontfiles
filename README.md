@@ -43,5 +43,5 @@ $ composer install && php artisan key:generate && npm install && npm run develop
 
 ### If you prefer a one-liner (make sure .env is configured first) -- FOR PRODUCTION
 ```
-$ composer install && php artisan key:generate && npm install && npm run prod && php artisan migrate && php artisan permission:create-role user && php artisan permission:create-role corporative
+$ composer install && php artisan key:generate && npm install && npm run prod && php artisan migrate && php artisan permission:create-role user && php artisan permission:create-role corporative && php artisan permission:create-role admin
 ```
