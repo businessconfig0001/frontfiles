@@ -76,6 +76,11 @@
                                                 @endif
 
                                                 <li><a href="{{ route('files.upload') }}" class="btn btn-border-black">Upload</a></li>
+
+                                                @if(auth()->user()->isAdmin())
+                                                    <li><a href="{{ route('backend') }}">Administration</a></li>
+                                                @endif
+
                                             @endif
 
                                         </ul>

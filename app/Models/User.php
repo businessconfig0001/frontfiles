@@ -112,6 +112,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Checks if this user is an administrator.
+     *
+     * @return bool
+     */
+    public function isAdmin() : bool
+    {
+        return $this->hasRole('admin');
+    }
+
+    /**
      * This will automatically encrypt the password.
      *
      * @param $password

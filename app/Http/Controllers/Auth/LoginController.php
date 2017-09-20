@@ -45,7 +45,7 @@ class LoginController extends Controller
      */
     protected function redirectTo() : string
     {
-        if(auth()->user()->hasRole('admin'))
+        if(auth()->user()->isAdmin())
             return '/backend';
         else
             return '/profile/' . auth()->user()->slug;

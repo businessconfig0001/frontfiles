@@ -1,0 +1,1 @@
+<a class="btn btn-link btn-lg" href="{{ url('/') }}" role="button">Home</a>

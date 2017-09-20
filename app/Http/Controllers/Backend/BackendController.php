@@ -17,10 +17,11 @@ class BackendController extends Controller
     {
         $user = User::find(auth()->user()->id);
 
-        if(request()->expectsJson())
-            return response()->json(['data' => $user], 200);
+        $files = File::latest()
+            ->orderBy('id', 'desc')
+            ->paginate(50);
 
-        return view('backend.index', compact('user'));
+        return view('backend.index', compact('user', 'files'));
     }
 
     /**

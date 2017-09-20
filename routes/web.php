@@ -20,11 +20,13 @@ Route::group([
 ], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/index', 'HomeController@main')->name('main');
+    /*
     Route::get('/testing', function(){
         $user = \FrontFiles\User::find(auth()->user()->id);
         $user->syncRoles(['admin']);
         return 'Worked!';
     });
+    */
 });
 
 /**
@@ -48,7 +50,7 @@ Route::group([
  * Profile routes
  */
 Route::group([
-    'prefix' => 'profile',
+    'prefix'    => 'profile',
     'namespace' => 'Profile',
 ], function () {
 
@@ -68,7 +70,7 @@ Route::group([
  * Files routes
  */
 Route::group([
-    'prefix' => 'files',
+    'prefix'    => 'files',
     'namespace' => 'Files',
 ], function () {
 
@@ -87,9 +89,9 @@ Route::group([
  * Admin routes
  */
 Route::group([
-    'prefix' => 'backend',
-    'namespace' => 'Backend',
-    'middleware' => ['auth', 'admin'],
+    'prefix'        => 'backend',
+    'namespace'     => 'Backend',
+    'middleware'    => ['auth', 'admin'],
 ], function () {
     Route::get('/', 'BackendController@index')->name('backend');
 });
