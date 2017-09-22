@@ -18,6 +18,13 @@ class Videos implements FileProcessInterface
     protected $file;
 
     /**
+     * The file's temporary pre-processing name.
+     *
+     * @var string
+     */
+    protected $tmp_pre_name;
+
+    /**
      * The file's temporary name.
      *
      * @var string
@@ -42,11 +49,13 @@ class Videos implements FileProcessInterface
     {
         $this->file = $file;
         $this->tmp_name = $tmp_name;
+        $this->tmp_pre_name = 'pre_'.$tmp_name;
         $this->new_name = $new_name;
 
         //General
         $ffmpeg                 = env('FFMPEG');
         $source_file            = public_path('userFiles/').$file->name;
+        $output_pre_temp        = public_path('userFiles/').$this->tmp_pre_name;
         $output_temp            = public_path('userFiles/').$tmp_name;
         $output_final           = public_path('userFiles/').$new_name;
         //Text
@@ -65,8 +74,20 @@ class Videos implements FileProcessInterface
         $bitrate                = '192k';
         $scale                  = '-2:360';
 
+        $preprocess = new Process(
+            "{$ffmpeg} -i {$source_file} -lavfi '[0:v]scale=ih*16/9:-2,boxblur=luma_radius=min(h\,w)/20:luma_power=1:chroma_radius=min(cw\,ch)/20:chroma_power=1[bg];[bg][0:v]overlay=(W-w)/2:(H-h)/2,crop=h=iw*9/16' {$output_pre_temp}"
+        );
+
+        $preprocess->run();
+
+        if(!$preprocess->isSuccessful())
+        {
+            $this->clearFiles();
+            throw new ProcessFailedException($preprocess);
+        }
+
         $process1 = new Process(
-            "{$ffmpeg} -i {$source_file} -i {$watermark} -c:v {$encoding} -b:v {$bitrate} -bufsize {$bitrate} -filter_complex \"[0:v]scale={$scale}[bg];[bg][1:v]overlay={$watermark_position}\" -strict -2 {$output_temp}"
+            "{$ffmpeg} -i {$output_pre_temp} -i {$watermark} -c:v {$encoding} -b:v {$bitrate} -bufsize {$bitrate} -filter_complex \"[0:v]scale={$scale}[bg];[bg][1:v]overlay={$watermark_position}\" -strict -2 {$output_temp}"
         );
         $process1->run();
 
@@ -95,6 +116,7 @@ class Videos implements FileProcessInterface
     {
         Storage::disk('local')->delete($this->file->name);
         Storage::disk('local')->delete($this->new_name);
+        Storage::disk('local')->delete($this->tmp_pre_name);
         Storage::disk('local')->delete($this->tmp_name);
     }
 }
