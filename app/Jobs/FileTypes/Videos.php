@@ -46,7 +46,7 @@ class Videos implements FileProcessInterface
     public function process(File $file)
     {
         $this->file = $file;
-        $this->tmp_name = $this->file->short_id.'mp4';
+        $this->tmp_name = $this->file->short_id.'.mp4';
         $this->tmp_pre_name = 'pre_'.$this->tmp_name;
         $this->new_name = 'processed_'.$this->tmp_name;
 
