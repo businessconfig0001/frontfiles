@@ -75,36 +75,36 @@ class Videos implements FileProcessInterface
         $scale                  = '-2:360';
 
         $preprocess = new Process(
-            "{$ffmpeg} -i '{$source_file}' -lavfi '[0:v]scale=ih*16/9:-2,boxblur=luma_radius=min(h\,w)/20:luma_power=1:chroma_radius=min(cw\,ch)/20:chroma_power=1[bg];[bg][0:v]overlay=(W-w)/2:(H-h)/2,crop=h=iw*9/16' {$output_pre_temp}"
+            "{$ffmpeg} -i {$source_file} -lavfi '[0:v]scale=ih*16/9:-2,boxblur=luma_radius=min(h\,w)/20:luma_power=1:chroma_radius=min(cw\,ch)/20:chroma_power=1[bg];[bg][0:v]overlay=(W-w)/2:(H-h)/2,crop=h=iw*9/16' {$output_pre_temp}"
         );
 
         $preprocess->run();
 
         if(!$preprocess->isSuccessful())
         {
-            $this->clearFiles();
+            //$this->clearFiles();
             throw new ProcessFailedException($preprocess);
         }
 
         $process1 = new Process(
-            "{$ffmpeg} -i '{$output_pre_temp}' -i {$watermark} -c:v {$encoding} -b:v {$bitrate} -bufsize {$bitrate} -filter_complex \"[0:v]scale={$scale}[bg];[bg][1:v]overlay={$watermark_position}\" -strict -2 {$output_temp}"
+            "{$ffmpeg} -i {$output_pre_temp} -i {$watermark} -c:v {$encoding} -b:v {$bitrate} -bufsize {$bitrate} -filter_complex \"[0:v]scale={$scale}[bg];[bg][1:v]overlay={$watermark_position}\" -strict -2 {$output_temp}"
         );
         $process1->run();
 
         if(!$process1->isSuccessful())
         {
-            $this->clearFiles();
+            //$this->clearFiles();
             throw new ProcessFailedException($process1);
         }
 
         $process2 = new Process(
-            "{$ffmpeg} -i '{$output_temp}' -vf \"[in]drawtext={$text_options}:fontfile='{$font}':text='{$text_id}':{$text_id_position},drawtext={$text_options}:fontfile='{$font}':text='{$text_author}':{$text_author_position}[out]\" -y -strict -2 {$output_final}"
+            "{$ffmpeg} -i {$output_temp} -vf \"[in]drawtext={$text_options}:fontfile='{$font}':text='{$text_id}':{$text_id_position},drawtext={$text_options}:fontfile='{$font}':text='{$text_author}':{$text_author_position}[out]\" -y -strict -2 {$output_final}"
         );
         $process2->run();
 
         if(!$process2->isSuccessful())
         {
-            $this->clearFiles();
+            //$this->clearFiles();
             throw new ProcessFailedException($process2);
         }
     }
