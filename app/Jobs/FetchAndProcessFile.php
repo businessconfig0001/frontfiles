@@ -41,20 +41,6 @@ class FetchAndProcessFile implements ShouldQueue
     protected $file;
 
     /**
-     * The file's temporary name.
-     *
-     * @var string
-     */
-    protected $tmp_name;
-
-    /**
-     * The file's new name.
-     *
-     * @var string
-     */
-    protected $new_name;
-
-    /**
      * Create a new job instance.
      *
      * @param File $file
@@ -62,8 +48,6 @@ class FetchAndProcessFile implements ShouldQueue
     public function __construct(File $file)
     {
         $this->file = $file;
-        $this->tmp_name = 'tmp_' . $file->name;
-        $this->new_name = 'processed_' . $file->name;
     }
 
     /**
@@ -78,16 +62,6 @@ class FetchAndProcessFile implements ShouldQueue
 
         //Process the file
         $this->processFile();
-
-        //Save to the blob storage
-        if(config('filesystems.default') === 'azure')
-            $this->sendToAzureBlobStorage();
-
-        //Updates the file
-        $this->updateFile();
-
-        //Delete file locally
-        $this->deleteFileLocally();
     }
 
     /**
@@ -129,49 +103,17 @@ class FetchAndProcessFile implements ShouldQueue
         //Process the file, according to its type
         switch($this->file->type){
             case 'video':
-                (new FileTypes\Videos)->process($this->file, $this->tmp_name, $this->new_name);
+                (new FileTypes\Videos)->process($this->file);
                 break;
             case 'image':
-                (new FileTypes\Images)->process($this->file, $this->tmp_name, $this->new_name);
+                (new FileTypes\Images)->process($this->file);
                 break;
             case 'audio':
-                (new FileTypes\Audios)->process($this->file, $this->tmp_name, $this->new_name);
+                (new FileTypes\Audios)->process($this->file);
                 break;
             case 'document':
-                (new FileTypes\Documents)->process($this->file, $this->tmp_name, $this->new_name);
+                (new FileTypes\Documents)->process($this->file);
                 break;
         }
-    }
-
-    /**
-     * Saves the processed file on the blob storage.
-     */
-    protected function sendToAzureBlobStorage()
-    {
-        $processed_video = Storage::disk('local')->get($this->new_name);
-
-        Storage::disk('azure')->put('user-files/'.$this->new_name, $processed_video);
-    }
-
-    /**
-     * Updates the file with the URL for the preview and the processed option as true.
-     */
-    protected function updateFile()
-    {
-        $this->file->update([
-            'azure_url'         => 'https://ffcontents.blob.core.windows.net/user-files/' . $this->new_name,
-            'processed_name'    => $this->new_name,
-            'processed'         => true,
-        ]);
-    }
-
-    /**
-     * Deletes the file locally.
-     */
-    protected function deleteFileLocally()
-    {
-        Storage::disk('local')->delete($this->file->name);
-        Storage::disk('local')->delete($this->new_name);
-        Storage::disk('local')->delete($this->tmp_name);
     }
 }
