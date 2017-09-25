@@ -80,7 +80,7 @@ class Videos implements FileProcessInterface
 
         if(!$preprocess->isSuccessful())
         {
-            //$this->clearFiles();
+            $this->clearFiles();
             throw new ProcessFailedException($preprocess);
         }
 
@@ -91,7 +91,7 @@ class Videos implements FileProcessInterface
 
         if(!$process1->isSuccessful())
         {
-            //$this->clearFiles();
+            $this->clearFiles();
             throw new ProcessFailedException($process1);
         }
 
@@ -102,7 +102,7 @@ class Videos implements FileProcessInterface
 
         if(!$process2->isSuccessful())
         {
-            //$this->clearFiles();
+            $this->clearFiles();
             throw new ProcessFailedException($process2);
         }
 
@@ -114,7 +114,7 @@ class Videos implements FileProcessInterface
         $this->updateFile();
 
         //Deletes the files locally
-        //$this->clearFiles();
+        $this->clearFiles();
     }
 
     /**
