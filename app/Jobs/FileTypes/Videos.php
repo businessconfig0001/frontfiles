@@ -42,30 +42,28 @@ class Videos implements FileProcessInterface
      * Method to process the file.
      *
      * @param File $file
-     * @param string $tmp_name
-     * @param string $new_name
      */
-    public function process(File $file, string $tmp_name, string $new_name)
+    public function process(File $file)
     {
         $this->file = $file;
-        $this->tmp_name = $tmp_name;
-        $this->tmp_pre_name = 'pre_'.$tmp_name;
-        $this->new_name = $new_name;
+        $this->tmp_name = $this->file->short_id.'mp4';
+        $this->tmp_pre_name = 'pre_'.$this->tmp_name;
+        $this->new_name = 'processed_'.$this->tmp_name;
 
         //General
         $ffmpeg                 = env('FFMPEG');
-        $source_file            = public_path('userFiles/').$file->name;
+        $source_file            = public_path('userFiles/').$this->file->name;
         $output_pre_temp        = public_path('userFiles/').$this->tmp_pre_name;
-        $output_temp            = public_path('userFiles/').$tmp_name;
-        $output_final           = public_path('userFiles/').$new_name;
+        $output_temp            = public_path('userFiles/').$this->tmp_name;
+        $output_final           = public_path('userFiles/').$this->new_name;
         //Text
         $font                   = public_path('watermarks/arial_narrow.ttf');
         $text_options           = 'fontsize=10:fontcolor=White';
         //Text id
-        $text_id                = 'ID\: '.$file->short_id;
+        $text_id                = 'ID\: '.$this->file->short_id;
         $text_id_position       = 'x=(w-text_w-10):y=(text_h+24)';
         //Text author
-        $text_author            = $file->owner->fullName();
+        $text_author            = $this->file->owner->fullName();
         $text_author_position   = 'x=(w-text_w-10):y=(text_h)+35';
         //Watermark + resizing + encoding + bitrate
         $watermark              = public_path('watermarks/watermark.png');
@@ -107,6 +105,38 @@ class Videos implements FileProcessInterface
             //$this->clearFiles();
             throw new ProcessFailedException($process2);
         }
+
+        //Save to the blob storage
+        if(config('filesystems.default') === 'azure')
+            $this->sendToAzureBlobStorage();
+
+        //Updates the file
+        $this->updateFile();
+
+        //Deletes the files locally
+        //$this->clearFiles();
+    }
+
+    /**
+     * Saves the processed file on the blob storage.
+     */
+    protected function sendToAzureBlobStorage()
+    {
+        $processed_file = Storage::disk('local')->get($this->new_name);
+
+        Storage::disk('azure')->put('user-files/'.$this->new_name, $processed_file);
+    }
+
+    /**
+     * Updates the file with the URL for the preview and the processed option as true.
+     */
+    protected function updateFile()
+    {
+        $this->file->update([
+            'azure_url'         => 'https://ffcontents.blob.core.windows.net/user-files/' . $this->new_name,
+            'processed_name'    => $this->new_name,
+            'processed'         => true,
+        ]);
     }
 
     /**
@@ -115,8 +145,8 @@ class Videos implements FileProcessInterface
     protected function clearFiles()
     {
         Storage::disk('local')->delete($this->file->name);
-        Storage::disk('local')->delete($this->new_name);
         Storage::disk('local')->delete($this->tmp_pre_name);
         Storage::disk('local')->delete($this->tmp_name);
+        Storage::disk('local')->delete($this->new_name);
     }
 }
