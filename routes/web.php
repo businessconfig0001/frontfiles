@@ -80,6 +80,7 @@ Route::group([
         Route::get('/upload', 'FilesController@create')->name('files.upload');
         Route::patch('/{file}', 'FilesController@update')->name('files.update');
         Route::delete('/{file}', 'FilesController@destroy')->name('files.delete');
+        Route::get('/download/{file}', 'FilesController@downloadFile')->name('files.download-file');
     });
 
     Route::get('/{short_id}', 'FilesController@show')->name('files.show');
