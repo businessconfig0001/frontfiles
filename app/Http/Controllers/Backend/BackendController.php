@@ -2,9 +2,11 @@
 
 namespace FrontFiles\Http\Controllers\Backend;
 
-use FrontFiles\{ User, File};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use FrontFiles\Http\Controllers\Controller;
+use FrontFiles\{User, File, Utility\DriversHelper};
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class BackendController extends Controller
 {
@@ -22,6 +24,27 @@ class BackendController extends Controller
             ->paginate(50);
 
         return view('backend.index', compact('user', 'files'));
+    }
+
+    /**
+     * Downloads the original file from the user's Dropbox.
+     *
+     * @param File $file
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws FileNotFoundException
+     */
+    public function downloadFile(File $file)
+    {
+        $filesystem = DriversHelper::userDropbox($file->owner->dropbox_token);
+
+        if(!$filesystem->has($file->name))
+            throw new FileNotFoundException('We couln\'t find this file!');
+
+        Storage::disk('local')->put($file->name, $filesystem->read($file->name));
+
+        return response()
+            ->download(public_path('userFiles/').$file->name)
+            ->deleteFileAfterSend(true);
     }
 
     /**

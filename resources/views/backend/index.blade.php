@@ -16,6 +16,7 @@
             <th>Name</th>
             <th>Type</th>
             <th>Processed</th>
+            <th>Download</th>
             <th>Where</th>
             <th>When</th>
             <th>Owner</th>
@@ -30,6 +31,7 @@
                     <td><a href="{{ $file->path() }}" target="_blank">{{ $file->name }}</a></td>
                     <td>{{ $file->type }}</td>
                     <td>{{ $file->processed ? 'Yes' : 'No' }}</td>
+                    <td><a href="{{ route('backend.download-file', ['file' => $file]) }}">&hearts;</a></td>
                     <td>{{ $file->where }}</td>
                     <td>{{ $file->when }}</td>
                     <td><a href="{{ $file->owner->path() }}" target="_blank">{{ $file->owner->fullName() }}</a></td>

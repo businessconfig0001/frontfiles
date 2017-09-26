@@ -94,4 +94,5 @@ Route::group([
     'middleware'    => ['auth', 'admin'],
 ], function () {
     Route::get('/', 'BackendController@index')->name('backend');
+    Route::get('/download/{file}', 'BackendController@downloadFile')->name('backend.download-file');
 });
