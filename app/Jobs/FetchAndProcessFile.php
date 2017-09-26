@@ -103,16 +103,16 @@ class FetchAndProcessFile implements ShouldQueue
         //Process the file, according to its type
         switch($this->file->type){
             case 'video':
-                (new FileTypes\Videos)->process($this->file);
+                (new FileTypes\Video)->process($this->file);
                 break;
             case 'image':
-                (new FileTypes\Images)->process($this->file);
+                (new FileTypes\Image)->process($this->file);
                 break;
             case 'audio':
-                (new FileTypes\Audios)->process($this->file);
+                (new FileTypes\Audio)->process($this->file);
                 break;
             case 'document':
-                (new FileTypes\Documents)->process($this->file);
+                (new FileTypes\Document)->process($this->file);
                 break;
         }
     }

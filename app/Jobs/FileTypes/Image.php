@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use FrontFiles\Jobs\Interfaces\FileProcessInterface;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
-class Images implements FileProcessInterface
+class Image implements FileProcessInterface
 {
     /**
      * The file to be processed.
@@ -121,8 +121,10 @@ class Images implements FileProcessInterface
      */
     protected function clearFiles()
     {
-        Storage::disk('local')->delete($this->file->name);
-        Storage::disk('local')->delete($this->new_name);
-        Storage::disk('local')->delete($this->tmp_name);
+        Storage::disk('local')->delete([
+            $this->file->name,
+            $this->new_name,
+            $this->tmp_name,
+        ]);
     }
 }

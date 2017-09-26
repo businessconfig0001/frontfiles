@@ -6,7 +6,7 @@ use FrontFiles\File;
 use Illuminate\Support\Facades\Storage;
 use FrontFiles\Jobs\Interfaces\FileProcessInterface;
 
-class Documents implements FileProcessInterface
+class Document implements FileProcessInterface
 {
     /**
      * Method to process the file.
