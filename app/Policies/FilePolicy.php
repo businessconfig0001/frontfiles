@@ -55,4 +55,16 @@ class FilePolicy
     {
         return $file->user_id === $user->id;
     }
+
+    /**
+     * Determine whether the user can download the file.
+     *
+     * @param  \FrontFiles\User  $user
+     * @param  \FrontFiles\File  $file
+     * @return mixed
+     */
+    public function download(User $user, File $file)
+    {
+        return $file->user_id === $user->id;
+    }
 }
