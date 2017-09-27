@@ -32,10 +32,7 @@
 			<div class="buttons" v-if="active">
 				<a  @click.prevent="showDelete = true"><img src="/images/close-icon.svg" alt=""></a>
 				<a  @click.prevent="showEdit = true"><img src="/images/edit-btn.png" alt=""></a>
-				<a  :src="download"><i class="fa fa-download"></i></a>		
-			</div>
-			<div class="buttons" v-else>
-				<a  :src="download"><i class="fa fa-download"></i></a>	
+				<a  @click.prevent="toDownload"><i class="fa fa-download"></i></a>		
 			</div>
 		</div>
 	</a>
@@ -139,6 +136,9 @@ export default {
 			})	
 		}
 		catch(e){}	
+	},
+	toDownload(){
+		location.replace(this.url)
 	}
   }
 };
