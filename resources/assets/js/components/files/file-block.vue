@@ -31,7 +31,11 @@
 			</div>
 			<div class="buttons" v-if="active">
 				<a  @click.prevent="showDelete = true"><img src="/images/close-icon.svg" alt=""></a>
-				<a  @click.prevent="showEdit = true"><img src="/images/edit-btn.png" alt=""></a>	
+				<a  @click.prevent="showEdit = true"><img src="/images/edit-btn.png" alt=""></a>
+				<a  :src="download"><i class="fa fa-download"></i></a>		
+			</div>
+			<div class="buttons" v-else>
+				<a  :src="download"><i class="fa fa-download"></i></a>	
 			</div>
 		</div>
 	</a>
@@ -79,6 +83,9 @@ export default {
 		short_desc(){
 			if(this.file.description.length > 100) return this.file.description.substring(0,100) + ' ...'
 			return this.file.description
+		},
+		download(){
+			return location.origin +'/file/download/' + this.file.id
 		}
 	
 	},
@@ -162,7 +169,7 @@ export default {
 			top:0;
 			left:0;
 			z-index:100;
-			height:40%;
+			height:45%;
 			width:20%;
 			transition: .4s ease-in-out;
 			a{
@@ -175,11 +182,17 @@ export default {
 				display:flex;
 				align-items:center;
 				justify-content:center;
+				text-decoration:none;
 
 				img{
 					width:20px;
 					height:20px;
 					
+				}
+
+				i {
+					color:black;
+					font-size:1.6rem;
 				}
 			}
 				
