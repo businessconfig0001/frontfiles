@@ -82,7 +82,7 @@ export default {
 			return this.file.description
 		},
 		download(){
-			return location.origin +'/file/download/' + this.file.id
+			return location.origin +'/files/download/' + this.file.id
 		}
 	
 	},
@@ -138,7 +138,7 @@ export default {
 		catch(e){}	
 	},
 	toDownload(){
-		location.replace(this.url)
+		location.replace(this.download)
 	}
   }
 };
