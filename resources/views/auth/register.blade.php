@@ -8,7 +8,7 @@
                 <p class="beta-notice"> In order to register you must be part of our beta program</p>
                 <div class="auth-form">
 
-                    <form class="form-horizontal" method="POST" action="{{ route('auth.register') }}" enctype="multipart/form-data" id="register_form">
+                    <form class="form-horizontal" method="POST" action="{{ route('register') }}" enctype="multipart/form-data" id="register_form">
                         {{ csrf_field() }}
 
                         <!-- First Name -->

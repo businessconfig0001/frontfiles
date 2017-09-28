@@ -39,12 +39,15 @@
 						
 						<ul class="tags">
 							<li>#Author <span>{{author}}</span></li>
+							<li>#ID <span>{{file.short_id}}</span></li>
+							<li>#Type <span>{{file.type}}</span></li>
+							<li>#Size <span>{{ size }}</span></li>
 							<li v-show="file.where">#Where<span>{{file.where}}</span></li>
 							<li v-show="file.when">#When<span>{{file.when}}</span></li>
 							<li v-show="file.what">#What #Why #How
 								<span>
 									<ul class="tag-list">
-										<li v-for="tag in file.what">{{tag}}</li>
+										<li v-for="tag in file.what"><a :href="'/tag/' + tag">#{{tag}}</a></li>
 									</ul>
 								</span>
 							</li>
@@ -104,6 +107,9 @@ export default {
 
 			if(this.user)return this.file.user_id === this.user.id
 			else return false
+		},
+		size(){
+			return Math.round((this.file.size/Math.pow(10,6) * 100))/100 + 'MB'
 		}
 	},
 	methods:{
@@ -208,7 +214,17 @@ export default {
 						display:inline-block;
 						color:blue;
 						padding:0 .2rem;
+
+						a{
+							color:blue;
+						}
 					}
+				}
+			}
+			.extra-info{
+				li{
+					display:inline-block;
+					color:#ddd;
 				}
 			}
 		}
