@@ -49,6 +49,13 @@
 								</span>
 							</li>
 						</ul>
+						<div class="extra-info">
+							<ul>
+								<li>{{file.short_id}}</li>
+								<li>{{file.type}}</li>
+								<li>{{ size }}</li>
+							</ul>
+						</div>
 						<a v-if="current" class="btn btn-secondary" @click.prevent="showEdit = true">Edit</a>
 						<a v-if="current" class="btn btn-primary" @click.prevent="showDelete = true">Remove</a>
 					</div>
@@ -104,6 +111,9 @@ export default {
 
 			if(this.user)return this.file.user_id === this.user.id
 			else return false
+		},
+		size(){
+			return Math.round((this.file.size/Math.pow(10,6) * 100))/100 + 'MB'
 		}
 	},
 	methods:{
@@ -209,6 +219,12 @@ export default {
 						color:blue;
 						padding:0 .2rem;
 					}
+				}
+			}
+			.extra-info{
+				li{
+					display:inline-block;
+					color:#ddd;
 				}
 			}
 		}
