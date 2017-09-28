@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div class="container files">
-			<files-display :_files="files" :activeUser="user"></files-display>
+			<files-display :_files="files" :activeuser="user"></files-display>
 		</div>
 		<profile-edit v-if="current" :userprop="user" :show="show" @close="close"></profile-edit>
 </section>
