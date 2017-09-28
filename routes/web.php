@@ -20,10 +20,15 @@ Route::group([
 ], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/index', 'HomeController@main')->name('main');
+
     /*
     Route::get('/testing', function(){
-        $user = \FrontFiles\User::find(auth()->user()->id);
-        $user->syncRoles(['admin']);
+        Mail::send('emails.test', [], function($message) {
+            $message
+                ->from('no-reply@mailer.frontfiles.com', 'FrontFiles')
+                ->to('andre@businessconfig.com', 'André Botelho')
+                ->subject('From SparkPost with ❤');
+        });
         return 'Worked!';
     });
     */
@@ -35,15 +40,20 @@ Route::group([
 Route::group([
     'namespace' => 'Auth'
 ], function () {
-    Route::get('/login', 'LoginController@showLoginForm')->name('auth.login');
-    Route::post('/login', 'LoginController@login')->name('auth.login');
-    Route::post('/logout', 'LoginController@logout')->name('auth.logout');
-    Route::get('/register', 'RegisterController@showRegistrationForm')->name('auth.register');
-    Route::post('/register', 'RegisterController@register')->name('auth.register');
-    Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('auth.password.reset');
-    Route::post('/password/reset', 'ResetPasswordController@reset')->name('auth.password.reset');
-    Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('auth.password.reset.email');
-    Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('auth.password.reset.token');
+    //Authentication Routes
+    Route::get('/login', 'LoginController@showLoginForm')->name('login');
+    Route::post('/login', 'LoginController@login')->name('login');
+    Route::post('/logout', 'LoginController@logout')->name('logout');
+
+    //Registration Routes
+    Route::get('/register', 'RegisterController@showRegistrationForm')->name('register');
+    Route::post('/register', 'RegisterController@register')->name('register');
+
+    //Password Reset Routes
+    Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+    Route::post('/password/reset', 'ResetPasswordController@reset')->name('password.reset');
+    Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.reset.email');
+    Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset.token');
 });
 
 /**

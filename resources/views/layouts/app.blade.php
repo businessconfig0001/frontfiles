@@ -56,15 +56,15 @@
                                         <ul class="nav navbar-nav navbar-right">
 
                                             @if (Auth::guest())
-                                                <li><a href="{{ route('auth.login') }}">Login</a></li>
+                                                <li><a href="{{ route('login') }}">Login</a></li>
                                                 <li><a @click.prevent="modal">Register</a></li>
                                             @else
                                                 <li>
-                                                    <a href="{{ route('auth.logout') }}"
+                                                    <a href="{{ route('logout') }}"
                                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                                         Logout
                                                     </a>
-                                                    <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                         {{ csrf_field() }}
                                                     </form>
                                                 </li>
