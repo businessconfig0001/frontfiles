@@ -97,6 +97,16 @@ Route::group([
 });
 
 /**
+ * Tags routes
+ */
+Route::group([
+    'prefix'    => 'tag',
+    'namespace' => 'Tag',
+], function () {
+    Route::get('/{name}', 'TagController@index')->name('tag.index');
+});
+
+/**
  * Admin routes
  */
 Route::group([
