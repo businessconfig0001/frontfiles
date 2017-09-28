@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
                 <h1 class="auth-title title-offset">Login</h1>
                 <div class="auth-form">
-                    <form class="form-horizontal" method="POST" action="{{ route('auth.login') }}" id="loginForm">
+                    <form class="form-horizontal" method="POST" action="{{ route('login') }}" id="loginForm">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -53,7 +53,7 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('auth.password.reset') }}">
+                                <a class="btn btn-link" href="{{ route('password.reset') }}">
                                     Forgot Your Password?
                                 </a>
                             </div>

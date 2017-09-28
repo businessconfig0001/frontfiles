@@ -4,14 +4,15 @@ namespace FrontFiles;
 
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Notifications\Notifiable;
 use Spatie\Sluggable\{ HasSlug, SlugOptions };
+use FrontFiles\Notifications\MailResetPasswordToken;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class User extends Authenticatable
 {
-    use HasRoles;
-    use HasSlug;
+    use HasRoles, HasSlug, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -122,13 +123,25 @@ class User extends Authenticatable
     }
 
     /**
+     * Send a password reset email to the user
+     * @param string $token
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new MailResetPasswordToken($token));
+    }
+
+    /**
      * This will automatically encrypt the password.
      *
      * @param $password
      */
     public function setPasswordAttribute($password)
     {
-        $this->attributes['password'] = bcrypt($password);
+        if(preg_match('/^\$2y\$[0-9]*\$.{50,}$/', $password))
+            $this->attributes['password'] = $password;
+        else
+            $this->attributes['password'] = bcrypt($password);
     }
 
     /**
