@@ -2,7 +2,7 @@
 <div class="tag-wrapper" @click="focus">
 	<ul class="tags">
 		<li v-for="tag in tags" class="tag">
-			{{ tag }}
+			#{{ tag }}
 			<a @click.prevent="removeTag(tag)"><i class="fa fa-times"></i></a>
 		</li>
 		<li class="input"><input  ref="input" v-if="!disabled" v-model="new_tag" :placeholder="placeholder" @keyup.space.prevent="add(true)" @blur="add(false)" @keyup.delete="removeLast" class="form-control" :disabled="disabled" @keyup="change"></li>
@@ -59,7 +59,7 @@ export default {
 			
 			if(this.new_tag.length){
 				
-				this.tags.push('#' + this.new_tag)
+				this.tags.push(this.new_tag)
 				this.$emit('change',this.tags)
 				this.new_tag='';
 				let charcount = this.tags.reduce((total,t) => total +=t.length,0)

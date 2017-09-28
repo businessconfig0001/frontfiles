@@ -47,7 +47,7 @@
 							<li v-show="file.what">#What #Why #How
 								<span>
 									<ul class="tag-list">
-										<li v-for="tag in file.what"><a :href="'/tag/' + tag">{{tag}}</a></li>
+										<li v-for="tag in file.what"><a :href="'/tag/' + tag">#{{tag}}</a></li>
 									</ul>
 								</span>
 							</li>
