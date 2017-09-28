@@ -49,13 +49,15 @@ class TagController extends Controller
         $files = File::whereHas('tagsWhat', function($q) use ($name){ $q->where('name', $name); })
             ->orderBy('id', 'desc')
             ->paginate(25);
-        $jsonfiles= json_encode($files);
+
+        $jsonfiles = json_encode($files);
+
         if(request()->expectsJson())
             return response([
                 'data' => $files,
             ], 200);
-        return view('tags.index', compact('files','jsonfiles','name'));
 
+        return view('tags.index', compact('files','jsonfiles','name'));
     }
 
     /**
