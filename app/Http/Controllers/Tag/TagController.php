@@ -55,6 +55,8 @@ class TagController extends Controller
                 'data' => $files,
             ], 200);
 
+        $files = json_encode($files, true);
+
         return view('tags.index', compact('files'));
     }
 
