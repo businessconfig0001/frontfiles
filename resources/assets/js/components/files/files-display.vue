@@ -1,10 +1,13 @@
 <template>
 <div class="display-container">
-	<ul class="video-list">
+	<ul v-if="_files.length"class="video-list">
 		<li v-for="file in files">
 			<file-block :file="file" @remove="remove" @edit="handleEdit" :activeuser="activeuser"></file-block>
 		</li>
 	</ul>
+	<div v-else>
+		<h2>No matching files were found</h2>
+	</div>
 </div>
 </template>
 

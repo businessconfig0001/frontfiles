@@ -54,7 +54,7 @@ class TagController extends Controller
             return response([
                 'data' => $files,
             ], 200);
-        return view('tags.index', compact('files','jsonfiles'));
+        return view('tags.index', compact('files','jsonfiles','name'));
 
     }
 

@@ -39,6 +39,9 @@
 						
 						<ul class="tags">
 							<li>#Author <span>{{author}}</span></li>
+							<li>#ID <span>{{file.short_id}}</span></li>
+							<li>#Type <span>{{file.type}}</span></li>
+							<li>#Size <span>{{ size }}</span></li>
 							<li v-show="file.where">#Where<span>{{file.where}}</span></li>
 							<li v-show="file.when">#When<span>{{file.when}}</span></li>
 							<li v-show="file.what">#What #Why #How
@@ -48,9 +51,6 @@
 									</ul>
 								</span>
 							</li>
-							<li>#ID <span>{{file.short_id}}</span></li>
-							<li>#Type <span>{{file.type}}</span></li>
-							<li>#Size <span>{{ size }}</span></li>
 						</ul>
 						<a v-if="current" class="btn btn-secondary" @click.prevent="showEdit = true">Edit</a>
 						<a v-if="current" class="btn btn-primary" @click.prevent="showDelete = true">Remove</a>
