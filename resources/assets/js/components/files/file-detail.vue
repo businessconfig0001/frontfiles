@@ -44,18 +44,14 @@
 							<li v-show="file.what">#What #Why #How
 								<span>
 									<ul class="tag-list">
-										<li v-for="tag in file.what">{{tag}}</li>
+										<li v-for="tag in file.what"><a :href="'/tag/' + tag">{{tag}}</a></li>
 									</ul>
 								</span>
 							</li>
+							<li>#ID <span>{{file.short_id}}</span></li>
+							<li>#Type <span>{{file.type}}</span></li>
+							<li>#Size <span>{{ size }}</span></li>
 						</ul>
-						<div class="extra-info">
-							<ul>
-								<li>{{file.short_id}}</li>
-								<li>{{file.type}}</li>
-								<li>{{ size }}</li>
-							</ul>
-						</div>
 						<a v-if="current" class="btn btn-secondary" @click.prevent="showEdit = true">Edit</a>
 						<a v-if="current" class="btn btn-primary" @click.prevent="showDelete = true">Remove</a>
 					</div>
@@ -218,6 +214,10 @@ export default {
 						display:inline-block;
 						color:blue;
 						padding:0 .2rem;
+
+						a{
+							color:blue;
+						}
 					}
 				}
 			}

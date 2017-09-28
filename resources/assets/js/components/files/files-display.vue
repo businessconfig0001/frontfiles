@@ -2,7 +2,7 @@
 <div class="display-container">
 	<ul class="video-list">
 		<li v-for="file in files">
-			<file-block :file="file" @remove="remove" @edit="handleEdit" :active="active"></file-block>
+			<file-block :file="file" @remove="remove" @edit="handleEdit" :activeuser="activeuser"></file-block>
 		</li>
 	</ul>
 </div>
@@ -21,9 +21,8 @@ export default {
 			required:true,
 			type:Array
 		},
-		active:{
-			required:true,
-			type:Boolean
+		activeuser:{
+			default:() => false
 		}
 	},
 	data () {

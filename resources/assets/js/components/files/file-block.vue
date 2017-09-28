@@ -60,11 +60,10 @@ export default {
 	props:{
 		file:{
 			required:true,
-			type:Object
 		},
-		active:{
+		activeuser:{
 			required:true,
-			type:Boolean
+			
 		}
 	},
 	mounted(){
@@ -83,6 +82,10 @@ export default {
 		},
 		download(){
 			return location.origin +'/files/download/' + this.file.id
+		},
+		active(){
+			if(this.activeuser)return this.file.user_id === this.activeuser.id
+			return false
 		}
 	
 	},
