@@ -14,24 +14,13 @@
 /**
  * Homepage routes
  */
-
 Route::group([
     'namespace' => 'Home'
 ], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/index', 'HomeController@main')->name('main');
-
-    /*
-    Route::get('/testing', function(){
-        Mail::send('emails.test', [], function($message) {
-            $message
-                ->from('no-reply@mailer.frontfiles.com', 'FrontFiles')
-                ->to('andre@businessconfig.com', 'André Botelho')
-                ->subject('From SparkPost with ❤');
-        });
-        return 'Worked!';
-    });
-    */
+    Route::get('/inside', 'HomeController@inside')->name('inside');
+    Route::get('/community', 'HomeController@community')->name('community');
 });
 
 /**
