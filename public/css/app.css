@@ -8795,8 +8795,35 @@ body.page-payment-info.home {
   margin: 0.5rem 0 !important;
 }
 
-@media only screen and (min-width: 600px) {
-  /* For tablets: */
+@media only screen and (max-width: 500px) {
+  #landing #how-it-works .steps h3,
+  #landing #how-it-works .steps h2 {
+    padding-left: 20px;
+  }
+
+  #landing #how-it-works .steps .step {
+    line-height: 60px;
+    font-size: 20px;
+    padding: 0px;
+  }
+
+  #landing #how-it-works .steps .step .icon {
+    height: 60px;
+  }
+
+  #landing #how-it-works .steps .step :before {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  #landing #about-us {
+    padding: 40px 0px;
+  }
+
+  .footer .fa {
+    float: left;
+    margin: 35px 17px;
+  }
 }
 
 .profile {
@@ -8857,8 +8884,14 @@ body.page-payment-info.home {
   padding: 1.5rem;
 }
 
-.profile .storage .box p + p {
-  padding: 1rem;
+@media only screen and (max-width: 500px) {
+  .drag-container .dropbox {
+    margin-bottom: 30px;
+  }
+
+  .display-container ul.video-list li {
+    width: 100%;
+  }
 }
 
 .auth-form {
