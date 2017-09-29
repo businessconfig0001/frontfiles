@@ -4,6 +4,7 @@ namespace FrontFiles\Http\Controllers\Auth;
 
 use FrontFiles\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo;
 
     /**
      * Create a new controller instance.
@@ -35,5 +36,18 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Where to redirect users after login.
+     *
+     * @return string
+     */
+    protected function redirectTo() : string
+    {
+        if(auth()->user()->isAdmin())
+            return '/backend';
+        else
+            return '/profile/' . auth()->user()->slug;
     }
 }

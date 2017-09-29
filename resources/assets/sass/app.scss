@@ -2,6 +2,8 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
+@import "./loading";
+
 // Variables
 @import "variables";
 
@@ -19,6 +21,8 @@
 @import "./theme/theme";
 
 
+
+
 .structural {
 	position: absolute;
 	left: -9999px;
@@ -32,4 +36,28 @@
 
 body{
 	background-color:white;
+}
+
+.pac-container { z-index: 1000000000 !important; }
+
+$placeholder:#b1b7ba;
+
+::-webkit-input-placeholder { /* Chrome */
+  color: $placeholder !important;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: $placeholder !important;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: $placeholder !important;
+  opacity: 1;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: $placeholder !important;
+  opacity: 1;
+}
+
+.modal-background{
+	overflow:hidden;
+	height:100% !important;
 }

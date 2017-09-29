@@ -8,7 +8,7 @@
                 <h1 class="auth-title title-offset">Edit profile</h1>
                 <div class="auth-form">
 
-                    <form class="form-horizontal" method="POST" action="{{ route('profile.update') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {!! method_field('patch') !!}
 
@@ -116,9 +116,7 @@
                         <!-- Button -->
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Edit
-                                </button>
+                                <input type="submit" class="btn btn-primary" value="Save">
                             </div>
                         </div>
                         <!-- Button -->
@@ -134,6 +132,10 @@
 
 @section('scripts')
 <script>
-    new google.maps.places.Autocomplete(document.getElementById('location'))
+    window.onload=function(){
+        let location=document.getElementById('location')
+        location.addEventListener('focus',() => new google.maps.places.Autocomplete(location))
+        
+    }
 </script>
 @endsection

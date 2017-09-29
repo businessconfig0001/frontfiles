@@ -6,6 +6,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\{ HasSlug, SlugOptions };
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class User extends Authenticatable
 {
@@ -81,6 +82,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Returns the full name of the user and his/her location.
+     *
+     * @return string
+     */
+    public function fullNameAndLocation() : string
+    {
+        return $this->first_name . ' ' . $this->last_name . ', ' . $this->location;
+    }
+
+    /**
      * Gets the path for the user's profile.
      *
      * @return \Illuminate\Contracts\Routing\UrlGenerator|string
@@ -98,6 +109,16 @@ class User extends Authenticatable
     public function amountOfSpaceLeft(): int
     {
         return (int)($this->allowed_space - $this->files->sum('size'));
+    }
+
+    /**
+     * Checks if this user is an administrator.
+     *
+     * @return bool
+     */
+    public function isAdmin() : bool
+    {
+        return $this->hasRole('admin');
     }
 
     /**

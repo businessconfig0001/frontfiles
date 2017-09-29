@@ -26,4 +26,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.err-wrapper{
+  li,span{
+    color:blue;
+  }
+}
 </style>

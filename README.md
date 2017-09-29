@@ -40,3 +40,8 @@ $ npm run dev
 ```
 $ composer install && php artisan key:generate && npm install && npm run development && php artisan migrate && php artisan db:seed
 ```
+
+### If you prefer a one-liner (make sure .env is configured first) -- FOR PRODUCTION
+```
+$ composer install && php artisan key:generate && npm install && npm run prod && php artisan migrate && php artisan permission:create-role user && php artisan permission:create-role corporative && php artisan permission:create-role admin
+```

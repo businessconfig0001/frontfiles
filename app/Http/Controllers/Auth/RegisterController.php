@@ -4,9 +4,11 @@ namespace FrontFiles\Http\Controllers\Auth;
 
 use FrontFiles\User;
 use FrontFiles\Utility\Helper;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use FrontFiles\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Intervention\Image\Facades\Image;
 
 class RegisterController extends Controller
 {
@@ -53,7 +55,7 @@ class RegisterController extends Controller
             'avatar'        => 'nullable|image:jpeg,jpg,png|max:1048576',
             'bio'           => 'nullable|string|max:500',
             'location'      => 'required|string|max:100',
-            'type'          => 'required|in:user,corporative',
+            'role'          => 'required|in:user,corporative',
             'password'      => 'required|string|min:6|confirmed',
         ]);
     }
@@ -68,11 +70,20 @@ class RegisterController extends Controller
     {
         if(request()->file('avatar'))
         {
+            $crop           = json_decode($data['crop'], true);
             $rawImg         = request()->file('avatar');
-            $extension      = (string)$rawImg->clientExtension();
             $short_id       = Helper::generateRandomAlphaNumericString(12);
-            $avatar_name    = $short_id . '.' . $extension;
-            $avatarUrl      = Helper::storeUserAvatarAndReturnUrl($avatar_name);
+            $avatar_name    = $short_id . '.' . (string)$rawImg->clientExtension();
+
+            $img = Image::make($rawImg)
+                ->crop($crop['width'], $crop['height'], $crop['x'], $crop['y'])
+                ->resize(null, 160, function ($constraint){
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->stream();
+
+            $avatarUrl = Helper::storeUserAvatarAndReturnUrl($avatar_name, $img->__toString());
         }
 
         return User::create([
@@ -84,6 +95,6 @@ class RegisterController extends Controller
             'bio'           => $data['bio'] ?? 'I am new here!',
             'location'      => $data['location'],
             'password'      => $data['password'],
-        ])->assignRole($data['type']);
+        ])->assignRole($data['role']);
     }
 }

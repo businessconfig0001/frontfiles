@@ -35,17 +35,18 @@ class ProfileController extends Controller
     {
         $user = User::where('slug', $slug)->firstOrFail();
 
-        $this->authorize('view', $user);
-
         $files = File::where('user_id', $user->id)->latest()->get();
+
+        $role = $user->getRoleNames();
 
         if(request()->expectsJson())
             return response()->json([
                 'data'  => $user,
+                'role'  => $role,
                 'files' => $files,
             ], 200);
 
-        return view('profile.show', compact('user','files'));
+        return view('profile.show', compact('user','files', 'role'));
     }
 
     /**
@@ -53,14 +54,17 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+ public function edit()
     {
         $user = User::find(auth()->user()->id);
 
         $this->authorize('edit', $user);
 
         if(request()->expectsJson())
-            return response()->json(['data' => $user], 200);
+            return response()->json([
+                'data' => $user,
+                'role' => $user->getRoleNames()->toArray()[0],
+            ], 200);
 
         return view('profile.edit', compact('user'));
     }

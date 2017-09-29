@@ -1,6 +1,7 @@
 <template>
 	<div v-show="show" class="modal-background clearfix">
 		<div class="modal-wrapper modal-content col-md-4">
+
 			<div class="modal-text">
 				<div v-if="lang === 'es'">
 					<slot name="es"></slot>
@@ -14,18 +15,18 @@
 				<div v-else>
 					<slot name="en"></slot>
 				</div>
-				<div class="controls">
-					<ul>
-						<li :class="lang === 'en' ? 'active' : ''"><a @click.prevent="lang ='en'">EN</a></li>
-						<li :class="lang === 'es' ? 'active' : ''"><a @click.prevent="lang ='es'">ES</a></li>
-						<li :class="lang === 'br' ? 'active' : ''"><a @click.prevent="lang ='br'">BR</a></li>
-						<li :class="lang === 'pt' ? 'active' : ''"><a @click.prevent="lang ='pt'">PT</a></li>
-					</ul>
-				</div>
-			</div>
-			<a @click.prevent="close(true)" class="btn btn-primary modal-button">Ok</a>
+			</div>	
+			
+			<a  v-if="button" @click.prevent="close(true)" @keyup.enter="close(true)" :class="button.className +  ' modal-button'">{{ button.text}}</a>
+			<a  v-else @click.prevent="close(true)" @keyup.enter="close(true)" class="btn btn-primary modal-button">Ok</a><div class="controls">
+			<ul>
+				<li :class="lang === 'en' ? 'active' : ''"><a @click.prevent="lang ='en'">EN</a></li>
+				<li :class="lang === 'es' ? 'active' : ''"><a @click.prevent="lang ='es'">ES</a></li>
+				<li :class="lang === 'br' ? 'active' : ''"><a @click.prevent="lang ='br'">PT</a></li>
+			</ul>		
 	  		<a href="#" class="close" @click.prevent="close">&#10005</a>
 		</div>
+	</div>
 	</div>
 </template>
 
@@ -33,23 +34,44 @@
 export default {
 
 	name: 'modal-container',
+	props:{
+		showmodal:{
+			type:Boolean,
+			required:false,
+			default:() => false
+		},
+		button:{
+			required:false,
+			default:() => true
+		}
+	},
 	data () {
 		return {
-			lang:'pt'
+			lang:'en',
 		}
+	},
+	mounted(){
 	},
 	computed:{
 		show(){
 			scroll(0,0)
 			return this.$store.state.showModal
+
 		},
 		modelData(){
 			return this.$store.state.modalData
 		}
 
 	},
+	watch:{
+		showmodal(){
+			if(this.showmodal)this.$store.commit('openModal','')
+		}
+	},
 	methods:{
 		close(confirm = false){
+			this.$emit('close')
+
 			if(confirm)localStorage.setItem(this.modelData,true)
 			this.$store.commit('closeModal')
 		}
@@ -85,12 +107,19 @@ export default {
   		}
   		h1{
   			padding:2rem 0;
-  			font-size: 1.6rem;
+  			font-size: 1.4rem;
+  		}
+  		p{
+  			font-size:15px;
+
+  			& + p{
+  				margin-top:.5rem
+  			}
   		}
 
 		.modal-button{
 			width:60%;
-			margin:2rem;
+			margin:1rem;
 			margin-left:20%;
 		}		
 		.close{
@@ -107,7 +136,19 @@ export default {
 
 			li{
 				display:inline-block;
-				padding:.5rem;
+				padding:.2rem;
+
+				a{
+					color:#ddd;
+					font-size:12px;
+				}
+
+				&.active{
+					a{
+						color:blue;
+					}
+					
+				}
 
 				& + li {
 					border-left:1px solid blue;

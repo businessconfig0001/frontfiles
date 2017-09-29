@@ -14,11 +14,19 @@
 /**
  * Homepage routes
  */
+
 Route::group([
     'namespace' => 'Home'
 ], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/index', 'HomeController@main')->name('main');
+    /*
+    Route::get('/testing', function(){
+        $user = \FrontFiles\User::find(auth()->user()->id);
+        $user->syncRoles(['admin']);
+        return 'Worked!';
+    });
+    */
 });
 
 /**
@@ -42,31 +50,50 @@ Route::group([
  * Profile routes
  */
 Route::group([
+    'prefix'    => 'profile',
     'namespace' => 'Profile',
-    'middleware' => 'auth',
-    'prefix' => 'profile',
 ], function () {
-    Route::get('/', 'ProfileController@index')->name('profile');
-    Route::get('/edit', 'ProfileController@edit')->name('profile.edit');
-    Route::get('/dropbox', 'ProfileController@dropbox')->name('profile.dropbox');
-    Route::get('/dropbox/callback', 'ProfileController@dropboxCallback')->name('profile.dropbox.callback');
+
+    Route::group(['middleware' => 'auth'], function(){
+        Route::get('/', 'ProfileController@index')->name('profile');
+        Route::get('/edit', 'ProfileController@edit')->name('profile.edit');
+        Route::get('/dropbox', 'ProfileController@dropbox')->name('profile.dropbox');
+        Route::get('/dropbox/callback', 'ProfileController@dropboxCallback')->name('profile.dropbox.callback');
+        Route::patch('/', 'ProfileController@update')->name('profile.update');
+        Route::delete('/', 'ProfileController@destroy')->name('profile.delete');
+    });
+
     Route::get('/{slug}', 'ProfileController@show')->name('profile.show');
-    Route::patch('/', 'ProfileController@update')->name('profile.update');
-    Route::delete('/', 'ProfileController@destroy')->name('profile.delete');
 });
 
 /**
  * Files routes
  */
 Route::group([
+    'prefix'    => 'files',
     'namespace' => 'Files',
-    'middleware' => 'auth',
-    'prefix' => 'files',
 ], function () {
-    Route::get('/', 'FilesController@index')->name('files');
-    Route::post('/', 'FilesController@store')->name('files');
-    Route::get('/upload', 'FilesController@create')->name('files.upload');
+
+    Route::group(['middleware' => 'auth'], function(){
+        Route::get('/', 'FilesController@index')->name('files');
+        Route::post('/', 'FilesController@store')->name('files');
+        Route::get('/upload', 'FilesController@create')->name('files.upload');
+        Route::patch('/{file}', 'FilesController@update')->name('files.update');
+        Route::delete('/{file}', 'FilesController@destroy')->name('files.delete');
+        Route::get('/download/{file}', 'FilesController@downloadFile')->name('files.download-file');
+    });
+
     Route::get('/{short_id}', 'FilesController@show')->name('files.show');
-    Route::patch('/{file}', 'FilesController@update')->name('files.update');
-    Route::delete('/{file}', 'FilesController@destroy')->name('files.delete');
+});
+
+/**
+ * Admin routes
+ */
+Route::group([
+    'prefix'        => 'backend',
+    'namespace'     => 'Backend',
+    'middleware'    => ['auth', 'admin'],
+], function () {
+    Route::get('/', 'BackendController@index')->name('backend');
+    Route::get('/download/{file}', 'BackendController@downloadFile')->name('backend.download-file');
 });

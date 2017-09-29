@@ -3,10 +3,12 @@
 namespace FrontFiles\Http\Controllers\Files;
 
 use FrontFiles\{
-    File, Inspections\TokenValidator\TokenValidator
+    File, Inspections\TokenValidator\TokenValidator, Utility\DriversHelper
 };
 use FrontFiles\Http\Controllers\Controller;
 use FrontFiles\Http\Requests\{ CreateFileRequest, UpdateFileRequest };
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Support\Facades\Storage;
 
 class FilesController extends Controller
 {
@@ -65,10 +67,10 @@ class FilesController extends Controller
     {
         $file = File::where('short_id', $short_id)->firstOrFail();
 
-        $this->authorize('view', $file);
-
         if(request()->expectsJson())
-            return $file;
+            return response([
+                'data' => $file,
+            ], 200);
 
         return view('files.show', compact('file'));
     }
@@ -115,6 +117,29 @@ class FilesController extends Controller
 
         return back()
             ->with('message', 'File deleted!');
+    }
+
+    /**
+     * Downloads the original file from the user's Dropbox.
+     *
+     * @param File $file
+     * @return $this
+     * @throws FileNotFoundException
+     */
+    public function downloadFile(File $file)
+    {
+        $this->authorize('download', $file);
+
+        $filesystem = DriversHelper::userDropbox($file->owner->dropbox_token);
+
+        if(!$filesystem->has($file->name))
+            throw new FileNotFoundException('We couln\'t find this file!');
+
+        Storage::disk('local')->put($file->name, $filesystem->read($file->name));
+
+        return response()
+            ->download(public_path('userFiles/').$file->name)
+            ->deleteFileAfterSend(true);
     }
 
     /**

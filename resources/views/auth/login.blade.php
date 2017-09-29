@@ -4,10 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="login-box">
                 <h1 class="auth-title title-offset">Login</h1>
                 <div class="auth-form">
-                    <form class="form-horizontal" method="POST" action="{{ route('auth.login') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('auth.login') }}" id="loginForm">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -63,6 +62,9 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>    
+    </div>  
 @endsection
+
+@section('scripts')
+
+@endsection('')

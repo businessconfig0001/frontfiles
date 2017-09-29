@@ -19,6 +19,7 @@ require('./bootstrap');
 //files
 Vue.component('drag-n-drop', require('./components/files/drag-n-drop.vue'))
 Vue.component('files-display',require('./components/files/files-display.vue'))
+Vue.component('file-detail',require('./components/files/file-detail.vue'))
 
 
 //inputs
@@ -46,7 +47,13 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		showModal:false,
-		modalData:''
+		showEdit:'',
+		modalData:'',
+		progress:0,
+		previousProgress:0,
+		whoTags:[],
+		whatTags:[],
+		enter:false
 		
 	},
 	actions: {
@@ -59,7 +66,33 @@ const store = new Vuex.Store({
 		},
 		closeModal(state){
 			state.showModal = false
+		},
+		editModal(state,name){
+			state.showEdit=name
+		},
+		closeEdit(state){
+			state.showEdit=''
+		},
+		resetProgress(state){
+			state.progress = 0
+		},
+		addProgress(state,p){
+			state.progress +=p
+			state.previousProgress=p
+		},
+		changeWhoTags(state,tags){
+			state.whoTags=tags
+		},
+		changeWhatTags(state,tags){
+			state.whatTags=tags
+		},
+		down(state){
+			state.enter=true
+		},
+		up(state){
+			state.enter=false
 		}
+
 
 
 	},
@@ -74,15 +107,41 @@ const app = new Vue({
     store,
     data(){
     	return {
-    		allow:false
+    		allow:false,
+    		options:{
+    			show:false
+    		},
+    		regOptions:{
+    			show:false,
+    		},
+    		ethics:false
     	}	
     },
     mounted(){
     	if(getQuery('code') === 'secret')this.allow=true
+    	else this.options.show=true
+
+    	window.addEventListener('keydown',e => {
+    		if(e.keyCode === 13){
+    			this.$store.commit('down')
+    		}
+    	})
+
+    	window.addEventListener('keyup',e =>{
+    		if(e.keyCode === 13){
+    			this.$store.commit('up')
+    		}
+    	})
+
     },
 	methods:{
 		modal(){
+			console.log('click')
 			this.$store.commit('openModal','')
-		}
-	}
+		},
+		submit(name){
+			let form=document.getElementById(name)
+			form.submit()
+		},
+	},
 });

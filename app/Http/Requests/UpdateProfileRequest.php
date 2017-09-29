@@ -2,8 +2,11 @@
 
 namespace FrontFiles\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use FrontFiles\User;
+use FrontFiles\Utility\Helper;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
+use Intervention\Image\Facades\Image;
 
 class UpdateProfileRequest extends FormRequest
 {
@@ -27,9 +30,10 @@ class UpdateProfileRequest extends FormRequest
         return [
             'first_name'    => 'required|string|max:100',
             'last_name'     => 'required|string|max:100',
+            'avatar'        => 'nullable|image:jpeg,jpg,png|max:1048576',
             'bio'           => 'nullable|string|max:500',
             'location'      => 'required|string|max:100',
-            'type'          => 'required|in:user,corporative',
+            'role'          => 'required|in:user,corporative',
         ];
     }
 
@@ -48,14 +52,44 @@ class UpdateProfileRequest extends FormRequest
             'location'      => request('location'),
         ]);
 
-        $user->syncRoles([request('type')]);
+        if(request()->file('avatar'))
+        {
+            if($user->avatar_name)
+                Helper::deleteUserAvatar($user->avatar_name);
+
+            $rawCrop        = json_decode(request('crop'), true);
+            $crop           = json_decode($rawCrop, true);
+            $rawImg         = request()->file('avatar');
+            $short_id       = Helper::generateRandomAlphaNumericString(12);
+            $avatar_name    = $short_id . '.' . (string)$rawImg->clientExtension();
+
+            $img = Image::make($rawImg)
+                ->crop($crop['width'], $crop['height'], $crop['x'], $crop['y'])
+                ->resize(null, 160, function ($constraint){
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->stream();
+
+            $avatarUrl = Helper::storeUserAvatarAndReturnUrl($avatar_name, $img->__toString());
+
+            $user->update([
+                'avatar'        => $avatarUrl ?? 'http://via.placeholder.com/300x300',
+                'avatar_name'   => $avatar_name ?? null,
+            ]);
+        }
+
+        $user->syncRoles([request('role')]);
 
         $user->generateSlug();
 
         $user->save();
 
         if(request()->expectsJson())
-            return response(['status' => 'Profile successfully edited!'], 200);
+            return response([
+                'status' => 'Profile successfully edited!',
+                'slug' => $user->slug,
+            ], 200);
 
         return redirect(route('profile'))
             ->with('message', 'Profile successfully edited!');
