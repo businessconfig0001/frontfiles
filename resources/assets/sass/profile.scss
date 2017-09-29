@@ -55,4 +55,12 @@
     .display-container ul.video-list li{
         width: 100%;
     }
+
+   	#app .modal-background .modal-wrapper.modal-content,
+    {
+	    left: 0!important;
+	    right: 0!important;
+	    top: 0!important;
+	    transform: none!important;
+	}
 }
