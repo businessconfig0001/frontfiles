@@ -20,6 +20,8 @@ Route::group([
 ], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/index', 'HomeController@main')->name('main');
+    Route::get('/inside', 'HomeController@inside')->name('inside');
+    Route::get('/community', 'HomeController@community')->name('community');
 
     /*
     Route::get('/testing', function(){
