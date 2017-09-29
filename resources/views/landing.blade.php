@@ -67,37 +67,37 @@
 		                <section class="steps">
 		                	<div class="step">
 		                		<div class="container-fluid">
-		                			<div class="col-xs-10">1. Create a Profile</div>
+		                			<div class="col-xs-10"><span>1. Create a Profile</span></div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-profile.png" class="img-responsive"></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
 		                		<div class="container-fluid">
-		                			<div class="col-xs-10">2. Shoot Photo or Video</div>
+		                			<div class="col-xs-10"><span>2. Shoot Photo or Video</span></div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-shoot.png" class="img-responsive"></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
 		                		<div class="container-fluid">
-		                			<div class="col-xs-10">3. Tag it</div>
+		                			<div class="col-xs-10"><span>3. Tag it</span></div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-tag.png" class="img-responsive"></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
 		                		<div class="container-fluid">
-		                			<div class="col-xs-10">4. Set the Price and License</div>
+		                			<div class="col-xs-10"><span>4. Set the Price and License</span></div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-price.png" class="img-responsive"></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
 		                		<div class="container-fluid">
-		                			<div class="col-xs-10">5. Upload & Sell</div>
+		                			<div class="col-xs-10"><span>5. Upload & Sell</span></div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-upload.png" class="img-responsive"></div>
 		                		</div>
 		                	</div>
 		                	<div class="step">
 		                		<div class="container-fluid">
-		                			<div class="col-xs-10">6. Stay independent</div>
+		                			<div class="col-xs-10"><span>6. Stay independent</span></div>
 		                			<div class="col-xs-2 icon"><img src="assets/images/how-independent.png" class="img-responsive"></div>
 		                		</div>
 		                	</div>

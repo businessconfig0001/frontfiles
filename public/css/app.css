@@ -8556,19 +8556,19 @@ body.page-payment-info.home {
 }
 
 @media only screen and (max-width: 500px) {
-  #landing #how-it-works .steps h3,
-  #landing #how-it-works .steps h2 {
+  #landing #how-it-works h3,
+  #landing #how-it-works h2 {
     padding-left: 20px;
   }
 
   #landing #how-it-works .steps .step {
-    line-height: 60px;
+    line-height: 20px;
     font-size: 20px;
-    padding: 0px;
+    padding: 20px 20px 20px 10px;
   }
 
   #landing #how-it-works .steps .step .icon {
-    height: 60px;
+    height: 20px;
   }
 
   #landing #how-it-works .steps .step :before {
@@ -8576,8 +8576,16 @@ body.page-payment-info.home {
     border-right: 0;
   }
 
+  #landing #how-it-works .steps .step span {
+    line-height: 25px;
+  }
+
   #landing #about-us {
-    padding: 40px 0px;
+    padding: 40px 10px;
+  }
+
+  .footer {
+    padding: 60px 15px 200px;
   }
 
   .footer .fa {
