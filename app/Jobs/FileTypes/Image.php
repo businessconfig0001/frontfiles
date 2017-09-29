@@ -49,13 +49,13 @@ class Image implements FileProcessInterface
         $output_final           = public_path('userFiles/').$this->new_name;
         //Text
         $font                   = public_path('watermarks/arial_narrow.ttf');
-        $text_options           = 'fontsize=10:fontcolor=White';
+        $text_options           = 'fontsize=20:fontcolor=White';
         //Text id
         $text_id                = 'ID\: '.$this->file->short_id;
-        $text_id_position       = 'x=(w-text_w-10):y=(text_h+24)';
+        $text_id_position       = 'x=(w-text_w-10):y=(text_h+29)';
         //Text author
         $text_author            = $this->file->owner->fullName();
-        $text_author_position   = 'x=(w-text_w-10):y=(text_h)+35';
+        $text_author_position   = 'x=(w-text_w-10):y=(text_h)+49';
         //Watermark + resizing + encoding + bitrate
         $watermark              = public_path('watermarks/watermark.png');
         $watermark_position     = 'main_w-overlay_w-10:10';
