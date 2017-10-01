@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
+@section('fb-data')
+
+		<meta property="og:url" content="{{ url()->current() }}" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="FrontFiles" />
+        <meta property="og:description" content="Frontfiles: {{ $file->title }}" />
+        <meta property="og:image" content="{{ asset('images/logo2x.png') }}" />
+
+@endsection
+
 @section('content')
 
 	@if (Auth::guest())

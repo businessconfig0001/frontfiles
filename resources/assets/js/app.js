@@ -35,6 +35,8 @@ Vue.component('register-modal',require('./components/modals/register-modal.vue')
 
 //profiles
 Vue.component('user-profile',require('./components/profiles/user-profile.vue'))
+Vue.component('user-listing',require('./components/profiles/user-listing.vue'))
+
 
 /**
  * Vuex data store implementation

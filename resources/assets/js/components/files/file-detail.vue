@@ -27,7 +27,8 @@
 					<div class="file-container" v-else>
 						<img src="/images/processing.png" alt="">
 					</div>
-					<span class="date">Uploaded on {{date_string}}</span>	
+					<span class="date">Uploaded on {{date_string}}</span>
+					<div class="fb-share-button" :data-href="url" data-layout="button_count"></div>	
 				</div>
 
 				
@@ -110,7 +111,11 @@ export default {
 		},
 		size(){
 			return Math.round((this.file.size/Math.pow(10,6) * 100))/100 + 'MB'
+		},
+		url(){
+			return location.href
 		}
+
 	},
 	methods:{
 		handleEdit(file){

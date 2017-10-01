@@ -16,14 +16,18 @@
             window.csrfToken = "{{ csrf_token() }}";
         </script>
 
-        <meta property="og:url" content="{{ url()->current() }}" />
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content="FrontFiles" />
-        <meta property="og:description" content="FrontFiles content." />
-        <meta property="og:image" content="{{ asset('images/logo2x.png') }}" />
+        @yield('fb-data')
 
     </head>
     <body class="page-payment-info @if(Request::is('/')) home @endif">
+        <script>
+            (function(d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.10&appId=137675656854943";
+                  fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
