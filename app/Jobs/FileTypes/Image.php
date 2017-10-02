@@ -64,6 +64,7 @@ class Image implements FileProcessInterface
         $process1 = new Process(
             "{$ffmpeg} -i '{$source_file}' -i {$watermark} -filter_complex \"[0:v]scale={$scale}[bg];[bg][1:v]overlay={$watermark_position}\" -strict -2 {$output_temp}"
         );
+        $process1->setTimeout(0);
         $process1->run();
 
         if(!$process1->isSuccessful())
@@ -75,6 +76,7 @@ class Image implements FileProcessInterface
         $process2 = new Process(
             "{$ffmpeg} -i '{$output_temp}' -vf \"[in]drawtext={$text_options}:fontfile='{$font}':text='{$text_id}':{$text_id_position},drawtext={$text_options}:fontfile='{$font}':text='{$text_author}':{$text_author_position}[out]\" -y -strict -2 {$output_final}"
         );
+        $process2->setTimeout(0);
         $process2->run();
 
         if(!$process2->isSuccessful())
