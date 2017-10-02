@@ -8892,6 +8892,18 @@ body.page-payment-info.home {
   padding: 1.5rem;
 }
 
+.profile .storage .box p + p {
+  padding: 1rem;
+}
+
+.pioneers {
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
 @media only screen and (max-width: 500px) {
   .drag-container .dropbox {
     margin-bottom: 30px;
@@ -8908,14 +8920,6 @@ body.page-payment-info.home {
     -webkit-transform: none !important;
             transform: none !important;
   }
-}
-
-.pioneers {
-  width: 100%;
-  text-align: center;
-  border-bottom: 2px solid #ddd;
-  text-transform: uppercase;
-  font-size: 2rem;
 }
 
 .auth-form {
@@ -8982,6 +8986,32 @@ body.page-payment-info.home {
 
 .login-box .checkbox label {
   font-size: 14px;
+}
+
+.pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.pagination .active span {
+  background-color: blue;
+}
+
+.pagination .active span:hover {
+  background-color: blue;
+  text-decoration: underline;
+}
+
+.pagination a {
+  color: blue !important;
+}
+
+.pagination a:hover {
+  color: blue !important;
 }
 
 /*-------------------------------------

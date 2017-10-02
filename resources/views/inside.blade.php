@@ -13,6 +13,8 @@
 			<files-display :_files="{{$jsonfiles}}.data" :activeuser="{{Auth::user()}}"></files-display>
 	     @endauth
 	    </div>
+
+	    {{$files->links()}}
 	</div>
 
 
