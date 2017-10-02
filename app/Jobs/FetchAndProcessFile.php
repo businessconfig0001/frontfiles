@@ -24,7 +24,7 @@ class FetchAndProcessFile implements ShouldQueue
      *
      * @var int
      */
-    public $tries = 3;
+    public $tries = 1;
 
     /**
      * The number of seconds the job can run before timing out.
