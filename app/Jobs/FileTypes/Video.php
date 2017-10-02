@@ -45,10 +45,10 @@ class Video implements FileProcessInterface
      */
     public function process(File $file)
     {
-        $this->file = $file;
-        $this->tmp_name = 'tmp_'.$this->file->short_id.'.mp4';
-        $this->tmp_pre_name = 'pre_'.$this->tmp_name;
-        $this->new_name = 'processed_'.$this->tmp_name;
+        $this->file         = $file;
+        $this->tmp_pre_name = 'pre_'.$this->file->short_id.'.mp4';
+        $this->tmp_name     = 'tmp_'.$this->file->short_id.'.mp4';
+        $this->new_name     = 'processed_'.$this->file->short_id.'.mp4';
 
         //General
         $ffmpeg                 = env('FFMPEG');
