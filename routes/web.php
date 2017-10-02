@@ -14,6 +14,7 @@
 /**
  * Homepage routes
  */
+
 Route::group([
     'namespace' => 'Home'
 ], function () {
