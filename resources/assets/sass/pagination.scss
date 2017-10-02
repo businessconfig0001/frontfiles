@@ -1,0 +1,25 @@
+.pagination{
+	display: flex;
+    justify-content: center;
+	
+
+	.active{
+		span{
+			background-color:blue;
+
+			&:hover{
+				background-color:blue;
+				text-decoration:underline;
+			}
+		}
+		
+	}
+
+	a{
+		color:blue !important;
+
+		&:hover{
+			color:blue !important;
+		}
+	}
+}
