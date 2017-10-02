@@ -46,7 +46,7 @@ class Video implements FileProcessInterface
     public function process(File $file)
     {
         $this->file = $file;
-        $this->tmp_name = $this->file->short_id.'.mp4';
+        $this->tmp_name = 'tmp_'.$this->file->short_id.'.mp4';
         $this->tmp_pre_name = 'pre_'.$this->tmp_name;
         $this->new_name = 'processed_'.$this->tmp_name;
 
@@ -70,7 +70,7 @@ class Video implements FileProcessInterface
         $watermark_position     = 'main_w-overlay_w-10:10';
         $encoding               = 'libx264';
         $bitrate                = '192k';
-        $scale                  = '-2:480';
+        $scale                  = '-2:720';
 
         $preprocess = new Process(
             "{$ffmpeg} -i {$source_file} -lavfi '[0:v]scale=ih*16/9:-2,boxblur=luma_radius=min(h\,w)/20:luma_power=1:chroma_radius=min(cw\,ch)/20:chroma_power=1[bg];[bg][0:v]overlay=(W-w)/2:(H-h)/2,crop=h=iw*9/16' {$output_pre_temp}"
