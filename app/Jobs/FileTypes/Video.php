@@ -147,11 +147,9 @@ class Video implements FileProcessInterface
      */
     protected function clearFiles()
     {
-        Storage::disk('local')->delete([
-            $this->file->name,
-            $this->pre_name,
-            $this->tmp_name,
-            $this->processed_name,
-        ]);
+        Storage::disk('local')->delete($this->file->name);
+        Storage::disk('local')->delete($this->pre_name);
+        Storage::disk('local')->delete($this->tmp_name);
+        Storage::disk('local')->delete($this->processed_name);
     }
 }
