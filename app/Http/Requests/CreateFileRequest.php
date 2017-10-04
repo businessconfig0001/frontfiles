@@ -53,6 +53,8 @@ class CreateFileRequest extends FormRequest
             'title'         => 'required|string|max:40',
             'description'   => 'required|string',
             'where'         => 'required|string|max:175',
+            'lat'           => 'required|string',
+            'lng'           => 'required|string',
             'when'          => 'required|date',
             'what.*'        => 'nullable|string|max:25',
             'who.*'         => 'nullable|string|max:25',
@@ -106,6 +108,8 @@ class CreateFileRequest extends FormRequest
             'title'         => request('title'),
             'description'   => request('description'),
             'where'         => request('where'),
+            'latitude'      => request('lat'),
+            'longitude'     => request('lng'),
             'when'          => request('when'),
             'why'           => request('why'),
         ]);

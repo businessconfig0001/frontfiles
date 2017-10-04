@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('avatar_name')->nullable();
             $table->text('bio');
             $table->string('location');
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
 
             $table->unsignedBigInteger('allowed_space')->default(10737418240);
             $table->string('dropbox_token', 64)->nullable();

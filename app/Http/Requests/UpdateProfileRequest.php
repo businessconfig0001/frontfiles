@@ -33,6 +33,8 @@ class UpdateProfileRequest extends FormRequest
             'avatar'        => 'nullable|image:jpeg,jpg,png|max:1048576',
             'bio'           => 'nullable|string|max:500',
             'location'      => 'required|string|max:100',
+            'lat'           => 'required|string',
+            'lng'           => 'required|string',
             'role'          => 'required|in:user,corporative',
         ];
     }
@@ -50,6 +52,8 @@ class UpdateProfileRequest extends FormRequest
             'last_name'     => request('last_name'),
             'bio'           => request('bio') ?? 'I am new here!',
             'location'      => request('location'),
+            'latitude'      => request('lat'),
+            'longitude'     => request('lng'),
         ]);
 
         if(request()->file('avatar'))
