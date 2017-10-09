@@ -25,6 +25,7 @@ Vue.component('file-detail',require('./components/files/file-detail.vue'))
 //inputs
 Vue.component('tag-input',require('./components/inputs/tag-input.vue'))
 Vue.component('file-input',require('./components/inputs/file-input.vue'))
+Vue.component('places-input',require('./components/inputs/places-input.vue'))
 
 
 //modals

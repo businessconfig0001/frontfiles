@@ -12,7 +12,7 @@
 	
 	<div class="input col-md-6">
 		<display-error :error="errors['where']"></display-error>
-		<input type="" ref="where" name="where" id="where" class="form-control" placeholder="#Where" v-model="upload.data.where" @focus.once="initPlace"/>
+		<places-input :options="{name:'where',className:'form-control',placeholder:'#Where'}" :content="upload.data.where" @change="changeWhere"></places-input>
 		
 	</div>
 	<div class="input col-md-5 col-md-offset-1">
@@ -89,15 +89,6 @@ export default {
 		}
 	},
 	methods:{
-		initPlace(event){
-				let placebox=new google.maps.places.Autocomplete(event.target)
-				try{
-					placebox.addListener('place_changed',() => {
-						this.upload.data.where = placebox.getPlace().formatted_address
-					})	
-				}
-				catch(e){}	
-		},
 		changeDate(d){
 			this.date.time= d
   			this.upload.data.when = moment(d).format('YYYY-MM-DD')
@@ -108,6 +99,11 @@ export default {
   		changeWho(tags){
   			this.$emit('changeWho',tags)
   		},
+  		changeWhere(data){
+				this.upload.data.where=data.location
+				this.upload.data.lat=data.lat
+				this.upload.data.lng=data.lng
+		},
 	},
 	mounted(){
 		this.upload.data.drive="dropbox"

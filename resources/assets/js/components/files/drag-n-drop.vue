@@ -31,7 +31,7 @@
 					</div>
 					<div class="input col-md-6">
 						<display-error :error="errors['where']"></display-error>
-						<input type="text" name="where"  class="form-control" @focus.once="initPlace" v-model="where" placeholder="#Where">
+						<places-input :options="{name:'where',className:'form-control',placeholder:'#Where'}" :content="where.location" @change="changeWhere"></places-input>
 					</div>
 					<div class="input col-md-5 col-md-offset-1">
 						<display-error :error="errors['when']"></display-error>
@@ -93,7 +93,9 @@
 				uploads:[],
 				progressBar:{},
 				title:'',
-				where:'',
+				where:{
+					location:''
+				},
 				why:'',
 				description:'',
 				focus:false,
@@ -159,7 +161,9 @@
 			},
 			where(){
 				this.uploads=this.uploads.map(u => {
-					u.data.where=this.where
+					u.data.where=this.where.location
+					u.data.lat=this.where.lat
+					u.data.lng=this.where.lng
 					return u
 				})
 			},
@@ -185,6 +189,15 @@
 			this.date.time=moment().format('YYYY-MM-DD')
 		},
 		methods:{
+			changeWhere(data){
+				this.where=data
+				this.uploads=this.uploads.map(u => {
+					u.data.where=data.location
+					u.data.lat=data.lat
+					u.data.lng=data.lng
+					return u
+				})
+			},
 			filesChange(fieldName, fileList) {
 				if (!fileList.length) return;
 
@@ -197,6 +210,8 @@
 				  			description:'',
 				  			what:[],
 				  			where:'',
+				  			lat:'',
+				  			lng:'',
 				  			when:moment().format('YYYY-MM-DD'),
 				  			who:[],
 				  			why:'',
