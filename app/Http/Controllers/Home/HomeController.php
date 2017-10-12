@@ -38,7 +38,9 @@ class HomeController extends Controller
         $files = File::latest()
             ->orderBy('id', 'desc')
             ->paginate(9);
-        $jsonfiles=json_encode($files);
+
+        $jsonfiles = json_encode($files);
+
         return view('inside', compact('files','jsonfiles'));
     }
 
@@ -51,7 +53,11 @@ class HomeController extends Controller
     {
         $users = User::orderBy('first_name')
             ->paginate(12);
-        $jsonusers=json_encode($users);
+
+        $all_users = User::all();
+
+        $jsonusers = json_encode($all_users);
+
         return view('community', compact('users','jsonusers'));
     }
 }
