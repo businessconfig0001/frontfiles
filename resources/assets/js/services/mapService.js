@@ -8,7 +8,7 @@ function drawMap(el){
 		let height=parseInt(el.style("height"))
 		projection=d3.geoMercator()
 	      //.scale(width / 2 / Math.PI)
-	      .translate([width / 2 - 30, height/2  + 210])
+	      .translate([width / 2 , height/2  + 210])
 		let path=d3.geoPath().projection(projection)
 
 	    d3.json(url, (err, geojson) => {
@@ -52,18 +52,22 @@ function createMarkers(data){
 
 }
 function drawMarkers(markers,el){
-	el.selectAll(".mark")
+	let pins =el.selectAll(".mark")
 		    .data(markers)
 		    .enter()
-		    .append("circle")
+
+	pins.append("circle")
 		    .attr('fill','black')
 		    .attr('r', 10)
 		    .attr("transform", d => "translate(" + projection([d.lng,d.lat]) + ")")
-		    .append('text')		    
-		    .attr("text-anchor", "middle") 
-		    .style('fill','white')
-		    .style('font-size','8px')
-		    .text(d => d.count)
+
+    pins.append('text')
+    	.attr("transform", d => "translate(" + projection([d.lng,d.lat]) + ")")
+    	.attr('dx',d => -4)
+    	.attr('dy',d => 4)
+	    .style('fill','white')		     	    
+	    .style('font-size','12px')
+	    .text(d => d.count)
 
 }
 

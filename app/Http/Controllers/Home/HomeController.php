@@ -54,10 +54,11 @@ class HomeController extends Controller
         $users = User::orderBy('first_name')
             ->paginate(12);
 
-        $all_users = User::all();
 
-        $jsonusers = json_encode($all_users);
+        $jsonusers= json_encode($users);
 
-        return view('community', compact('users','jsonusers'));
+        $all_users = json_encode(User::all());
+
+        return view('community', compact('users','jsonusers','all_users'));
     }
 }
