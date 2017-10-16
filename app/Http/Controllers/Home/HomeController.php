@@ -54,8 +54,7 @@ class HomeController extends Controller
         $users = User::orderBy('first_name')
             ->paginate(12);
 
-
-        $jsonusers= json_encode($users);
+        $jsonusers = json_encode($users);
 
         $all_users = json_encode(User::all());
 
