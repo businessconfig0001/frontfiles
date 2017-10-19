@@ -2,9 +2,9 @@
 
 namespace FrontFiles\Http\Controllers\Home;
 
-use FrontFiles\File;
+use FrontFiles\{User, File};
+use Illuminate\Support\Facades\Storage;
 use FrontFiles\Http\Controllers\Controller;
-use FrontFiles\User;
 
 class HomeController extends Controller
 {
@@ -39,9 +39,12 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(9);
 
-        $jsonfiles = json_encode($files);
+        $images = Storage::disk('slideshow')->files();
 
-        return view('inside', compact('files','jsonfiles'));
+        $jsonfiles      = json_encode($files);
+        $json_images    = json_encode($images);
+
+        return view('inside', compact('files','jsonfiles', 'json_images'));
     }
 
     /**
