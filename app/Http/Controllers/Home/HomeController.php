@@ -39,12 +39,9 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(9);
 
-        $images = Storage::disk('slideshow')->files();
+        $jsonfiles = json_encode($files);
 
-        $jsonfiles      = json_encode($files);
-        $json_images    = json_encode($images);
-
-        return view('inside', compact('files','jsonfiles', 'json_images'));
+        return view('inside', compact('files','jsonfiles'));
     }
 
     /**
@@ -62,5 +59,17 @@ class HomeController extends Controller
         $all_users = json_encode(User::all());
 
         return view('community', compact('users','jsonusers','all_users'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function slideshow()
+    {
+        $images = Storage::disk('slideshow')->files();
+
+        return response(['images' => $images], 200);
     }
 }
