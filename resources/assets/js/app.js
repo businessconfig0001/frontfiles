@@ -20,6 +20,7 @@ require('./bootstrap');
 Vue.component('drag-n-drop', require('./components/files/drag-n-drop.vue'))
 Vue.component('files-display',require('./components/files/files-display.vue'))
 Vue.component('file-detail',require('./components/files/file-detail.vue'))
+Vue.component('vue-slider',require('./components/files/vue-slider.vue'))
 
 
 //inputs
@@ -41,7 +42,8 @@ Vue.component('user-listing',require('./components/profiles/user-listing.vue'))
 //map
 Vue.component('map-component',require('./components/maps/map-component.vue'))
 
-
+import VueCarousel from 'vue-carousel'
+Vue.use(VueCarousel)
 /**
  * Vuex data store implementation
 */
