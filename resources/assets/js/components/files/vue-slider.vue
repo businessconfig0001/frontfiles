@@ -1,8 +1,10 @@
 <template>
 	<div class="slider-wrapper">
-		<carousel :autoplay="true" :perPage="1" :paginationColor="'blue'">
+		<carousel :autoplay="true" :perPage="1" :paginationColor="'blue'" :navigationEnabled="true" navigationNextLabel="&#xf054;" navigationPrevLabel="&#xf053;">
 			<slide v-for="slide in slides" class="slide">
-				<img :src="'/images/slideshow/' +slide" alt="">
+				<a :href="slide.link">
+					<img :src="'/images/slideshow/' +slide.img" alt="">
+				</a>	
 			</slide>
 		</carousel>
 	</div>
@@ -21,8 +23,13 @@ export default {
 	mounted(){
 		axios.get(location.origin +'/slideshow')
 			.then(res=>{
-				console.log(res)
-				this.slides=res.data.images
+				this.slides=res.data.images.map(i =>{
+					return{
+						img:i,
+						link:location.origin + '/file/' + i.split('.')[0]	
+					}
+					
+				})
 			})
 			.catch(console.error)	
 	}
@@ -47,6 +54,19 @@ export default {
 		margin-bottom:5rem;
 		position: relative;
 		z-index: 30;
+	}
+	.VueCarousel-navigation-button{
+		color:blue !important;
+		z-index:100;
+
+		&.VueCarousel-navigation-prev{
+			left:60px;
+		}
+
+		&.VueCarousel-navigation-next{
+			right:60px;
+		}
+
 	}
 }
 </style>
