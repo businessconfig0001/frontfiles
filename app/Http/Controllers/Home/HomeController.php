@@ -68,7 +68,15 @@ class HomeController extends Controller
      */
     public function slideshow()
     {
-        $images = Storage::disk('slideshow')->files();
+        $raw_images = Storage::disk('slideshow')->files();
+
+        $images = [];
+
+        foreach($raw_images as $image)
+            $images[] = [
+                'name' => pathinfo($image, PATHINFO_FILENAME),
+                'src' => $image
+            ];
 
         return response(['images' => $images], 200);
     }
