@@ -18,13 +18,6 @@ class Image implements FileProcessInterface
     protected $file;
 
     /**
-     * The file's temporary name.
-     *
-     * @var string
-     */
-    protected $tmp_name;
-
-    /**
      * The file's new name.
      *
      * @var string
@@ -35,54 +28,42 @@ class Image implements FileProcessInterface
      * Method to process the file.
      *
      * @param File $file
+     * @throws \Symfony\Component\Process\Exception\LogicException
+     * @throws \Symfony\Component\Process\Exception\RuntimeException
+     * @throws \Symfony\Component\Process\Exception\ProcessFailedException
+     * @throws \Symfony\Component\Process\Exception\InvalidArgumentException
      */
     public function process(File $file)
     {
         $this->file = $file;
-        $this->tmp_name = 'tmp_'.$this->file->name;
         $this->new_name = 'processed_' . $this->file->name;
 
         //General
-        $ffmpeg                 = env('FFMPEG');
+        $imagemagick            = env('IMAGEMAGICK');
         $source_file            = public_path('userFiles/').$this->file->name;
-        $output_temp            = public_path('userFiles/').$this->tmp_name;
         $output_final           = public_path('userFiles/').$this->new_name;
         //Text
         $font                   = public_path('watermarks/arial_narrow.ttf');
-        $text_options           = 'fontsize=20:fontcolor=White';
         //Text id
         $text_id                = 'ID\: '.$this->file->short_id;
-        $text_id_position       = 'x=(w-text_w-10):y=(text_h+50)';
+        $text_id_position       = '+10+65';
         //Text author
         $text_author            = $this->file->owner->fullName();
-        $text_author_position   = 'x=(w-text_w-10):y=(text_h)+74';
-        //Watermark + resizing + encoding + bitrate
-        $watermark              = public_path('watermarks/watermark.png');
-        $watermark_position     = 'main_w-overlay_w-10:10';
-        $scale                  = '-2:720';
+        $text_author_position   = '10,102';
+        //Watermark + resizing
+        $watermark              = public_path('watermarks/gray_watermark.png');
+        $scale                  = '1280x720';
 
-        $process1 = new Process(
-            "{$ffmpeg} -i '{$source_file}' -i {$watermark} -filter_complex \"[0:v]scale={$scale}[bg];[bg][1:v]overlay={$watermark_position}\" -strict -2 {$output_temp}"
+        $process = new Process(
+            "{$imagemagick} {$source_file} -scale {$scale} -background white -gravity center -extent {$scale} -background transparent {$watermark} -gravity northeast -geometry +10+10 -composite -background transparent -pointsize 27 -font {$font} -fill gray label:'{$text_id}' -gravity northeast -geometry {$text_id_position} -draw \"font '{$font}' gravity northeast fill gray text {$text_author_position} '{$text_author}'\" -composite {$output_final}"
         );
-        $process1->setTimeout(0);
-        $process1->run();
+        $process->setTimeout(0);
+        $process->run();
 
-        if(!$process1->isSuccessful())
+        if(!$process->isSuccessful())
         {
             $this->clearFiles();
-            throw new ProcessFailedException($process1);
-        }
-
-        $process2 = new Process(
-            "{$ffmpeg} -i '{$output_temp}' -vf \"[in]drawtext={$text_options}:fontfile='{$font}':text='{$text_id}':{$text_id_position},drawtext={$text_options}:fontfile='{$font}':text='{$text_author}':{$text_author_position}[out]\" -y -strict -2 {$output_final}"
-        );
-        $process2->setTimeout(0);
-        $process2->run();
-
-        if(!$process2->isSuccessful())
-        {
-            $this->clearFiles();
-            throw new ProcessFailedException($process2);
+            throw new ProcessFailedException($process);
         }
 
         //Save to the blob storage
@@ -126,7 +107,6 @@ class Image implements FileProcessInterface
         Storage::disk('local')->delete([
             $this->file->name,
             $this->new_name,
-            $this->tmp_name,
         ]);
     }
 }
