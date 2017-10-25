@@ -37,7 +37,7 @@ class FilesController extends Controller
         
         if(request()->expectsJson())
             return response([
-                'data' => $file,
+                'data' => $files,
                 'dropbox_token' => $dropbox_token
             ], 200);
 

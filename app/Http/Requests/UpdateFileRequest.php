@@ -48,7 +48,7 @@ class UpdateFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'         => 'required|string|max:40',
+            'title'         => 'required|string|max:52',
             'description'   => 'required|string',
             'where'         => 'required|string|max:175',
             'lat'           => 'required|string',

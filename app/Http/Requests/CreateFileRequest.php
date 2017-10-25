@@ -50,7 +50,7 @@ class CreateFileRequest extends FormRequest
     {
         return [
             'file'          => 'required|file|allowed_file|max:524288000',
-            'title'         => 'required|string|max:40',
+            'title'         => 'required|string|max:52',
             'description'   => 'required|string',
             'where'         => 'required|string|max:175',
             'lat'           => 'required|string',
