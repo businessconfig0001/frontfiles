@@ -9014,6 +9014,15 @@ body.page-payment-info.home {
   color: blue !important;
 }
 
+.slider {
+  width: 100vw;
+  height: 20rem;
+}
+
+.map {
+  margin-top: 23rem;
+}
+
 /*-------------------------------------
  Name: FRONTFILES
  Date: Jun 2017

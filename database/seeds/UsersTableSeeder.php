@@ -32,6 +32,8 @@ class UsersTableSeeder extends Seeder
                 'avatar'        => 'http://via.placeholder.com/450x450',
                 'bio'           => $faker->text,
                 'location'      => 'Odivelas, Lisbon, Portugal',
+                'latitude'      => 38.795369,
+                'longitude'     => -9.18518,
                 'password'      => 'secret',
                 'allowed_space' => 10737418240,
                 'confirmed'     => true,

@@ -23,6 +23,8 @@
   },
   "dependencies": {
     "concurrently": "^3.4.0",
-    "smartcrop": "^1.1.1"
+    "d3": "^4.11.0",
+    "smartcrop": "^1.1.1",
+    "vue-carousel": "^0.6.5"
   }
 }

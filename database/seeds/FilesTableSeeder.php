@@ -35,6 +35,8 @@ class FilesTableSeeder extends Seeder
                 'title'         => $faker->sentence,
                 'description'   => $faker->paragraph,
                 'where'         => 'Odivelas, Lisbon, Portugal',
+                'latitude'      => 38.795369,
+                'longitude'     => -9.18518,
                 'when'          => $faker->dateTimeThisMonth,
                 'why'           => $faker->sentence,
             ]);

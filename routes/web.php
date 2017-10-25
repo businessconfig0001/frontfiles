@@ -21,6 +21,7 @@ Route::group([
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/index', 'HomeController@main')->name('main');
     Route::get('/inside', 'HomeController@inside')->name('inside');
+    Route::get('/slideshow', 'HomeController@slideshow')->name('slideshow');
     Route::get('/community', 'HomeController@community')->name('community');
 });
 

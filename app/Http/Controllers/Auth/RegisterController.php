@@ -55,6 +55,8 @@ class RegisterController extends Controller
             'avatar'        => 'nullable|image:jpeg,jpg,png|max:1048576',
             'bio'           => 'nullable|string|max:500',
             'location'      => 'required|string|max:100',
+            'lat'           => 'required|string',
+            'lng'           => 'required|string',
             'role'          => 'required|in:user,corporative',
             'password'      => 'required|string|min:6|confirmed',
         ]);
@@ -94,6 +96,8 @@ class RegisterController extends Controller
             'avatar_name'   => $avatar_name ?? null,
             'bio'           => $data['bio'] ?? 'I am new here!',
             'location'      => $data['location'],
+            'latitude'      => $data['lat'],
+            'longitude'     => $data['lng'],
             'password'      => $data['password'],
         ])->assignRole($data['role']);
     }

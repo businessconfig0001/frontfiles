@@ -80,8 +80,7 @@
                             <label for="location" class="col-md-4 control-label">Location</label>
 
                             <div class="col-md-6">
-                                <input id="location" type="text" class="form-control" name="location" value="{{ old('location') }}" required autofocus>
-
+                                <places-input :options="{ name:'location',className:'form-control' }" :content="'{{old('location')}}'"></places-input>
                                 @if ($errors->has('location'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('location') }}</strong>
@@ -238,10 +237,4 @@
 @endsection
 
 @section('scripts')
-<script>
-    window.onload=function(){
-        let location=document.getElementById('location')
-        location.addEventListener('focus',() => new google.maps.places.Autocomplete(location))
-    }
-</script>
 @endsection

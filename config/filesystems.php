@@ -50,6 +50,13 @@ return [
             'visibility'    => 'public',
         ],
 
+        'slideshow' => [
+            'driver'        => 'local',
+            'root'          => public_path('images/slideshow/'),
+            'url'           => env('APP_URL').'/images/slideshow/',
+            'visibility'    => 'public',
+        ],
+
         'azure' => [
             'driver'    => 'azure',
             'name'      => env('STORAGE_NAME'),
