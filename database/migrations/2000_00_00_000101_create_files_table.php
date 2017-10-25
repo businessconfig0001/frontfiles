@@ -34,15 +34,10 @@ class CreateFilesTable extends Migration
             $table->text('description');
 
             $table->string('where');
-            $table->double('latitude')->nullable();
-            $table->double('longitude')->nullable();
             $table->date('when');
             $table->string('why')->nullable();
 
             $table->timestamps();
-        });
-
-        Schema::table('files', function($table) {
         });
     }
 
