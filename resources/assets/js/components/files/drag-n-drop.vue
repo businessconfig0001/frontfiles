@@ -4,8 +4,16 @@
 		<div class="col-sm-4 col-offset-2 col-xs-12 bg-blue text-center dropbox">
 			<input type="file" multiple name="file" :disabled="state ==='saving'" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*,video/*,audio/*,application/pdf" class="input-file">
 			<div v-if="state === 'saving'" class="progressbar">
-			  	Uploading files...
 			  	<loading-icon></loading-icon>
+			  	<div class="loading-msg">
+			  		<h3>Uploading files</h3>
+			  		<p>
+			  			This may take a few minutes
+			  		</p>
+			  		<p>
+			  			please wait
+			  		</p>
+			  	</div>
 			</div>
 			<div v-else-if="state === 'more'">
 			  	Add more files or <a @click.prevent="upload">save them</a>
@@ -23,7 +31,7 @@
 				<div class="col-md-12">
 					<div class="input col-md-12">
 						<display-error :error="errors['title']"></display-error>
-						<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="title"/>
+						<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="title" maxlength="40" />
 					</div>
 					<div class="input col-md-12">
 						<display-error :error="errors['description']"></display-error>
@@ -43,7 +51,7 @@
 					</div>
 				</div>
 				<div class="upload-button">
-					<a v-if="dropbox" class="submit btn btn-primary" @click.prevent="uploadFile" @keyup.enter="uploadFile">Upload all</a>
+					<button v-if="dropbox" :disabled="state === saving" class="submit btn btn-primary" @click.prevent="uploadFile" @keyup.enter="uploadFile">Upload all</button>
 					<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
 				</div>
 			</div>
@@ -326,8 +334,10 @@
 		.upload-button{
 			float:left;
 			width:100%;
-
-			a{
+			.submit:disabled{
+				background-color:#ddd;
+			}
+			a,button{
 				width:10rem;
 				margin:0 auto;
 			}
@@ -372,6 +382,10 @@
 
 		.progressbar{
 			width:60%;
+
+			.loading-msg{
+				color:white;
+			}
 
 			progress[value]{
 				width:100%;

@@ -2,7 +2,7 @@
 <div class="form-wrapper clearfix">
 	<div class="input col-md-12">
 		<display-error :error="errors['title']"></display-error>
-		<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title"/>
+		<input type="text" name="title" id="title" class="form-control" placeholder="Title" v-model="upload.data.title" maxlength="40"/>
 	</div>
 	<div class="input col-md-12">
 		<display-error :error="errors['description']"></display-error>
