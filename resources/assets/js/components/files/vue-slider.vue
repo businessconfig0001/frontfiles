@@ -1,11 +1,11 @@
 <template>
 	<div class="slider-wrapper">
-		<carousel :autoplay="true" :perPage="1" :paginationColor="'blue'" :navigationEnabled="true" navigationNextLabel="&#xf054;" navigationPrevLabel="&#xf053;">
-			<slide v-for="slide in slides" class="slide">
-				<a :href="slide.link">
-					<img :src="'/images/slideshow/' +slide.img" alt="">
+		<carousel :autoplay="true" :perPage="1" :paginationColor="'blue'" :navigationEnabled="true" navigationNextLabel="<i class='fa fa-chevron-right fa-5x'></i>" navigationPrevLabel="<i class='fa fa-chevron-left fa-5x'></i>">
+			<slide v-for="slide in slides"  class="slide">
+				<a :href="'/files/' + slide.name">
+					<img :src="'/images/slideshow/' +slide.src" alt="">
 				</a>	
-			</slide>
+			</slide>	
 		</carousel>
 	</div>
 </template>
@@ -23,13 +23,7 @@ export default {
 	mounted(){
 		axios.get(location.origin +'/slideshow')
 			.then(res=>{
-				this.slides=res.data.images.map(i =>{
-					return{
-						img:i,
-						link:location.origin + '/file/' + i.split('.')[0]	
-					}
-					
-				})
+				this.slides=res.data.images
 			})
 			.catch(console.error)	
 	}
@@ -60,11 +54,11 @@ export default {
 		z-index:100;
 
 		&.VueCarousel-navigation-prev{
-			left:60px;
+			left:80px;
 		}
 
 		&.VueCarousel-navigation-next{
-			right:60px;
+			right:80px;
 		}
 
 	}
