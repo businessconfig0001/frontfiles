@@ -51,7 +51,7 @@
 					</div>
 				</div>
 				<div class="upload-button">
-					<button v-if="dropbox" :disabled="state === saving" class="submit btn btn-primary" @click.prevent="uploadFile" @keyup.enter="uploadFile">Upload all</button>
+					<button v-if="dropbox" :disabled="state === 'saving'" class="submit btn btn-primary" @click.prevent="uploadFile" @keyup.enter="uploadFile">Upload all</button>
 					<a href="/profile" v-else class="submit btn btn-primary" title="Connect to ur dropbox to upload files">Connect to dropbox</a>
 				</div>
 			</div>
