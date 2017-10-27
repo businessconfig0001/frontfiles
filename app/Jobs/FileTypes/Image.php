@@ -46,16 +46,16 @@ class Image implements FileProcessInterface
         $font                   = public_path('watermarks/arial_narrow.ttf');
         //Text id
         $text_id                = 'ID\: '.$this->file->short_id;
-        $text_id_position       = '+10+65';
+        $text_id_position       = '+10+45';
         //Text author
         $text_author            = $this->file->owner->fullName();
-        $text_author_position   = '10,102';
+        $text_author_position   = '10,73';
         //Watermark + resizing
-        $watermark              = public_path('watermarks/gray_watermark.png');
+        $watermark              = public_path('watermarks/watermark.png');
         $scale                  = '1280x720';
 
         $process = new Process(
-            "{$imagemagick} {$source_file} -scale {$scale} -background white -gravity center -extent {$scale} -background transparent {$watermark} -gravity northeast -geometry +10+10 -composite -background transparent -pointsize 27 -font {$font} -fill gray label:'{$text_id}' -gravity northeast -geometry {$text_id_position} -draw \"font '{$font}' gravity northeast fill gray text {$text_author_position} '{$text_author}'\" -composite {$output_final}"
+            "{$imagemagick} {$source_file} -scale {$scale} -background gray30 -gravity center -extent {$scale} -background transparent {$watermark} -gravity northeast -geometry +10+10 -composite -background transparent -pointsize 20 -font {$font} -fill white label:'{$text_id}' -gravity northeast -geometry {$text_id_position} -draw \"font '{$font}' gravity northeast fill white text {$text_author_position} '{$text_author}'\" -composite {$output_final}"
         );
         $process->setTimeout(0);
         $process->run();

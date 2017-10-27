@@ -62,10 +62,10 @@ class Video implements FileProcessInterface
         $text_options           = 'fontsize=20:fontcolor=White';
         //Text id
         $text_id                = 'ID\: '.$this->file->short_id;
-        $text_id_position       = 'x=(w-text_w-10):y=(text_h+50)';
+        $text_id_position       = 'x=(w-text_w-10):y=(text_h+31)';
         //Text author
         $text_author            = $this->file->owner->fullName();
-        $text_author_position   = 'x=(w-text_w-10):y=(text_h)+74';
+        $text_author_position   = 'x=(w-text_w-10):y=(text_h)+54';
         //Watermark + resizing + encoding + bitrate
         $watermark              = public_path('watermarks/watermark.png');
         $watermark_position     = 'main_w-overlay_w-10:10';
