@@ -67,12 +67,20 @@ class FilesController extends Controller
     {
         $file = File::where('short_id', $short_id)->firstOrFail();
 
+        $FBOpenGraphImg = asset('images/ff_generic_fb_logo.png');
+
+        if($file->processed)
+        {
+            if($file->type === 'image') $FBOpenGraphImg = $file->azure_url;
+            if($file->type === 'video') $FBOpenGraphImg = asset('images/ff_generic_fb_video_thumbnail.png');
+        }
+
         if(request()->expectsJson())
             return response([
                 'data' => $file,
             ], 200);
 
-        return view('files.show', compact('file'));
+        return view('files.show', compact('file', 'FBOpenGraphImg'));
     }
 
     /**

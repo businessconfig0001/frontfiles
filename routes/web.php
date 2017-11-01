@@ -15,10 +15,6 @@
  * Homepage routes
  */
 
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
-use Illuminate\Support\Facades\Storage;
-
 Route::group([
     'namespace' => 'Home'
 ], function () {
@@ -27,47 +23,6 @@ Route::group([
     Route::get('/inside', 'HomeController@inside')->name('inside');
     Route::get('/slideshow', 'HomeController@slideshow')->name('slideshow');
     Route::get('/community', 'HomeController@community')->name('community');
-
-    Route::get('/testing', function(){
-
-        $file = 'avo.jpg';
-        $new_name = 'processed_'.$file;
-
-        list($imgWidth, $imgHeight) = getimagesize(Storage::disk('local')->url($file));
-
-        return $imgWidth . 'x' . $imgHeight;
-
-        /*
-        //General
-        $imagemagick            = env('IMAGEMAGICK');
-        $source_file            = public_path('userFiles/').$file;
-        $output_final           = public_path('userFiles/').$new_name;
-        //Text
-        $font                   = public_path('watermarks/arial_narrow.ttf');
-        //Text id
-        $text_id                = 'ID\: 12345678';
-        $text_id_position       = '+10+45';
-        //Text author
-        $text_author            = 'André Botelho';
-        $text_author_position   = '10,73';
-        //Watermark + resizing
-        $watermark              = public_path('watermarks/watermark.png');
-        $scale                  = '1280x720';
-
-        $process = new Process(
-            "{$imagemagick} {$source_file} -scale {$scale} -background gray30 -gravity center -extent {$scale} -background transparent {$watermark} -gravity northeast -geometry +10+10 -composite -background transparent -pointsize 20 -font {$font} -fill white label:'{$text_id}' -gravity northeast -geometry {$text_id_position} -draw \"font '{$font}' gravity northeast fill white text {$text_author_position} '{$text_author}'\" -composite {$output_final}"
-        );
-        $process->setTimeout(0);
-        $process->run();
-
-        if(!$process->isSuccessful())
-            throw new ProcessFailedException($process);
-
-        return 'Worked!';
-        */
-    });
-
-
 });
 
 /**

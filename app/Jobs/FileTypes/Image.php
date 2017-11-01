@@ -37,26 +37,23 @@ class Image implements FileProcessInterface
     {
         $this->file = $file;
         $this->new_name = 'processed_' . $this->file->name;
+        list($imgWidth, $imgHeight) = getimagesize(Storage::disk('local')->url($this->file->name));
 
         //General
         $imagemagick            = env('IMAGEMAGICK');
         $source_file            = public_path('userFiles/').$this->file->name;
         $output_final           = public_path('userFiles/').$this->new_name;
-        //Text
-        $font                   = public_path('watermarks/arial_narrow.ttf');
-        //Text id
-        $text_id                = 'ID\: '.$this->file->short_id;
-        $text_id_position       = '+10+45';
-        //Text author
-        $text_author            = $this->file->owner->fullName();
-        $text_author_position   = '10,73';
-        //Watermark + resizing
         $watermark              = public_path('watermarks/watermark.png');
-        $scale                  = '1280x720';
+        $font                   = public_path('watermarks/arial_narrow.ttf');
+        $text_id                = 'ID\: '.$this->file->short_id;
+        $text_author            = $this->file->owner->fullName();
 
-        $process = new Process(
-            "{$imagemagick} {$source_file} -scale {$scale} -background gray30 -gravity center -extent {$scale} -background transparent {$watermark} -gravity northeast -geometry +10+10 -composite -background transparent -pointsize 20 -font {$font} -fill white label:'{$text_id}' -gravity northeast -geometry {$text_id_position} -draw \"font '{$font}' gravity northeast fill white text {$text_author_position} '{$text_author}'\" -composite {$output_final}"
-        );
+        if($imgHeight > $imgWidth)
+            $cmd = "{$imagemagick} {$source_file} -scale 1280x720 -background white -gravity center -extent 1280x720 -background transparent {$watermark} -gravity north -geometry +0+10 -composite -background transparent -pointsize 20 -font {$font} -fill blue label:'{$text_id}' -gravity north -geometry +0+45 -draw \"font '{$font}' gravity north fill blue text 0,73 '{$text_author}'\" -composite {$output_final}";
+        else
+            $cmd = "{$imagemagick} {$source_file} -resize x720 -background transparent {$watermark} -gravity northeast -geometry +10+10 -composite -background transparent -pointsize 20 -font {$font} -fill blue label:'{$text_id}' -gravity northeast -geometry +10+45 -draw \"font '{$font}' gravity northeast fill blue text 10,73 '{$text_author}'\" -composite {$output_final}";
+
+        $process = new Process($cmd);
         $process->setTimeout(0);
         $process->run();
 
