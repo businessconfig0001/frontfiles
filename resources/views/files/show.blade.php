@@ -7,7 +7,7 @@
 		<meta property="og:description" 		content="{{ $file->description }}">
 		<meta property="og:url" 				content="{{ url()->current() }}">
         <meta property="og:type" 				content="article">
-        <meta property="og:image" 				content="{{ asset('images/ff_generic_fb_logo.png') }}">
+        <meta property="og:image" 				content="{{ $FBOpenGraphImg }}">
 		<meta property="og:locale" 				content="en_GB">
 		<meta property="og:locale:alternate" 	content="pt_PT">
 		<meta property="og:locale:alternate" 	content="pt_BR">
