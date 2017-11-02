@@ -64,11 +64,11 @@ export default {
 		font-size:3rem;
 
 		&.VueCarousel-navigation-prev{
-			left:2%;
+			left:4%;
 		}
 
 		&.VueCarousel-navigation-next{
-			right:2%;
+			right:4%;
 		}
 
 	}
