@@ -1,6 +1,6 @@
 <template>
 	<div class="slider-wrapper">
-		<carousel :autoplay="true" :perPage="1" :paginationColor="'blue'" :navigationEnabled="true" navigationNextLabel="<i class='fa fa-chevron-right fa-5x'></i>" navigationPrevLabel="<i class='fa fa-chevron-left fa-5x'></i>">
+		<carousel :autoplay="true" :perPage="1" :paginationColor="'blue'" :navigationEnabled="true" navigationNextLabel="<i class='fa fa-chevron-right'></i>" navigationPrevLabel="<i class='fa fa-chevron-left '></i>">
 			<slide v-for="slide in slides"  class="slide">
 				<a :href="'/files/' + slide.name">
 					<img :src="'/images/slideshow/' +slide.src" alt="">
@@ -37,8 +37,17 @@ export default {
 	width:100%;
 
 	.slide{
-		img{
+		width:100%;
+		height:70vh;
+		overflow:hidden;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		a{
 			width:100%;
+		}
+		img{
+			min-width:100%;
 			height:50rem;
 		}
 	}
@@ -52,15 +61,41 @@ export default {
 	.VueCarousel-navigation-button{
 		color:blue !important;
 		z-index:100;
+		font-size:3rem;
 
 		&.VueCarousel-navigation-prev{
-			left:80px;
+			left:2%;
 		}
 
 		&.VueCarousel-navigation-next{
-			right:80px;
+			right:2%;
 		}
 
+	}
+
+	@media(max-width:1000px){
+		.slide{
+			height:35vh;
+			a{
+				width:100%;
+			}
+			img{
+				min-width:100%;
+				height:25rem;
+			}
+		}
+		.VueCarousel-navigation-button{
+		font-size:1rem;
+
+		&.VueCarousel-navigation-prev{
+			left:10%;
+		}
+
+		&.VueCarousel-navigation-next{
+			right:10%;
+		}
+
+	}
 	}
 }
 </style>
