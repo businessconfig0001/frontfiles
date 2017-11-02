@@ -23,7 +23,8 @@ class User extends Authenticatable
         'email', 'first_name', 'last_name',
         'slug', 'avatar', 'avatar_name', 'bio',
         'location', 'dropbox_token', 'password',
-        'confirmation_code', 'confirmed'
+        'confirmation_code', 'confirmed',
+        'latitude', 'longitude'
     ];
 
     /**

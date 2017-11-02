@@ -33,8 +33,8 @@ class UpdateProfileRequest extends FormRequest
             'avatar'        => 'nullable|image:jpeg,jpg,png|max:1048576',
             'bio'           => 'nullable|string|max:500',
             'location'      => 'required|string|max:100',
-            'lat'           => 'required|string',
-            'lng'           => 'required|string',
+            'lat'           => 'required|numeric',
+            'lng'           => 'required|numeric',
             'role'          => 'required|in:user,corporative',
         ];
     }
