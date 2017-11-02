@@ -17,7 +17,7 @@ class File extends Model
         'user_id', 'short_id', 'drive', 'type', 'extension',
         'size', 'original_name', 'name', 'url', 'azure_url',
         'processed', 'title', 'description', 'where', 'when',
-        'why'
+        'why', 'latitude', 'longitude'
     ];
 
     /**
