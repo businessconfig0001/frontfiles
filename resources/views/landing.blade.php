@@ -10,7 +10,7 @@
   <!-- HERO !-->
                 <section class="col-xs-12  no-pad hero">
                     <div class="hero-image">
-                        <img src="assets/images/hero.jpg" alt="hero">
+                        <img src="assets/images/Image-1.jpg" alt="hero">
                     </div>
                 </section>
                 <!-- /HERO !-->
@@ -59,7 +59,7 @@
 
                 <section class="col-xs-12  no-pad hero">
                     <div class="hero-image">
-                        <img src="assets/images/riot1.jpg" alt="hero">
+                        <img src="assets/images/Image-2.jpg" alt="hero">
                     </div>
                 </section>
 
