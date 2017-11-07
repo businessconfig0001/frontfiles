@@ -53,7 +53,8 @@
 								</span>
 							</li>
 						</ul>
-						<a v-if="current" class="btn btn-secondary" @click.prevent="showEdit = true">Edit</a>
+						<a class="btn btn-primary btn-lg" href="">Download original</a>
+						<a v-if="current" class="btn  btn-secondary" @click.prevent="showEdit = true">Edit</a>
 						<a v-if="current" class="btn btn-primary" @click.prevent="showDelete = true">Remove</a>
 					</div>
 				
@@ -209,6 +210,11 @@ export default {
 				width:47%;
 				margin:1%;
 			}
+
+			.btn-lg{
+				width:98%;
+			}
+
 
 			.tags{
 				margin-top:1rem;
