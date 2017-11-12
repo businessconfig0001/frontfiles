@@ -75,6 +75,16 @@ class File extends Model
     }
 
     /**
+     * Returns the download path for this file.
+     *
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function downloadPath() :string
+    {
+        return route('backend.download-file', ['file' => $this]);
+    }
+
+    /**
      * Generates a pseudo-random string that will be the Short ID of the file.
      *
      * @param int $length
