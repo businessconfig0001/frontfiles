@@ -53,7 +53,7 @@
 								</span>
 							</li>
 						</ul>
-						<a class="btn btn-primary btn-lg" href="">Download original</a>
+						<a class="btn btn-primary btn-lg" :href="download">Download original</a>
 						<a v-if="current" class="btn  btn-secondary" @click.prevent="showEdit = true">Edit</a>
 						<a v-if="current" class="btn btn-primary" @click.prevent="showDelete = true">Remove</a>
 					</div>
@@ -92,7 +92,12 @@ export default {
 		author:{
 			required:true,
 			type:String
+		},
+		download:{
+			required:true,
+			type:String
 		}
+
 	},
 	data () {
 		return {
