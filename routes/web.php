@@ -26,12 +26,8 @@ Route::group([
 
     Route::get('/testing', function(){
 
-        $ids = range(575, 629);
-
-        foreach($ids as $id){
-            $file = FrontFiles\File::find($id);
-            $file->delete();
-        }
+        $file = FrontFiles\File::find(630);
+        $file->delete();
 
         return 'Worked!';
     });
