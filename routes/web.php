@@ -23,15 +23,6 @@ Route::group([
     Route::get('/inside', 'HomeController@inside')->name('inside');
     Route::get('/slideshow', 'HomeController@slideshow')->name('slideshow');
     Route::get('/community', 'HomeController@community')->name('community');
-
-    Route::get('/testing', function(){
-
-        $file = FrontFiles\File::find(630);
-        $file->delete();
-
-        return 'Worked!';
-    });
-
 });
 
 /**
