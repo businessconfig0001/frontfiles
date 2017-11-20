@@ -162,9 +162,12 @@
                         </div>
                         <!-- Button -->
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div v-if="allow" class="col-md-6 col-md-offset-4">
                                 <input type="submit" class="btn btn-primary" :disabled="!ethics" value="Submit">
                             </div>
+                            <div v-else class="col-md-6 col-md-offset-4">
+                                <a class="btn btn-primary" @click.prevent="modal" :disabled="!ethics">Submit</a>
+                           </div>
                         </div>
                         <!-- Button -->
 
