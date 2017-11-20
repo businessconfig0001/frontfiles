@@ -126,6 +126,8 @@ const app = new Vue({
     	}	
     },
     mounted(){
+    	if(getQuery('code') === 'secret')this.allow=true
+     	else this.options.show=true
     	window.addEventListener('keydown',e => {
     		if(e.keyCode === 13){
     			this.$store.commit('down')

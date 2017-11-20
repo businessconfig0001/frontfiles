@@ -61,7 +61,7 @@
 
                                             @if (Auth::guest())
                                                 <li><a href="{{ route('login') }}">Login</a></li>
-                                                <li><a href="{{ route('register') }}">Register</a></li>
+                                                <li><a @click.prevent="modal">Register</a></li>
                                             @else
                                                 <li>
                                                     <a href="{{ route('logout') }}"
@@ -112,8 +112,63 @@
                 </div>
                 <!-- /header module -->
                 <div class="row loaded-content">
-                    @yield('content')
-                    @yield('modals')
+                        @yield('content')
+                         @if (Auth::guest())
+                                 <modal-container :showmodal="regOptions.show">
+                                     <div slot="br">
+                                         <h1>Olá! <br/> Ainda estamos a trabalhar árduamente na nossa potente plataforma.</h1>
+                                         <p>
+                                             A FF estará disponível para todo o mundo brevemente.
+                                             Por agora estamos a testar algumas funcionalidades com um grupo restrito de utilizadores.
+                                         </p>
+                                         <P>
+                                             Se você quiser tornar-se um FrontFiles Pioneer e juntar-se a nós nesta fase de testes, envie-nos um pedido para pioneers@frontfiles.com e conte-nos um pouco sobre você.
+                                            Sinta-se à vontade para fazer perguntas sobre a plataforma FrontFiles.
+                                        </p>
+                                        <p>
+                                            Muito obrigado!
+                                            Até breve.
+                                        </p>
+                                    </div>
+                                    <div slot="es">
+                                        <h1>¡Hola! <br/> Estamos trabajando duro en nuestra plataforma.</h1>
+                                        <p>
+                                            FF estará disponible para todo el mundo muy pronto.
+                                            Por ahora estamos probando algunas funcionalidades con algunos usuarios seleccionados.
+                                        </p>
+                                        <P>
+                                            Si también quieres ser uno de nuestros pioneros y juntarte a nuestro programa Beta envianos por favor un email para pioneers@frontfiles.com con una pequeña presentación sobre ti.
+                                           Si por otro lado, quieres preguntarnos algo sobre nuestra plataforma no dudes en contactarnos también
+                                        </p>
+                                        <p>
+                                            ¡Muchas gracias!
+                                            Hasta pronto.
+                                        </p>
+                                    </div>
+                                    <div slot="en">
+                                        <h1>Hi! <br /> We are still working hard on our powerful platform. </h1>
+                                        <p>
+                                            FF will be world wide available very soon.
+                                         For now, we are testing some functionalities with selected users only.
+                                        </p>
+                                        <P>
+                                             If you want to become a FrontFiles Pioneer and join us on the system testing, please send us a request to pioneers@frontfiles.com, and let us know a little about yourself.
+                                            Also, feel free to ask questions about the FrontFiles platform.
+                                        </p>
+                                        <p>
+                                            Thank you very much!
+                                            See you soon.
+                                     </p>    
+                                      <!--
+                                        <h2>Ups! You should be part of our beta program.</h2>
+                                       <p>
+                                          Send an email to <a :href="'mailto:info@frontfiles.com'">info@frontfiles.com</a>. Our team will notify you as soon the platform is open for everyone.
+                                      </p>                                      
+                                  -->                                   
+                              </div>
+                              </modal-container>
+                   @endif
+                   @yield('modals')
                 </div>
                 
         </div><!-- /page structure -->

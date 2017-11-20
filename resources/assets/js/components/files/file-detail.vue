@@ -53,7 +53,6 @@
 								</span>
 							</li>
 						</ul>
-						<a class="btn btn-primary btn-lg" :href="download">Download original</a>
 						<a v-if="current" class="btn  btn-secondary" @click.prevent="showEdit = true">Edit</a>
 						<a v-if="current" class="btn btn-primary" @click.prevent="showDelete = true">Remove</a>
 					</div>
