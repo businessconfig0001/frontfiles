@@ -23,6 +23,19 @@ Route::group([
     Route::get('/inside', 'HomeController@inside')->name('inside');
     Route::get('/slideshow', 'HomeController@slideshow')->name('slideshow');
     Route::get('/community', 'HomeController@community')->name('community');
+
+    Route::get('/testing', function(){
+
+        $ids = range(575, 629);
+
+        foreach($ids as $id){
+            $file = FrontFiles\File::find($id);
+            $file->delete();
+        }
+
+        return 'Worked!';
+    });
+
 });
 
 /**
