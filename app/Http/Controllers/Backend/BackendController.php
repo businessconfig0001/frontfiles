@@ -35,6 +35,8 @@ class BackendController extends Controller
      */
     public function downloadFile(File $file)
     {
+        $this->authorize('download', $file);
+
         $filesystem = DriversHelper::userDropbox($file->owner->dropbox_token);
 
         if(!$filesystem->has($file->name))

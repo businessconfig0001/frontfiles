@@ -65,6 +65,6 @@ class FilePolicy
      */
     public function download(User $user, File $file)
     {
-        return $file->user_id === $user->id;
+        return ($file->user_id === $user->id) || $user->isAdmin();
     }
 }
