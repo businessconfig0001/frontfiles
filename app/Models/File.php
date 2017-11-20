@@ -43,9 +43,7 @@ class File extends Model
             {
                 $filesystem = DriversHelper::userDropbox($dropbox_token);
 
-                if(!$filesystem->has($file->name))
-                    throw new FileNotFoundException('We couln\'t find this file!');
-                else
+                if($filesystem->has($file->name))
                     $filesystem->delete($file->name);
             }
 
